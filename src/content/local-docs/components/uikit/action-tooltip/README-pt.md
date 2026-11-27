@@ -1,9 +1,3 @@
-<!--GITHUB_BLOCK-->
-
-# ActionTooltip
-
-<!--/GITHUB_BLOCK-->
-
 [`Tooltip`](../Tooltip/README.md) para rotular botões de ação sem texto descritivo (por exemplo, botões de ícone).
 
 ## Uso
@@ -11,8 +5,8 @@
 ```tsx
 import {ActionTooltip} from '@gravity-ui/uikit';
 
-<ActionTooltip title="Action">
-  <div tabIndex={0}>Anchor</div>
+<ActionTooltip title="Ação">
+  <div tabIndex={0}>Ancora</div>
 </ActionTooltip>;
 ```
 
@@ -26,7 +20,7 @@ Alternativamente, você pode passar uma função como filho para fornecer `ref` 
 ```tsx
 import {ActionTooltip} from '@gravity-ui/uikit';
 
-<ActionTooltip title="Action">
+<ActionTooltip title="Ação">
   {(props, ref) => <MyCustomButton buttonProps={props} buttonRef={ref} />}
 </ActionTooltip>;
 ```
@@ -37,7 +31,14 @@ Por padrão, o `ActionTooltip` abre e fecha ao passar o mouse sobre a âncora. V
 Passe seu estado para a prop `open` e altere-o a partir do callback `onOpenChange`.
 O callback `onOpenChange` tem a seguinte assinatura: `(open: boolean, event?: Event, reason: 'hover' | 'focus') => void`.
 
+## Grupo de Atraso
+
+Assim como o `Tooltip`, o `ActionTooltip` compartilha o atraso de abertura com os outros tooltips do aplicativo: o primeiro tooltip de
+uma barra de ferramentas paga seu `openDelay`, seus vizinhos abrem instantaneamente enquanto o grupo está aquecido. Veja a
+seção [Grupo de Atraso](../Tooltip/README.md#delay-group) do `Tooltip` para obter detalhes.
+
 ## Propriedades
+GRAVITY_TRANSLATION_BLOCK_0_END
 
 | Nome          | Descrição                                                                                     |                       Tipo                       |     Padrão     |
 | :------------ | :-------------------------------------------------------------------------------------------- | :----------------------------------------------: | :------------: |

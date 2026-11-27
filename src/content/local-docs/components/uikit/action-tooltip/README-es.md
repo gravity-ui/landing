@@ -1,9 +1,3 @@
-<!--GITHUB_BLOCK-->
-
-# ActionTooltip
-
-<!--/GITHUB_BLOCK-->
-
 [`Tooltip`](../Tooltip/README.md) para etiquetar botones de acción sin texto descriptivo (por ejemplo, botones con iconos).
 
 ## Uso
@@ -11,8 +5,8 @@
 ```tsx
 import {ActionTooltip} from '@gravity-ui/uikit';
 
-<ActionTooltip title="Action">
-  <div tabIndex={0}>Anchor</div>
+<ActionTooltip title="Acción">
+  <div tabIndex={0}>Ancla</div>
 </ActionTooltip>;
 ```
 
@@ -26,7 +20,7 @@ Alternativamente, puedes pasar una función como hijo para proporcionar `ref` y 
 ```tsx
 import {ActionTooltip} from '@gravity-ui/uikit';
 
-<ActionTooltip title="Action">
+<ActionTooltip title="Acción">
   {(props, ref) => <MyCustomButton buttonProps={props} buttonRef={ref} />}
 </ActionTooltip>;
 ```
@@ -36,6 +30,12 @@ import {ActionTooltip} from '@gravity-ui/uikit';
 Por defecto, `ActionTooltip` se abre y se oculta al pasar el ratón por encima del ancla. Puedes cambiar este comportamiento para establecer manualmente el estado abierto.
 Pasa tu estado a la prop `open` y cámbialo desde la devolución de llamada `onOpenChange`.
 La devolución de llamada `onOpenChange` tiene la siguiente firma: `(open: boolean, event?: Event, reason: 'hover' | 'focus') => void`.
+
+## Grupo de Retraso
+
+Al igual que `Tooltip`, `ActionTooltip` comparte el retraso de apertura con otros tooltips de la aplicación: el primer tooltip de
+una barra de herramientas paga su `openDelay`, sus vecinos se abren instantáneamente mientras el grupo está activo. Consulta la
+sección [Grupo de Retraso](../Tooltip/README.md#delay-group) de `Tooltip` para obtener más detalles.
 
 ## Propiedades
 

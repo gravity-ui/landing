@@ -1,10 +1,6 @@
-<!--GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_0_END
 
-# ActionTooltip
-
-<!--/GITHUB_BLOCK-->
-
-[`Tooltip`](../Tooltip/README.md) pour étiqueter les boutons d'action sans texte descriptif (par exemple, les boutons icônes).
+[`Tooltip`](../Tooltip/README.md) pour étiqueter les boutons d'action sans texte descriptif (par exemple, les boutons avec icônes).
 
 ## Utilisation
 
@@ -12,7 +8,7 @@
 import {ActionTooltip} from '@gravity-ui/uikit';
 
 <ActionTooltip title="Action">
-  <div tabIndex={0}>Anchor</div>
+  <div tabIndex={0}>Ancre</div>
 </ActionTooltip>;
 ```
 
@@ -21,7 +17,7 @@ import {ActionTooltip} from '@gravity-ui/uikit';
 Pour que `ActionTooltip` fonctionne, vous devez passer un `ReactElement` valide comme enfant qui accepte la propriété `ref` pour `HTMLElement`
 et d'autres propriétés pour `HTMLElement`.
 
-Alternativement, vous pouvez passer une fonction comme enfant pour fournir manuellement la ref et les props à vos composants sous-jacents :
+Alternativement, vous pouvez passer une fonction comme enfant pour fournir manuellement la référence et les props à vos composants sous-jacents :
 
 ```tsx
 import {ActionTooltip} from '@gravity-ui/uikit';
@@ -36,6 +32,10 @@ import {ActionTooltip} from '@gravity-ui/uikit';
 Par défaut, `ActionTooltip` s'ouvre et se ferme au survol de l'ancre. Vous pouvez modifier ce comportement pour définir manuellement l'état d'ouverture.
 Passez votre état à la prop `open` et modifiez-le à partir du callback `onOpenChange`.
 Le callback `onOpenChange` a la signature suivante : `(open: boolean, event?: Event, reason: 'hover' | 'focus') => void`.
+
+## Groupe de délai
+
+Comme `Tooltip`, `ActionTooltip` partage le délai d'ouverture avec les autres tooltips de l'application : le premier tooltip d'une barre d'outils paie son `openDelay`, ses voisins s'ouvrent instantanément pendant que le groupe est actif. Voir la section [Groupe de délai](../Tooltip/README.md#delay-group) de `Tooltip` pour plus de détails.
 
 ## Propriétés
 

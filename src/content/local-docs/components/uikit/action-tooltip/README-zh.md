@@ -1,10 +1,6 @@
-<!--GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_0_END
 
-# ActionTooltip
-
-<!--/GITHUB_BLOCK-->
-
-[`Tooltip`](../Tooltip/README.md) 用于为没有描述性文本的操作按钮（例如图标按钮）添加标签。
+用于为没有描述性文本的操作按钮（例如图标按钮）添加标签的[`Tooltip`](../Tooltip/README.md)。
 
 ## 用法
 
@@ -18,7 +14,7 @@ import {ActionTooltip} from '@gravity-ui/uikit';
 
 ## Anchor
 
-为了使 `ActionTooltip` 正常工作，您应该将一个有效的 `ReactElement` 作为子元素传递，该子元素接受 `ref` 属性用于 `HTMLElement`
+为了使 `ActionTooltip` 生效，您应该将一个有效的 `ReactElement` 作为子元素传递，该元素接受 `ref` 属性用于 `HTMLElement`
 以及其他用于 `HTMLElement` 的属性。
 
 或者，您可以将函数作为子元素传递，以便手动为您的底层组件提供 ref 和 props：
@@ -33,9 +29,14 @@ import {ActionTooltip} from '@gravity-ui/uikit';
 
 ## 受控状态
 
-默认情况下，`ActionTooltip` 会在鼠标悬停在 anchor 上时打开和隐藏。您可以更改此行为，手动设置打开状态。
+默认情况下，`ActionTooltip` 会在鼠标悬停在 anchor 上时打开和隐藏。您可以更改此行为，通过手动设置打开状态。
 将您的状态传递给 `open` 属性，并通过 `onOpenChange` 回调进行更改。
-`onOpenChange` 回调具有以下签名：`(open: boolean, event?: Event, reason: 'hover' | 'focus') => void`。
+`onOpenChange` 回调具有以下签名： `(open: boolean, event?: Event, reason: 'hover' | 'focus') => void`。
+
+## 延迟组
+
+与 `Tooltip` 类似，`ActionTooltip` 与应用程序中的其他工具提示共享打开延迟：工具栏的第一个工具提示会支付其 `openDelay`，而其邻居则会立即打开，直到该组变热。有关详细信息，请参阅 `Tooltip` 的
+[延迟组](../Tooltip/README.md#delay-group) 部分。
 
 ## 属性
 
@@ -50,13 +51,13 @@ import {ActionTooltip} from '@gravity-ui/uikit';
 | disabled      | 防止 `ActionTooltip` 打开                                                        |                    `boolean`                     |                 |
 | hotkey        | 要显示在右上角的 `Hotkey` 值                                                |   [`Hotkey` 值](../Hotkey/README.md#value)    |                 |
 | offset        | `ActionTooltip` 相对于其锚点的偏移量                                                          |                     `number`                     |       `4`       |
-| onOpenChange  | 处理打开状态变化的事件处理函数                                                            |                    `Function`                    |                 |
+| onOpenChange  | 处理打开状态变化的 callback                                                            |                    `Function`                    |                 |
 | open          | 受控的打开状态                                                                           |                    `boolean`                     |                 |
 | openDelay     | 鼠标悬停开始后显示 `ActionTooltip` 的延迟毫秒数                                                       |                     `number`                     |     `1000`      |
 | placement     | `ActionTooltip` 相对于其锚点的位置                                                 | [`PopupPlacement`](../Popup/README.md#placement) |    `bottom`     |
 | qa            | `data-qa` HTML 属性，用于测试                                                      |                     `string`                     |                 |
-| rest          | 光标在打开前必须静止的毫秒数。                                        |                     `number`                     |       `0`       |
+| rest          | 光标在打开前必须静止的时间（毫秒）。                                        |                     `number`                     |       `0`       |
 | strategy      | 要使用的 CSS `position` 属性的类型。                                                       |                `absolute` `fixed`                |   `absolute`    |
 | style         | `style` HTML 属性                                                                          |              `React.CSSProperties`               |                 |
 | title         | 标题内容                                                                                   |                     `string`                     |                 |
-| trigger       | 触发打开的事件类型。默认的 `all` 值同时指 `hover` 和 `focus`。                                |                `"all"` `"focus"`                 |     `"all"`     |
+| trigger       | 触发打开的事件类型。默认的 `all` 值同时指 `hover` 和 `focus`。                                                |                `"all"` `"focus"`                 |     `"all"`     |

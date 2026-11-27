@@ -1,9 +1,3 @@
-<!--GITHUB_BLOCK-->
-
-# ActionTooltip
-
-<!--/GITHUB_BLOCK-->
-
 [`Tooltip`](../Tooltip/README.md) zur Beschriftung von Aktionsschaltflächen ohne beschreibenden Text (z. B. Symbolschaltflächen).
 
 ## Verwendung
@@ -11,8 +5,8 @@
 ```tsx
 import {ActionTooltip} from '@gravity-ui/uikit';
 
-<ActionTooltip title="Action">
-  <div tabIndex={0}>Anchor</div>
+<ActionTooltip title="Aktion">
+  <div tabIndex={0}>Anker</div>
 </ActionTooltip>;
 ```
 
@@ -26,18 +20,25 @@ Alternativ können Sie eine Funktion als Kind übergeben, um `ref` und `props` m
 ```tsx
 import {ActionTooltip} from '@gravity-ui/uikit';
 
-<ActionTooltip title="Action">
+<ActionTooltip title="Aktion">
   {(props, ref) => <MyCustomButton buttonProps={props} buttonRef={ref} />}
 </ActionTooltip>;
 ```
 
 ## Gesteuerter Zustand
 
-Standardmäßig öffnet und schließt sich `ActionTooltip` beim Überfahren des Ankers mit der Maus. Sie können dieses Verhalten ändern, um den Öffnungszustand manuell festzulegen.
+Standardmäßig öffnet und schließt sich `ActionTooltip` beim Überfahren des Ankers mit der Maus. Sie können dieses Verhalten ändern, um den geöffneten Zustand manuell festzulegen.
 Übergeben Sie Ihren Zustand an die `open`-Eigenschaft und ändern Sie ihn über den `onOpenChange`-Callback.
 Der `onOpenChange`-Callback hat die folgende Signatur: `(open: boolean, event?: Event, reason: 'hover' | 'focus') => void`.
 
+## Verzögerungsgruppe
+
+Wie `Tooltip` teilt sich `ActionTooltip` die Öffnungsverzögerung mit den anderen Tooltips der App: Der erste Tooltip einer
+Symbolleiste zahlt seine `openDelay`, seine Nachbarn öffnen sich sofort, während die Gruppe warm ist. Weitere Informationen finden Sie im
+Abschnitt [Verzögerungsgruppe](../Tooltip/README.md#delay-group) von `Tooltip`.
+
 ## Eigenschaften
+GRAVITY_TRANSLATION_BLOCK_0_END
 
 | Name          | Beschreibung                                                                                     |                       Typ                       |     Standard     |
 | :------------ | :----------------------------------------------------------------------------------------------- | :----------------------------------------------: | :-------------: |
@@ -48,15 +49,15 @@ Der `onOpenChange`-Callback hat die folgende Signatur: `(open: boolean, event?: 
 | description   | Beschreibungsinhalt                                                                             |                `React.ReactNode`                 |                 |
 | disablePortal | Deaktiviert die Verwendung von `Portal`                                                          |                    `boolean`                     |     `false`     |
 | disabled      | Verhindert das Öffnen des `ActionTooltip`                                                        |                    `boolean`                     |                 |
-| hotkey        | `Hotkey`-Wert, der in der oberen rechten Ecke angezeigt werden soll                                |   [`Hotkey`-Wert](../Hotkey/README.md#value)    |                 |
+| hotkey        | `Hotkey`-Wert, der in der oberen rechten Ecke angezeigt werden soll                               |   [`Hotkey`-Wert](../Hotkey/README.md#value)    |                 |
 | offset        | Abstand des `ActionTooltip` vom Anker                                                          |                     `number`                     |       `4`       |
 | onOpenChange  | Callback zur Behandlung von Änderungen des Öffnungszustands                                     |                    `Function`                    |                 |
 | open          | Gesteuerter Öffnungszustand                                                                     |                    `boolean`                     |                 |
 | openDelay     | Anzahl der Millisekunden, die das Anzeigen des `ActionTooltip` nach Beginn des Hoverens verzögert werden |                     `number`                     |     `1000`      |
 | placement     | Position des `ActionTooltip` relativ zum Anker                                                 | [`PopupPlacement`](../Popup/README.md#placement) |    `bottom`     |
 | qa            | `data-qa` HTML-Attribut, das zum Testen verwendet wird                                           |                     `string`                     |                 |
-| rest          | Wie viel Zeit in ms der Cursor ruhen muss, bevor er geöffnet wird.                                |                     `number`                     |       `0`       |
-| strategy      | Die Art der zu verwendenden CSS-Positionierungseigenschaft.                                      |                `absolute` `fixed`                |   `absolute`    |
+| rest          | Wie viel Zeit in ms der Cursor ruhen muss, bevor er geöffnet wird.                               |                     `number`                     |       `0`       |
+| strategy      | Der Typ der zu verwendenden CSS-Positionseigenschaft.                                           |                `absolute` `fixed`                |   `absolute`    |
 | style         | `style` HTML-Attribut                                                                          |              `React.CSSProperties`               |                 |
 | title         | Titelinhalt                                                                                   |                     `string`                     |                 |
 | trigger       | Ereignistyp, der das Öffnen auslösen soll. Der Standardwert `all` bezieht sich auf `hover` und `focus`. |                `"all"` `"focus"`                 |     `"all"`     |

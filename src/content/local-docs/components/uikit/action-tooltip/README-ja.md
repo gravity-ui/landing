@@ -1,40 +1,40 @@
-<!--GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_0_END
 
-# ActionTooltip
-
-<!--/GITHUB_BLOCK-->
-
-説明的なテキスト（例：アイコンボタン）がないアクションボタンのラベル付けのための[`Tooltip`](../Tooltip/README.md)。
+説明的なテキストがないアクションボタン（例：アイコンボタン）のラベル付けのための[`Tooltip`](../Tooltip/README.md)。
 
 ## 使用方法
 
 ```tsx
 import {ActionTooltip} from '@gravity-ui/uikit';
 
-<ActionTooltip title="Action">
-  <div tabIndex={0}>Anchor</div>
+<ActionTooltip title="アクション">
+  <div tabIndex={0}>アンカー</div>
 </ActionTooltip>;
 ```
 
 ## アンカー
 
-`ActionTooltip` を機能させるには、`ref` プロパティと `HTMLElement` 用のその他のプロパティを受け入れる有効な `ReactElement` を子として渡す必要があります。
+`ActionTooltip` を機能させるには、`ref` プロパティを `HTMLElement` に受け入れ、`HTMLElement` のその他のプロパティを受け入れる有効な `ReactElement` を子として渡す必要があります。
 
-または、子として関数を渡して、基になるコンポーネントに手動で ref と props を提供することもできます。
+または、子として関数を渡して、基になるコンポーネントに `ref` とプロパティを手動で提供することもできます。
 
 ```tsx
 import {ActionTooltip} from '@gravity-ui/uikit';
 
-<ActionTooltip title="Action">
+<ActionTooltip title="アクション">
   {(props, ref) => <MyCustomButton buttonProps={props} buttonRef={ref} />}
 </ActionTooltip>;
 ```
 
 ## 制御された状態
 
-デフォルトでは、`ActionTooltip` はアンカーをホバーすると開閉します。この動作を変更して、開いた状態を手動で設定できます。
-`open` プロップに状態を渡し、`onOpenChange` コールバックから変更します。
-`onOpenChange` コールバックのシグネチャは次のとおりです: `(open: boolean, event?: Event, reason: 'hover' | 'focus') => void`。
+デフォルトでは、`ActionTooltip` はアンカーをホバーすることで開閉します。この動作を、開いている状態を手動で設定するように変更できます。
+`open` プロパティに状態を渡し、`onOpenChange` コールバックから変更します。
+`onOpenChange` コールバックのシグネチャは次のとおりです。`(open: boolean, event?: Event, reason: 'hover' | 'focus') => void`。
+
+## 遅延グループ
+
+`Tooltip` と同様に、`ActionTooltip` はアプリの他のツールチップと開く遅延を共有します。ツールバーの最初のツールチップは `openDelay` を支払い、その隣接するツールチップはグループがウォームな間は即座に開きます。詳細は `Tooltip` の [遅延グループ](../Tooltip/README.md#delay-group) セクションを参照してください。
 
 ## プロパティ
 
