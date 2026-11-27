@@ -1,8 +1,4 @@
-<!--GITHUB_BLOCK-->
-
-# Toaster
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_0_END
 
 Dies ist eine Komponente für einstellbare Benachrichtigungen, auch bekannt als Toasts.
 
@@ -30,7 +26,7 @@ Sie können `toaster` aber auch direkt in verschiedenen Teilen Ihrer Anwendung (
 
 ```js
 toaster.add({
-  title: 'Toaster is here',
+  title: 'Toaster ist hier',
 });
 ```
 
@@ -54,7 +50,7 @@ export function FoobarComponent() {
 
   useEffect(() => {
     add({
-      title: 'Toaster is here',
+      title: 'Toaster ist hier',
     });
   }, []);
 
@@ -116,17 +112,17 @@ Es akzeptiert das Argument `toastOptions` mit den Details der laufenden Benachri
 
 Jede `action` ist ein Objekt mit folgenden Parametern:
 
-| Parameter        | Typ                                      | Erforderlich | Standard    | Beschreibung                                                              |
-| :--------------- | :---------------------------------------- | :------- | :--------- | :----------------------------------------------------------------------- |
-| label            | `string`                                  | ja      |            | Aktionsbeschreibung                                                       |
-| onClick          | `() => void`                              | ja      |            | Handler für den Klick auf die Aktion                                                  |
-| view             | [`ButtonView`](../Button/README.md#props) |          | `outlined` | Aktionsaussehen, wie `view` für `<Button/>`                        |
-| removeAfterClick | `boolean`                                 |          | `true`     | Aktiviert oder deaktiviert das Schließen der Benachrichtigung nach dem Klicken auf die Aktion |
+| Parameter        | Typ                                            | Erforderlich | Standard   | Beschreibung                                                              |
+| :--------------- | :--------------------------------------------- | :----------- | :--------- | :------------------------------------------------------------------------ |
+| label            | `string`                                       | ja           |            | Aktionsbeschreibung                                                       |
+| onClick          | `() => void`                                   | ja           |            | Handler für den Klick auf die Aktion                                      |
+| view             | [`ButtonView`](../Button/README.md#properties) |              | `outlined` | Aktionsaussehen, wie `view` für `<Button/>`                               |
+| removeAfterClick | `boolean`                                      |              | `true`     | Aktiviert oder deaktiviert das Schließen der Benachrichtigung nach dem Klick auf die Aktion |
 
 ## CSS API
 
 | Name                       | Beschreibung     |
-| :------------------------- | :-------------- |
+| :------------------------- | :--------------- |
 | `--g-toaster-width`        | Container-Breite |
-| `--g-toaster-item-padding` | Item-Padding    |
+| `--g-toaster-item-padding` | Item-Padding     |
 | `--g-toaster-item-gap`     | Item-Abstand     |

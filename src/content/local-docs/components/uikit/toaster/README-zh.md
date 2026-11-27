@@ -1,14 +1,10 @@
-<!--GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_0_END
 
-# Toaster
-
-<!--/GITHUB_BLOCK-->
-
-这是一个可配置的通知组件，也称为 toasts。
+这是一个可调节通知（也称为 toast）的组件。
 
 ## 使用 Toaster
 
-要在您的应用程序中显示 toasts，您需要将应用程序包装在 `ToasterProvider` 中。
+要在您的应用程序中显示 toast，您需要将应用程序包装在 `ToasterProvider` 中。
 
 ```jsx
 import {Toaster, ToasterComponent, ToasterProvider} from '@gravity-ui/uikit';
@@ -24,7 +20,7 @@ root.render(
 );
 ```
 
-这里的 `toaster` 是类的实例，它保存了所有 toasts 的状态，并在 `useToaster` hook 和 `withToaster` HOC 中被底层使用。
+这里的 `toaster` 是类的实例，它保存着所有 toast 的状态，并在 `useToaster` hook 和 `withToaster` HOC 中被底层使用。
 
 但您也可以在应用程序的不同部分（React 外部）直接使用 `toaster`：
 
@@ -34,7 +30,7 @@ toaster.add({
 });
 ```
 
-您必须在 React 内外使用相同的 `Toaster` 实例，才能在屏幕上的同一个容器中显示所有 toasts。
+您必须在 React 和 React 外部使用相同的 `Toaster` 实例，才能在屏幕上的同一个容器中显示所有 toast。
 您可以自己实现此逻辑，或从 `toaster-singleton` 模块导入现成的实例。
 
 ```js
@@ -43,7 +39,7 @@ import {toaster} from '@gravity-ui/uikit/toaster-singleton';
 
 ## 使用 `useToaster`
 
-您可以在您的应用组件中使用 `useToaster` hook 来显示 toasts：
+您可以在应用程序组件中使用 `useToaster` hook 来显示 toast：
 
 ```jsx
 import {useToaster} from '@gravity-ui/uikit';
@@ -62,7 +58,7 @@ export function FoobarComponent() {
 }
 ```
 
-该 hook 返回 `add`、`update`、`remove` 和 `removeAll` 方法（详情请参见下文）。
+该 hook 返回 `add`、`update`、`remove` 和 `removeAll` 方法（有关详细信息，请参见下文）。
 
 ## 使用 `Toaster` 作为 HOC
 
@@ -83,7 +79,7 @@ const FoobarWithToaster = withToaster()(FoobarComponent);
 
 ## 属性
 
-这些是 `ToasterComponent` 组件的 props。
+这些是 `ToasterComponent` 组件的属性。
 
 | 名称      | 描述                                         |   类型    | 默认值 |
 | :-------- | :------------------------------------------- | :-------: | :-----: |
@@ -93,10 +89,10 @@ const FoobarWithToaster = withToaster()(FoobarComponent);
 
 ## 构造函数参数
 
-| 参数    | 类型      | 默认值      | 描述                                         |
-| :------ | :-------- | :---------- | :------------------------------------------- |
+| 参数      | 类型      | 默认值      | 描述                                         |
+| :-------- | :-------- | :---------- | :------------------------------------------- |
 | className | `string`  | `undefined` | 添加到组件容器的自定义类名                   |
-| mobile  | `boolean` | `false`     | 管理移动/桌面视图的配置                      |
+| mobile    | `boolean` | `false`     | 管理移动/桌面视图的配置                      |
 
 ## 方法
 
@@ -105,10 +101,10 @@ const FoobarWithToaster = withToaster()(FoobarComponent);
 | add(toastOptions)        | `Object`         | 创建一个新通知                                                                                                                   |
 | remove(name)             | `string`         | 手动删除现有通知                                                                                                                 |
 | removeAll()              |                  | 删除所有现有通知                                                                                                                 |
-| update(name, overrideOptions) | `string`, `Object` | 更改已渲染的通知内容。在 `overrideOptions` 中，`title`、`type`、`content` 和 `actions` 字段是可选的。 |
-| has(name)                | `string`         | 检查显示通知列表中是否存在具有特定名称的 toast                                                                                     |
+| update(name, overrideOptions) | `string`, `Object` | 更改已渲染通知的内容。在 `overrideOptions` 中，`title`、`type`、`content` 和 `actions` 字段是可选的。 |
+| has(name)                | `string`         | 检查列表中是否存在具有特定名称的 toast                                                                                             |
 
-## 关于 `add` 的更多信息
+## `add` 的更多信息
 
 它接受 `toastOptions` 参数，其中包含正在进行的通知的详细信息：
 
@@ -126,12 +122,14 @@ const FoobarWithToaster = withToaster()(FoobarComponent);
 
 每个 `action` 是一个具有以下参数的对象：
 
-| 参数           | 类型                                      | 是否必填 | 默认值   | 描述                                                                 |
-| :------------- | :---------------------------------------- | :------- | :------- | :------------------------------------------------------------------- |
-| label          | `string`                                  | 是       |          | 操作描述                                                             |
-| onClick        | `() => void`                              | 是       |          | 操作点击处理函数                                                     |
-| view           | [`ButtonView`](../Button/README.md#props) |          | `outlined` | 操作外观，与 `<Button/>` 的 `view` 相同                               |
-| removeAfterClick | `boolean`                                 |          | `true`   | 点击操作后启用或禁用关闭通知                                         |
+| 参数             | 类型                                           | 是否必填 | 默认值   | 描述                                                                 |
+| :--------------- | :--------------------------------------------- | :------- | :------- | :------------------------------------------------------------------- |
+| label            | `string`                                       | 是       |          | 操作描述                                                             |
+| onClick          | `() => void`                                   | 是       |          | 操作点击处理程序                                                     |
+| view             | [`ButtonView`](../Button/README.md#properties) |          | `outlined` | 操作外观，与 `<Button/>` 的 `view` 相同 |
+| removeAfterClick | `boolean`                                      |          | `true`   | 启用或禁用在操作点击后关闭通知 |
+
+GRAVITY_TRANSLATION_BLOCK_1_END
 
 ## CSS API
 
