@@ -1,10 +1,4 @@
-<!--GITHUB_BLOCK-->
-
-# Skeleton
-
-<!--/GITHUB_BLOCK-->
-
-Skeleton 组件在数据加载完成前显示内容的占位符预览。此预览旨在减少加载时间带来的挫败感。
+Skeleton 组件在数据加载完成前显示内容的占位符预览。此预览用于减轻加载时间的挫败感。
 
 ```tsx
 import {Skeleton} from '@gravity-ui/uikit';
@@ -16,7 +10,7 @@ import {Skeleton} from '@gravity-ui/uikit';
 
 | 值        | 描述                                |
 | :-------- | :---------------------------------- |
-| `'gradient'` | 滑动渐变闪烁 — **默认**           |
+| `'gradient'` | 滑动渐变闪烁 — **默认**             |
 | `'pulse'`    | 透明度脉冲                          |
 | `'none'`     | 无动画                              |
 
@@ -24,63 +18,48 @@ import {Skeleton} from '@gravity-ui/uikit';
 
 使用 `variant` 属性来选择预设的外观。默认值为 `'rect'`。
 
-| 值        | 描述                                                                      |
-| :-------- | :------------------------------------------------------------------------ |
-| `'rect'`   | 使用与尺寸相关的 border-radius token 的圆角 — **默认**                  |
-| `'circle'` | 完全圆形 (`border-radius: 50%`, `aspect-ratio: 1`)                        |
-| `'square'` | 正方形宽高比 (`aspect-ratio: 1`)，具有与 `'rect'` 相同的圆角              |
+| 值        | 描述                                                                               |
+| :-------- | :--------------------------------------------------------------------------------- |
+| `'rect'`   | 使用与尺寸相关的 border-radius token 的圆角 — **默认**                             |
+| `'circle'` | 完全圆形 (`border-radius: 50%`, `aspect-ratio: 1`)                                  |
+| `'square'` | 方形宽高比 (`aspect-ratio: 1`)，具有与 `'rect'` 相同的圆角                       |
 | `'text'`   | 文本行占位符 — 高度继承父级上下文的 `font-size` 和 `line-height` |
 
 ## Size
 
 使用 `size` 属性来设置预设的骨架高度（对于 `'circle'` / `'square'` 变体，也设置宽度）。每种尺寸还会调整 `'rect'` 和 `'square'` 变体使用的 border-radius token。如果省略 `size`，则使用 `width` 和 `height` 设置尺寸。
 
-| 值  | 描述     |
-| :-- | :------- |
-| `'xs'` | 特小     |
-| `'s'`  | 小       |
-| `'m'`  | 中       |
-| `'l'`  | 大       |
-| `'xl'` | 特大     |
+| 值  | 描述       |
+| :-- | :--------- |
+| `'xs'` | 特小       |
+| `'s'`  | 小         |
+| `'m'`  | 中         |
+| `'l'`  | 大         |
+| `'xl'` | 特大       |
 
-<!--GITHUB_BLOCK-->
-
-```tsx
-<Skeleton size="xs" width={120} />
-<Skeleton size="m"  width={200} />
-<Skeleton size="xl" width={280} />
-
-<Skeleton variant="circle" size="l" />
-<Skeleton variant="square" size="l" />
-```
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_1_END
 
 ## Text placeholder
 
-使用 `variant="text"` 来渲染一个继承父级上下文 `font-size` 和 `line-height` 的占位符。将多个占位符放置在 `<Text variant="...">` 元素内以实现多行占位符。
+使用 `variant="text"` 来渲染一个继承父级上下文 `font-size` 和 `line-height` 的骨架。将多个骨架放置在 `<Text variant="...">` 元素内以实现多行占位符。
 
-<!--GITHUB_BLOCK-->
-
-```tsx
-<Text variant="body-1">
-  <Skeleton variant="text" width={400} />
-  <Skeleton variant="text" width={400} />
-  <Skeleton variant="text" width={240} />
-</Text>
-```
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_2_END
 
 ## Properties
 
-| 名称        | 描述                                                                                                                  |                       类型                       |  默认值   |
-| :---------- | :--------------------------------------------------------------------------------------------------------------------------- | :----------------------------------------------: | :--------: |
-| `style`     | 根元素的自定义 CSS 属性                                                                                                                  |              `React.CSSProperties`               |            |
-| `className` | 根元素的自定义 CSS 类                                                                                                                       |                     `string`                     |            |
-| `qa`        | `data-qa` HTML 属性，用于测试                                                                                                                  |                     `string`                     |            |
-| `animation` | 应用于骨架的动画类型                                                                                                                     |      `'gradient'` \| `'pulse'` \| `'none'`       | `gradient` |
-| `variant`   | 预设外观。`'circle'` 和 `'square'` 会强制设置 `aspect-ratio: 1`。`'text'` 会继承父级上下文的排版。    | `'rect'` \| `'square'` \| `'circle'` \| `'text'` |   `rect`   |
-| `size`      | 预设高度（对于 `'circle'`/`'square'` 变体，也控制宽度）。还控制 `'rect'`/`'square'` 的边框半径 token。 |   `'xs'` \| `'s'` \| `'m'` \| `'l'` \| `'xl'`    |            |
-| `width`     | 自定义宽度。`style.width` 的别名                                                                                                                       |               `number` \| `string`               |            |
-| `height`    | 自定义高度。`style.height` 的别名                                                                                                                      |               `number` \| `string`               |            |
+| 名称        | 描述                                                                                                                            |                       类型                       |  默认值   |
+| :---------- | :------------------------------------------------------------------------------------------------------------------------------ | :----------------------------------------------: | :--------: |
+| `style`     | 根元素的自定义 CSS 属性                                                                                                         |              `React.CSSProperties`               |            |
+| `className` | 根元素的自定义 CSS 类                                                                                                           |                     `string`                     |            |
+| `qa`        | `data-qa` HTML 属性，用于测试                                                                                                   |                     `string`                     |            |
+| `animation` | 应用于骨架的动画类型                                                                                                            |      `'gradient'` \| `'pulse'` \| `'none'`       | `gradient` |
+| `variant`   | 预设外观。`'circle'` 和 `'square'` 强制设置 `aspect-ratio: 1`。`'text'` 继承父上下文的排版。                                       | `'rect'` \| `'square'` \| `'circle'` \| `'text'` |   `rect`   |
+| `size`      | 预设高度（`'circle'`/`'square'` 变体的宽度也相同）。也控制 `'rect'`/`'square'` 变体的边框半径 token。                               |   `'xs'` \| `'s'` \| `'m'` \| `'l'` \| `'xl'`    |            |
+| `width`     | 自定义宽度。`style.width` 的别名                                                                                                |               `number` \| `string`               |            |
+| `height`    | 自定义高度。`style.height` 的别名                                                                                               |               `number` \| `string`               |            |
+
+## CSS API
+
+| 名称                            | 描述                                                                         |
+| :------------------------------ | :--------------------------------------------------------------------------- |
+| `--g-skeleton-background-color` | 骨架背景颜色，也用作 `'gradient'` 动画的结束颜色 |
