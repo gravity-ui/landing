@@ -1,9 +1,3 @@
-<!--GITHUB_BLOCK-->
-
-# Pagination
-
-<!--/GITHUB_BLOCK-->
-
 `Pagination` renderiza controles de navegação de página — números de página com botões anterior/próximo e um seletor opcional de tamanho de página — usados para dividir listas ou tabelas longas em várias páginas.
 
 ```tsx
@@ -27,7 +21,7 @@ const pagination = <Pagination page={1} pageSize={100} total={1000} onUpdate={ha
 
 Você pode substituir o elemento raiz dos itens de paginação clicáveis (botões de navegação e de página) usando a prop `pageComponent`. Passe `pageComponent="a"` e retorne `href` de `getPageProps` para usar links regulares. Para integrações de roteador, passe um componente ciente do roteador, como `Link`, e retorne props específicas do roteador, por exemplo `to`.
 
-`getPageProps` é chamado para cada item clicável (botões de página e botões de navegação). Ele **não** é chamado para reticências, o indicador "página de", o item de página simples (atual) no layout móvel ou botões de navegação desabilitados (eles sempre permanecem um `<button disabled>` nativo inerte para que não possam ser ativados, inclusive via teclado). As props gerenciadas pela paginação (`onClick`, `className`, `size`, `view`, `selected`, `disabled`, `qa`, `aria-current`, `extraProps`, `children`) têm precedência sobre os valores retornados por `getPageProps`.
+`getPageProps` é chamado para cada item clicável (botões de página e botões de navegação). Ele **não** é chamado para reticências, o indicador "página de", o item de página simples (atual) no layout móvel ou botões de navegação desabilitados (eles sempre permanecem um `<button disabled>` nativo inerte para que não possam ser ativados, inclusive via teclado). As props gerenciadas pela paginação (`onClick`, `className`, `size`, `view`, `selected`, `disabled`, `qa`, `aria-current`, `children`) têm precedência sobre os valores retornados por `getPageProps`.
 
 ### Links regulares (`pageComponent="a"`)
 
@@ -85,6 +79,7 @@ const pagination = (
 ```
 
 ## Propriedades
+GRAVITY_TRANSLATION_BLOCK_0_END
 
 | Nome            | Descrição                                                                                                                                      |            Tipo             |   Padrão    |
 | :-------------- | :----------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------: | :---------: |

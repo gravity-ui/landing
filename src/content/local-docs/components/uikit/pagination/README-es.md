@@ -1,8 +1,4 @@
-<!--GITHUB_BLOCK-->
-
-# Pagination
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_0_END
 
 `Pagination` renderiza controles de navegación de página — números de página con botones anterior/siguiente y un selector opcional de tamaño de página — utilizados para dividir listas o tablas largas en varias páginas.
 
@@ -25,9 +21,9 @@ const pagination = <Pagination page={1} pageSize={100} total={1000} onUpdate={ha
 
 ## Componente personalizado
 
-Puedes anular el elemento raíz de los elementos de paginación clickables (botones de navegación y de página) usando la prop `pageComponent`. Pasa `pageComponent="a"` y devuelve `href` de `getPageProps` para usar enlaces regulares. Para integraciones de enrutador, pasa un componente consciente del enrutador como `Link` y devuelve props específicas del enrutador, por ejemplo `to`.
+Puedes anular el elemento raíz de los elementos de paginación clickeables (botones de navegación y de página) usando la prop `pageComponent`. Pasa `pageComponent="a"` y devuelve `href` de `getPageProps` para usar enlaces regulares. Para integraciones de enrutador, pasa un componente consciente del enrutador como `Link` y devuelve props específicas del enrutador, por ejemplo `to`.
 
-`getPageProps` se llama para cada elemento clickable (botones de página y botones de navegación). **No** se llama para elipsis, el indicador "página de", el elemento de página simple (actual) en el diseño móvil, o los botones de navegación deshabilitados (estos siempre permanecen como un `<button disabled>` nativo inerte para que no puedan ser activados, incluso a través del teclado). Las props gestionadas por Pagination (`onClick`, `className`, `size`, `view`, `selected`, `disabled`, `qa`, `aria-current`, `extraProps`, `children`) tienen prioridad sobre los valores devueltos por `getPageProps`.
+`getPageProps` se llama para cada elemento clickeable (botones de página y botones de navegación). **No** se llama para elipsis, el indicador "página de", el elemento de página simple (actual) en el diseño móvil, o botones de navegación deshabilitados (estos siempre permanecen como un `<button disabled>` nativo inerte para que no puedan ser activados, incluso a través del teclado). Las props gestionadas por Pagination (`onClick`, `className`, `size`, `view`, `selected`, `disabled`, `qa`, `aria-current`, `children`) tienen prioridad sobre los valores devueltos por `getPageProps`.
 
 ### Enlaces regulares (`pageComponent="a"`)
 
@@ -96,9 +92,9 @@ const pagination = (
 | pageSize        | Número de elementos de datos por página                                                                                                                    |          `number`           |                     |
 | pageSizeOptions | Permite especificar las opciones de `sizeChanger`                                                                                                  |         `number[]`          |                     |
 | total           | Número total de elementos de datos                                                                                                                       |          `number`           |                     |
-| showInput       | Muestra la entrada para navegar directamente a las páginas                                                                                                        |          `boolean`          |       `false`       |
+| showInput       | Muestra una entrada para navegar directamente a las páginas                                                                                                        |          `boolean`          |       `false`       |
 | showPages       | Muestra la numeración de las páginas                                                                                                                             |          `boolean`          |       `true`        |
 | qa              | Atributo HTML `data-qa`, utilizado para pruebas                                                                                                       |          `string`           |                     |
-| view            | Establece la apariencia de los botones y controles. Afecta la vista de la entrada de paginación en dispositivos móviles.                                |   `"outlined" \| "clear"`   |     `"outlined"`    |
+| view            | Establece la apariencia de los botones y controles. Afecta la vista de la entrada de paginación en dispositivos móviles.                                |   `"outlined" \| "clear"`   |     `"outlined"`      |
 | pageComponent   | Anula el elemento raíz para los elementos de paginación clickeables (botones de navegación y página). Usa `"a"` para enlaces normales o un componente consciente del enrutador. |  `PaginationPageComponent`  |                     |
 | getPageProps    | Devuelve props adicionales por elemento clickeable (por ejemplo, `href` para `"a"` o `to` para un `Link` del enrutador). Solo se aplica cuando se establece `pageComponent`. | `PaginationPagePropsGetter` |                     |
