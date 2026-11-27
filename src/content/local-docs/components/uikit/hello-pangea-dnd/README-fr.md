@@ -1,0 +1,233 @@
+GRAVITY_TRANSLATION_BLOCK_0_END
+
+Le point d'entrée qui rend une [List](../List/README.md) réorganisable avec `@hello-pangea/dnd`, la bibliothèque de glisser-déposer recommandée.
+
+```tsx
+import {ListHelloPangeaDnd} from '@gravity-ui/uikit/hello-pangea-dnd';
+```
+
+Ce point d'entrée nécessite `@hello-pangea/dnd` et React 18 ou une version ultérieure : installez la bibliothèque à côté de `@gravity-ui/uikit`, une seule copie de celle-ci — `Draggable` et `DragDropContext` de votre code doivent provenir de la même copie que le kit.
+
+## Utilisation
+
+Enveloppez la liste et donnez-lui `role="grid"` : la poignée de glissement est interactive, et le contenu interactif à l'intérieur d'une ligne n'est valide que dans le modèle de rôle de grille. Le wrapper possède le `DragDropContext` et le `Droppable`, prend les mêmes `items` que la liste et renvoie le tableau réorganisé.
+
+```tsx
+import {List} from '@gravity-ui/uikit';
+import {ListHelloPangeaDnd} from '@gravity-ui/uikit/hello-pangea-dnd';
+
+function Playlist() {
+  const [tracks, setTracks] = React.useState(initialTracks);
+
+  return (
+    <ListHelloPangeaDnd items={tracks} onItemsUpdate={setTracks}>
+      <List role="grid" aria-label="Playlist" items={tracks} getItemContent={(t) => t.title} />
+    </ListHelloPangeaDnd>
+  );
+}
+```
+
+Chaque ligne reçoit une poignée à son bord le plus extérieur. La souris fait glisser une ligne par la poignée ; le clavier atteint la poignée avec `←`/`→`, soulève la ligne avec `Espace`, la déplace avec `↑`/`↓` et la dépose avec `Espace` (`Échap` annule). Les lignes que la liste désactive ne sont pas déplaçables, et `getItemDragDisabled` en épingle davantage. Le nom de la poignée et les instructions que la bibliothèque donne aux lecteurs d'écran suivent la langue définie avec `configure` (sous un `DragDropContext` de votre propre création, passez vous-même ses `dragHandleUsageInstructions`).
+
+Une liste à l'intérieur d'un `Sheet`, d'un `Dialog` ou d'une fenêtre contextuelle animée se déplace de la même manière : le kit compense un ancêtre transformé. Pour des données qui ne sont pas un tableau en mémoire, utilisez `onDrop` au lieu de `onItemsUpdate`.
+
+Le kit couvre les listes plates : la bibliothèque a besoin d'index contigus, et ils sont comptés sur `items`. Les sections ne sont pas déplaçables.
+
+Les enfants du wrapper sont la liste et rien d'autre : l'adaptateur va à la liste la plus proche en dessous, donc un Select ou un Menu placé à côté de la liste le prendrait. `getItemId` et `getItemDragDisabled` doivent être stables — une fonction en ligne ré-rend chaque ligne à chaque rendu du parent.
+
+### Les slots d'une ligne
+
+La ligne par défaut est `ListHelloPangeaDnd.Row`. Rendez-la dans `renderItem` pour remplir les slots de la vue de la ligne.
+
+```tsx
+<List
+  role="grid"
+  aria-label="Playlist"
+  items={tracks}
+  getItemContent={(t) => t.title}
+  renderItem={(ctx, helpers) => (
+    <ListHelloPangeaDnd.Row
+      ctx={ctx}
+      helpers={helpers}
+      description={ctx.item.artist}
+      endContent={<Label>{ctx.item.duration}</Label>}
+      handlePlacement="end"
+    />
+  )}
+/>
+```
+
+### Marquage personnalisé
+
+Lorsqu'une ligne n'est pas `List.ItemView`, écrivez vous-même le `Draggable` et prenez le câblage de `getHelloPangeaRowProps` ; la poignée et le contenu obtiennent une cellule chacun. L'index du `Draggable` est la position de l'élément dans `items`.
+
+```tsx
+import {Draggable} from '@hello-pangea/dnd';
+import {HelloPangeaDragHandle, getHelloPangeaRowProps} from '@gravity-ui/uikit/hello-pangea-dnd';
+
+<List
+  role="grid"
+  aria-label="Speakers"
+  items={people}
+  renderItem={(ctx, helpers) => (
+    <Draggable draggableId={ctx.id} index={people.indexOf(ctx.item)}>
+      {(provided, snapshot) => {
+        const {rowProps, handleProps, cellProps} = getHelloPangeaRowProps({
+          ctx,
+          helpers,
+          provided,
+          snapshot,
+        });
+        return (
+          <article {...rowProps}>
+            <span {...cellProps}>
+              <HelloPangeaDragHandle {...handleProps} />
+            </span>
+            <span {...cellProps}>{ctx.item.name}</span>
+          </article>
+        );
+      }}
+    </Draggable>
+  )}
+/>;
+```
+
+Étalez `handleProps` plutôt que les `dragHandleProps` de la bibliothèque : en plus du contrat de grille, ils maintiennent un glissement tactile actif sous la virtualisation.
+
+`HelloPangeaDragHandle` est la poignée avec un nom accessible ; ses enfants remplacent l'icône.
+
+### Virtualisation
+
+Placez `ListVirtualizer` **à l'extérieur** du wrapper : le wrapper lit la virtualisation de la liste et passe le `Droppable` en mode virtuel. Sous un `minItemsCount`, il compte ses `items` de la même manière que la liste compte ses lignes, donc une liste en dessous du seuil conserve le mode standard.
+
+```tsx
+import {ListVirtualizer} from '@gravity-ui/uikit/virtualizer';
+
+<ListVirtualizer estimateItemSize={28}>
+  <ListHelloPangeaDnd items={tracks} onItemsUpdate={setTracks}>
+    <List
+      role="grid"
+      aria-label="Archive"
+      style={{height: 480}}
+      items={tracks}
+      getItemContent={(t) => t.title}
+    />
+  </ListHelloPangeaDnd>
+</ListVirtualizer>;
+```
+
+La ligne déplacée est dessinée par un clone — une copie de la `Row` — donc une ligne personnalisée a besoin de `renderClone` : elle reçoit `{item, provided, snapshot}` du clone. Les hauteurs de ligne ne doivent pas changer pendant un glissement : la bibliothèque les mesure au soulèvement.
+
+### Plusieurs listes
+
+Sous un `DragDropContext` de votre propre création — plusieurs listes, déplacements entre elles — le wrapper ne rend aucun contexte. Donnez à chaque liste un état de `useListHelloPangeaDnd` et un `droppableId`, et appelez les gestionnaires de chaque état à partir du contexte ; `onItemsUpdate` et `onDrop` du wrapper fonctionnent comme d'habitude. Un état réorganise uniquement sa propre liste ; un déplacement d'une liste à une autre est à gérer par vous dans `onDragEnd`.
+
+```tsx
+import {DragDropContext} from '@hello-pangea/dnd';
+import {List} from '@gravity-ui/uikit';
+import {ListHelloPangeaDnd, useListHelloPangeaDnd} from '@gravity-ui/uikit/hello-pangea-dnd';
+
+const todo = useListHelloPangeaDnd();
+const done = useListHelloPangeaDnd();
+```
+
+<DragDropContext
+  onDragStart={(start) => {
+    todo.onDragStart(start);
+    done.onDragStart(start);
+  }}
+  onDragEnd={(result) => {
+    todo.onDragEnd(result);
+    done.onDragEnd(result);
+  }}
+>
+  <ListHelloPangeaDnd
+    items={todoItems}
+    onItemsUpdate={setTodoItems}
+    state={todo}
+    droppableId="todo"
+  >
+    <List role="grid" aria-label="À faire" items={todoItems} getItemContent={(i) => i.title} />
+  </ListHelloPangeaDnd>
+  <ListHelloPangeaDnd
+    items={doneItems}
+    onItemsUpdate={setDoneItems}
+    state={done}
+    droppableId="done"
+  >
+    <List role="grid" aria-label="Terminé" items={doneItems} getItemContent={(i) => i.title} />
+  </ListHelloPangeaDnd>
+</DragDropContext>;
+```
+
+Sans `state`, chaque wrapper rend son propre `DragDropContext`, et les contextes imbriqués dupliquent les capteurs de la bibliothèque.
+
+## Propriétés
+
+### ListHelloPangeaDnd
+
+| Nom                | Description                                                                                        |                                      Type                                       |        Défaut        |
+| :------------------ | :------------------------------------------------------------------------------------------------- | :-----------------------------------------------------------------------------: | :-------------------: |
+| items               | Les éléments de la liste à l'intérieur, dans le même ordre                                         |                                 `readonly T[]`                                  |                       |
+| getItemId           | L'identifiant d'un élément ; doit être égal au `getItemId` de la `List`                             |                              `(item: T) => string`                              | celui de la `List` |
+| onItemsUpdate       | Le tableau réordonné, `moveItem` déjà appliqué                                                     |                             `(items: T[]) => void`                              |                       |
+| onDrop              | Le drop sous forme d'ids et d'une arête                                                            |     `(fromId: string, toId: string, position: 'before' \| 'after') => void`     |                       |
+| droppableId         | L'identifiant du `Droppable`                                                                       |                                    `string`                                     |      un id auto       |
+| getItemDragDisabled | Les lignes qui ne peuvent pas être déplacées, en plus de celles désactivées                        |                             `(item: T) => boolean`                              |                       |
+| renderClone         | Mode virtuel : la copie d'une ligne déplacée, requise pour les lignes personnalisées                 |                `({item, provided, snapshot}) => React.ReactNode`                |  une copie de la `Row`  |
+| state               | L'état `useListHelloPangeaDnd` pour votre propre `DragDropContext` — voir [Plusieurs listes](#plusieurs-listes) |                          `UseListHelloPangeaDndResult`                          |                       |
+| droppableProps      | Passé au `Droppable`                                                                               | `Pick<DroppableProps, 'isDropDisabled' \| 'ignoreContainerClipping' \| 'type'>` |                       |
+| children            | La `List`, avec `role="grid"`                                                                      |                                   `ReactNode`                                   |                       |
+
+### ListHelloPangeaDnd.Row
+
+| Nom            | Description                                                      |         Type          |      Défaut      |
+| :------------- | :--------------------------------------------------------------- | :-------------------: | :--------------: |
+| ctx            | Le premier argument de `renderItem`                               |   `ListItemContext`   |                  |
+| helpers        | Le deuxième argument de `renderItem`                              |   `ListItemHelpers`   |                  |
+| children       | Le contenu de la ligne                                           |      `ReactNode`      |   `ctx.content`  |
+| startContent   | Le slot de début de la vue                                       |      `ReactNode`      |                  |
+| description    | La deuxième ligne de la vue                                      |      `ReactNode`      |                  |
+| endContent     | Le slot de fin de la vue                                         |      `ReactNode`      |                  |
+| handleLabel    | Le nom accessible de la poignée                                  |       `string`        | "Drag to reorder" |
+| handlePlacement | Le bord de la poignée : le slot le plus externe ou après `endContent` |  `'start' \| 'end'`   |     `'start'`     |
+| className      | La classe CSS de la ligne                                        |       `string`        |                  |
+| style          | Le style en ligne de la ligne                                    | `React.CSSProperties` |                  |
+| qa             | L'attribut `data-qa` de la ligne                                 |       `string`        |                  |
+
+### getHelloPangeaRowProps
+
+Prend `{ctx, helpers, provided, snapshot, handleLabel?}` — les arguments de `renderItem` et de la fonction de rendu de `Draggable` — et retourne :
+
+| Nom         | Description                                                                                        |            Type             |
+| :---------- | :------------------------------------------------------------------------------------------------- | :-------------------------: |
+| rowProps    | Les props de la ligne : celles de la liste avec les props draggable et le ref de la librairie     |     `ListItemDOMProps`      |
+| handleProps | Les props de la poignée : `dragHandleProps`, `tabIndex={-1}` et le nom ; décoratif lorsqu'il est désactivé | `HelloPangeaHandleDOMProps` |
+| cellProps   | Les props d'une cellule                                                                            |     `ListCellDOMProps`      |
+
+### HelloPangeaDragHandle
+
+Prend les props d'un `span` sauf `tabIndex`, et :
+
+| Nom        | Description                       |    Type     |      Défaut      |
+| :--------- | :-------------------------------- | :---------: | :--------------: |
+| aria-label | Le nom accessible de la poignée |  `string`   | "Drag to reorder" |
+| qa         | L'attribut `data-qa`           |  `string`   |                  |
+| children   | Le contenu à la place de la poignée | `ReactNode` |   l'icône de poignée   |
+
+### useListHelloPangeaDnd
+
+L'état du glisser-déposer pour un `DragDropContext` de votre propre création — le `state` du wrapper (aucune prop nécessaire), ou la prop `dnd` d'une liste câblée manuellement. Les props, toutes optionnelles :
+
+| Nom   | Description                                                                                               |                                  Type                                   |
+| :---- | :-------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------: |
+| ids    | Les ids des lignes dans l'ordre de la liste ; par défaut — ceux de `ListHelloPangeaDnd` étant donné l'état |                           `readonly string[]`                           |
+| onDrop | Le drop — associez-le à `moveItem(items, fromId, toId, position)`; facultatif sous un `ListHelloPangeaDnd`  | `(fromId: string, toId: string, position: 'before' \| 'after') => void` |
+
+Ce qu'il retourne :
+
+| Nom        | Description                                               |              Type              |
+| :---------- | :-------------------------------------------------------- | :----------------------------: |
+| draggingId  | Ce qui est déplacé — va dans l'adaptateur de la liste |        `string \| null`        |
+| onDragStart | Pour le `DragDropContext`                                 |  `(start: DragStart) => void`  |
+| onDragEnd   | Pour le `DragDropContext` ; appelle `onDrop` lors d'un vrai déplacement  | `(result: DropResult) => void` |
