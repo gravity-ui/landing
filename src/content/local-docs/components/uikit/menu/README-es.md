@@ -1,306 +1,126 @@
-<!--GITHUB_BLOCK-->
+# Menú
 
-# Menu
+El componente `Menu` muestra una lista de opciones en el `Popup` al interactuar con su disparador, típicamente un botón.
 
-<!--/GITHUB_BLOCK-->
+Hay una colección de componentes relacionados:
 
-El componente `Menu` permite crear fácilmente vistas para listas de acciones.
+- `Menu` - el contenedor del menú
+- `MenuItem` - una opción para seleccionar del menú
+- `MenuDivider` - un divisor para agrupar opciones
+- `MenuTrigger` - un disparador predeterminado incorporado, `Button` con un ícono de elipsis
 
-```tsx
-import {Menu} from '@gravity-ui/uikit';
-```
+## Uso básico
 
-Tiene componentes dedicados para elementos (`Menu.Item`) y grupos (`Menu.Group`). Puedes combinarlos para crear menús más complejos.
+```jsx
+import {Menu, MenuItem, MenuDivider, MenuTrigger} from '@gravity-ui/uikit';
 
-<!--SANDBOX
-import {Menu} from '@gravity-ui/uikit';
-
-export default function () {
-    return (
-        <Menu>
-            <Menu.Item>First</Menu.Item>
-            <Menu.Item>Second</Menu.Item>
-            <Menu.Group label="Group">
-                <Menu.Item>One</Menu.Item>
-                <Menu.Item>Two</Menu.Item>
-            </Menu.Group>
-        </Menu>
-    );
+function BasicMenu() {
+  return (
+    <Menu trigger={<MenuTrigger />}>
+      <MenuItem>Copiar</MenuItem>
+      <MenuItem>Mover</MenuItem>
+      <MenuDivider />
+      <MenuItem theme="danger">Eliminar</MenuItem>
+    </Menu>
+  );
 }
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-<Menu>
-  <Menu.Item>First</Menu.Item>
-  <Menu.Item>Second</Menu.Item>
-  <Menu.Group label="Group">
-    <Menu.Item>One</Menu.Item>
-    <Menu.Item>Two</Menu.Item>
-  </Menu.Group>
-</Menu>
 ```
 
-<!--/GITHUB_BLOCK-->
+## Disparador personalizado
 
-### Tamaño
+Puedes renderizar cualquier tipo de componente como disparador si acepta `basic HTMLAttributes` como props y una `ref` para `HTMLElement`.
+Para componentes más complejos, puedes usar una variante de función del prop `trigger` que tiene `triggerProps` como primer argumento
+y `triggerRef` como segundo argumento, que debes pasar a tu componente.
 
-Esta propiedad se utiliza para seleccionar el tamaño del menú. El valor predeterminado es `m`.
+## Menú contextual
 
-<!--SANDBOX
-import {Menu} from '@gravity-ui/uikit';
+Para implementar el patrón de menú contextual, debes usar un "elemento virtual" como disparador:
 
-export default function () {
-    return (
-        <>
-            <Menu size="s">
-                <Menu.Item>First</Menu.Item>
-                <Menu.Item>Second</Menu.Item>
-            </Menu>
-            <Menu size="m">
-                <Menu.Item>First</Menu.Item>
-                <Menu.Item>Second</Menu.Item>
-            </Menu>
-            <Menu size="l">
-                <Menu.Item>First</Menu.Item>
-                <Menu.Item>Second</Menu.Item>
-            </Menu>
-            <Menu size="xl">
-                <Menu.Item>First</Menu.Item>
-                <Menu.Item>Second</Menu.Item>
-            </Menu>
-        </>
-    );
+```jsx
+import {Menu, MenuItem, MenuDivider, MenuTrigger} from '@gravity-ui/uikit';
+
+function ContextMenu() {
+  const [trigger, setTrigger] = React.useState(null);
+
+  React.useEffect(() => {
+    const handleContextMenu = (event) => {
+      event.preventDefault();
+      setTrigger({
+        getBoundingClientRect() {
+          return {
+            width: 0,
+            height: 0,
+            x: event.clientX,
+            y: event.clientY,
+            top: event.clientY,
+            right: event.clientX,
+            bottom: event.clientY,
+            left: event.clientX,
+          };
+        },
+      });
+    };
+    document.addEventListener('contextmenu', handleContextMenu);
+    return () => document.removeEventListener('contextmenu', handleContextMenu);
+  }, []);
+
+  return (
+    <Menu trigger={trigger}>
+      <MenuItem>Copiar</MenuItem>
+      <MenuItem>Mover</MenuItem>
+      <MenuDivider />
+      <MenuItem theme="danger">Eliminar</MenuItem>
+    </Menu>
+  );
 }
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-<Menu size="s">
-    <Menu.Item>First</Menu.Item>
-    <Menu.Item>Second</Menu.Item>
-</Menu>
-
-<Menu size="m">
-    <Menu.Item>First</Menu.Item>
-    <Menu.Item>Second</Menu.Item>
-</Menu>
-
-<Menu size="l">
-    <Menu.Item>First</Menu.Item>
-    <Menu.Item>Second</Menu.Item>
-</Menu>
-
-<Menu size="xl">
-    <Menu.Item>First</Menu.Item>
-    <Menu.Item>Second</Menu.Item>
-</Menu>
 ```
 
-<!--/GITHUB_BLOCK-->
+## Modo en línea
+
+Por defecto, `Menu` se renderiza dentro del `Popup`. Pero puedes renderizarlo en línea usando el prop `inline` en tu propio contenedor.
 
 ## Propiedades
 
-| Nombre      | Descripción                                |           Tipo           | Predeterminado |
-| :---------- | :----------------------------------------- | :----------------------: | :------------: |
-| size        | Tamaño del menú                            | `"s"` `"m"` `"l"` `"xl"` |     `"m"`      |
-| children    | Elemento hijo                              |    `React.ReactNode`     |                |
-| className   | Atributo `class` HTML                      |         `string`         |                |
-| style       | Atributo `style` HTML                      |  `React.CSSProperties`   |                |
-| qa          | Atributo `data-qa` HTML, usado para pruebas |         `string`         |                |
+| Nombre            | Descripción                                     |                                              Tipo                                               |     Por defecto      |
+| :-------------- | :---------------------------------------------- | :---------------------------------------------------------------------------------------------: | :--------------: |
+| className       | Atributo `class` de HTML                          |                                            `string`                                             |                  |
+| style           | Atributo `style` de HTML                          |                                      `React.CSSProperties`                                      |                  |
+| aria-label      | Nombre accesible para el menú                    |                                            `string`                                             |                  |
+| aria-labelledby | ID de un elemento que nombra el menú            |                                            `string`                                             |                  |
+| qa              | ID de prueba (atributo `data-qa`)                   |                                            `string`                                             |                  |
+| open            | Estado controlado para `open`                     |                                            `boolean`                                            |                  |
+| defaultOpen     | Estado no controlado para `open`                   |                                            `boolean`                                            |                  |
+| children        | Componentes relacionados con el menú (ítems, divisores, etc.) |                                        `React.ReactNode`                                        |                  |
+| disabled        | Estado deshabilitado                                  |                                            `boolean`                                            |     `false`      |
+| inline          | Renderiza el menú en línea                         |                                            `boolean`                                            |     `false`      |
+| trigger         | Elemento disparador que abre el menú            | `React.ReactElement` `(triggerProps, triggerRef) => React.ReactElement` `VirtualElement` `null` |                  |
+| placement       | Colocación del popup                                 |                                        `PopupPlacement`                                         | `"bottom-start"` |
+| onOpenChange    | Callback para el cambio de estado de `open`                |                `(open: boolean, event: Event, reason: OpenChangeReason) => void`                |                  |
+| size            | El tamaño del `Menu`                                 |                                    `"s"` `"m"` `"l"` `"xl"`                                     |      `"m"`       |
 
-## Menu.Item
+### MenuItem
 
-Esta propiedad se utiliza para renderizar elementos del menú.
+Cuando se pasa un `Icon` sin un tamaño explícito a la propiedad `icon`, su tamaño se selecciona
+automáticamente según el tamaño del `Menu`. Establezca explícitamente el `size`, `width` o `height`
+del `Icon` para anularlo.
 
-### Icono
+`MenuItem` acepta cualquier prop válida de elemento `button` o `a` además de estas:
 
-Utiliza la propiedad `iconStart` o `iconEnd` para mostrar un icono al principio o al final de un elemento del menú:
+| Nombre      | Descripción                         |                                Type                                |  Por defecto   |
+| :-------- | :---------------------------------- | :----------------------------------------------------------------: | :------------: |
+| qa        | ID de prueba (atributo `data-qa`)   |                              `string`                              |                |
+| theme     | El tema de `MenuItem`               | `"normal"` `"info"` `"success"` `"warning"` `"danger"` `"utility"` | `"normal"`     |
+| selected  | Estado seleccionado (`menuitemcheckbox`) |                             `boolean`                              |                |
+| disabled  | Estado deshabilitado                |                             `boolean`                              |    `false`     |
+| icon      | Slot de renderizado para un icono   |                        `React.ReactElement`                        |                |
+| arrow     | Slot de renderizado para una flecha de menú anidado |                        `React.ReactElement`                        |                |
+| children  | Contenido                           |                         `React.ReactNode`                          |                |
+| component | Componente raíz personalizado       |                        `React.ElementType`                         |                |
 
-<!--SANDBOX
-import {Gear, TriangleExclamation} from '@gravity-ui/icons';
-import {Icon, Menu} from '@gravity-ui/uikit';
+### MenuTrigger
 
-export default function () {
-    return (
-        <>
-            <Menu>
-                <Menu.Item iconStart={<Icon size={16} data={Gear} />}>Item with icon</Menu.Item>
-                <Menu.Item>Item without icon</Menu.Item>
-            </Menu>
-            <Menu>
-                <Menu.Item iconEnd={<Icon size={16} data={TriangleExclamation} />}>
-                    Item with icon
-                </Menu.Item>
-                <Menu.Item>Item without icon</Menu.Item>
-            </Menu>
-        </>
-    );
-}
-SANDBOX-->
+`MenuTrigger` acepta cualquier prop del componente `Button` además de estas:
 
-<!--GITHUB_BLOCK-->
-
-```tsx
-<Menu>
-  <Menu.Item iconStart={<Icon size={16} data={GearIcon} />}>Item with icon</Menu.Item>
-  <Menu.Item>Item without icon</Menu.Item>
-</Menu>
-```
-
-```tsx
-<Menu>
-  <Menu.Item iconEnd={<Icon size={16} data={TriangleExclamation} />}>Item with icon</Menu.Item>
-  <Menu.Item>Item without icon</Menu.Item>
-</Menu>
-```
-
-<!--/GITHUB_BLOCK-->
-
-### Estados
-
-Usando esta propiedad, puedes habilitar o deshabilitar (atenuar) elementos específicos del menú:
-
-<!--SANDBOX
-import {Menu} from '@gravity-ui/uikit';
-
-export default function () {
-    return (
-        <Menu>
-            <Menu.Item disabled>First</Menu.Item>
-            <Menu.Item>Second</Menu.Item>
-            <Menu.Item selected>Third</Menu.Item>
-        </Menu>
-    );
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-<Menu>
-  <Menu.Item disabled>First</Menu.Item>
-  <Menu.Item>Second</Menu.Item>
-  <Menu.Item selected>Third</Menu.Item>
-</Menu>
-```
-
-<!--/GITHUB_BLOCK-->
-
-### Tema
-
-Esto te permite cambiar el tema del elemento del menú. El tema predeterminado es `normal`.
-
-<!--SANDBOX
-import {Menu} from '@gravity-ui/uikit';
-
-export default function () {
-    return (
-        <Menu>
-            <Menu.Item theme="danger">First</Menu.Item>
-            <Menu.Item theme="normal">Second</Menu.Item>
-            <Menu.Item>Third</Menu.Item>
-        </Menu>
-    );
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-<Menu>
-  <Menu.Item theme="danger">First</Menu.Item>
-  <Menu.Item theme="normal">Second</Menu.Item>
-  <Menu.Item>Third</Menu.Item>
-</Menu>
-```
-
-<!--/GITHUB_BLOCK-->
-
-### Propiedades
-
-| Nombre             | Descripción                                    |           Tipo            |  Predeterminado   |
-| :---------------- | :--------------------------------------------- | :-----------------------: | :--------: |
-| iconStart        | Icono del menú antes del texto del elemento                     |        `ReactNode`        |            |
-| iconEnd          | Icono del menú después del texto del elemento                      |        `ReactNode`        |            |
-| selected         | Indicador de elemento de menú seleccionado                        |         `boolean`         |  `false`   |
-| disabled         | Indicador de elemento de menú deshabilitado                        |         `boolean`         |  `false`   |
-| active           | Indicador de elemento de menú activo                          |         `boolean`         |  `false`   |
-| href             | URL                                            |         `string`          |            |
-| title            | Atributo de título                                |         `string`          |            |
-| target           | Atributo de destino                               |         `string`          |            |
-| rel              | Atributo rel                                  |         `string`          |            |
-| onClick          | Manejador para el evento onclick                      | `React.MouseEventHandler` |            |
-| theme            | Tema del elemento del menú                                |   `"normal"` `"danger"`   | `"normal"` |
-| children         | Elemento hijo                                  |     `React.ReactNode`     |            |
-| className        | Atributo HTML `class` para el elemento raíz    |         `string`          |            |
-| contentClassName | Atributo HTML `class` para el elemento de contenido |         `string`          |            |
-| style            | Atributo HTML `style`                         |   `React.CSSProperties`   |            |
-| qa               | Atributo HTML `data-qa`, usado para pruebas     |         `string`          |            |
-| extraProps       | Atributos HTML adicionales                     |         `Record`          |            |
-
-## Menu.Group
-
-Puedes agrupar elementos por temas dentro de un solo menú:
-
-<!--SANDBOX
-import {Menu} from '@gravity-ui/uikit';
-
-export default function () {
-    return (
-        <Menu>
-            <Menu.Item>First</Menu.Item>
-            <Menu.Group label="Group One">
-                <Menu.Item>One</Menu.Item>
-                <Menu.Item>Two</Menu.Item>
-            </Menu.Group>
-            <Menu.Group label="Group Two">
-                <Menu.Item>One</Menu.Item>
-                <Menu.Item>Two</Menu.Item>
-            </Menu.Group>
-            <Menu.Item>Middle</Menu.Item>
-            <Menu.Group label="Group Three">
-                <Menu.Item>One</Menu.Item>
-                <Menu.Item>Two</Menu.Item>
-            </Menu.Group>
-            <Menu.Item>Last</Menu.Item>
-        </Menu>
-    );
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-<Menu>
-  <Menu.Item>First</Menu.Item>
-  <Menu.Group label="Group One">
-    <Menu.Item>One</Menu.Item>
-    <Menu.Item>Two</Menu.Item>
-  </Menu.Group>
-  <Menu.Group label="Group Two">
-    <Menu.Item>One</Menu.Item>
-    <Menu.Item>Two</Menu.Item>
-  </Menu.Group>
-  <Menu.Item>Middle</Menu.Item>
-  <Menu.Group label="Group Three">
-    <Menu.Item>One</Menu.Item>
-    <Menu.Item>Two</Menu.Item>
-  </Menu.Group>
-  <Menu.Item>Last</Menu.Item>
-</Menu>
-```
-
-<!--/GITHUB_BLOCK-->
-
-### Propiedades
-
-| Nombre      | Descripción                                |         Tipo          | Predeterminado |
-| :-------- | :----------------------------------------- | :-------------------: | :-----: |
-| label     | Etiqueta del grupo de menú                           |       `string`        |         |
-| children  | Elemento hijo                              |   `React.ReactNode`   |         |
-| className | Atributo HTML `class`                     |       `string`        |         |
-| style     | Atributo HTML `style`                     | `React.CSSProperties` |         |
-| qa        | Atributo HTML `data-qa`, usado para pruebas |       `string`        |         |
+| Nombre | Descripción             |            Type             |    Por defecto     |
+| :--- | :---------------------- | :-------------------------: | :----------------: |
+| icon | Tipo de icono a mostrar | `"horizontal"` `"vertical"` | `"horizontal"` |

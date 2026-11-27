@@ -1,306 +1,123 @@
-<!--GITHUB_BLOCK-->
-
 # Menu
 
-<!--/GITHUB_BLOCK-->
+`Menu` コンポーネントは、通常はボタンであるトリガーとのインタラクション時に、`Popup` 内に選択肢のリストを表示します。
 
-`Menu` コンポーネントを使用すると、アクションリストのビューを簡単に作成できます。
+関連するコンポーネントのコレクションがあります。
 
-```tsx
-import {Menu} from '@gravity-ui/uikit';
-```
+- `Menu` - メニューのコンテナ
+- `MenuItem` - メニューから選択するオプション
+- `MenuDivider` - オプションをグループ化するための区切り線
+- `MenuTrigger` - 組み込みのデフォルトトリガー、楕円アイコン付きの `Button`
 
-アイテム (`Menu.Item`) とグループ (`Menu.Group`) 専用のコンポーネントがあります。これらを組み合わせて、より複雑なメニューを作成できます。
+## 基本的な使い方
 
-<!--SANDBOX
-import {Menu} from '@gravity-ui/uikit';
+```jsx
+import {Menu, MenuItem, MenuDivider, MenuTrigger} from '@gravity-ui/uikit';
 
-export default function () {
-    return (
-        <Menu>
-            <Menu.Item>First</Menu.Item>
-            <Menu.Item>Second</Menu.Item>
-            <Menu.Group label="Group">
-                <Menu.Item>One</Menu.Item>
-                <Menu.Item>Two</Menu.Item>
-            </Menu.Group>
-        </Menu>
-    );
+function BasicMenu() {
+  return (
+    <Menu trigger={<MenuTrigger />}>
+      <MenuItem>Copy</MenuItem>
+      <MenuItem>Move</MenuItem>
+      <MenuDivider />
+      <MenuItem theme="danger">Delete</MenuItem>
+    </Menu>
+  );
 }
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-<Menu>
-  <Menu.Item>First</Menu.Item>
-  <Menu.Item>Second</Menu.Item>
-  <Menu.Group label="Group">
-    <Menu.Item>One</Menu.Item>
-    <Menu.Item>Two</Menu.Item>
-  </Menu.Group>
-</Menu>
 ```
 
-<!--/GITHUB_BLOCK-->
+## カスタムトリガー
 
-### Size
+基本的な `HTMLAttributes` をプロパティとして、および `HTMLElement` のための ref を受け入れるコンポーネントであれば、どのようなコンポーネントでもトリガーとしてレンダリングできます。
+より複雑なコンポーネントの場合は、`trigger` プロパティの関数バリアントを使用できます。この関数バリアントは、最初の引数として `triggerProps`、2番目の引数として `triggerRef` を持ち、これをコンポーネントに渡す必要があります。
 
-このプロパティは、メニューのサイズを選択するために使用されます。デフォルト値は `m` です。
+## コンテキストメニュー
 
-<!--SANDBOX
-import {Menu} from '@gravity-ui/uikit';
+コンテキストメニューパターンを実装するには、トリガーとして「仮想要素」を使用する必要があります。
 
-export default function () {
-    return (
-        <>
-            <Menu size="s">
-                <Menu.Item>First</Menu.Item>
-                <Menu.Item>Second</Menu.Item>
-            </Menu>
-            <Menu size="m">
-                <Menu.Item>First</Menu.Item>
-                <Menu.Item>Second</Menu.Item>
-            </Menu>
-            <Menu size="l">
-                <Menu.Item>First</Menu.Item>
-                <Menu.Item>Second</Menu.Item>
-            </Menu>
-            <Menu size="xl">
-                <Menu.Item>First</Menu.Item>
-                <Menu.Item>Second</Menu.Item>
-            </Menu>
-        </>
-    );
+```jsx
+import {Menu, MenuItem, MenuDivider, MenuTrigger} from '@gravity-ui/uikit';
+
+function ContextMenu() {
+  const [trigger, setTrigger] = React.useState(null);
+
+  React.useEffect(() => {
+    const handleContextMenu = (event) => {
+      event.preventDefault();
+      setTrigger({
+        getBoundingClientRect() {
+          return {
+            width: 0,
+            height: 0,
+            x: event.clientX,
+            y: event.clientY,
+            top: event.clientY,
+            right: event.clientX,
+            bottom: event.clientY,
+            left: event.clientX,
+          };
+        },
+      });
+    };
+    document.addEventListener('contextmenu', handleContextMenu);
+    return () => document.removeEventListener('contextmenu', handleContextMenu);
+  }, []);
+
+  return (
+    <Menu trigger={trigger}>
+      <MenuItem>Copy</MenuItem>
+      <MenuItem>Move</MenuItem>
+      <MenuDivider />
+      <MenuItem theme="danger">Delete</MenuItem>
+    </Menu>
+  );
 }
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-<Menu size="s">
-    <Menu.Item>First</Menu.Item>
-    <Menu.Item>Second</Menu.Item>
-</Menu>
-
-<Menu size="m">
-    <Menu.Item>First</Menu.Item>
-    <Menu.Item>Second</Menu.Item>
-</Menu>
-
-<Menu size="l">
-    <Menu.Item>First</Menu.Item>
-    <Menu.Item>Second</Menu.Item>
-</Menu>
-
-<Menu size="xl">
-    <Menu.Item>First</Menu.Item>
-    <Menu.Item>Second</Menu.Item>
-</Menu>
 ```
 
-<!--/GITHUB_BLOCK-->
+## インラインモード
 
-## Properties
+デフォルトでは、`Menu` は `Popup` 内にレンダリングされます。しかし、独自のコンテナで `inline` プロパティを使用してインラインでレンダリングすることができます。
 
-| Name      | Description                                |           Type           | Default |
-| :-------- | :----------------------------------------- | :----------------------: | :-----: |
-| size      | Menu size                                  | `"s"` `"m"` `"l"` `"xl"` |  `"m"`  |
-| children  | Child element                              |    `React.ReactNode`     |         |
-| className | `class` HTML attribute                     |         `string`         |         |
-| style     | `style` HTML attribute                     |  `React.CSSProperties`   |         |
-| qa        | `data-qa` HTML attribute, used for testing |         `string`         |         |
+## プロパティ
 
-## Menu.Item
+| 名前            | 説明                                     |                                              タイプ                                               |     デフォルト      |
+| :-------------- | :---------------------------------------------- | :---------------------------------------------------------------------------------------------: | :--------------: |
+| className       | HTML `class` 属性                          |                                            `string`                                             |                  |
+| style           | HTML `style` 属性                          |                                      `React.CSSProperties`                                      |                  |
+| aria-label      | メニューのアクセシブル名                    |                                            `string`                                             |                  |
+| aria-labelledby | メニューを名前付ける要素のID            |                                            `string`                                             |                  |
+| qa              | テストID (`data-qa` 属性)                   |                                            `string`                                             |                  |
+| open            | `open` の制御された状態                     |                                            `boolean`                                            |                  |
+| defaultOpen     | `open` の制御されていない状態                   |                                            `boolean`                                            |                  |
+| children        | メニュー関連コンポーネント（アイテム、区切り線など） |                                        `React.ReactNode`                                        |                  |
+| disabled        | 無効状態                                  |                                            `boolean`                                            |     `false`      |
+| inline          | メニューをインラインでレンダリングする         |                                            `boolean`                                            |     `false`      |
+| trigger         | メニューを開くトリガー要素            | `React.ReactElement` `(triggerProps, triggerRef) => React.ReactElement` `VirtualElement` `null` |                  |
+| placement       | ポップアップの配置                         |                                        `PopupPlacement`                                         | `"bottom-start"` |
+| onOpenChange    | `open` 状態変更のコールバック                |                `(open: boolean, event: Event, reason: OpenChangeReason) => void`                |                  |
+| size            | `Menu` のサイズ                                 |                                    `"s"` `"m"` `"l"` `"xl"`                                     |      `"m"`       |
 
-このプロパティは、メニューアイテムをレンダリングするために使用されます。
+### MenuItem
 
-### Icon
+`icon` プロパティに明示的なサイズが指定されていない `Icon` が渡された場合、そのサイズは `Menu` のサイズに応じて自動的に選択されます。それを上書きするには、`Icon` の `size`、`width`、または `height` を明示的に設定してください。
 
-`iconStart` または `iconEnd` プロパティを使用して、メニューアイテムの先頭または末尾にアイコンを表示します。
+`MenuItem` は、これらのプロパティに加えて、有効な `button` または `a` 要素のプロパティをすべて受け入れます。
 
-<!--SANDBOX
-import {Gear, TriangleExclamation} from '@gravity-ui/icons';
-import {Icon, Menu} from '@gravity-ui/uikit';
+| 名前      | 説明                                 |                                Type                                |  デフォルト   |
+| :-------- | :----------------------------------- | :----------------------------------------------------------------: | :--------: |
+| qa        | テスト ID (`data-qa` 属性)           |                              `string`                              |            |
+| theme     | `MenuItem` のテーマ                  | `"normal"` `"info"` `"success"` `"warning"` `"danger"` `"utility"` | `"normal"` |
+| selected  | 選択状態 (`menuitemcheckbox`)        |                             `boolean`                              |            |
+| disabled  | 無効状態                             |                             `boolean`                              |  `false`   |
+| icon      | アイコンのレンダリングスロット       |                        `React.ReactElement`                        |            |
+| arrow     | ネストされたメニューの矢印のレンダリングスロット |                        `React.ReactElement`                        |            |
+| children  | コンテンツ                           |                         `React.ReactNode`                          |            |
+| component | カスタムルートコンポーネント         |                        `React.ElementType`                         |            |
 
-export default function () {
-    return (
-        <>
-            <Menu>
-                <Menu.Item iconStart={<Icon size={16} data={Gear} />}>Item with icon</Menu.Item>
-                <Menu.Item>Item without icon</Menu.Item>
-            </Menu>
-            <Menu>
-                <Menu.Item iconEnd={<Icon size={16} data={TriangleExclamation} />}>
-                    Item with icon
-                </Menu.Item>
-                <Menu.Item>Item without icon</Menu.Item>
-            </Menu>
-        </>
-    );
-}
-SANDBOX-->
+### MenuTrigger
 
-<!--GITHUB_BLOCK-->
+`MenuTrigger` は、これらのプロパティに加えて、`Button` コンポーネントのプロパティをすべて受け入れます。
 
-```tsx
-<Menu>
-  <Menu.Item iconStart={<Icon size={16} data={GearIcon} />}>Item with icon</Menu.Item>
-  <Menu.Item>Item without icon</Menu.Item>
-</Menu>
-```
-
-```tsx
-<Menu>
-  <Menu.Item iconEnd={<Icon size={16} data={TriangleExclamation} />}>Item with icon</Menu.Item>
-  <Menu.Item>Item without icon</Menu.Item>
-</Menu>
-```
-
-<!--/GITHUB_BLOCK-->
-
-### States
-
-このプロパティを使用すると、特定のメニューアイテムを有効または無効 (グレーアウト) にできます。
-
-<!--SANDBOX
-import {Menu} from '@gravity-ui/uikit';
-
-export default function () {
-    return (
-        <Menu>
-            <Menu.Item disabled>First</Menu.Item>
-            <Menu.Item>Second</Menu.Item>
-            <Menu.Item selected>Third</Menu.Item>
-        </Menu>
-    );
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-<Menu>
-  <Menu.Item disabled>First</Menu.Item>
-  <Menu.Item>Second</Menu.Item>
-  <Menu.Item selected>Third</Menu.Item>
-</Menu>
-```
-
-<!--/GITHUB_BLOCK-->
-
-### Theme
-
-これにより、メニューアイテムのテーマを変更できます。デフォルトのテーマは `normal` です。
-
-<!--SANDBOX
-import {Menu} from '@gravity-ui/uikit';
-
-export default function () {
-    return (
-        <Menu>
-            <Menu.Item theme="danger">First</Menu.Item>
-            <Menu.Item theme="normal">Second</Menu.Item>
-            <Menu.Item>Third</Menu.Item>
-        </Menu>
-    );
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-<Menu>
-  <Menu.Item theme="danger">First</Menu.Item>
-  <Menu.Item theme="normal">Second</Menu.Item>
-  <Menu.Item>Third</Menu.Item>
-</Menu>
-```
-
-<!--/GITHUB_BLOCK-->
-
-### Properties
-
-| 名前             | 説明                                       |           型            |  デフォルト   |
-| :--------------- | :----------------------------------------- | :---------------------: | :---------: |
-| iconStart        | メニュー項目のテキストの前のアイコン       |        `ReactNode`        |             |
-| iconEnd          | メニュー項目のテキストの後のアイコン       |        `ReactNode`        |             |
-| selected         | メニュー項目が選択されているフラグ         |         `boolean`         |  `false`   |
-| disabled         | メニュー項目が無効になっているフラグ       |         `boolean`         |  `false`   |
-| active           | メニュー項目がアクティブなフラグ           |         `boolean`         |  `false`   |
-| href             | URL                                        |         `string`          |             |
-| title            | title属性                                  |         `string`          |             |
-| target           | target属性                                 |         `string`          |             |
-| rel              | rel属性                                    |         `string`          |             |
-| onClick          | onclickイベントのハンドラ                    | `React.MouseEventHandler` |             |
-| theme            | メニュー項目のテーマ                       |   `"normal"` `"danger"`   | `"normal"` |
-| children         | 子要素                                     |     `React.ReactNode`     |             |
-| className        | ルート要素の`class` HTML属性               |         `string`          |             |
-| contentClassName | コンテンツ要素の`class` HTML属性           |         `string`          |             |
-| style            | `style` HTML属性                           |   `React.CSSProperties`   |             |
-| qa               | テストに使用される`data-qa` HTML属性       |         `string`          |             |
-| extraProps       | 追加のHTML属性                             |         `Record`          |             |
-
-## Menu.Group
-
-単一のメニュー内で項目をトピックごとにグループ化できます。
-
-<!--SANDBOX
-import {Menu} from '@gravity-ui/uikit';
-
-export default function () {
-    return (
-        <Menu>
-            <Menu.Item>First</Menu.Item>
-            <Menu.Group label="Group One">
-                <Menu.Item>One</Menu.Item>
-                <Menu.Item>Two</Menu.Item>
-            </Menu.Group>
-            <Menu.Group label="Group Two">
-                <Menu.Item>One</Menu.Item>
-                <Menu.Item>Two</Menu.Item>
-            </Menu.Group>
-            <Menu.Item>Middle</Menu.Item>
-            <Menu.Group label="Group Three">
-                <Menu.Item>One</Menu.Item>
-                <Menu.Item>Two</Menu.Item>
-            </Menu.Group>
-            <Menu.Item>Last</Menu.Item>
-        </Menu>
-    );
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-<Menu>
-  <Menu.Item>First</Menu.Item>
-  <Menu.Group label="Group One">
-    <Menu.Item>One</Menu.Item>
-    <Menu.Item>Two</Menu.Item>
-  </Menu.Group>
-  <Menu.Group label="Group Two">
-    <Menu.Item>One</Menu.Item>
-    <Menu.Item>Two</Menu.Item>
-  </Menu.Group>
-  <Menu.Item>Middle</Menu.Item>
-  <Menu.Group label="Group Three">
-    <Menu.Item>One</Menu.Item>
-    <Menu.Item>Two</Menu.Item>
-  </Menu.Group>
-  <Menu.Item>Last</Menu.Item>
-</Menu>
-```
-
-<!--/GITHUB_BLOCK-->
-
-### プロパティ
-
-| 名前      | 説明                   |         型          | デフォルト |
-| :-------- | :--------------------- | :-----------------: | :------: |
-| label     | メニューグループのラベル |       `string`        |          |
-| children  | 子要素                 |   `React.ReactNode`   |          |
-| className | `class` HTML属性       |       `string`        |          |
-| style     | `style` HTML属性       | `React.CSSProperties` |          |
-| qa        | テストに使用される`data-qa` HTML属性 |       `string`        |          |
+| 名前 | 説明                 |            Type             |    デフォルト     |
+| :--- | :------------------- | :-------------------------: | :------------: |
+| icon | 表示するアイコンの種類 | `"horizontal"` `"vertical"` | `"horizontal"` |

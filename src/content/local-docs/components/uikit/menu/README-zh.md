@@ -1,306 +1,123 @@
-<!--GITHUB_BLOCK-->
-
 # Menu
 
-<!--/GITHUB_BLOCK-->
+`Menu` 组件在与触发器（通常是按钮）交互时，会在 `Popup` 中显示选项列表。
 
-`Menu` 组件可轻松创建操作列表视图。
+有一系列相关的组件：
 
-```tsx
-import {Menu} from '@gravity-ui/uikit';
-```
+- `Menu` - 菜单的容器
+- `MenuItem` - 菜单中的一个选项
+- `MenuDivider` - 用于分组选项的分隔线
+- `MenuTrigger` - 内置的默认触发器，一个带有省略号图标的 `Button`
 
-它有专门用于项目 (`Menu.Item`) 和组 (`Menu.Group`) 的组件。您可以将它们组合起来创建更复杂的菜单。
+## 基本用法
 
-<!--SANDBOX
-import {Menu} from '@gravity-ui/uikit';
+```jsx
+import {Menu, MenuItem, MenuDivider, MenuTrigger} from '@gravity-ui/uikit';
 
-export default function () {
-    return (
-        <Menu>
-            <Menu.Item>First</Menu.Item>
-            <Menu.Item>Second</Menu.Item>
-            <Menu.Group label="Group">
-                <Menu.Item>One</Menu.Item>
-                <Menu.Item>Two</Menu.Item>
-            </Menu.Group>
-        </Menu>
-    );
+function BasicMenu() {
+  return (
+    <Menu trigger={<MenuTrigger />}>
+      <MenuItem>Copy</MenuItem>
+      <MenuItem>Move</MenuItem>
+      <MenuDivider />
+      <MenuItem theme="danger">Delete</MenuItem>
+    </Menu>
+  );
 }
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-<Menu>
-  <Menu.Item>First</Menu.Item>
-  <Menu.Item>Second</Menu.Item>
-  <Menu.Group label="Group">
-    <Menu.Item>One</Menu.Item>
-    <Menu.Item>Two</Menu.Item>
-  </Menu.Group>
-</Menu>
 ```
 
-<!--/GITHUB_BLOCK-->
+## 自定义触发器
 
-### Size
+您可以将任何接受基本 `HTMLAttributes` 作为 props 和 `HTMLElement` 的 ref 的组件渲染为触发器。
+对于更复杂的组件，您可以使用 `trigger` prop 的函数变体，该变体将 `triggerProps` 作为第一个参数，将 `triggerRef` 作为第二个参数，您应该将它们传递给您的组件。
 
-此属性用于选择菜单大小。默认值为 `m`。
+## 上下文菜单
 
-<!--SANDBOX
-import {Menu} from '@gravity-ui/uikit';
+要实现上下文菜单模式，您应该使用“虚拟元素”作为触发器：
 
-export default function () {
-    return (
-        <>
-            <Menu size="s">
-                <Menu.Item>First</Menu.Item>
-                <Menu.Item>Second</Menu.Item>
-            </Menu>
-            <Menu size="m">
-                <Menu.Item>First</Menu.Item>
-                <Menu.Item>Second</Menu.Item>
-            </Menu>
-            <Menu size="l">
-                <Menu.Item>First</Menu.Item>
-                <Menu.Item>Second</Menu.Item>
-            </Menu>
-            <Menu size="xl">
-                <Menu.Item>First</Menu.Item>
-                <Menu.Item>Second</Menu.Item>
-            </Menu>
-        </>
-    );
+```jsx
+import {Menu, MenuItem, MenuDivider, MenuTrigger} from '@gravity-ui/uikit';
+
+function ContextMenu() {
+  const [trigger, setTrigger] = React.useState(null);
+
+  React.useEffect(() => {
+    const handleContextMenu = (event) => {
+      event.preventDefault();
+      setTrigger({
+        getBoundingClientRect() {
+          return {
+            width: 0,
+            height: 0,
+            x: event.clientX,
+            y: event.clientY,
+            top: event.clientY,
+            right: event.clientX,
+            bottom: event.clientY,
+            left: event.clientX,
+          };
+        },
+      });
+    };
+    document.addEventListener('contextmenu', handleContextMenu);
+    return () => document.removeEventListener('contextmenu', handleContextMenu);
+  }, []);
+
+  return (
+    <Menu trigger={trigger}>
+      <MenuItem>Copy</MenuItem>
+      <MenuItem>Move</MenuItem>
+      <MenuDivider />
+      <MenuItem theme="danger">Delete</MenuItem>
+    </Menu>
+  );
 }
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-<Menu size="s">
-    <Menu.Item>First</Menu.Item>
-    <Menu.Item>Second</Menu.Item>
-</Menu>
-
-<Menu size="m">
-    <Menu.Item>First</Menu.Item>
-    <Menu.Item>Second</Menu.Item>
-</Menu>
-
-<Menu size="l">
-    <Menu.Item>First</Menu.Item>
-    <Menu.Item>Second</Menu.Item>
-</Menu>
-
-<Menu size="xl">
-    <Menu.Item>First</Menu.Item>
-    <Menu.Item>Second</Menu.Item>
-</Menu>
 ```
 
-<!--/GITHUB_BLOCK-->
+## 内联模式
 
-## Properties
+默认情况下，`Menu` 渲染在 `Popup` 中。但是，您可以使用 `inline` prop 在自己的容器中将其内联渲染。
 
-| Name      | Description                                |           Type           | Default |
-| :-------- | :----------------------------------------- | :----------------------: | :-----: |
-| size      | Menu size                                  | `"s"` `"m"` `"l"` `"xl"` |  `"m"`  |
-| children  | Child element                              |    `React.ReactNode`     |         |
-| className | `class` HTML attribute                     |         `string`         |         |
-| style     | `style` HTML attribute                     |  `React.CSSProperties`   |         |
-| qa        | `data-qa` HTML attribute, used for testing |         `string`         |         |
+## 属性
 
-## Menu.Item
+| 名称            | 描述                                     |                                              类型                                               |     默认值      |
+| :-------------- | :---------------------------------------------- | :---------------------------------------------------------------------------------------------: | :--------------: |
+| className       | HTML `class` 属性                          |                                            `string`                                             |                  |
+| style           | HTML `style` 属性                          |                                      `React.CSSProperties`                                      |                  |
+| aria-label      | 菜单的可访问名称                    |                                            `string`                                             |                  |
+| aria-labelledby | 用于命名菜单的元素的 ID            |                                            `string`                                             |                  |
+| qa              | 测试 ID (`data-qa` 属性)                   |                                            `string`                                             |                  |
+| open            | `open` 的受控状态                     |                                            `boolean`                                            |                  |
+| defaultOpen     | `open` 的非受控状态                   |                                            `boolean`                                            |                  |
+| children        | 与菜单相关的组件（项目、分隔符等） |                                        `React.ReactNode`                                        |                  |
+| disabled        | 禁用状态                                  |                                            `boolean`                                            |     `false`      |
+| inline          | 内联渲染菜单                         |                                            `boolean`                                            |     `false`      |
+| trigger         | 打开菜单的触发器元素            | `React.ReactElement` `(triggerProps, triggerRef) => React.ReactElement` `VirtualElement` `null` |                  |
+| placement       | 弹出窗口的放置位置                                 |                                        `PopupPlacement`                                         | `"bottom-start"` |
+| onOpenChange    | `open` 状态更改的回调函数                |                `(open: boolean, event: Event, reason: OpenChangeReason) => void`                |                  |
+| size            | `Menu` 的大小                                 |                                    `"s"` `"m"` `"l"` `"xl"`                                     |      `"m"`       |
 
-此属性用于渲染菜单项。
+### MenuItem
 
-### Icon
+当传递给 `icon` 属性的 `Icon` 没有显式设置大小时，其大小会根据 `Menu` 的大小自动选择。显式设置 `Icon` 的 `size`、`width` 或 `height` 以覆盖它。
 
-使用 `iconStart` 或 `iconEnd` 属性在菜单项的开头或结尾显示图标：
+`MenuItem` 除了以下属性外，还接受任何有效的 `button` 或 `a` 元素属性：
 
-<!--SANDBOX
-import {Gear, TriangleExclamation} from '@gravity-ui/icons';
-import {Icon, Menu} from '@gravity-ui/uikit';
+| 名称      | 描述                         |                                类型                                |  默认值   |
+| :-------- | :--------------------------- | :----------------------------------------------------------------: | :--------: |
+| qa        | 测试 ID (`data-qa` 属性)       |                              `string`                              |            |
+| theme     | `MenuItem` 的主题                | `"normal"` `"info"` `"success"` `"warning"` `"danger"` `"utility"` | `"normal"` |
+| selected  | 选中状态 (`menuitemcheckbox`) |                             `boolean`                              |            |
+| disabled  | 禁用状态                      |                             `boolean`                              |  `false`   |
+| icon      | 图标的渲染插槽             |                        `React.ReactElement`                        |            |
+| arrow     | 嵌套菜单箭头的渲染插槽     |                        `React.ReactElement`                        |            |
+| children  | 内容                         |                         `React.ReactNode`                          |            |
+| component | 自定义根组件                 |                        `React.ElementType`                         |            |
 
-export default function () {
-    return (
-        <>
-            <Menu>
-                <Menu.Item iconStart={<Icon size={16} data={Gear} />}>Item with icon</Menu.Item>
-                <Menu.Item>Item without icon</Menu.Item>
-            </Menu>
-            <Menu>
-                <Menu.Item iconEnd={<Icon size={16} data={TriangleExclamation} />}>
-                    Item with icon
-                </Menu.Item>
-                <Menu.Item>Item without icon</Menu.Item>
-            </Menu>
-        </>
-    );
-}
-SANDBOX-->
+### MenuTrigger
 
-<!--GITHUB_BLOCK-->
+`MenuTrigger` 除了以下属性外，还接受任何 `Button` 组件的属性：
 
-```tsx
-<Menu>
-  <Menu.Item iconStart={<Icon size={16} data={GearIcon} />}>Item with icon</Menu.Item>
-  <Menu.Item>Item without icon</Menu.Item>
-</Menu>
-```
-
-```tsx
-<Menu>
-  <Menu.Item iconEnd={<Icon size={16} data={TriangleExclamation} />}>Item with icon</Menu.Item>
-  <Menu.Item>Item without icon</Menu.Item>
-</Menu>
-```
-
-<!--/GITHUB_BLOCK-->
-
-### States
-
-使用此属性，您可以启用或禁用（灰色显示）特定的菜单项：
-
-<!--SANDBOX
-import {Menu} from '@gravity-ui/uikit';
-
-export default function () {
-    return (
-        <Menu>
-            <Menu.Item disabled>First</Menu.Item>
-            <Menu.Item>Second</Menu.Item>
-            <Menu.Item selected>Third</Menu.Item>
-        </Menu>
-    );
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-<Menu>
-  <Menu.Item disabled>First</Menu.Item>
-  <Menu.Item>Second</Menu.Item>
-  <Menu.Item selected>Third</Menu.Item>
-</Menu>
-```
-
-<!--/GITHUB_BLOCK-->
-
-### Theme
-
-这允许您更改菜单项主题。默认主题为 `normal`。
-
-<!--SANDBOX
-import {Menu} from '@gravity-ui/uikit';
-
-export default function () {
-    return (
-        <Menu>
-            <Menu.Item theme="danger">First</Menu.Item>
-            <Menu.Item theme="normal">Second</Menu.Item>
-            <Menu.Item>Third</Menu.Item>
-        </Menu>
-    );
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-<Menu>
-  <Menu.Item theme="danger">First</Menu.Item>
-  <Menu.Item theme="normal">Second</Menu.Item>
-  <Menu.Item>Third</Menu.Item>
-</Menu>
-```
-
-<!--/GITHUB_BLOCK-->
-
-### Properties
-
-| 名称             | 描述                                   |           类型            |  默认值   |
-| :--------------- | :------------------------------------- | :-----------------------: | :--------: |
-| iconStart        | 菜单项文本之前的图标                   |        `ReactNode`        |            |
-| iconEnd          | 菜单项文本之后的图标                   |        `ReactNode`        |            |
-| selected         | 菜单项选中状态标志                     |         `boolean`         |  `false`   |
-| disabled         | 菜单项禁用状态标志                     |         `boolean`         |  `false`   |
-| active           | 菜单项激活状态标志                     |         `boolean`         |  `false`   |
-| href             | URL                                    |         `string`          |            |
-| title            | Title 属性                             |         `string`          |            |
-| target           | Target 属性                            |         `string`          |            |
-| rel              | Rel 属性                               |         `string`          |            |
-| onClick          | 点击事件处理函数                       | `React.MouseEventHandler` |            |
-| theme            | 菜单项主题                             |   `"normal"` `"danger"`   | `"normal"` |
-| children         | 子元素                                 |     `React.ReactNode`     |            |
-| className        | 根元素的 `class` HTML 属性             |         `string`          |            |
-| contentClassName | 内容元素的 `class` HTML 属性           |         `string`          |            |
-| style            | `style` HTML 属性                      |   `React.CSSProperties`   |            |
-| qa               | `data-qa` HTML 属性，用于测试          |         `string`          |            |
-| extraProps       | 额外的 HTML 属性                       |         `Record`          |            |
-
-## Menu.Group
-
-您可以在单个菜单中按主题对项目进行分组：
-
-<!--SANDBOX
-import {Menu} from '@gravity-ui/uikit';
-
-export default function () {
-    return (
-        <Menu>
-            <Menu.Item>First</Menu.Item>
-            <Menu.Group label="Group One">
-                <Menu.Item>One</Menu.Item>
-                <Menu.Item>Two</Menu.Item>
-            </Menu.Group>
-            <Menu.Group label="Group Two">
-                <Menu.Item>One</Menu.Item>
-                <Menu.Item>Two</Menu.Item>
-            </Menu.Group>
-            <Menu.Item>Middle</Menu.Item>
-            <Menu.Group label="Group Three">
-                <Menu.Item>One</Menu.Item>
-                <Menu.Item>Two</Menu.Item>
-            </Menu.Group>
-            <Menu.Item>Last</Menu.Item>
-        </Menu>
-    );
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-<Menu>
-  <Menu.Item>First</Menu.Item>
-  <Menu.Group label="Group One">
-    <Menu.Item>One</Menu.Item>
-    <Menu.Item>Two</Menu.Item>
-  </Menu.Group>
-  <Menu.Group label="Group Two">
-    <Menu.Item>One</Menu.Item>
-    <Menu.Item>Two</Menu.Item>
-  </Menu.Group>
-  <Menu.Item>Middle</Menu.Item>
-  <Menu.Group label="Group Three">
-    <Menu.Item>One</Menu.Item>
-    <Menu.Item>Two</Menu.Item>
-  </Menu.Group>
-  <Menu.Item>Last</Menu.Item>
-</Menu>
-```
-
-<!--/GITHUB_BLOCK-->
-
-### 属性
-
-| 名称      | 描述                     |         类型          | 默认值 |
-| :-------- | :----------------------- | :-------------------: | :----: |
-| label     | 菜单组标签               |       `string`        |        |
-| children  | 子元素                   |   `React.ReactNode`   |        |
-| className | `class` HTML 属性        |       `string`        |        |
-| style     | `style` HTML 属性        | `React.CSSProperties` |        |
-| qa        | `data-qa` HTML 属性，用于测试 |       `string`        |        |
+| 名称 | 描述             |            类型             |    默认值     |
+| :--- | :--------------- | :-------------------------: | :------------: |
+| icon | 要显示的图标类型 | `"horizontal"` `"vertical"` | `"horizontal"` |
