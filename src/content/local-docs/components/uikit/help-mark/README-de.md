@@ -1,10 +1,4 @@
-<!--GITHUB_BLOCK-->
-
-# HelpMark
-
-<!--/GITHUB_BLOCK-->
-
-Ein Hilfe-Symbol, das kontextbezogene Informationen in einem Popover bei Hover oder Klick anzeigt. Ideal, um Tipps, Erklärungen oder unterstützende Inhalte anzuzeigen, ohne zusätzlichen Platz in der Benutzeroberfläche einzunehmen.
+Ein Hilfe-Symbol, das kontextbezogene Informationen in einem Popover auf dem Desktop und in einem Sheet auf Mobilgeräten anzeigt. Ideal, um Tipps, Erklärungen oder unterstützende Inhalte anzuzeigen, ohne zusätzlichen Platz in der Benutzeroberfläche einzunehmen.
 
 ```tsx
 import {HelpMark} from '@gravity-ui/uikit';
@@ -14,42 +8,23 @@ import {HelpMark} from '@gravity-ui/uikit';
 
 Komponente mit gerendertem rohem HTML und Schließen bei Mausverlassen:
 
-<!--SANDBOX
-import {HelpMark} from '@gravity-ui/uikit';
+GRAVITY_TRANSLATION_BLOCK_1_END
 
-export default function () {
-    return (
-        <HelpMark onClick={() => console.log('just action happened')}>
-            <b>Lorem ipsum</b> dolor sit{' '}
-            <a href="https://example.com" target="_blank" rel="noreferrer">
-                amet
-            </a>
-            , at scelerisque suspendisse
-        </HelpMark>
-    );
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-<HelpMark onClick={() => console.log('just action happened')}>
-  <b>Lorem ipsum</b> dolor sit{' '}
-  <a href="https://example.com" target="_blank" rel="noreferrer">
-    amet
-  </a>
-  , at scelerisque suspendisse
-</HelpMark>
-```
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_2_END
 
 ## Eigenschaften
 
-`HelpMark` akzeptiert zusätzlich zu diesen alle gültigen `button`-Element-Eigenschaften:
+`HelpMark` akzeptiert alle gültigen `button`-Element-Eigenschaften zusätzlich zu diesen:
 
-| Name         | Beschreibung                          |           Typ           | Standard |
-| :----------- | :----------------------------------- | :----------------------: | :------: |
-| iconSize     | Legt die Symbolgröße fest            | `"s"` `"m"` `"l"` `"xl"` |  `"m"`   |
-| popoverProps | Überschreibt `Popover`-Eigenschaften |      `PopoverProps`      |          |
-| children     | Inhalt, der im Popover angezeigt wird |    `React.ReactNode`     |          |
+| Name         | Beschreibung                                   |           Typ           | Standard |
+| :----------- | :-------------------------------------------- | :----------------------: | :------: |
+| size         | Legt die Symbolgröße fest                                | `"s"` `"m"` `"l"` `"xl"` |  `"m"`  |
+| popoverProps | Überschreibt Desktop `Popover`-Eigenschaften              |      `PopoverProps`      |          |
+| sheetProps   | Überschreibt Mobil `Sheet`-Eigenschaften                 |       `SheetProps`       |          |
+| children     | Inhalt, der im Popover oder Sheet angezeigt wird |    `React.ReactNode`     |          |
+
+## CSS API
+
+| Name                 | Beschreibung     |
+| :------------------- | :-------------- |
+| `--g-help-mark-size` | Symbolgröße in px |
