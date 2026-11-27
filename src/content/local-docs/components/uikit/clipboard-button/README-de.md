@@ -1,8 +1,4 @@
-<!--GITHUB_BLOCK-->
-
-# ClipboardButton
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_0_END
 
 `ClipboardButton` ist ein fertiger Button, der einen gegebenen Text in die Zwischenablage kopiert und eine Erfolgsanimation abspielt. Er kombiniert [`CopyToClipboard`](../CopyToClipboard/README.md) (das Kopierverhalten) mit [`ClipboardIcon`](../ClipboardIcon/README.md) (dem animierten Icon).
 
@@ -10,21 +6,25 @@
 import {ClipboardButton} from '@gravity-ui/uikit';
 ```
 
-<!--SANDBOX
-import {ClipboardButton} from '@gravity-ui/uikit';
+GRAVITY_TRANSLATION_BLOCK_1_END
 
-export default function () {
-    return <ClipboardButton text="Some text to copy" />;
-}
-SANDBOX-->
+GRAVITY_TRANSLATION_BLOCK_2_END
 
-<!--GITHUB_BLOCK-->
+## Tooltip
+
+Verwenden Sie `tooltipProps`, um den zugrunde liegenden [`ActionTooltip`](../ActionTooltip/README.md) zu konfigurieren,
+z. B. dessen Platzierung oder Portalverhalten:
 
 ```tsx
-<ClipboardButton text="Some text to copy" />
+<ClipboardButton text="Some text to copy" tooltipProps={{placement: 'top', disablePortal: true}} />
 ```
 
-<!--/GITHUB_BLOCK-->
+Unterstützte Eigenschaften sind `onOpenChange`, `strategy`, `placement`, `offset`, `disabled`,
+`container`, `disablePortal` sowie die `DOMProps` (`className`, `style`) und `QAProps` (`qa`) Eigenschaften.
+
+Setzen Sie `tooltipProps.disabled` auf `true`, um den Tooltip zu deaktivieren. `hasTooltip={false}` und das
+Feedback-Timeout für das Kopieren deaktivieren ihn ebenfalls, auch wenn `tooltipProps.disabled` `false` ist.
+Verwenden Sie `tooltipInitialText`, `tooltipSuccessText` und `timeout`, um das Feedback für das Kopieren zu konfigurieren.
 
 ## Eigenschaften
 
@@ -35,8 +35,9 @@ Die Eigenschaften von `ClipboardButton` werden von den [Eigenschaften](../Button
 | hasTooltip         | Schaltet die Anzeige des Tooltips um                                      |         `boolean`         |   `true`     |
 | onCopy             | Callback nach dem Kopieren `(text: string, result: boolean) => void`      |         `Function`        |              |
 | text               | Zu kopierender Text (kann ein String oder eine Funktion sein, die einen String zurückgibt) |  `string \| () => string` |              |
-| timeout            | Zeit, bevor der Zustand nach dem Klicken des Buttons auf normal zurückspringt |          `number`         |   `1000`     |
-| tooltipInitialText | Text, der vor dem Kopieren angezeigt wird                                 |          `string`         |  `"Copy"`    |
-| tooltipSuccessText | Text, der nach dem Kopieren angezeigt wird                                |          `string`         | `"Copied!"`  |
-| icon               | Benutzerdefiniertes Icon                                                  |     `React.ReactNode`     |              |
-| iconPosition       | Position des Icons                                                        | `start          \|    end` |   `start`    |
+| timeout            | Zeit, bevor der Zustand nach dem Klicken des Buttons wieder auf normal wechselt |          `number`         |    `1000`    |
+| tooltipInitialText | Vor dem Kopieren angezeigter Text                                         |          `string`         |   `"Copy"`   |
+| tooltipSuccessText | Nach dem Kopieren angezeigter Text                                        |          `string`         | `"Copied!"`  |
+| tooltipProps       | Tooltip-Konfiguration. Siehe [unterstützte Eigenschaften](#tooltip).      |          `object`         |              |
+| icon               | Benutzerdefiniertes Icon                                                   |     `React.ReactNode`     |              |
+| iconPosition       | Position des Icons                                                        | `start          \|    end` |    `start`   |
