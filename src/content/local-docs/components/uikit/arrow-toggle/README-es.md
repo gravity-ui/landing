@@ -4,28 +4,26 @@
 
 <!--/GITHUB_BLOCK-->
 
-`ArrowToggle` es un componente para mostrar el icono de cheurón. Puede girar en cuatro direcciones y se puede usar para mostrar listas desplegables, cortar componentes, etc.
+`ArrowToggle` es un componente para mostrar el icono de cheurón. Puede rotar en cuatro direcciones y se puede usar para mostrar listas desplegables, componentes cortados, etc.
 
 ## Apariencia
 
-`ArrowToggle` tiene cuatro direcciones posibles: `top` `right`, `bottom`, y `left`.
+`ArrowToggle` tiene cuatro direcciones posibles: `top`, `right`, `bottom` y `left`.
 
-<!--LANDING_BLOCK
+<!--SANDBOX
+import {ArrowToggle} from '@gravity-ui/uikit';
 
-<ExampleBlock
-    code={`
-<ArrowToggle direction="top" /> top
-<ArrowToggle direction="right" /> right
-<ArrowToggle direction="bottom" /> bottom
-<ArrowToggle direction="left" /> left
-`}>
-    <UIKit.ArrowToggle direction="top" /> top
-    <UIKit.ArrowToggle direction="right" /> right
-    <UIKit.ArrowToggle direction="bottom" /> bottom
-    <UIKit.ArrowToggle direction="left" /> left
-</ExampleBlock>
-
-LANDING_BLOCK-->
+export default function () {
+    return (
+        <>
+            <ArrowToggle direction="top" /> top
+            <ArrowToggle direction="right" /> right
+            <ArrowToggle direction="bottom" /> bottom
+            <ArrowToggle direction="left" /> left
+        </>
+    );
+}
+SANDBOX-->
 
 <!--GITHUB_BLOCK-->
 
@@ -40,26 +38,22 @@ LANDING_BLOCK-->
 
 ## Tamaño
 
-<!--LANDING_BLOCK
+<!--SANDBOX
+import {ArrowToggle} from '@gravity-ui/uikit';
 
-<ExampleBlock
-code={`
-<ArrowToggle size={10} /> 10
-<ArrowToggle size={20} /> 20
-<ArrowToggle size={30} /> 30
-<ArrowToggle size={40} /> 40
-<ArrowToggle size={50} /> 50
-<ArrowToggle size={100} /> 100
-`}>
-    <UIKit.ArrowToggle size={10} /> 10
-    <UIKit.ArrowToggle size={20} /> 20
-    <UIKit.ArrowToggle size={30} /> 30
-    <UIKit.ArrowToggle size={40} /> 40
-    <UIKit.ArrowToggle size={50} /> 50
-    <UIKit.ArrowToggle size={100} /> 100
-</ExampleBlock>
-
-LANDING_BLOCK-->
+export default function () {
+    return (
+        <>
+            <ArrowToggle size={10} /> 10
+            <ArrowToggle size={20} /> 20
+            <ArrowToggle size={30} /> 30
+            <ArrowToggle size={40} /> 40
+            <ArrowToggle size={50} /> 50
+            <ArrowToggle size={100} /> 100
+        </>
+    );
+}
+SANDBOX-->
 
 <!--GITHUB_BLOCK-->
 
@@ -74,28 +68,28 @@ LANDING_BLOCK-->
 
 <!--/GITHUB_BLOCK-->
 
-## Utilízalo como elemento interactivo
+## Usar como elemento interactivo
 
-Este es un ejemplo del uso de ArrowToggle con un icono de alternancia:
+Aquí tienes un ejemplo de uso de ArrowToggle con un icono que se alterna:
 
-<!--LANDING_BLOCK
+<!--SANDBOX
+import {useState} from 'react';
+import type {ArrowToggleProps} from '@gravity-ui/uikit';
+import {ArrowToggle, Button} from '@gravity-ui/uikit';
 
-<ExampleBlock
-code={`
-const [directionIndex, setDirectionIndex] = React.useState(0);
 const directions = ['top', 'left', 'bottom', 'right'] as Array<ArrowToggleProps['direction']>;
-const direction = directions[directionIndex % directions.length];
 
-return (
-    <Button onClick={() => setDirectionIndex(directionIndex + 1)} view="flat">
-        <ArrowToggle {...args} direction={direction} /> <h3>{direction}</h3>
-    </Button>
-);
-`}>
-    <UIKitExamples.ArrowToggleExample/>
-</ExampleBlock>
+export default function () {
+    const [directionIndex, setDirectionIndex] = useState(0);
+    const direction = directions[directionIndex % directions.length];
 
-LANDING_BLOCK-->
+    return (
+        <Button onClick={() => setDirectionIndex(directionIndex + 1)} view="flat">
+            <ArrowToggle direction={direction} /> <span>{direction}</span>
+        </Button>
+    );
+}
+SANDBOX-->
 
 <!--GITHUB_BLOCK-->
 
@@ -106,7 +100,7 @@ const direction = directions[directionIndex % directions.length];
 
 return (
   <Button onClick={() => setDirectionIndex(directionIndex + 1)} view="flat">
-    <ArrowToggle {...args} direction={direction} /> <h3>{direction}</h3>
+    <ArrowToggle {...args} direction={direction} /> <span>{direction}</span>
   </Button>
 );
 ```
@@ -115,9 +109,15 @@ return (
 
 ## Propiedades
 
-| Nombre    | Descripción                                          |   Tipo   | Predeterminado |
-| :-------- | :--------------------------------------------------- | :------: | :------------: |
-| className | `class` Atributo HTML                                | `string` |                |
-| dirección | Se usa para establecer la `arrowToggle` dirección    | `string` |   `"bottom"`   |
-| tamaño    | `arrowToggle` tamaño (en píxeles)                    | `number` |      `16`      |
-| qa        | `data-qa` Atributo HTML, usado para realizar pruebas | `string` |                |
+| Nombre      | Descripción                               |   Tipo   |  Por defecto   |
+| :---------- | :---------------------------------------- | :------: | :------------: |
+| className | Atributo HTML `class`                     | `string` |                |
+| direction | Se usa para establecer la dirección de `arrowToggle` | `string` |    `"bottom"`    |
+| size      | Tamaño de `arrowToggle` (en píxeles)      | `number` |      `16`      |
+| qa        | Atributo HTML `data-qa`, usado para pruebas | `string` |                |
+
+## API CSS
+
+| Nombre                                   | Descripción         |
+| :--------------------------------------- | :------------------ |
+| `--g-arrow-toggle-transition-duration` | Duración de la transición |

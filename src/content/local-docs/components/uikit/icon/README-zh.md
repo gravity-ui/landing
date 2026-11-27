@@ -1,15 +1,14 @@
 <!--GITHUB_BLOCK-->
 
-# 图标
+# Icon
 
 <!--/GITHUB_BLOCK-->
+
+`Icon` 渲染指定大小和颜色的 SVG 图标，接受 SVG 作为 React 组件或导入的资源。它作为代码库中统一使用 SVG 的代理，可以通过 React 组件或 Webpack 加载器（如 [`SVGR`](https://react-svgr.com/docs/webpack/)、[`svg-react-loader`](https://github.com/jhamlet/svg-react-loader)、[`svg-inline-loader`](https://github.com/webpack-contrib/svg-inline-loader) 或 [`svg-sprite-loader`](https://github.com/JetBrains/svg-sprite-loader)）进行加载。
 
 ```tsx
 import {Icon} from '@gravity-ui/uikit';
 ```
-
-该 `Icon` 组件是 SVG 图标的包装器。SVG 可以通过不同的方式加载，例如通过 React 组件或各种 Webpack 加载器： [`SVGR`](https://react-svgr.com/docs/webpack/) 、 [`svg-react-loader`](https://github.com/jhamlet/svg-react-loader) 、 [`svg-inline-loader`](https://github.com/webpack-contrib/svg-inline-loader) 或。 [`svg-sprite-loader`](https://github.com/JetBrains/svg-sprite-loader)
-该 `Icon` 组件充当通过代码库使用的代理。
 
 ### React 组件
 
@@ -51,12 +50,14 @@ import CheckIcon from './check.svg';
 
 ## 属性
 
-| 姓名      | 描述                              |       类型        |       默认       |
-| :-------- | :-------------------------------- | :---------------: | :--------------: |
-| 数据      | SVG 图标的来源                    |    `IconData`     |                  |
-| 宽度      | `width` SVG 属性                  | `number` `string` |                  |
-| 高度      | `height` SVG 属性                 | `number` `string` |                  |
-| 尺寸      | 两者 `width` 和 `height` SVG 属性 | `number` `string` |                  |
-| 填        | `fill` SVG 属性                   |     `string`      | `"currentColor"` |
-| 中风      | `stroke` SVG 属性                 |     `string`      |     `"none"`     |
-| className | 根元素的自定义 CSS 类             |     `string`      |                  |
+| 名称      | 描述                              |                             类型                             |     默认值      |
+| :-------- | :-------------------------------- | :----------------------------------------------------------: | :--------------: |
+| data      | SVG 图标的来源                    |                          `IconData`                          |                  |
+| width     | `width` SVG 属性                  |                      `number` `string`                       |                  |
+| height    | `height` SVG 属性                 |                      `number` `string`                       |                  |
+| size      | `width` 和 `height` SVG 属性      |                      `number` `string`                       |                  |
+| fill      | `fill` SVG 属性                   |                           `string`                           | `"currentColor"` |
+| stroke    | `stroke` SVG 属性                 |                           `string`                           |     `"none"`     |
+| color     | 应用于 SVG 图标的文本颜色         | `string`（请参阅 `Text` 组件的**颜色**部分中的值） |                  |
+| className | 根元素的自定义 CSS 类名           |                           `string`                           |                  |
+| style     | 根元素的自定义样式                |                       `CSSProperties`                        |                  |

@@ -1,34 +1,32 @@
 <!--GITHUB_BLOCK-->
 
-# 旋转
+# Spin
 
 <!--/GITHUB_BLOCK-->
+
+`Spin` 组件在内联场景中显示加载状态（一个旋转的半圆）。与 `Loader` 不同，此组件用于在内联场景中显示加载状态，例如在 `Button` 或 `Label` 中。
 
 ```tsx
 import {Spin} from '@gravity-ui/uikit';
 ```
 
-该 `Spin` 组件在行内场景中显示加载状态（旋转的半圆形）。与之不同的是 `Loader` ，此组件用于在行内场景中显示加载状态，例如在 `Button` 或中 `Label`。
+### Size
 
-### 大小
+<!--SANDBOX
+import {Spin} from '@gravity-ui/uikit';
 
-<!--LANDING_BLOCK
-<ExampleBlock
-    code={`
-<Spin size="xs" />
-<Spin size="s" />
-<Spin size="m" />
-<Spin size="l" />
-<Spin size="xl" />
-`}
->
-    <UIKit.Spin size="xs" />
-    <UIKit.Spin size="s" />
-    <UIKit.Spin size="m" />
-    <UIKit.Spin size="l" />
-    <UIKit.Spin size="xl" />
-</ExampleBlock>
-LANDING_BLOCK-->
+export default function () {
+    return (
+        <>
+            <Spin size="xs" />
+            <Spin size="s" />
+            <Spin size="m" />
+            <Spin size="l" />
+            <Spin size="xl" />
+        </>
+    );
+}
+SANDBOX-->
 
 <!--GITHUB_BLOCK-->
 
@@ -42,21 +40,27 @@ LANDING_BLOCK-->
 
 <!--/GITHUB_BLOCK-->
 
-`XS`:超小。
+`XS`: Extra small (特小)。
 
-`S`:小，当中型旋转过大时使用。
+`S`: Small (小)，当中等大小的 spin 太大时使用。
 
-`M`:中等（基本），在大多数情况下使用。
+`M`: Medium (中等) (基础)，大多数情况使用。
 
-`L`:大，当中型旋转过小时使用。
+`L`: Large (大)，当中等大小的 spin 太小时使用。
 
-`XL`:超大号。
+`XL`: Extra large (特大)。
 
-## 属性
+## Properties
 
-| 姓名      | 描述                    |         类型          | 默认  |
-| :-------- | :---------------------- | :-------------------: | :---: |
-| 尺寸      | 旋转大小                |     `"xs"` `"xl"`     | `"m"` |
-| 风格      | 根元素的自定义 CSS 样式 | `React.CSSProperties` |       |
-| className | 根元素的自定义 CSS 类   |       `string`        |       |
-| qa        | 测试属性 (`data-qa`)    |       `string`        |       |
+| Name      | Description                           |              Type               | Default |
+| :-------- | :------------------------------------ | :-----------------------------: | :-----: |
+| size      | Spin size (Spin 大小)                 | `"xs"` `"s"` `"m"` `"l"` `"xl"` |  `"m"`  |
+| style     | Custom CSS styles for root element (根元素的自定义 CSS 样式) |      `React.CSSProperties`      |         |
+| className | Custom CSS class for the root element (根元素的自定义 CSS 类名) |            `string`             |         |
+| qa        | Test attribute (`data-qa`) (测试属性 (`data-qa`))            |            `string`             |         |
+
+### CSS API
+
+| Name             | Description                     |
+| :--------------- | :------------------------------ |
+| `--g-spin-color` | The main color of the component (组件的主颜色) |

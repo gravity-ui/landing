@@ -1,0 +1,55 @@
+<!--GITHUB_BLOCK-->
+
+# Sheet
+
+<!--/GITHUB_BLOCK-->
+
+`Sheet`는 모바일 컨텍스트에서 정보 또는 대화형 요소로 사용하기 위해 설계된 컴포넌트입니다. 내부 스크롤링 및 동적 크기 조절이 지원되므로 크기가 다른 콘텐츠를 배치할 수 있습니다.
+
+```tsx
+import {Sheet} from '@gravity-ui/uikit';
+```
+
+모바일 장치에서는 `Sheet`의 메인 부분이나 스와이프 영역을 끌어서 이동할 수 있습니다. 닫으려면 아래로 스와이프하거나 `Sheet` 외부 영역을 탭하세요.
+
+## 사용법
+
+```tsx
+import React from 'react';
+import {Button, Sheet} from '@gravity-ui/uikit';
+
+const SheetExample = () => {
+  const [visible, setVisible] = React.useState(false);
+
+  return (
+    <React.Fragment>
+      <Button onClick={() => setVisible(true)}>Open Sheet</Button>
+      <Sheet visible={visible} onClose={() => setVisible(false)} title="Content Sheet">
+        Content
+      </Sheet>
+    </React.Fragment>
+  );
+};
+```
+
+## 속성
+
+| 이름                        | 설명                                                                                                                                                                                           |     타입      |     기본값     |
+| :-------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-----------: | :------------: |
+| allowHideOnContentScroll    | 콘텐츠가 맨 위로 스크롤되었거나(`content Node.scrollTop === 0`) 스크롤이 전혀 없는 경우, 아래로 스와이프하여 시트 창을 닫는 동작을 활성화합니다.                                                               |   `boolean`   |     `true`      |
+| alwaysFullHeight            | `Sheet` 높이가 항상 최대값이 됩니다.                                                                                                                                                           |   `boolean`   |   `undefined`   |
+| className                   | `class` HTML 속성                                                                                                                                                                              |   `string`    |   `undefined`   |
+| container                   | `Portal`을 통해 컴포넌트가 마운트될 DOM 요소                                                                                                                                                   | `HTMLElement` | `document.body` |
+| contentClassName            | 시트 콘텐츠에 대한 `class` HTML 속성                                                                                                                                                           |   `string`    |   `undefined`   |
+| disablePortal               | `Portal` 사용 비활성화                                                                                                                                                                         |   `boolean`   |     `false`     |
+| hideTopBar                  | 크기 조절 핸들이 있는 상단 바 숨기기                                                                                                                                                           |   `boolean`   |                 |
+| id                          | URL의 해시로 사용되는 시트 ID. 페이지에 여러 개의 시트가 있을 수 있는 경우 여러 `id` 값을 지정해야 합니다.                                                                                             |   `string`    |     `modal`     |
+| maxContentHeightCoefficient | 뷰포트 높이에 대한 `Sheet`의 최대 높이를 결정하는 계수 (0-1 범위)                                                                                                                               |   `number`    |      `0.9`      |
+| onClose                     | 닫기 이벤트 핸들러                                                                                                                                                                             |  `function`   |   `undefined`   |
+| swipeAreaClassName          | 스와이프 영역에 대한 `class` HTML 속성                                                                                                                                                          |   `string`    |   `undefined`   |
+| title                       | 시트 창 제목                                                                                                                                                                                   |   `string`    |   `undefined`   |
+| visible                     | `Sheet` 가시성 관리                                                                                                                                                                            |   `boolean`   |     `false`     |
+
+## CSS API
+
+| 이름                         | 설명

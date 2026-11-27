@@ -1,14 +1,14 @@
 <!--GITHUB_BLOCK-->
 
-# Tostadora
+# Toaster
 
 <!--/GITHUB_BLOCK-->
 
-Este es un componente para las notificaciones ajustables, también conocido como brindis.
+Este es un componente para notificaciones ajustables, también conocidas como toasts.
 
-## Uso de la tostadora
+## Uso de Toaster
 
-Para mostrar los brindis en su solicitud, debe envolverla. `ToasterProvider`
+Para mostrar toasts en tu aplicación, necesitas envolver tu aplicación en `ToasterProvider`.
 
 ```jsx
 import {Toaster, ToasterComponent, ToasterProvider} from '@gravity-ui/uikit';
@@ -24,9 +24,9 @@ root.render(
 );
 ```
 
-`toaster` este es el ejemplo de la clase, que sostiene el estado con todas tus tostadas y se usa bajo el capó en `useToaster` gancho y `withToaster` HOC.
+`toaster` aquí es la instancia de la clase, que mantiene el estado con todos tus toasts y se utiliza internamente en el hook `useToaster` y el HOC `withToaster`.
 
-Pero también puedes usarlo `toaster` directamente en diferentes partes de tu aplicación (fuera de React):
+Pero también puedes usar `toaster` directamente en diferentes partes de tu aplicación (fuera de React):
 
 ```js
 toaster.add({
@@ -34,16 +34,16 @@ toaster.add({
 });
 ```
 
-Debes usar la misma instancia de `Toaster` en React y fuera de ella para mostrar todas las tostadas en el mismo contenedor en la pantalla.
-Puede implementar esta lógica usted mismo o importar una instancia lista para usar desde `toaster-singleton` el módulo.
+Debes usar la misma instancia de `Toaster` en React y fuera de él para mostrar todos los toasts en el mismo contenedor en la pantalla.
+Puedes implementar esta lógica tú mismo o importar una instancia lista para usar del módulo `toaster-singleton`.
 
 ```js
 import {toaster} from '@gravity-ui/uikit/toaster-singleton';
 ```
 
-## Uso `useToaster`
+## Uso de `useToaster`
 
-Puedes mostrar los brindis con el `useToaster` gancho en los componentes de tu aplicación:
+Puedes mostrar toasts con el hook `useToaster` en tus componentes de aplicación:
 
 ```jsx
 import {useToaster} from '@gravity-ui/uikit';
@@ -62,11 +62,11 @@ export function FoobarComponent() {
 }
 ```
 
-El gancho devuelve los `removeAll` métodos `add` `update`, `remove`, y (consulte los detalles a continuación).
+El hook devuelve los métodos `add`, `update`, `remove` y `removeAll` (ver más abajo para más detalles).
 
-## `Toaster` Utilización como HOC
+## Uso de `Toaster` como HOC
 
-Para los componentes de la clase, puede usar el `withToaster` HOC, que inyectará la `toaster` propiedad en el componente.
+Para componentes de clase, puedes usar el HOC `withToaster`, que inyectará la propiedad `toaster` en el componente.
 
 ```jsx
 import {Component} from 'react';
@@ -81,52 +81,62 @@ class FoobarComponent extends Component {
 const FoobarWithToaster = withToaster()(FoobarComponent);
 ```
 
+## Propiedades
+
+Estas son las props del componente `ToasterComponent`.
+
+| Nombre      | Descripción                                         |   Tipo    | Predeterminado |
+| :---------- | :-------------------------------------------------- | :-------: | :------------: |
+| className | Nombre de clase personalizado para añadir al contenedor del componente | `string`  |                |
+| mobile    | Configuración que gestiona las vistas móvil/escritorio     | `boolean` |                |
+| hasPortal | Renderiza el toaster dentro de un `Portal` cuando está habilitado  | `boolean` | `true`         |
+
 ## Argumentos del constructor
 
-| Parámetro | Tipo      | Predeterminado | Descripción                                                             |
-| :-------- | :-------- | :------------- | :---------------------------------------------------------------------- |
-| className | `string`  | `undefined`    | Nombre de clase personalizado para agregar al contenedor de componentes |
-| móvil     | `boolean` | `false`        | Configuración que administra las vistas móviles y de escritorio         |
+| Parámetro | Tipo      | Predeterminado | Descripción                                         |
+| :-------- | :-------- | :------------: | :-------------------------------------------------- |
+| className | `string`  | `undefined`    | Nombre de clase personalizado para añadir al contenedor del componente |
+| mobile    | `boolean` | `false`        | Configuración que gestiona las vistas móvil/escritorio     |
 
 ## Métodos
 
-| Nombre del método                    | Parámetros         | Descripción                                                                                                                                        |
-| :----------------------------------- | :----------------- | :------------------------------------------------------------------------------------------------------------------------------------------------- |
-| agregar (ToastOptions)               | `Object`           | Crea una nueva notificación                                                                                                                        |
-| eliminar (nombre)                    | `string`           | Elimina manualmente una notificación existente                                                                                                     |
-| Eliminar todo ()                     |                    | Elimina todas las notificaciones existentes                                                                                                        |
-| actualizar (nombre, OverrideOptions) | `string`, `Object` | Cambia el contenido de las notificaciones ya renderizado. En `overrideOptions`, los `actions` campos `title` `type` `content`, , y son opcionales. |
-| tiene (nombre)                       | `string`           | Comprueba si hay un brindis con un nombre determinado en la lista de tostadas mostradas                                                            |
+| Nombre del método                   | Parámetros             | Descripción                                                                                                                             |
+| :---------------------------------- | :--------------------- | :-------------------------------------------------------------------------------------------------------------------------------------- |
+| add(toastOptions)             | `Object`               | Crea una nueva notificación                                                                                                             |
+| remove(name)                  | `string`               | Elimina manualmente una notificación existente                                                                                               |
+| removeAll()                   |                        | Elimina todas las notificaciones existentes                                                                                                      |
+| update(name, overrideOptions) | `string`, `Object`     | Cambia el contenido de una notificación ya renderizada. En `overrideOptions`, los campos `title`, `type`, `content` y `actions` son opcionales. |
+| has(name)                     | `string`               | Comprueba si existe un toast con un nombre determinado en la lista de toasts mostrados                                                                |
 
-## Más información sobre `add`
+## Más sobre `add`
 
-Acepta el `toastOptions` argumento con los detalles de la notificación en curso:
+Acepta el argumento `toastOptions` con los detalles de la notificación en curso:
 
-| Parámetro  | Tipo                                    | Necesario | Predeterminado | Descripción                                                                                                                                                                                                                                                                          |
-| :--------- | :-------------------------------------- | :-------- | :------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| nombre     | `string`                                | sí        |                | Nombre de notificación único. Las notificaciones con nombres idénticos se agrupan en una                                                                                                                                                                                             |
-| título     | `string`                                |           |                | Título de la notificación                                                                                                                                                                                                                                                            |
-| className  | `string`                                |           |                | clase CSS                                                                                                                                                                                                                                                                            |
-| autoHiding | `number` o `false`                      |           | 5000           | Número de ms para retrasar la ocultación de la notificación. Se usa `false` para deshabilitar la ocultación de la tostada después del tiempo de espera                                                                                                                               |
-| contenido  | `node`                                  |           | `undefined`    | Contenido de las notificaciones. Puede ser [cualquier cosa que se pueda representar: números, cadenas, elementos o una matriz](https://reactjs.org/docs/typechecking-with-proptypes.html#proptypes)                                                                                  |
-| canción    | `string`                                |           | `"normal"`     | Tema de notificación. Los valores posibles son `"normal"` `"info"`, `"success"`, `"warning"` `danger`, y `"utility"`. Si `theme` se establece en cualquier otra opción `"normal"`, el icono se añadirá al título de la notificación. _De forma predeterminada, no hay ningún icono_. |
-| isClosable | `boolean`                               |           | `true`         | Configuración que gestiona la visibilidad del icono X, que permite al usuario cerrar la notificación                                                                                                                                                                                 |
-| acciones   | `ToastAction[]`                         |           | `undefined`    | Conjunto de [acciones](./types.ts#L9) que se muestran después `content`                                                                                                                                                                                                              |
-| renderIcon | `(toastProps: ToastProps) => ReactNode` |           | `undefined`    | Se usa para personalizar el icono de tostadas. El comportamiento basado en tipos se usa de forma predeterminada                                                                                                                                                                      |
+| Parámetro  | Tipo                                    | Requerido | Predeterminado | Descripción                                                                                                                                                                                                                                              |
+| :--------- | :-------------------------------------- | :------- | :---------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| name       | `string`                                | sí       |             | Nombre único de la notificación. Las notificaciones con nombres idénticos se colapsan en una sola.                                                                                                                                                       |
+| title      | `string`                                |          |             | Título de la notificación.                                                                                                                                                                                                                               |
+| className  | `string`                                |          |             | Clase CSS.                                                                                                                                                                                                                                               |
+| autoHiding | `number` o `false`                      |          | 5000        | Número de milisegundos para retrasar el ocultamiento de la notificación. Usa `false` para deshabilitar el ocultamiento del toast después del tiempo de espera.                                                                                       |
+| content    | `node`                                  |          | `undefined` | Contenido de la notificación. Esto puede ser [cualquier cosa que se pueda renderizar: números, cadenas, elementos o un array](https://reactjs.org/docs/typechecking-with-proptypes.html#proptypes).                                                       |
+| theme      | `string`                                |          | `"normal"`  | Tema de la notificación. Los valores posibles son `"normal"`, `"info"`, `"success"`, `"warning"`, `danger` y `"utility"`. Si `theme` se establece en algo que no sea `"normal"`, el icono se agregará al título de la notificación. _Por defecto, no hay icono_. |
+| isClosable | `boolean`                               |          | `true`      | Configuración que gestiona la visibilidad del icono X, que permite al usuario cerrar la notificación.                                                                                                                                                    |
+| actions    | `ToastAction[] \| () => ReactElement`   |          | `undefined` | Array de [acciones](./types.ts#L9) que se muestran después de `content`, o una función de devolución de llamada que devuelve las acciones requeridas.                                                                                                       |
+| renderIcon | `(toastProps: ToastProps) => ReactNode` |          | `undefined` | Se utiliza para personalizar el icono del toast. Por defecto, se utiliza el comportamiento basado en el tipo.                                                                                                                                              |
 
 Cada `action` es un objeto con los siguientes parámetros:
 
-| Parámetro        | Tipo                                      | Necesario | Predeterminado | Descripción                                                                        |
-| :--------------- | :---------------------------------------- | :-------- | :------------- | :--------------------------------------------------------------------------------- |
-| etiqueta         | `string`                                  | sí        |                | Descripción de la acción                                                           |
-| onClick          | `() => void`                              | sí        |                | Gestor de clics en acción                                                          |
-| vista            | [`ButtonView`](../Button/README.md#props) |           | `outlined`     | Apariencia de acción, igual que `view` para `<Button/>`                            |
-| removeAfterClick | `boolean`                                 |           | `true`         | Activa o desactiva el cierre de la notificación después de hacer clic en la acción |
+| Parámetro        | Tipo                                      | Requerido | Por defecto | Descripción                                                              |
+| :--------------- | :---------------------------------------- | :------- | :--------- | :----------------------------------------------------------------------- |
+| label            | `string`                                  | sí       |            | Descripción de la acción                                                 |
+| onClick          | `() => void`                              | sí       |            | Manejador de clic de la acción                                           |
+| view             | [`ButtonView`](../Button/README.md#props) |          | `outlined` | Apariencia de la acción, igual que `view` para `<Button/>`               |
+| removeAfterClick | `boolean`                                 |          | `true`     | Habilita o deshabilita el cierre de la notificación después de hacer clic en la acción |
 
 ## API CSS
 
-| Nombre                     | Descripción          |
-| :------------------------- | :------------------- |
+| Nombre                       | Descripción     |
+| :--------------------------- | :-------------- |
 | `--g-toaster-width`        | Ancho del contenedor |
-| `--g-toaster-item-padding` | Relleno del artículo |
-| `--g-toaster-item-gap`     | Brecha de artículos  |
+| `--g-toaster-item-padding` | Relleno del ítem    |
+| `--g-toaster-item-gap`     | Espacio entre ítems |

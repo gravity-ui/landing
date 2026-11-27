@@ -1,15 +1,14 @@
 <!--GITHUB_BLOCK-->
 
-# Icono
+# Icon
 
 <!--/GITHUB_BLOCK-->
+
+`Icon` renderiza un glifo SVG con un tamaño y color dados, tomando el SVG como un componente React o un activo importado. Sirve como un proxy único para usar SVGs en todo el código base, que pueden cargarse a través de un componente React o cargadores de Webpack como [`SVGR`](https://react-svgr.com/docs/webpack/), [`svg-react-loader`](https://github.com/jhamlet/svg-react-loader), [`svg-inline-loader`](https://github.com/webpack-contrib/svg-inline-loader), o [`svg-sprite-loader`](https://github.com/JetBrains/svg-sprite-loader).
 
 ```tsx
 import {Icon} from '@gravity-ui/uikit';
 ```
-
-El `Icon` componente es un contenedor para el icono SVG. Los SVG se pueden cargar de diferentes maneras, como a través de un componente de React o varios cargadores de Webpack: [`SVGR`](https://react-svgr.com/docs/webpack/), , [`svg-react-loader`](https://github.com/jhamlet/svg-react-loader), [`svg-inline-loader`](https://github.com/webpack-contrib/svg-inline-loader) o. [`svg-sprite-loader`](https://github.com/JetBrains/svg-sprite-loader)
-El `Icon` componente sirve como un proxy para usar a través de la base de código.
 
 ### Componente React
 
@@ -29,7 +28,7 @@ import {CheckIcon} from './CheckIcon';
 <Icon data={CheckIcon} size={16} />;
 ```
 
-### Cargador de paquetes web
+### Cargador Webpack
 
 ```tsx
 // webpack.config.js
@@ -51,12 +50,14 @@ import CheckIcon from './check.svg';
 
 ## Propiedades
 
-| Nombre                    | Descripción                                   |       Tipo        |  Predeterminado  |
-| :------------------------ | :-------------------------------------------- | :---------------: | :--------------: |
-| dato                      | Fuente del icono SVG                          |    `IconData`     |                  |
-| anchura                   | `width` Atributo SVG                          | `number` `string` |                  |
-| altura                    | `height` Atributo SVG                         | `number` `string` |                  |
-| tamaño                    | Ambos `width` atributos y `height` SVG        | `number` `string` |                  |
-| llenar                    | `fill` Atributo SVG                           |     `string`      | `"currentColor"` |
-| accidente cerebrovascular | `stroke` Atributo SVG                         |     `string`      |     `"none"`     |
-| className                 | Clase CSS personalizada para el elemento raíz |     `string`      |                  |
+| Nombre      | Descripción                              |                             Tipo                             |     Por defecto      |
+| :---------- | :--------------------------------------- | :----------------------------------------------------------: | :------------------: |
+| data        | Fuente del icono SVG                       |                          `IconData`                          |                      |
+| width       | Atributo `width` del SVG                 |                      `number` `string`                       |                      |
+| height      | Atributo `height` del SVG                |                      `number` `string`                       |                      |
+| size        | Ambos atributos `width` y `height` del SVG |                      `number` `string`                       |                      |
+| fill        | Atributo `fill` del SVG                  |                           `string`                           | `"currentColor"` |
+| stroke      | Atributo `stroke` del SVG                |                           `string`                           |       `"none"`       |
+| color       | Color de texto aplicado al icono SVG     | `string` (ver los valores en la sección **Color** de `Text`) |                      |
+| className   | Clase CSS personalizada para el elemento raíz |                           `string`                           |                      |
+| style       | Estilos personalizados para el elemento raíz |                       `CSSProperties`                        |                      |

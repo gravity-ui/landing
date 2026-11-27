@@ -1,8 +1,10 @@
 <!--GITHUB_BLOCK-->
 
-# Alerta
+# Alert
 
 <!--/GITHUB_BLOCK-->
+
+El componente `Alert` muestra un mensaje destacado para llamar la atención del usuario sobre información importante.
 
 ```tsx
 import {Alert} from '@gravity-ui/uikit';
@@ -12,34 +14,35 @@ import {Alert} from '@gravity-ui/uikit';
 
 `normal`: Tema principal (usado por defecto).
 
-`info`: Se utiliza para cualquier tipo de información regular.
+`info`: Se usa para cualquier tipo de información regular.
 
 `success`: Se usa para información positiva.
 
-`warning`: Se usa para información que necesita atención.
+`warning`: Se usa para información que requiere atención.
 
 `danger`: Se usa para errores críticos.
 
 `utility`: Se usa para consejos útiles.
 
-<!--LANDING_BLOCK
-<ExampleBlock
-    code={`
-<Alert theme="normal" title="Normal" message="Normal theme" />
-<Alert theme="info" title="Info" message="Info theme" />
-<Alert theme="success" title="Success" message="Success theme" />
-<Alert theme="warning" title="Warning" message="Warning theme" />
-<Alert theme="danger" title="Danger" message="Danger theme" />
-<Alert theme="utility" title="utility" message="Utility theme" />
-`}>
-    <UIKit.Alert theme="normal" title="Normal" message="Normal theme" />
-    <UIKit.Alert theme="info" title="Info" message="Info theme" />
-    <UIKit.Alert theme="success" title="Success" message="Success theme" />
-    <UIKit.Alert theme="warning" title="Warning" message="Warning theme" />
-    <UIKit.Alert theme="danger" title="Danger" message="Danger theme" />
-    <UIKit.Alert theme="utility" title="Utility" message="Utility theme" />
-</ExampleBlock>
-LANDING_BLOCK-->
+`clear`: Sin estilos, adecuado para su uso en otros componentes (por ejemplo, como `content` en `Popover`)
+
+<!--SANDBOX
+import {Alert} from '@gravity-ui/uikit';
+
+export default function () {
+    return (
+        <>
+            <Alert theme="normal" title="Normal" message="Normal theme" />
+            <Alert theme="info" title="Info" message="Info theme" />
+            <Alert theme="success" title="Success" message="Success theme" />
+            <Alert theme="warning" title="Warning" message="Warning theme" />
+            <Alert theme="danger" title="Danger" message="Danger theme" />
+            <Alert theme="utility" title="Utility" message="Utility theme" />
+            <Alert theme="clear" title="Clear" message="Clear theme" />
+        </>
+    );
+}
+SANDBOX-->
 
 <!--GITHUB_BLOCK-->
 
@@ -50,27 +53,29 @@ LANDING_BLOCK-->
 <Alert theme="warning" title="Warning" message="Warning theme"/>
 <Alert theme="danger" title="Danger" message="Danger theme"/>
 <Alert theme="utility" title="Utility" message="Utility theme"/>
+<Alert theme="clear" title="Clear" message="Clear theme"/>
 ```
 
 <!--/GITHUB_BLOCK-->
 
-### Ver
+### Vista
 
-`filled`: Se usa para ajustar el color de fondo de la alerta (se usa de forma predeterminada).
+`filled`: Se usa para ajustar el color de fondo de la alerta (usado por defecto).
 
 `outlined`: Se usa para ajustar el color del borde de la alerta.
 
-<!--LANDING_BLOCK
-<ExampleBlock
-    code={`
-<Alert title="Filled" message="Filled view" view="filled" />
-<Alert title="Outlined" message="Outlined theme" view="outlined" />
-`}
->
-    <UIKit.Alert title="Filled" message="Filled view" view="filled" />
-    <UIKit.Alert title="Outlined" message="Outlined theme" view="outlined" />
-</ExampleBlock>
-LANDING_BLOCK-->
+<!--SANDBOX
+import {Alert} from '@gravity-ui/uikit';
+
+export default function () {
+    return (
+        <>
+            <Alert title="Filled" message="Filled view" view="filled" />
+            <Alert title="Outlined" message="Outlined theme" view="outlined" />
+        </>
+    );
+}
+SANDBOX-->
 
 <!--GITHUB_BLOCK-->
 
@@ -81,22 +86,34 @@ LANDING_BLOCK-->
 
 <!--/GITHUB_BLOCK-->
 
-### Disposición
+### Diseño
 
-`vertical`: Se usa para dirigir a los usuarios al contenido si hay una `actions` propiedad con botones. Permite mostrar los botones debajo del texto (se utilizan de forma predeterminada).
+`vertical`: Se usa para dirigir a los usuarios al contenido si hay una propiedad `actions` con botones. Permite mostrar los botones debajo del texto (usado por defecto).
 
-`horizontal`: Se usa para dirigir a los usuarios al contenido si hay una `actions` propiedad con botones. Permite mostrar los botones a la derecha del texto.
+`horizontal`: Se usa para dirigir a los usuarios al contenido si hay una propiedad `actions` con botones. Permite mostrar los botones a la derecha del texto.
 
-<!--LANDING_BLOCK
-<ExampleBlock
-    code={`
-<Alert layout="vertical" title="Vertical" message="Vertical direction" actions={<Alert.Action>button</Alert.Action>} />
-<Alert layout="horizontal" title="Horizontal" message="Horizontal direction" actions={<Alert.Action>button</Alert.Action>} />
-`}>
-    <UIKit.Alert layout="vertical" title="Vertical" message="Vertical direction" actions={<UIKit.Alert.Action>button</UIKit.Alert.Action>} />
-    <UIKit.Alert layout="horizontal" title="Horizontal" message="Horizontal direction" actions={<UIKit.Alert.Action>button</UIKit.Alert.Action>} />
-</ExampleBlock>
-LANDING_BLOCK-->
+<!--SANDBOX
+import {Alert} from '@gravity-ui/uikit';
+
+export default function () {
+    return (
+        <>
+            <Alert
+                layout="vertical"
+                title="Vertical"
+                message="Vertical direction"
+                actions={<Alert.Action>button</Alert.Action>}
+            />
+            <Alert
+                layout="horizontal"
+                title="Horizontal"
+                message="Horizontal direction"
+                actions={<Alert.Action>button</Alert.Action>}
+            />
+        </>
+    );
+}
+SANDBOX-->
 
 <!--GITHUB_BLOCK-->
 
@@ -109,21 +126,22 @@ LANDING_BLOCK-->
 
 ### Esquinas
 
-`rounded`: Activa las esquinas redondeadas de la ventana de alerta (se usa de forma predeterminada).
+`rounded`: Habilita esquinas redondeadas de la ventana de alerta (usado por defecto).
 
-`square`: Activa las esquinas cuadradas de la ventana de alerta.
+`square`: Habilita esquinas cuadradas de la ventana de alerta.
 
-<!--LANDING_BLOCK
-<ExampleBlock
-    code={`
-<Alert title="Rounded" message="Rounded corners" corners="rounded"  />
-<Alert title="Square" message="Square corners" corners="square" />
-`}
->
-    <UIKit.Alert title="Rounded" message="Rounded corners" corners="rounded"  />
-    <UIKit.Alert title="Square" message="Square corners" corners="square" />
-</ExampleBlock>
-LANDING_BLOCK-->
+<!--SANDBOX
+import {Alert} from '@gravity-ui/uikit';
+
+export default function () {
+    return (
+        <>
+            <Alert title="Rounded" message="Rounded corners" corners="rounded" />
+            <Alert title="Square" message="Square corners" corners="square" />
+        </>
+    );
+}
+SANDBOX-->
 
 <!--GITHUB_BLOCK-->
 
@@ -136,17 +154,15 @@ LANDING_BLOCK-->
 
 ## Título de la alerta
 
-`title`: Título de la alerta. Tiene una prioridad inferior a `Alert.Title`.
+`title`: Título de la alerta. Tiene una prioridad menor que `Alert.Title`.
 
-<!--LANDING_BLOCK
-<ExampleBlock
-    code={`
-<Alert title={<Alert.Title className={'some-class'} text="some text"></Alert.Title>} />
-`}
->
-    <UIKit.Alert title={<UIKit.Alert.Title className={'some-class'} text="some text"></UIKit.Alert.Title>} />
-</ExampleBlock>
-LANDING_BLOCK-->
+<!--SANDBOX
+import {Alert} from '@gravity-ui/uikit';
+
+export default function () {
+    return <Alert title={<Alert.Title className={'some-class'} text="some text" />} />;
+}
+SANDBOX-->
 
 <!--GITHUB_BLOCK-->
 
@@ -156,23 +172,27 @@ LANDING_BLOCK-->
 
 <!--/GITHUB_BLOCK-->
 
-## Mensaje de alerta
+## Mensaje de la alerta
 
-`message`: Mensaje de alerta. Debe ser lo suficientemente significativo como para explicar completamente de qué se trata la alerta.
+`message`: Mensaje de la alerta. Debe ser lo suficientemente significativo como para explicar completamente de qué trata la alerta.
 
 ## `onClose`
 
-`onClose`: La función de devolución de llamada se activa cuando un usuario hace clic en el botón de cierre de la alerta. Cuando se defina esta propiedad, aparecerá el botón de cierre.
+`onClose`: Función de callback que se llama cuando el usuario hace clic en el botón de cierre de la alerta. Cuando esta propiedad está definida, el botón de cierre será visible.
 
-<!--LANDING_BLOCK
-<ExampleBlock
-    code={`
-<Alert onClose={() => alert('Close button pressed')} title="Alert has close" message="Alert has close" />
-`}
->
-    <UIKit.Alert onClose={() => alert('Close button pressed')} title="Alert has close" message="Alert has close" />
-</ExampleBlock>
-LANDING_BLOCK-->
+<!--SANDBOX
+import {Alert} from '@gravity-ui/uikit';
+
+export default function () {
+    return (
+        <Alert
+            onClose={() => alert('Close button pressed')}
+            title="Alert has close"
+            message="Alert has close"
+        />
+    );
+}
+SANDBOX-->
 
 <!--GITHUB_BLOCK-->
 
@@ -186,24 +206,38 @@ LANDING_BLOCK-->
 
 <!--/GITHUB_BLOCK-->
 
-### Alinear
+### Alineación
 
-Determina cómo se alinea verticalmente el contenido del `Alert` componente.
+Determina cómo se alinea verticalmente el contenido dentro del componente `Alert`.
 
-`baseline`: Alineación predeterminada.
+`baseline`: Alineación por defecto.
 
-`center`: El contenido está centrado verticalmente dentro del `Alert` componente. Puede resultar útil si las acciones ocupan más espacio que el texto o si el icono debe estar en el centro del contenido.
+`center`: El contenido se centra verticalmente dentro del componente `Alert`. Puede ser útil si las acciones ocupan más espacio que el texto, o si el icono debe estar en el medio del contenido.
 
-<!--LANDING_BLOCK
-<ExampleBlock
-    code={`
-<Alert align="baseline" theme="info" title="Baseline" message="Baseline align" actions={<Alert.Action>button</Alert.Action>} />
-<Alert align="center" theme="info" title="Center" message="Center align" actions={<Alert.Action>button</Alert.Action>} align="center"/>
-`}>
-    <UIKit.Alert align="baseline" theme="info" title="Baseline" message="Baseline align" actions={<UIKit.Alert.Action>button</UIKit.Alert.Action>} />
-    <UIKit.Alert align="center" theme="info" title="Center" message="Center align" actions={<UIKit.Alert.Action>button</UIKit.Alert.Action>} align="center"/>
-</ExampleBlock>
-LANDING_BLOCK-->
+<!--SANDBOX
+import {Alert} from '@gravity-ui/uikit';
+
+export default function () {
+    return (
+        <>
+            <Alert
+                align="baseline"
+                theme="info"
+                title="Baseline"
+                message="Baseline align"
+                actions={<Alert.Action>button</Alert.Action>}
+            />
+            <Alert
+                align="center"
+                theme="info"
+                title="Center"
+                message="Center align"
+                actions={<Alert.Action>button</Alert.Action>}
+            />
+        </>
+    );
+}
+SANDBOX-->
 
 <!--GITHUB_BLOCK-->
 
@@ -216,18 +250,39 @@ LANDING_BLOCK-->
 
 ## Propiedades
 
-| Nombre    | Descripción                                                                                                       |               Tipo                | Predeterminado |
-| :-------- | :---------------------------------------------------------------------------------------------------------------- | :-------------------------------: | :------------: |
-| canción   | Apariencia de alertas                                                                                             |      `"normal"` `"utility"`       |   `"normal"`   |
-| vista     | Activar/desactivar el color de fondo de la alerta                                                                 |      `"filled"` `"outlined"`      |   `"filled"`   |
-| diseño    | Se usa para dirigir a los usuarios al contenido si hay una propiedad `actions` con botones                        |    `"vertical"` `"horizontal"`    |  `"vertical"`  |
-| arrincona | Se utiliza para las esquinas redondas/cuadradas de la ventana de alerta                                           |      `"rounded"` `"square"`       |  `"rounded"`   |
-| título    | Título de la alerta                                                                                               |             `string`              |                |
-| mensaje   | Mensaje de la alerta                                                                                              |         `React.ReactNode`         |                |
-| onClose   | Una función de devolución de llamada que se invoca cuando el usuario hace clic en el botón de cierre de la alerta |            `Function`             |                |
-| acciones  | Conjunto de botones o componentes totalmente personalizados                                                       | `React.ReactNode` `"AlertAction"` |                |
-| alinear   | Determina cómo se alinea verticalmente el contenido del componente de alerta                                      |      `"center"` `"baseline"`      |  `"baseline"`  |
-| estilo    | Atributo de estilo HTML                                                                                           |       `React.CSSProperties`       |                |
-| className | Nombre de la clase de alerta                                                                                      |             `string`              |                |
-| icono     | Anular el icono predeterminado                                                                                    |         `React.ReactNode`         |                |
-| qa        | `data-qa` Atributo HTML, usado en las pruebas.                                                                    |             `string`              |                |
+| Nombre          | Descripción                                                                 |                                     Tipo                                     |   Predeterminado    |
+| :-------------- | :-------------------------------------------------------------------------- | :--------------------------------------------------------------------------: | :-----------------: |
+| theme         | Apariencia de la alerta                                                            | `"normal"` `"info"` `"success"` `"warning"` `"danger"` `"utility"` `"clear"` |  `"normal"`  |
+| size          | Tamaño de la alerta                                                                  |                              `"s"` `"m"` `"l"`                               |    `"m"`     |
+| view          | Habilitar/deshabilitar el color de fondo de la alerta                                |                           `"filled"` `"outlined"`                            |  `"filled"`  |
+| layout        | Se utiliza para dirigir a los usuarios al contenido si hay una propiedad `actions` con botones |                         `"vertical"` `"horizontal"`                          | `"vertical"` |
+| actionsLayout | Se utiliza para controlar la dirección de los botones de acción.                        |                         `"vertical"` `"horizontal"`                          | `"vertical"` |
+| corners       | Se utiliza para esquinas redondeadas/cuadradas de la ventana de alerta                           |                            `"rounded"` `"square"`                            | `"rounded"`  |
+| title         | Título de la alerta                                                          |                                   `string`                                   |                     |
+| message       | Mensaje de la alerta                                                        |                              `React.ReactNode`                               |                     |
+| onClose       | Una función de devolución de llamada que se llama cuando el usuario hace clic en el botón de cierre de la alerta    |                                  `Function`                                  |                     |
+| actions       | Matriz de botones o componentes personalizados completos                                  |                      `React.ReactNode` `"AlertAction"`                       |                     |
+| align         | Determina cómo se alinea verticalmente el contenido dentro del componente Alert     |                           `"center"` `"baseline"`                            | `"baseline"` |
+| style         | Atributo de estilo HTML                                                        |                            `React.CSSProperties`                             |                     |
+| className     | Nombre de la clase de la alerta                                                         |                                   `string`                                   |                     |
+| icon          | Anular el icono predeterminado                                                       |                              `React.ReactNode`                               |                     |
+| qa            | Atributo `data-qa` de HTML, utilizado en pruebas.                                    |                                   `string`                                   |                     |
+
+## API CSS
+
+| Nombre                               | Descripción                                                                    |
+| :--------------------------------- | :----------------------------------------------------------------------------- |
+| `--g-alert-padding`                | Rellenos laterales.                                                                 |
+| `--g-alert-border-radius`          | Radio del borde.                                                                 |
+| `--g-alert-icon-margin-inline-end` | La indentación entre el icono y la parte de contenido (contenido de texto + acciones)         |
+| `--g-alert-close-btn-margin`       | La indentación entre la parte de contenido (contenido de texto + acciones) y el botón de cierre |
+| `--g-alert-actions-margin`         | Espacio entre el contenido de texto y las acciones.                                          |
+| `--g-alert-message-title-indent`   | Espacio entre el título y el mensaje.                                                 |
+| `--g-alert-actions-gap`            | Espacio entre los botones de acción.                                                    |
+| `--g-alert-title-text-color`       | Color del título.                                                                   |
+| `--g-alert-title-font-size`        | Tamaño de fuente del título.                                                               |
+| `--g-alert-title-line-height`      | Altura de línea del título.                                                             |
+| `--g-alert-message-text-color`     | Color del mensaje.                                                                 |
+| `--g-alert-message-font-size`      | Tamaño de fuente del mensaje.                                                             |
+| `--g-alert-message-font-weight`    | Peso de fuente del mensaje.                                                           |
+| `--g-alert-message-line-height`    | Altura de línea del mensaje.                                                           |
