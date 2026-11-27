@@ -18,6 +18,10 @@ ENV ASSET_PREFIX=https://storage.yandexcloud.net/gravity-landing-static
 ENV NODE_ENV=production
 ENV IS_CONTAINER_BUILD=true
 
+RUN --mount=type=secret,id=github_token \
+    if [ -f /run/secrets/github_token ]; then \
+      GITHUB_TOKEN="$(cat /run/secrets/github_token)" npm run prepare-metadata; \
+    fi
 RUN npm run build
 
 RUN apk add --no-cache aws-cli
