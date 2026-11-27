@@ -1,9 +1,3 @@
-<!--GITHUB_BLOCK-->
-
-# Stepper
-
-<!--/GITHUB_BLOCK-->
-
 `Stepper`는 마법사 스타일의 다단계 워크플로에서 진행 상황을 보여주며 사용자를 번호가 매겨진 단계 시퀀스를 안내합니다.
 
 ```tsx
@@ -12,314 +6,53 @@ import {Stepper} from '@gravity-ui/uikit';
 
 ## 예시
 
-<!--SANDBOX
-import {Stepper} from '@gravity-ui/uikit';
+GRAVITY_TRANSLATION_BLOCK_0_END
 
-export default function () {
-    return (
-        <Stepper>
-            <Stepper.Item>Step 1</Stepper.Item>
-            <Stepper.Item>Step 2</Stepper.Item>
-            <Stepper.Item>Step 3</Stepper.Item>
-            <Stepper.Item>Step 4 with very long title</Stepper.Item>
-        </Stepper>
-    );
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-<Stepper>
-  <Stepper.Item>Step 1</Stepper.Item>
-  <Stepper.Item>Step 2</Stepper.Item>
-  <Stepper.Item>Step 3</Stepper.Item>
-  <Stepper.Item>Step 4 with very long title</Stepper.Item>
-</Stepper>
-```
-
-<!-- Storybook example -->
-
-<StepperDefault />
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_1_END
 
 ### 인터랙티브 항목
 
 `onUpdate` 및 `value` 속성을 사용자 지정 상태와 함께 사용하여 단계를 조작합니다.
 
-<!--SANDBOX
-import {useState} from 'react';
-import {Stepper} from '@gravity-ui/uikit';
+GRAVITY_TRANSLATION_BLOCK_2_END
 
-export default function () {
-    const [value, setValue] = useState(0);
-
-    return (
-        <Stepper value={value} onUpdate={setValue}>
-            <Stepper.Item>Step 1</Stepper.Item>
-            <Stepper.Item>Step 2</Stepper.Item>
-            <Stepper.Item>Step 3</Stepper.Item>
-            <Stepper.Item>Step 4 with very long title</Stepper.Item>
-        </Stepper>
-    );
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-const [value, setValue] = React.useState();
-
-return (
-  <Stepper value={value} onUpdate={setValue}>
-    <Stepper.Item>Step 1</Stepper.Item>
-    <Stepper.Item>Step 2</Stepper.Item>
-    <Stepper.Item>Step 3</Stepper.Item>
-    <Stepper.Item>Step 4 with very long title</Stepper.Item>
-  </Stepper>
-);
-```
-
-<!-- Storybook example -->
-
-<StepperInteractiveShowcase />
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_3_END
 
 ### 다양한 보기
 
-<!--SANDBOX
-import {Stepper} from '@gravity-ui/uikit';
+GRAVITY_TRANSLATION_BLOCK_4_END
 
-export default function () {
-    return (
-        <Stepper>
-            <Stepper.Item>Step 1</Stepper.Item>
-            <Stepper.Item view="error">Step 2</Stepper.Item>
-            <Stepper.Item view="error">Step 3</Stepper.Item>
-            <Stepper.Item view="success">Step 4 with very long title</Stepper.Item>
-        </Stepper>
-    );
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-<Stepper>
-  <Stepper.Item>Step 1</Stepper.Item>
-  <Stepper.Item view="error">Step 2</Stepper.Item>
-  <Stepper.Item view="error">Step 3</Stepper.Item>
-  <Stepper.Item view="success">Step 4</Stepper.Item>
-</Stepper>
-```
-
-<!-- Storybook example -->
-
-<StepperView/>
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_5_END
 
 ### 다양한 크기
 
-<!--SANDBOX
-import {Stepper} from '@gravity-ui/uikit';
+GRAVITY_TRANSLATION_BLOCK_6_END
 
-export default function () {
-    return (
-        <Stepper size="l">
-            <Stepper.Item>Step 1</Stepper.Item>
-            <Stepper.Item>Step 2</Stepper.Item>
-            <Stepper.Item>Step 3</Stepper.Item>
-            <Stepper.Item>Step 4 with very long title</Stepper.Item>
-        </Stepper>
-    );
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-<Flex direction="column" gap={4}>
-  <Stepper {...args} size="s">
-    <Stepper.Item>Step 1</Stepper.Item>
-    <Stepper.Item>Step 2</Stepper.Item>
-    <Stepper.Item>Step 3</Stepper.Item>
-  </Stepper>
-
-  <Stepper {...args} size="m">
-    <Stepper.Item>Step 1</Stepper.Item>
-    <Stepper.Item>Step 2</Stepper.Item>
-    <Stepper.Item>Step 3</Stepper.Item>
-  </Stepper>
-
-  <Stepper {...args} size="l">
-    <Stepper.Item>Step 1</Stepper.Item>
-    <Stepper.Item>Step 2</Stepper.Item>
-    <Stepper.Item>Step 3</Stepper.Item>
-  </Stepper>
-</Flex>
-```
-
-<!-- Storybook example -->
-
-<StepperSize/>
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_7_END
 
 ### 비활성화된 단계
 
-<!--SANDBOX
-import {Stepper} from '@gravity-ui/uikit';
+GRAVITY_TRANSLATION_BLOCK_8_END
 
-export default function () {
-    return (
-        <Stepper>
-            <Stepper.Item>Step 1</Stepper.Item>
-            <Stepper.Item disabled>Step 2</Stepper.Item>
-            <Stepper.Item disabled>Step 3</Stepper.Item>
-            <Stepper.Item disabled>Step 4 with very long title</Stepper.Item>
-        </Stepper>
-    );
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-<Stepper>
-  <Stepper.Item>Step 1</Stepper.Item>
-  <Stepper.Item disabled>Step 2</Stepper.Item>
-  <Stepper.Item disabled>Step 3</Stepper.Item>
-  <Stepper.Item disabled>Step 4 with very long title</Stepper.Item>
-</Stepper>
-```
-
-<!-- Storybook example -->
-
-<StepperDisabled/>
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_9_END
 
 ### 사용자 지정 아이콘
 
-<!--SANDBOX
-import {Cloud, Gear, Hammer, Rocket} from '@gravity-ui/icons';
-import {Stepper} from '@gravity-ui/uikit';
+GRAVITY_TRANSLATION_BLOCK_10_END
 
-export default function () {
-    return (
-        <Stepper>
-            <Stepper.Item icon={Gear}>Step 1</Stepper.Item>
-            <Stepper.Item icon={Rocket}>Step 2</Stepper.Item>
-            <Stepper.Item icon={Cloud}>Step 3</Stepper.Item>
-            <Stepper.Item icon={Hammer}>Step 4 with very long title</Stepper.Item>
-        </Stepper>
-    );
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-<Stepper>
-  <Stepper.Item icon={Gear}>Step 1</Stepper.Item>
-  <Stepper.Item view="error" icon={Gear}>
-    Step 2
-  </Stepper.Item>
-  <Stepper.Item view="success" icon={Gear}>
-    Step 3
-  </Stepper.Item>
-  <Stepper.Item>Step 4 with very long title</Stepper.Item>
-</Stepper>
-```
-
-<!-- Storybook example -->
-
-<StepperCustomIcons/>
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_11_END
 
 ### 사용자 지정 단계 구분 기호
 
-<!--SANDBOX
-import {Stepper, Text} from '@gravity-ui/uikit';
+GRAVITY_TRANSLATION_BLOCK_12_END
 
-const Separator = () => {
-    return <Text color="secondary">{'->'}</Text>;
-};
-
-export default function () {
-    return (
-        <Stepper separator={<Separator />}>
-            <Stepper.Item>Step 1</Stepper.Item>
-            <Stepper.Item view="error">Step 2</Stepper.Item>
-            <Stepper.Item view="success">Step 3</Stepper.Item>
-            <Stepper.Item>Step 4 with very long title</Stepper.Item>
-        </Stepper>
-    );
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-const Separator = () => {
-  return <Text color="secondary">{'->'}</Text>;
-};
-
-<Stepper {...args} separator={<Separator />}>
-  <Stepper.Item>Step 1</Stepper.Item>
-  <Stepper.Item view="error">Step 2</Stepper.Item>
-  <Stepper.Item view="success">Step 3</Stepper.Item>
-  <Stepper.Item>Step 4 with very long title</Stepper.Item>
-</Stepper>;
-```
-
-<!-- Storybook example -->
-
-<StepperCustomSeparator/>
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_13_END
 
 ### 플로팅 요소가 있는 단계
 
-<!--SANDBOX
-import {Stepper, Tooltip} from '@gravity-ui/uikit';
+GRAVITY_TRANSLATION_BLOCK_14_END
 
-export default function () {
-    return (
-        <Stepper>
-            <Tooltip content="fancy step with tooltip">
-                <Stepper.Item>Step 1</Stepper.Item>
-            </Tooltip>
-            <Stepper.Item view="error">Step 2</Stepper.Item>
-            <Stepper.Item view="success">Step 3</Stepper.Item>
-            <Stepper.Item>Step 4 with very long title</Stepper.Item>
-        </Stepper>
-    );
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-<Stepper {...args}>
-  <Tooltip content="fancy step with tooltip">
-    <Stepper.Item>Step 1</Stepper.Item>
-  </Tooltip>
-  <Stepper.Item view="error">Step 2</Stepper.Item>
-  <Stepper.Item view="success">Step 3</Stepper.Item>
-  <Stepper.Item>Step 4 with very long title</Stepper.Item>
-</Stepper>
-```
-
-<!-- Storybook example -->
-
-<StepperWithFloatingElements/>
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_15_END
 
 ## 속성
 
@@ -351,7 +84,7 @@ SANDBOX-->
 
 ### CSS API
 
-| 이름                              | 설명                                     |
-| :-------------------------------- | :--------------------------------------- |
+| 이름                              | 설명                                   |
+| :-------------------------------- | :------------------------------------- |
 | `--g-stepper-gap`                 | 스텝 항목과 구분선 사이의 간격입니다. |
 | `--g-stepper-item-text-max-width` | 스텝 항목 텍스트의 최대 너비입니다.   |
