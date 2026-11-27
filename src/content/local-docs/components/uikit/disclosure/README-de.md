@@ -1,24 +1,10 @@
-<!--GITHUB_BLOCK-->
-
-# Disclosure
-
-<!--/GITHUB_BLOCK-->
-
 `Disclosure` ist eine aufklappbare Komponente, die es ermöglicht, ihren verschachtelten Inhalt anzuzeigen und auszublenden.
 
 ```tsx
 import {Disclosure} from '@gravity-ui/uikit';
 ```
 
-<!--GITHUB_BLOCK-->
-
-## Base example
-
-```tsx
-<Disclosure summary="Summary">Content</Disclosure>
-```
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_0_END
 
 ## Steuerung des Erweiterungszustands
 
@@ -26,73 +12,17 @@ Sie können den Erweiterungszustand mit den Eigenschaften `expanded` und `onUpda
 
 Beispiel für eine gesteuerte Komponente:
 
-<!--SANDBOX
-import {Disclosure} from '@gravity-ui/uikit';
+GRAVITY_TRANSLATION_BLOCK_1_END
 
-export default function () {
-    return (
-        <Disclosure summary="Summary" defaultExpanded>
-            Content
-        </Disclosure>
-    );
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-function ControlledDisclosure() {
-  const [expanded, setExpanded] = React.useState(true);
-
-  return (
-    <Disclosure summary="Summary" expanded={expanded} onUpdate={setExpanded}>
-      Content
-    </Disclosure>
-  );
-}
-```
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_2_END
 
 ## Größe
 
 Verwenden Sie die Eigenschaft `size`, um die Größe von `Disclosure` zu steuern. Die Standardgröße ist `m`.
 
-<!--SANDBOX
-import {Disclosure, Flex} from '@gravity-ui/uikit';
+GRAVITY_TRANSLATION_BLOCK_3_END
 
-export default function () {
-    return (
-        <Flex gap={4} alignItems="center">
-            <Disclosure summary="Middle size" size="m">
-                Content
-            </Disclosure>
-            <Disclosure summary="Large size" size="l">
-                Content
-            </Disclosure>
-            <Disclosure summary="Extra large size" size="xl">
-                Content
-            </Disclosure>
-        </Flex>
-    );
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-<Disclosure summary="Middle size" size="m">
-  Content
-</Disclosure>
-<Disclosure summary="Large size" size="l">
-  Content
-</Disclosure>
-<Disclosure summary="Extra large size" size="xl">
-  Content
-</Disclosure>
-```
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_4_END
 
 ## Pfeilposition
 
@@ -100,135 +30,25 @@ SANDBOX-->
 
 `end`: Der Pfeil wird am Ende des Headers positioniert.
 
-<!--SANDBOX
-import {Disclosure, Flex} from '@gravity-ui/uikit';
+GRAVITY_TRANSLATION_BLOCK_5_END
 
-export default function () {
-    return (
-        <Flex gap={4} alignItems="center">
-            <Disclosure summary="Summary with start arrow" arrowPosition="start">
-                Content
-            </Disclosure>
-            <Disclosure summary="Summary with end arrow" arrowPosition="end">
-                Content
-            </Disclosure>
-        </Flex>
-    );
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-<Disclosure summary="Summary with start arrow" arrowPosition="start">
-  Content
-</Disclosure>
-<Disclosure summary="Summary with end arrow" arrowPosition="end">
-  Content
-</Disclosure>
-```
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_6_END
 
 ## Benutzerdefinierter Inhalt
 
 Verwenden Sie die Komponente `Disclosure.Summary`, um eine benutzerdefinierte Kopfzeile zu erstellen, und `Disclosure.Details`, um benutzerdefinierten Inhalt bereitzustellen.
 
-<!--SANDBOX
-import {Check} from '@gravity-ui/icons';
-import {Button, Disclosure, Flex, Icon} from '@gravity-ui/uikit';
+GRAVITY_TRANSLATION_BLOCK_7_END
 
-export default function () {
-    return (
-        <Flex gap={4} alignItems="center">
-            <Disclosure>
-                <Disclosure.Summary>
-                    {(props) => (
-                        <Button {...props}>
-                            <Icon data={Check} size={14} />
-                            Custom summary
-                            <Icon data={Check} size={14} />
-                        </Button>
-                    )}
-                </Disclosure.Summary>
-                <div>Custom details</div>
-                <div>More custom details</div>
-            </Disclosure>
-            <Disclosure summary="Summary">
-                <Disclosure.Summary>
-                    {(_props, defaultButton) => (
-                        <Flex gap={4}>
-                            {defaultButton}
-                            <Icon data={Check} size={14} />
-                        </Flex>
-                    )}
-                </Disclosure.Summary>
-                <Disclosure.Details>Custom Details</Disclosure.Details>
-            </Disclosure>
-        </Flex>
-    );
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-<Disclosure>
-  <Disclosure.Summary>
-    {(props) => (
-      <Button {...props}>
-        <Icon data={Check} size={14} />
-        Custom summary
-        <Icon data={Check} size={14} />
-      </Button>
-    )}
-  </Disclosure.Summary>
-  <div>Custom details</div>
-  <div>More custom details</div>
-</Disclosure>
-```
-
-```tsx
-<Disclosure>
-  <Disclosure.Summary>
-    {(_props, defaultButton) => (
-      <Flex gap={4}>
-        {defaultButton}
-        <Icon data={Check} size={14} />
-      </Flex>
-    )}
-  </Disclosure.Summary>
-  <Disclosure.Details>Custom Details</Disclosure.Details>
-</Disclosure>
-```
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_8_END
 
 ## Deaktivierter Zustand
 
 `Disclosure` kann mit der Eigenschaft `disabled` deaktiviert werden.
 
-<!--SANDBOX
-import {Disclosure} from '@gravity-ui/uikit';
+GRAVITY_TRANSLATION_BLOCK_9_END
 
-export default function () {
-    return (
-        <Disclosure summary="Summary" disabled>
-            Content
-        </Disclosure>
-    );
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-<Disclosure summary="Summary" disabled>
-  Content
-</Disclosure>
-```
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_10_END
 
 ## Eigenschaften
 
@@ -237,31 +57,32 @@ SANDBOX-->
 | Name             | Beschreibung                                                              | Typ                                                  | Standardwert |
 | :--------------- | :------------------------------------------------------------------------ | :--------------------------------------------------- | :----------- |
 | size             | Komponentengröße                                                          | `"m"` `"l"` `"xl"`                                   | `"m"`        |
-| className        | CSS-Klassenname des Root-Elements                                         | `string`                                             |              |
+| className        | CSS-Klassenname des Wurzelelements                                        | `string`                                             |              |
 | disabled         | Deaktivierter Zustand                                                     | `boolean`                                            | `false`      |
 | defaultExpanded  | Standard-Öffnungszustand                                                  | `boolean`                                            | `false`      |
 | expanded         | Gesteuerter Öffnungszustand                                               | `boolean`                                            |              |
-| arrowPosition    | Steuerung der Position                                                    | `"start"` `"end"`                                    | `"start"`    |
+| arrowPosition    | Steuerelementposition                                                     | `"start"` `"end"`                                    | `"start"`    |
 | summary          | Zusammenfassung des Inhalts                                               | `React.ReactNode`                                    |              |
 | keepMounted      | Inhalt auch im eingeklappten Zustand im DOM behalten                      | `boolean`                                            | `true`       |
 | onUpdate         | Callback, der ausgelöst wird, wenn sich der Erweiterungs-/Einklappzustand ändert. | `(expanded: boolean) => void`                        |              |
 | onSummaryKeyDown | Callback, der bei Tastaturereignissen ausgelöst wird, wenn die Zusammenfassung fokussiert ist. | `(e: React.KeyboardEvent<HTMLButtonElement>) => void` |              |
 | children         | Inhalt                                                                    | `React.ReactNode`                                    |              |
-| qa               | Test-Identifikator                                                        | `string`                                             |              |
+| qa               | Testidentifikator                                                         | `string`                                             |              |
 
 ### Disclosure.Summary
 
 | Name     | Beschreibung                                | Typ                                            | Standardwert         |
 | :------- | :------------------------------------------ | :--------------------------------------------- | :------------------- |
-| children | Render-Funktion                             | `(props, defaultSummary) => React.ReactElement` |                      |
-| qa       | Test-Identifikator                          | `string`                                       | `disclosure-summary` |
+| children | Renderfunktion                              | `(props, defaultSummary) => React.ReactElement` |                      |
+| qa       | Testidentifikator                           | `string`                                       | `disclosure-summary` |
 
 ### Disclosure.Details
+GRAVITY_TRANSLATION_BLOCK_11_END
 
-| Name     | Beschreibung                               | Typ               | Standardwert             |
-| :------- | :----------------------------------------- | :---------------- | :----------------------- |
-| children | Inhalt                                     | `React.ReactNode` |                          |
-| qa       | Test-Identifikator                         | `string`          | `disclosure-details`     |
+| Name     | Beschreibung                                  | Typ               | Standardwert         |
+| :------- | :-------------------------------------------- | :---------------- | :------------------- |
+| children | Inhalt                                        | `React.ReactNode` |                      |
+| qa       | Test-Identifikator                            | `string`          | `disclosure-details` |
 
 ## CSS API
 
