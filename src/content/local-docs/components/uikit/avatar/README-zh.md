@@ -1,9 +1,3 @@
-<!--GITHUB_BLOCK-->
-
-# Avatar
-
-<!--/GITHUB_BLOCK-->
-
 此组件用于渲染头像。它有三种基本头像类型：图像、图标和文本（姓名首字母）。所有这些类型都有特殊的属性来配置行为和外观。
 
 ```tsx
@@ -16,75 +10,27 @@ import {Avatar} from '@gravity-ui/uikit';
 
 此组件可用于使用图像渲染头像。要提供图像，请使用 `imgUrl` 属性。
 
-<!--SANDBOX
-import {Avatar} from '@gravity-ui/uikit';
-
-export default function () {
-    return <Avatar imgUrl="https://loremflickr.com/640/480/cats?lock=8610182282084352" size="l" />;
-}
-SANDBOX-->
+GRAVITY_TRANSLATION_BLOCK_1_END
 
 您还可以提供 `srcSet` 属性来加载不同尺寸的图像。
 
-<!--SANDBOX
-import {Avatar} from '@gravity-ui/uikit';
+GRAVITY_TRANSLATION_BLOCK_2_END
 
-export default function () {
-    return (
-        <Avatar
-            imgUrl="https://loremflickr.com/640/480/cats?lock=8610182282084352"
-            srcSet="https://loremflickr.com/57/43/cats?lock=2879400393572352 1x, https://loremflickr.com/131/98/cats?lock=4373954936438784 2x, https://loremflickr.com/164/123/cats?lock=3007328513163264 3x, https://loremflickr.com/225/169/cats?lock=8243879964835840 4x"
-            size="l"
-        />
-    );
-}
-SANDBOX-->
+`Avatar` 组件具有 `fallbackImgUrl` 属性，允许您提供在图像加载错误时显示的图像，通过 `imgUrl` 链接（CSP 错误或无原始图像）。
 
-`Avatar` 组件具有 `fallbackImgUrl` 属性，该属性允许您提供在图像加载错误时显示的图像，通过 `imgUrl` 链接（CSP 错误或无原始图像）。
-
-<!--SANDBOX
-import {Avatar} from '@gravity-ui/uikit';
-
-export default function () {
-    return (
-        <Avatar
-            imgUrl="random_link"
-            fallbackImgUrl="https://loremflickr.com/640/480/cats?lock=3552647338524672"
-            size="l"
-        />
-    );
-}
-SANDBOX-->
+GRAVITY_TRANSLATION_BLOCK_3_END
 
 ### 图标
 
 此组件可用于使用图标渲染头像。使用 `icon` 属性提供图标，就像在 `Icon` 组件中一样。
 
-<!--SANDBOX
-import {GraduationCap} from '@gravity-ui/icons';
-import {Avatar} from '@gravity-ui/uikit';
-
-export default function () {
-    return <Avatar icon={GraduationCap} size="l" />;
-}
-SANDBOX-->
+GRAVITY_TRANSLATION_BLOCK_4_END
 
 ### 文本
 
 此组件可用于使用文本渲染头像。为此使用 `text` 属性。文本将呈现为首字母缩写（两个单词的首字母）或单个单词的前两个字母。
 
-<!--SANDBOX
-import {Avatar} from '@gravity-ui/uikit';
-
-export default function () {
-    return (
-        <>
-            <Avatar text="Charles Darwin" size="l" />
-            <Avatar text="Guardian" size="l" />
-        </>
-    );
-}
-SANDBOX-->
+GRAVITY_TRANSLATION_BLOCK_5_END
 
 ## 外观
 
@@ -94,82 +40,25 @@ SANDBOX-->
 
 默认主题是 `normal`，默认视图是 `filled`。
 
-<!--SANDBOX
-import {GraduationCap} from '@gravity-ui/icons';
-import {Avatar} from '@gravity-ui/uikit';
-
-export default function () {
-    return (
-        <>
-            <Avatar icon={GraduationCap} size="l" theme="normal" view="filled" />
-            <Avatar icon={GraduationCap} size="l" theme="brand" view="filled" />
-            <Avatar icon={GraduationCap} size="l" theme="normal" view="outlined" />
-            <Avatar icon={GraduationCap} size="l" theme="brand" view="outlined" />
-        </>
-    );
-}
-SANDBOX-->
+GRAVITY_TRANSLATION_BLOCK_6_END
 
 ### 自定义颜色
 
 您还可以通过 `backgroundColor`、`borderColor` 和 `color` 属性提供自定义颜色（后者仅适用于图标和文本头像）。这些颜色比主题颜色具有更高的优先级。
 
-<!--SANDBOX
-import {Avatar} from '@gravity-ui/uikit';
-
-export default function () {
-    return (
-        <>
-            <Avatar
-                text="Charles Darwin"
-                size="l"
-                backgroundColor="var(--g-color-base-danger-medium)"
-                color="var(--g-color-text-primary)"
-            />
-            <Avatar text="Charles Darwin" size="l" borderColor="var(--g-color-line-misc)" />
-        </>
-    );
-}
-SANDBOX-->
+GRAVITY_TRANSLATION_BLOCK_7_END
 
 ### 大小
 
 使用 `size` 属性来管理 `Avatar` 的大小。默认大小为 `m`。可能的值为 `3xs`、`2xs`、`xs`、`s`、`m`、`l` 和 `xl`。
 
-<!--SANDBOX
-import {Avatar} from '@gravity-ui/uikit';
-
-export default function () {
-    return (
-        <>
-            <Avatar text="Charles Darwin" theme="brand" size="3xs" />
-            <Avatar text="Charles Darwin" theme="brand" size="2xs" />
-            <Avatar text="Charles Darwin" theme="brand" size="xs" />
-            <Avatar text="Charles Darwin" theme="brand" size="s" />
-            <Avatar text="Charles Darwin" theme="brand" size="m" />
-            <Avatar text="Charles Darwin" theme="brand" size="l" />
-            <Avatar text="Charles Darwin" theme="brand" size="xl" />
-        </>
-    );
-}
-SANDBOX-->
+GRAVITY_TRANSLATION_BLOCK_8_END
 
 ### 形状
 
 使用 `shape` 属性来管理 `Avatar` 的形状。默认形状为 `circle`。可能的值为 `circle` 和 `square`。
 
-<!--SANDBOX
-import {Avatar} from '@gravity-ui/uikit';
-
-export default function () {
-    return (
-        <>
-            <Avatar text="Charles Darwin" theme="brand" shape="circle" />
-            <Avatar text="Charles Darwin" theme="brand" shape="square" />
-        </>
-    );
-}
-SANDBOX-->
+GRAVITY_TRANSLATION_BLOCK_9_END
 
 ## 属性
 
@@ -192,31 +81,36 @@ SANDBOX-->
 | style            | `style` HTML 属性                  |              `React.CSSProperties`              |          |
 | qa               | `data-qa` HTML 属性，用于测试      |                    `string`                     |          |
 
-### 图像专用
+### 特定于图像
 
-| 名称            | 描述                                   |        类型        |   默认值   |
-| :-------------- | :------------------------------------- | :----------------: | :---------: |
-| imgUrl          | `img` `src` HTML 属性                  |      `string`      |             |
-| fallbackImgUrl  | 加载错误时显示的备用图片               |      `string`      |             |
-| sizes           | `img` `sizes` HTML 属性                |      `string`      |             |
-| srcSet          | `img` `srcSet` HTML 属性               |      `string`      |             |
-| alt             | `img` `alt` HTML 属性                  |      `string`      | props.title |
-| loading         | `img` `loading` HTML 属性              | `'eager'` `'lazy'` |             |
-| withImageBorder | 为图片添加默认边框                     |     `boolean`      |             |
+| 名称            | 描述                                   |        类型        | 默认值 |
+| :-------------- | :------------------------------------- | :----------------: | :-----: |
+| imgUrl          | `img` 的 `src` HTML 属性               |      `string`      |         |
+| fallbackImgUrl  | 发生错误时显示的备用图像               |      `string`      |         |
+| sizes           | `img` 的 `sizes` HTML 属性             |      `string`      |         |
+| srcSet          | `img` 的 `srcSet` HTML 属性            |      `string`      |         |
+| loading         | `img` 的 `loading` HTML 属性           | `'eager'` `'lazy'` |         |
+| withImageBorder | 为图像添加默认边框                     |     `boolean`      |         |
+
+GRAVITY_TRANSLATION_BLOCK_1_END
 
 ### 特定于图标
 
 | 名称  | 描述         |    类型    | 默认值 |
-| :---- | :----------- | :--------: | :----: |
-| icon  | SVG 图标来源 | `IconData` |        |
-| color | 自定义图标颜色 |  `string`  |        |
+| :---- | :----------- | :--------: | :-----: |
+| icon  | SVG 图标来源 | `IconData` |         |
+| color | 自定义图标颜色 |  `string`  |         |
+
+GRAVITY_TRANSLATION_BLOCK_2_END
 
 ### 特定于文本
 
 | 名称  | 描述       |   类型   | 默认值 |
-| :---- | :--------- | :------: | :----: |
-| text  | 头像文本   | `string` |        |
-| color | 自定义文本颜色 | `string` |        |
+| :---- | :--------- | :------: | :-----: |
+| text  | 头像文本   | `string` |         |
+| color | 自定义文本颜色 | `string` |         |
+
+GRAVITY_TRANSLATION_BLOCK_3_END
 
 ## CSS API
 
@@ -231,3 +125,5 @@ SANDBOX-->
 | `--g-avatar-font-weight`        | 文本字体粗细     |
 | `--g-avatar-font-size`          | 文本字体大小     |
 | `--g-avatar-line-height`        | 文本行高         |
+
+GRAVITY_TRANSLATION_BLOCK_4_END
