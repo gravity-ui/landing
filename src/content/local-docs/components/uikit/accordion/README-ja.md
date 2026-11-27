@@ -4,7 +4,11 @@ Accordion コンポーネントを使用すると、ユーザーが情報のセ�
 import {Accordion} from '@gravity-ui/uikit';
 ```
 
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# Accordion
+
+<!--/GITHUB_BLOCK-->
 
 ## アコーディオンの状態を制御する
 
@@ -12,23 +16,140 @@ GRAVITY_TRANSLATION_BLOCK_0_END
 
 ルートコンポーネントから状態を制御する例：
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--GITHUB_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+## Base example
+
+```tsx
+<Accordion>
+  <Accordion.Item summary="First Item">Content of the first item</Accordion.Item>
+  <Accordion.Item summary="Second Item">Content of the second item</Accordion.Item>
+  <Accordion.Item summary="Third Item">Content of the third item</Accordion.Item>
+</Accordion>
+```
+
+<!--/GITHUB_BLOCK-->
+
+<!--SANDBOX
+import {useState} from 'react';
+import {Accordion} from '@gravity-ui/uikit';
+
+export default function () {
+    const [value, setValue] = useState<string | null>('item1');
+
+    return (
+        <Accordion value={value} onUpdate={setValue}>
+            <Accordion.Item summary="Settings" value="item1">
+                Configure your application settings
+            </Accordion.Item>
+            <Accordion.Item summary="Notifications" value="item2">
+                Manage notification preferences
+            </Accordion.Item>
+        </Accordion>
+    );
+}
+SANDBOX-->
 
 expanded プロパティを使用してアイテムごとに状態を制御する例：
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+<!--GITHUB_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+```tsx
+function ControlledAccordion() {
+  const [value, setValue] = React.useState('item1');
+
+  return (
+    <Accordion value={value} onUpdate={setValue}>
+      <Accordion.Item summary="Settings" value="item1">
+        Configure your application settings
+      </Accordion.Item>
+      <Accordion.Item summary="Notifications" value="item2">
+        Manage notification preferences
+      </Accordion.Item>
+    </Accordion>
+  );
+}
+```
+
+<!--/GITHUB_BLOCK-->
+
+<!--SANDBOX
+import {useState} from 'react';
+import {Accordion} from '@gravity-ui/uikit';
+
+export default function () {
+    const [item1, setItem1] = useState(true);
+    const [item2, setItem2] = useState(false);
+
+    return (
+        <Accordion>
+            <Accordion.Item
+                summary="Settings"
+                onUpdate={setItem1}
+                value="item1"
+                expanded={item1}
+            >
+                Configure your application settings
+            </Accordion.Item>
+            <Accordion.Item
+                summary="Notifications"
+                onUpdate={setItem2}
+                value="item2"
+                expanded={item2}
+            >
+                Manage notification preferences
+            </Accordion.Item>
+        </Accordion>
+    );
+}
+SANDBOX-->
 
 ## サイズ
 
 `size` プロパティを使用して `Accordion` のサイズを制御します。デフォルトのサイズは `m` です。
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+<!--GITHUB_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+```tsx
+function ControlledAccordion() {
+  const [item1, setItem1] = React.useState(true);
+  const [item2, setItem2] = React.useState(false);
+  return (
+    <Accordion>
+      <Accordion.Item summary="Settings" onUpdate={setItem1} value="item1" expanded={item1}>
+        Configure your application settings
+      </Accordion.Item>
+      <Accordion.Item summary="Notifications" onUpdate={setItem2} value="item2" expanded={item2}>
+        Manage notification preferences
+      </Accordion.Item>
+    </Accordion>
+  );
+}
+```
+
+<!--/GITHUB_BLOCK-->
+
+<!--SANDBOX
+import {Accordion} from '@gravity-ui/uikit';
+
+export default function () {
+    return (
+        <>
+            <Accordion size="m">
+                <Accordion.Item summary="Medium Size">Content for medium accordion</Accordion.Item>
+            </Accordion>
+            <Accordion size="l">
+                <Accordion.Item summary="Large Size">Content for large accordion</Accordion.Item>
+            </Accordion>
+            <Accordion size="xl">
+                <Accordion.Item summary="Extra Large Size">
+                    Content for extra large accordion
+                </Accordion.Item>
+            </Accordion>
+        </>
+    );
+}
+SANDBOX-->
 
 ## 表示形式
 
@@ -36,9 +157,48 @@ GRAVITY_TRANSLATION_BLOCK_6_END
 
 `top-bottom`: 上下ボーダー付きの表示。
 
-GRAVITY_TRANSLATION_BLOCK_7_END
+<!--GITHUB_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_8_END
+```tsx
+<Accordion size="m">
+    <Accordion.Item summary="Medium Size">
+        Content for medium accordion
+    </Accordion.Item>
+</Accordion>
+<Accordion size="l">
+    <Accordion.Item summary="Large Size">
+        Content for large accordion
+    </Accordion.Item>
+</Accordion>
+<Accordion size="xl">
+    <Accordion.Item summary="Extra Large Size">
+        Content for extra large accordion
+    </Accordion.Item>
+</Accordion>
+```
+
+<!--/GITHUB_BLOCK-->
+
+<!--SANDBOX
+import {Accordion} from '@gravity-ui/uikit';
+
+export default function () {
+    return (
+        <>
+            <Accordion view="solid">
+                <Accordion.Item summary="Solid View">Content with solid background</Accordion.Item>
+                <Accordion.Item summary="Another Item">More content</Accordion.Item>
+            </Accordion>
+            <Accordion view="top-bottom">
+                <Accordion.Item summary="Top-Bottom View">
+                    Content with top-bottom borders
+                </Accordion.Item>
+                <Accordion.Item summary="Another Item">More content</Accordion.Item>
+            </Accordion>
+        </>
+    );
+}
+SANDBOX-->
 
 ## 矢印の位置
 
@@ -46,33 +206,164 @@ GRAVITY_TRANSLATION_BLOCK_8_END
 
 `start`: ヘッダーの先頭に矢印が表示される。
 
-GRAVITY_TRANSLATION_BLOCK_9_END
+<!--GITHUB_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_10_END
+```tsx
+<Accordion view="solid">
+    <Accordion.Item summary="Solid View">
+        Content with solid background
+    </Accordion.Item>
+    <Accordion.Item summary="Another Item">
+        More content
+    </Accordion.Item>
+</Accordion>
+<Accordion view="top-bottom">
+    <Accordion.Item summary="Top-Bottom View">
+        Content with top-bottom borders
+    </Accordion.Item>
+    <Accordion.Item summary="Another Item">
+        More content
+    </Accordion.Item>
+</Accordion>
+```
+
+<!--/GITHUB_BLOCK-->
+
+<!--SANDBOX
+import {Accordion} from '@gravity-ui/uikit';
+
+export default function () {
+    return (
+        <>
+            <Accordion arrowPosition="end">
+                <Accordion.Item summary="Arrow at End">Content with arrow at the end</Accordion.Item>
+            </Accordion>
+            <Accordion arrowPosition="start">
+                <Accordion.Item summary="Arrow at Start">
+                    Content with arrow at the start
+                </Accordion.Item>
+            </Accordion>
+        </>
+    );
+}
+SANDBOX-->
 
 ## 複数
 
 `multiple` プロパティを使用すると、複数のアコーディオンアイテムを同時に展開できます。
 
-GRAVITY_TRANSLATION_BLOCK_11_END
+<!--GITHUB_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_12_END
+```tsx
+<Accordion arrowPosition="end">
+    <Accordion.Item summary="Arrow at End">
+        Content with arrow at the end
+    </Accordion.Item>
+</Accordion>
+<Accordion arrowPosition="start">
+    <Accordion.Item summary="Arrow at Start">
+        Content with arrow at the start
+    </Accordion.Item>
+</Accordion>
+```
+
+<!--/GITHUB_BLOCK-->
+
+<!--SANDBOX
+import {Accordion} from '@gravity-ui/uikit';
+
+export default function () {
+    return (
+        <Accordion multiple>
+            <Accordion.Item summary="First Item">Content of the first item</Accordion.Item>
+            <Accordion.Item summary="Second Item">Content of the second item</Accordion.Item>
+            <Accordion.Item summary="Third Item">Content of the third item</Accordion.Item>
+        </Accordion>
+    );
+}
+SANDBOX-->
 
 ## カスタムサマリー
 
 `Accordion.Summary` コンポーネントを使用してカスタムヘッダーを作成します。
 
-GRAVITY_TRANSLATION_BLOCK_13_END
+<!--GITHUB_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_14_END
+```tsx
+<Accordion multiple>
+  <Accordion.Item summary="First Item">Content of the first item</Accordion.Item>
+  <Accordion.Item summary="Second Item">Content of the second item</Accordion.Item>
+  <Accordion.Item summary="Third Item">Content of the third item</Accordion.Item>
+</Accordion>
+```
+
+<!--/GITHUB_BLOCK-->
+
+<!--SANDBOX
+import {Accordion, Button} from '@gravity-ui/uikit';
+
+export default function () {
+    return (
+        <Accordion>
+            <Accordion.Item value="custom">
+                <Accordion.Summary>
+                    {(props) => (
+                        <Button {...props} view="flat" width="max">
+                            Custom Summary Button
+                        </Button>
+                    )}
+                </Accordion.Summary>
+                Content with custom summary component
+            </Accordion.Item>
+            <Accordion.Item summary="Regular Summary">
+                Content with regular summary prop
+            </Accordion.Item>
+        </Accordion>
+    );
+}
+SANDBOX-->
 
 ## 無効状態
 
 `disabled` プロパティを使用して、個々のアコーディオンアイテムを無効にすることができます。
 
-GRAVITY_TRANSLATION_BLOCK_15_END
+<!--GITHUB_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_16_END
+```tsx
+<Accordion>
+  <Accordion.Item value="custom">
+    <Accordion.Summary>
+      {(props) => (
+        <Button {...props} view="flat" width="max">
+          <Icon data={Settings} size={16} />
+          Custom Summary Button
+        </Button>
+      )}
+    </Accordion.Summary>
+    Content with custom summary component
+  </Accordion.Item>
+  <Accordion.Item summary="Regular Summary">Content with regular summary prop</Accordion.Item>
+</Accordion>
+```
+
+<!--/GITHUB_BLOCK-->
+
+<!--SANDBOX
+import {Accordion} from '@gravity-ui/uikit';
+
+export default function () {
+    return (
+        <Accordion>
+            <Accordion.Item summary="Active Item">
+                This item is active and can be expanded
+            </Accordion.Item>
+            <Accordion.Item summary="Disabled Item" disabled>
+                This item is disabled and cannot be expanded
+            </Accordion.Item>
+        </Accordion>
+    );
+}
+SANDBOX-->
 
 ## プロパティ
 
@@ -106,7 +397,18 @@ GRAVITY_TRANSLATION_BLOCK_16_END
 | qa              | テストに使用される HTML `data-qa` 属性 |     `string`      |           |
 
 ### Accordion.Summary
-GRAVITY_TRANSLATION_BLOCK_17_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Accordion>
+  <Accordion.Item summary="Active Item">This item is active and can be expanded</Accordion.Item>
+  <Accordion.Item summary="Disabled Item" disabled>
+    This item is disabled and cannot be expanded
+  </Accordion.Item>
+</Accordion>
+```
+
+<!--/GITHUB_BLOCK-->
 
 | 名前     | 説明                                                                                             | 型                                             | デフォルト                                                                                             |
 | :------- | :----------------------------------------------------------------------------------------------- | :---------------------------------------------: | :-----------------------------------------------------------------------------------------------------: |
