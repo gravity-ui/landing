@@ -1,8 +1,4 @@
-<!--GITHUB_BLOCK-->
-
-# Tooltip
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_0_END
 
 Una sugerencia de texto simple que utiliza su nodo hijo como ancla. Este componente solo acepta contenido de texto y puede ser una excelente alternativa al atributo `title` del navegador, con su pequeño tamaño y largo retraso de aparición.
 
@@ -11,8 +7,8 @@ Una sugerencia de texto simple que utiliza su nodo hijo como ancla. Este compone
 ```tsx
 import {Tooltip} from '@gravity-ui/uikit';
 
-<Tooltip content="Content">
-  <div tabIndex={0}>Anchor</div>
+<Tooltip content="Contenido">
+  <div tabIndex={0}>Ancla</div>
 </Tooltip>;
 ```
 
@@ -26,7 +22,7 @@ Alternativamente, puedes pasar una función como hijo para proporcionar `ref` y 
 ```tsx
 import {Tooltip} from '@gravity-ui/uikit';
 
-<Tooltip content="Content">
+<Tooltip content="Contenido">
   {(props, ref) => <MyCustomButton buttonProps={props} buttonRef={ref} />}
 </Tooltip>;
 ```
@@ -41,6 +37,21 @@ La devolución de llamada `onOpenChange` tiene la siguiente firma: `(open: boole
 
 `Tooltip` acepta la propiedad `role` que cambia cómo debe actuar en términos de accesibilidad.
 El rol `tooltip` debe usarse cuando el ancla tiene su propio texto y el rol `label` en caso contrario (por ejemplo, en un botón con icono).
+
+## Grupo de Retraso
+
+Todas las sugerencias de herramientas renderizadas bajo `Provider` comparten el retraso de apertura. La primera sugerencia de herramienta paga su propio `openDelay`,
+por lo que un movimiento accidental del ratón aún no abre nada. Mientras el grupo está "caliente" —una sugerencia de herramienta está abierta o se ha cerrado
+hace menos de `skipDelay`— la siguiente sugerencia de herramienta al pasar el cursor se abre instantáneamente, y no más de una sugerencia de herramienta está abierta a la vez. Esto se adapta a barras de herramientas y filas de botones con iconos, donde esperar el retraso en cada botón se siente lento.
+La apertura por foco es instantánea con o sin un grupo, por lo que el teclado no se ve afectado.
+
+`skipDelay` (300 ms por defecto) se configura con `defaultProps` de `Provider`:
+
+```tsx
+import {Provider} from '@gravity-ui/uikit';
+
+<Provider defaultProps={{TooltipDelayGroup: {skipDelay: 500}}}>{/* ... */}</Provider>;
+```
 
 ## Propiedades
 
