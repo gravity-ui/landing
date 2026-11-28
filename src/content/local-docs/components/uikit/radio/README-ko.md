@@ -1,9 +1,3 @@
-<!--GITHUB_BLOCK-->
-
-# Radio
-
-<!--/GITHUB_BLOCK-->
-
 `Radio` 컴포넌트를 사용하면 사용자는 여러 옵션 중에서 하나만 선택할 수 있습니다.
 
 ```tsx
@@ -17,95 +11,25 @@ import {Radio} from '@gravity-ui/uikit';
 - 선택됨: 라디오 버튼이 선택되었습니다.
 - 비활성화됨: 라디오 버튼을 선택할 수 없습니다.
 
-<!--SANDBOX
-import {Radio} from '@gravity-ui/uikit';
+GRAVITY_TRANSLATION_BLOCK_1_END
 
-export default function () {
-    return (
-        <>
-            <Radio value="option 1" content="Unchecked" size="l" checked={false} />
-            <Radio value="option 2" content="Checked" size="l" checked />
-            <Radio value="option 3" content="Disabled" size="l" disabled />
-        </>
-    );
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-<Radio value="option 1" content="Unchecked" size="l" checked={false}/>
-<Radio value="option 2" content="Checked" size="l" checked/>
-<Radio value="option 3" content="Disabled" size="l" disabled/>
-```
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_2_END
 
 ## 크기
 
 `Radio`의 크기를 관리하려면 `size` 속성을 사용하세요. 기본 크기는 `m`입니다.
 
-<!--SANDBOX
-import {Radio} from '@gravity-ui/uikit';
+GRAVITY_TRANSLATION_BLOCK_3_END
 
-export default function () {
-    return (
-        <>
-            <Radio value="option 1" content="M Size" size="m" />
-            <Radio value="option 2" content="L Size" size="l" />
-        </>
-    );
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-<Radio value="option 1" content="M Size" size="m"/>
-<Radio value="option 2" content="L Size" size="l"/>
-```
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_4_END
 
 ## 레이블
 
 `content` 속성을 사용하여 `Radio`에 레이블을 지정하거나 자식 속성으로 제공할 수 있습니다.
 
-<!--SANDBOX
-import {Box, Radio} from '@gravity-ui/uikit';
+GRAVITY_TRANSLATION_BLOCK_5_END
 
-export default function () {
-    return (
-        <div>
-            <Radio value="option-1" content="Content" size="l" />
-            <Box spacing={{mt: 2}}>
-                <Radio value="option-2" size="l">
-                    <span>Content as children</span>
-                </Radio>
-            </Box>
-        </div>
-    );
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-<div>
-  <Radio content="Content" size="l" />
-  <div
-    style={{
-      marginTop: 10,
-    }}
-  >
-    <Radio size="l">
-      <span>Content as children</span>
-    </Radio>
-  </div>
-</div>
-```
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_6_END
 
 ## 속성
 

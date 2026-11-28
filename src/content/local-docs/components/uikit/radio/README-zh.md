@@ -1,9 +1,3 @@
-<!--GITHUB_BLOCK-->
-
-# Radio
-
-<!--/GITHUB_BLOCK-->
-
 `Radio` 组件允许用户从选项列表中选择单个选项。
 
 ```tsx
@@ -17,95 +11,25 @@ import {Radio} from '@gravity-ui/uikit';
 - 选中：Radio 已被选中。
 - 禁用：Radio 无法被选中。
 
-<!--SANDBOX
-import {Radio} from '@gravity-ui/uikit';
+GRAVITY_TRANSLATION_BLOCK_1_END
 
-export default function () {
-    return (
-        <>
-            <Radio value="option 1" content="Unchecked" size="l" checked={false} />
-            <Radio value="option 2" content="Checked" size="l" checked />
-            <Radio value="option 3" content="Disabled" size="l" disabled />
-        </>
-    );
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-<Radio value="option 1" content="Unchecked" size="l" checked={false}/>
-<Radio value="option 2" content="Checked" size="l" checked/>
-<Radio value="option 3" content="Disabled" size="l" disabled/>
-```
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_2_END
 
 ## 大小
 
 要管理 `Radio` 的大小，请使用 `size` 属性。默认大小为 `m`。
 
-<!--SANDBOX
-import {Radio} from '@gravity-ui/uikit';
+GRAVITY_TRANSLATION_BLOCK_3_END
 
-export default function () {
-    return (
-        <>
-            <Radio value="option 1" content="M Size" size="m" />
-            <Radio value="option 2" content="L Size" size="l" />
-        </>
-    );
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-<Radio value="option 1" content="M Size" size="m"/>
-<Radio value="option 2" content="L Size" size="l"/>
-```
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_4_END
 
 ## 标签
 
 您可以使用 `content` 属性为 `Radio` 分配标签，或者将其作为子属性提供。
 
-<!--SANDBOX
-import {Box, Radio} from '@gravity-ui/uikit';
+GRAVITY_TRANSLATION_BLOCK_5_END
 
-export default function () {
-    return (
-        <div>
-            <Radio value="option-1" content="Content" size="l" />
-            <Box spacing={{mt: 2}}>
-                <Radio value="option-2" size="l">
-                    <span>Content as children</span>
-                </Radio>
-            </Box>
-        </div>
-    );
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-<div>
-  <Radio content="Content" size="l" />
-  <div
-    style={{
-      marginTop: 10,
-    }}
-  >
-    <Radio size="l">
-      <span>Content as children</span>
-    </Radio>
-  </div>
-</div>
-```
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_6_END
 
 ## 属性
 
@@ -115,7 +39,7 @@ SANDBOX-->
 | content        | 单选框的内容（`children` 的替代选项）。                                                                  |                  `ReactNode`                  |         |
 | disabled       | 切换单选框的 `disabled` 状态。                                                                           |                   `boolean`                   | `false` |
 | checked        | 切换单选框的 `checked` 状态。                                                                            |                   `boolean`                   | `false` |
-| defaultChecked | 设置组件挂载时的初始选中状态。                                                                           |                   `boolean`                   | `false` |
+| defaultChecked | 组件挂载时设置初始的选中状态。                                                                           |                   `boolean`                   | `false` |
 | onUpdate       | 当用户更改单选框状态时触发，并将选中的值作为回调参数提供。                                               |         `(checked: boolean) => void`          |         |
 | onChange       | 当用户更改单选框状态时触发，并将更改事件作为回调参数提供。                                               |                  `Function`                   |         |
 | onFocus        | 当单选框输入元素获得焦点时使用的事件处理程序。                                                           |                  `Function`                   |         |
@@ -126,8 +50,8 @@ SANDBOX-->
 | style          | `style` HTML 属性                                                                                        |             `React.CSSProperties`             |         |
 | className      | `class` HTML 属性                                                                                        |                   `string`                    |         |
 | title          | `title` HTML 属性                                                                                        |                   `string`                    |         |
-| name           | 输入元素的 `name` HTML 属性                                                                              |                   `string`                    |         |
-| value          | 控件值                                                                                                   |                   `string`                    |         |
+| name           | 输入元素的 `name` HTML 属性。                                                                            |                   `string`                    |         |
+| value          | 控件值。                                                                                                 |                   `string`                    |         |
 | indeterminate  | 切换单选框的不确定状态。                                                                                 |                   `boolean`                   | `false` |
-| controlProps   | 底层输入元素的附加属性                                                                                   | `React.InputHTMLAttributes<HTMLInputElement>` |         |
-| controlRef     | 底层输入元素的 ref                                                                                       |         `React.Ref<HTMLInputElement>`         |         |
+| controlProps   | 底层输入元素的附加属性。                                                                                 | `React.InputHTMLAttributes<HTMLInputElement>` |         |
+| controlRef     | 底层输入元素的 ref。                                                                                     |         `React.Ref<HTMLInputElement>`         |         |

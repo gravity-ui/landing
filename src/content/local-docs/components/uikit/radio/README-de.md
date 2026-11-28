@@ -1,9 +1,3 @@
-<!--GITHUB_BLOCK-->
-
-# Radio
-
-<!--/GITHUB_BLOCK-->
-
 Die `Radio`-Komponente ermöglicht es Benutzern, eine einzelne Option aus einer Liste von Auswahlmöglichkeiten auszuwählen.
 
 ```tsx
@@ -17,95 +11,25 @@ import {Radio} from '@gravity-ui/uikit';
 - Checked: Radio ist ausgewählt.
 - Disabled: Radio ist für die Auswahl nicht verfügbar.
 
-<!--SANDBOX
-import {Radio} from '@gravity-ui/uikit';
+GRAVITY_TRANSLATION_BLOCK_1_END
 
-export default function () {
-    return (
-        <>
-            <Radio value="option 1" content="Unchecked" size="l" checked={false} />
-            <Radio value="option 2" content="Checked" size="l" checked />
-            <Radio value="option 3" content="Disabled" size="l" disabled />
-        </>
-    );
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-<Radio value="option 1" content="Unchecked" size="l" checked={false}/>
-<Radio value="option 2" content="Checked" size="l" checked/>
-<Radio value="option 3" content="Disabled" size="l" disabled/>
-```
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_2_END
 
 ## Größe
 
 Um die Größe von `Radio` zu verwalten, verwenden Sie die Eigenschaft `size`. Die Standardgröße ist `m`.
 
-<!--SANDBOX
-import {Radio} from '@gravity-ui/uikit';
+GRAVITY_TRANSLATION_BLOCK_3_END
 
-export default function () {
-    return (
-        <>
-            <Radio value="option 1" content="M Size" size="m" />
-            <Radio value="option 2" content="L Size" size="l" />
-        </>
-    );
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-<Radio value="option 1" content="M Size" size="m"/>
-<Radio value="option 2" content="L Size" size="l"/>
-```
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_4_END
 
 ## Beschriftung
 
 Sie können einer `Radio`-Schaltfläche eine Beschriftung mit der Eigenschaft `content` zuweisen oder sie als Kind-Eigenschaft bereitstellen.
 
-<!--SANDBOX
-import {Box, Radio} from '@gravity-ui/uikit';
+GRAVITY_TRANSLATION_BLOCK_5_END
 
-export default function () {
-    return (
-        <div>
-            <Radio value="option-1" content="Content" size="l" />
-            <Box spacing={{mt: 2}}>
-                <Radio value="option-2" size="l">
-                    <span>Content as children</span>
-                </Radio>
-            </Box>
-        </div>
-    );
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-<div>
-  <Radio content="Content" size="l" />
-  <div
-    style={{
-      marginTop: 10,
-    }}
-  >
-    <Radio size="l">
-      <span>Content as children</span>
-    </Radio>
-  </div>
-</div>
-```
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_6_END
 
 ## Eigenschaften
 
