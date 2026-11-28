@@ -1,8 +1,4 @@
-<!--GITHUB_BLOCK-->
-
-# Toaster
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_0_END
 
 이것은 토스트라고도 알려진 조정 가능한 알림을 위한 컴포넌트입니다.
 
@@ -116,17 +112,17 @@ const FoobarWithToaster = withToaster()(FoobarComponent);
 
 모든 `action`은 다음 매개변수를 가진 객체입니다.
 
-| 매개변수        | 타입                                      | 필수 | 기본값    | 설명                                                              |
-| :--------------- | :---------------------------------------- | :------- | :--------- | :----------------------------------------------------------------------- |
-| label            | `string`                                  | 예      |            | 액션 설명                                                       |
-| onClick          | `() => void`                              | 예      |            | 액션 클릭 핸들러                                                  |
-| view             | [`ButtonView`](../Button/README.md#props) |          | `outlined` | 액션 모양, `<Button/>`의 `view`와 동일                        |
-| removeAfterClick | `boolean`                                 |          | `true`     | 액션 클릭 후 알림 닫기 활성화 또는 비활성화                                |
+| 매개변수        | 타입                                           | 필수 | 기본값   | 설명                                                                 |
+| :--------------- | :--------------------------------------------- | :--- | :------- | :------------------------------------------------------------------- |
+| label            | `string`                                       | 예   |          | 액션 설명                                                            |
+| onClick          | `() => void`                                   | 예   |          | 액션 클릭 핸들러                                                     |
+| view             | [`ButtonView`](../Button/README.md#properties) |      | `outlined` | 액션 모양, `<Button/>`의 `view`와 동일                               |
+| removeAfterClick | `boolean`                                      |      | `true`   | 액션 클릭 후 알림 닫기 활성화 또는 비활성화                          |
 
 ## CSS API
 
-| 이름                       | 설명     |
-| :------------------------- | :-------------- |
+| 이름                       | 설명       |
+| :------------------------- | :--------- |
 | `--g-toaster-width`        | 컨테이너 너비 |
-| `--g-toaster-item-padding` | 아이템 패딩    |
-| `--g-toaster-item-gap`     | 아이템 간격    |
+| `--g-toaster-item-padding` | 아이템 패딩   |
+| `--g-toaster-item-gap`     | 아이템 간격   |

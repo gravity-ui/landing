@@ -1,8 +1,4 @@
-<!--GITHUB_BLOCK-->
-
-# Toaster
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_0_END
 
 Ceci est un composant pour les notifications ajustables, également appelées toasts.
 
@@ -30,7 +26,7 @@ Mais vous pouvez également utiliser `toaster` directement dans différentes par
 
 ```js
 toaster.add({
-  title: 'Toaster is here',
+  title: 'Toaster est là',
 });
 ```
 
@@ -54,7 +50,7 @@ export function FoobarComponent() {
 
   useEffect(() => {
     add({
-      title: 'Toaster is here',
+      title: 'Toaster est là',
     });
   }, []);
 
@@ -117,21 +113,21 @@ Il accepte l'argument `toastOptions` avec les détails de la notification en cou
 | name       | `string`                                | oui      |             | Nom unique de la notification. Les notifications avec des noms identiques sont regroupées en une seule.                                                                                                                                                 |
 | title      | `string`                                |          |             | Titre de la notification                                                                                                                                                                                                                                 |
 | className  | `string`                                |          |             | Classe CSS                                                                                                                                                                                                                                               |
-| autoHiding | `number` ou `false`                     |          | 5000        | Nombre de millisecondes avant de masquer la notification. Utilisez `false` pour désactiver la fermeture automatique du toast après un délai.                                                                                                              |
+| autoHiding | `number` ou `false`                     |          | 5000        | Nombre de millisecondes avant de masquer la notification. Utilisez `false` pour désactiver la disparition automatique après un délai d'attente.                                                                                                        |
 | content    | `node`                                  |          | `undefined` | Contenu de la notification. Cela peut être [tout ce qui peut être rendu : nombres, chaînes de caractères, éléments ou un tableau](https://reactjs.org/docs/typechecking-with-proptypes.html#proptypes).                                                    |
 | theme      | `string`                                |          | `"normal"`  | Thème de la notification. Les valeurs possibles sont `"normal"`, `"info"`, `"success"`, `"warning"`, `danger` et `"utility"`. Si `theme` est défini sur autre chose que `"normal"`, l'icône sera ajoutée au titre de la notification. _Par défaut, il n'y a pas d'icône_. |
 | isClosable | `boolean`                               |          | `true`      | Configuration qui gère la visibilité de l'icône X, permettant à l'utilisateur de fermer la notification.                                                                                                                                                 |
 | actions    | `ToastAction[] \| () => ReactElement`   |          | `undefined` | Tableau d'[actions](./types.ts#L9) qui sont affichées après `content`, ou une fonction de rappel qui renvoie les actions requises.                                                                                                                        |
-| renderIcon | `(toastProps: ToastProps) => ReactNode` |          | `undefined` | Utilisé pour personnaliser l'icône du toast. Le comportement basé sur le type est utilisé par défaut.                                                                                                                                                   |
+| renderIcon | `(toastProps: ToastProps) => ReactNode` |          | `undefined` | Utilisé pour personnaliser l'icône de la notification. Le comportement basé sur le type est utilisé par défaut.                                                                                                                                          |
 
 Chaque `action` est un objet avec les paramètres suivants :
 
-| Paramètre        | Type                                      | Requis | Défaut   | Description                                                              |
-| :--------------- | :---------------------------------------- | :----- | :------- | :----------------------------------------------------------------------- |
-| label            | `string`                                  | oui    |          | Description de l'action                                                  |
-| onClick          | `() => void`                              | oui    |          | Gestionnaire de clic sur l'action                                        |
-| view             | [`ButtonView`](../Button/README.md#props) |        | `outlined` | Apparence de l'action, identique à `view` pour `<Button/>`             |
-| removeAfterClick | `boolean`                                 |        | `true`   | Active ou désactive la fermeture de la notification après un clic sur l'action |
+| Paramètre        | Type                                           | Requis | Défaut   | Description                                                              |
+| :--------------- | :--------------------------------------------- | :----- | :------- | :----------------------------------------------------------------------- |
+| label            | `string`                                       | oui    |          | Description de l'action                                                  |
+| onClick          | `() => void`                                   | oui    |          | Gestionnaire de clic sur l'action                                        |
+| view             | [`ButtonView`](../Button/README.md#properties) |        | `outlined` | Apparence de l'action, identique à `view` pour `<Button/>`             |
+| removeAfterClick | `boolean`                                      |        | `true`   | Active ou désactive la fermeture de la notification après avoir cliqué sur l'action |
 
 ## API CSS
 

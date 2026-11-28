@@ -1,8 +1,4 @@
-<!--GITHUB_BLOCK-->
-
-# Toaster
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_0_END
 
 Este é um componente para notificações ajustáveis, também conhecidas como toasts.
 
@@ -30,7 +26,7 @@ Mas você também pode usar `toaster` diretamente em diferentes partes de sua ap
 
 ```js
 toaster.add({
-  title: 'Toaster is here',
+  title: 'Toaster está aqui',
 });
 ```
 
@@ -54,7 +50,7 @@ export function FoobarComponent() {
 
   useEffect(() => {
     add({
-      title: 'Toaster is here',
+      title: 'Toaster está aqui',
     });
   }, []);
 
@@ -117,26 +113,26 @@ Ele aceita o argumento `toastOptions` com os detalhes da notificação em andame
 | name       | `string`                                | sim         |             | Nome exclusivo da notificação. Notificações com nomes idênticos são colapsadas em uma.                                                                                                                                                                      |
 | title      | `string`                                |             |             | Título da notificação.                                                                                                                                                                                                                                   |
 | className  | `string`                                |             |             | Classe CSS.                                                                                                                                                                                                                                              |
-| autoHiding | `number` ou `false`                     |             | 5000        | Número de ms para atrasar o ocultamento da notificação. Use `false` para desativar o ocultamento do toast após o tempo limite.                                                                                                                            |
-| content    | `node`                                  |             | `undefined` | Conteúdo da notificação. Isso pode ser [qualquer coisa que possa ser renderizada: números, strings, elementos ou um array](https://reactjs.org/docs/typechecking-with-proptypes.html#proptypes).                                                               |
+| autoHiding | `number` ou `false`                     |             | 5000        | Número de ms para atrasar o ocultamento da notificação. Use `false` para desativar o ocultamento do toast após o tempo limite.                                                                                                                             |
+| content    | `node`                                  |             | `undefined` | Conteúdo da notificação. Isso pode ser [qualquer coisa que possa ser renderizada: números, strings, elementos ou um array](https://reactjs.org/docs/typechecking-with-proptypes.html#proptypes).                                                                          |
 | theme      | `string`                                |             | `"normal"`  | Tema da notificação. Os valores possíveis são `"normal"`, `"info"`, `"success"`, `"warning"`, `danger` e `"utility"`. Se `theme` for definido como qualquer coisa diferente de `"normal"`, o ícone será adicionado ao título da notificação. _Por padrão, não há ícone_. |
-| isClosable | `boolean`                               |             | `true`      | Configuração que gerencia a visibilidade do ícone X, que permite ao usuário fechar a notificação.                                                                                                                                                       |
+| isClosable | `boolean`                               |             | `true`      | Configuração que gerencia a visibilidade do ícone X, que permite ao usuário fechar a notificação.                                                                                                                                                 |
 | actions    | `ToastAction[] \| () => ReactElement`   |             | `undefined` | Array de [ações](./types.ts#L9) que são exibidas após `content`, ou um callback que retornou as ações necessárias.                                                                                                                                        |
-| renderIcon | `(toastProps: ToastProps) => ReactNode` |             | `undefined` | Usado para personalizar o ícone do toast. O comportamento baseado em tipo é usado por padrão.                                                                                                                                                            |
+| renderIcon | `(toastProps: ToastProps) => ReactNode` |             | `undefined` | Usado para personalizar o ícone do toast. O comportamento baseado em tipo é usado por padrão.                                                                                                                                                  |
 
 Cada `action` é um objeto com os seguintes parâmetros:
 
-| Parâmetro        | Tipo                                      | Obrigatório | Padrão    | Descrição                                                              |
-| :--------------- | :---------------------------------------- | :---------- | :-------- | :----------------------------------------------------------------------- |
-| label            | `string`                                  | sim         |           | Descrição da ação                                                        |
-| onClick          | `() => void`                              | sim         |           | Manipulador de clique na ação                                            |
-| view             | [`ButtonView`](../Button/README.md#props) |             | `outlined` | Aparência da ação, igual a `view` para `<Button/>`                        |
-| removeAfterClick | `boolean`                                 |             | `true`    | Habilita ou desabilita o fechamento da notificação após o clique na ação |
+| Parâmetro        | Tipo                                           | Obrigatório | Padrão    | Descrição                                                              |
+| :--------------- | :--------------------------------------------- | :------- | :--------- | :----------------------------------------------------------------------- |
+| label            | `string`                                       | sim      |            | Descrição da ação                                                        |
+| onClick          | `() => void`                                   | sim      |            | Manipulador de clique na ação                                            |
+| view             | [`ButtonView`](../Button/README.md#properties) |          | `outlined` | Aparência da ação, o mesmo que `view` para `<Button/>`                   |
+| removeAfterClick | `boolean`                                      |          | `true`     | Habilita ou desabilita o fechamento da notificação após o clique na ação |
 
 ## API CSS
 
 | Nome                       | Descrição     |
-| :------------------------- | :------------ |
+| :------------------------- | :-------------- |
 | `--g-toaster-width`        | Largura do container |
-| `--g-toaster-item-padding` | Preenchimento do item    |
+| `--g-toaster-item-padding` | Padding do item    |
 | `--g-toaster-item-gap`     | Espaçamento do item        |
