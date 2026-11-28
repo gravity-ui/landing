@@ -47,7 +47,7 @@ jobs:
                   node-version: 24
                   cache: npm
 
-            - run: npm ci
+            - run: ONNXRUNTIME_NODE_INSTALL_CUDA=skip npm ci
 
             - name: Cache Playwright browsers
               uses: actions/cache@v4
