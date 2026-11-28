@@ -1,10 +1,4 @@
-<!--GITHUB_BLOCK-->
-
-# Dialog
-
-<!--/GITHUB_BLOCK-->
-
-`Dialog` ist ein modales Fenster mit einem Titel, einem Inhalt und Aktionsschaltflächen im Fußbereich, das für Bestätigungen, Formulare und Eingabeaufforderungen verwendet wird. Es basiert auf `Modal`.
+`Dialog` ist ein modales Fenster mit einem Titel, einem Inhalt und Aktionen im Fußbereich, das für Bestätigungen, Formulare und Aufforderungen verwendet wird. Es basiert auf `Modal`.
 
 ```tsx
 import {Dialog} from '@gravity-ui/uikit';
@@ -16,14 +10,7 @@ import {Dialog} from '@gravity-ui/uikit';
 const [open, setOpen] = useState(false);
 const dialogTitleId = 'app-confirmation-dialog-title';
 
-<Dialog
-  onClose={() => setOpen(false)}
-  open={open}
-  onEnterKeyDown={() => {
-    alert('onEnterKeyDown');
-  }}
-  aria-labelledby={dialogTitleId}
->
+<Dialog onOpenChange={setOpen} open={open} aria-labelledby={dialogTitleId}>
   <Dialog.Header caption="Caption" id={dialogTitleId} />
   <Dialog.Body>Dialog.Body</Dialog.Body>
   <Dialog.Footer
@@ -36,26 +23,29 @@ const dialogTitleId = 'app-confirmation-dialog-title';
 ```
 
 ## Eigenschaften
+GRAVITY_TRANSLATION_BLOCK_0_END
 
-| Name                  | Beschreibung                                                                                                | Typ                                                                                              | Standard    |
-| :-------------------- | :---------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------- | :---------- |
-| open                  | Aktueller Dialogzustand                                                                                     | `boolean`                                                                                        |             |
-| onEscapeKeyDown       | Escape-Tastendruck-Ereignisbehandlungsroutine                                                               | `(event: KeyboardEvent) => void`                                                                 |             |
-| onEnterKeyDown        | Enter-Tastendruck-Ereignisbehandlungsroutine                                                                | `(event: KeyboardEvent) => void`                                                                 |             |
-| onOutsideClick        | Ereignisbehandlungsroutine bei einem Mausklick außerhalb des Dialogs                                        | `(event: MouseEvent) => void`                                                                    |             |
-| onClose               | Ereignisbehandlungsroutine beim Schließen des Dialogs                                                       | `(event: MouseEvent or KeyboardEvent,` `reason: ModalCloseReason or "closeButtonClick") => void` |             |
-| className             | `className` des Wrapper-Elements des Dialoginhalts                                                          | `string`                                                                                         |             |
-| modalClassName        | `className` der Modalbox, in die der Dialog eingebettet ist                                                  | `string`                                                                                         |             |
-| size                  | Dialoggröße. Veraltet. Verwenden Sie `maxWidth` + `fullWidth`, um dasselbe Ergebnis zu erzielen.            | `'s'` `'m'` `'l'`                                                                                |             |
-| maxWidth              | Maximale Breite des Dialoginhalts                                                                           | `'s'` `'m'` `'l'`                                                                                |             |
-| fullWidth             | Wenn `true`, dehnt sich der Inhalt auf `maxWidth` aus                                                       | `boolean`                                                                                        |             |
-| disableBodyScrollLock | Schaltet ab, ob das Scrollen des Bodys gesperrt ist                                                         | `boolean`                                                                                        | `false`     |
-| disableEscapeKeyDown  | Schaltet ab, ob der Escape-Tastendruck deaktiviert ist                                                     | `boolean`                                                                                        | `false`     |
-| disableOutsideClick   | Schaltet ab, ob der Klick außerhalb deaktiviert ist                                                         | `boolean`                                                                                        | `false`     |
-| keepMounted           | Schaltet ab, ob der Dialog im gemounteten Zustand gehalten wird                                             | `boolean`                                                                                        | `false`     |
-| hasCloseButton        | Schaltet ab, ob ein Kreuzsymbol in der oberen rechten Ecke des Dialogs vorhanden ist                        | `boolean`                                                                                        | `true`      |
-| aria-labelledby       | ID der `<Dialog/>`-Beschriftung. Verwenden Sie die `id`-Eigenschaft von `<Dialog.Header/>`, um die ID für die Beschriftung festzulegen | `string`                                                                                         |             |
-| aria-label            | Dialogbeschriftung für Barrierefreiheit. Setzen Sie `aria-labelledby`, wenn die Beschriftung für den Benutzer sichtbar ist | `string`                                                                                         |             |
-| container             | Container-Element für die Dialogbox                                                                         | `HTMLElement`                                                                                    |             |
-| qa                    | `data-qa`-Attributwert der Modalbox, in die der Dialog eingebettet ist                                      | `string`                                                                                         |             |
-| contentOverflow       | Bestimmt, ob der `Dialog` eine Scrollanzeige im Inneren hat oder mit dem Inhalt größer wird                | `'visible'` `'auto'`                                                                             | `'visible'` |
+| Name                  | Beschreibung                                                                                             | Typ                                                                 | Standard    |
+| :-------------------- | :------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------ | :---------- |
+| open                  | Aktueller Dialogzustand                                                                                  | `boolean`                                                           |             |
+| onOpenChange          | Behandelt Änderungen des Dialogzustands                                                                  | `(open: boolean, event?: Event, reason?: OpenChangeReason) => void` |             |
+| initialFocus          | Ziel für den anfänglichen Fokus, einschließlich der Schaltflächen `cancel` oder `apply` im Footer        | `ModalProps['initialFocus'] \| 'cancel' \| 'apply'`                 |             |
+| returnFocus           | Steuert, wohin der Fokus nach dem Schließen zurückkehrt                                                  | `ModalProps['returnFocus']`                                         |             |
+| className             | `className` des Wrapper-Elements für den Dialoginhalt                                                    | `string`                                                            |             |
+| modalClassName        | `className` der Modalbox, in die der Dialog eingebettet ist                                              | `string`                                                            |             |
+| maxWidth              | Maximale Breite des Dialoginhalts                                                                        | `'s'` `'m'` `'l'`                                                   |             |
+| fullWidth             | Wenn `true`, dehnt sich der Inhalt bis zu `maxWidth` aus                                                | `boolean`                                                           |             |
+| disableBodyScrollLock | Schaltet das Sperren des Body-Scrolls um                                                                 | `boolean`                                                           | `false`     |
+| disableTransition     | Überspringt Öffnungs- und Schließanimationen, wenn `true`                                                | `boolean`                                                           | `false`     |
+| disableEscapeKeyDown  | Schaltet das Deaktivieren von Escape-KeyDown um                                                          | `boolean`                                                           | `false`     |
+| disableOutsideClick   | Schaltet das Deaktivieren von Klicks außerhalb des Dialogs um                                            | `boolean`                                                           | `false`     |
+| keepMounted           | Schaltet um, ob der Dialog im gemounteten Zustand gehalten wird                                          | `boolean`                                                           | `false`     |
+| hasCloseButton        | Schaltet um, ob ein Kreuzsymbol in der oberen rechten Ecke des Dialogs vorhanden ist                     | `boolean`                                                           | `true`      |
+| aria-labelledby       | ID der Dialogunterschrift. Verwenden Sie die `id`-Eigenschaft von `<Dialog.Header/>`, um die ID für die Beschriftung festzulegen | `string`                                                            |             |
+| aria-label            | Dialogbeschriftung für Barrierefreiheit. Setzen Sie `aria-labelledby`, wenn die Beschriftung für den Benutzer sichtbar ist | `string`                                                            |             |
+| container             | Container-Element für die Dialogbox                                                                      | `HTMLElement`                                                       |             |
+| qa                    | `data-qa`-Attributwert der Modalbox, in die der Dialog eingebettet ist                                   | `string`                                                            |             |
+| contentOverflow       | Bestimmt, ob der `Dialog` eine Scrollanzeige im Inneren hat oder mit dem Inhalt größer wird            | `'visible'` `'auto'`                                                | `'visible'` |
+
+`onOpenChange` empfängt `escape-key` für die Escape-Taste, `outside-press` für einen Klick außerhalb, `click` für den Schließen-Button und `undefined` für den Schließen-Button für Screenreader. Schließen, wenn `open` unabhängig vom Grund auf `false` gesetzt wird.
+GRAVITY_TRANSLATION_BLOCK_1_END
