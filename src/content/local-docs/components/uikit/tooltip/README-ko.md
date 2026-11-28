@@ -1,10 +1,6 @@
-<!--GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_0_END
 
-# Tooltip
-
-<!--/GITHUB_BLOCK-->
-
-자식 노드를 앵커로 사용하는 간단한 텍스트 팁입니다. 이 컴포넌트는 텍스트 콘텐츠만 허용하며, 작은 크기와 긴 표시 지연 시간으로 브라우저의 `title` 속성을 대체할 수 있습니다.
+간단한 텍스트 팁으로, 자식 노드를 앵커로 사용합니다. 이 컴포넌트는 텍스트 콘텐츠만 허용하며, 작은 크기와 긴 표시 지연 시간으로 브라우저의 `title` 속성에 대한 훌륭한 대안이 될 수 있습니다.
 
 ## 사용법
 
@@ -20,7 +16,7 @@ import {Tooltip} from '@gravity-ui/uikit';
 
 `Tooltip`이 작동하려면 `ref` 속성을 `HTMLElement`에 전달할 수 있는 유효한 `ReactElement`를 자식으로 전달해야 하며, `HTMLElement`에 대한 다른 속성도 전달해야 합니다.
 
-또는 함수를 자식으로 전달하여 기본 컴포넌트에 ref와 props를 수동으로 제공할 수 있습니다.
+또는 함수를 자식으로 전달하여 기본 컴포넌트에 `ref`와 `props`를 수동으로 제공할 수 있습니다.
 
 ```tsx
 import {Tooltip} from '@gravity-ui/uikit';
@@ -30,15 +26,27 @@ import {Tooltip} from '@gravity-ui/uikit';
 </Tooltip>;
 ```
 
-## 제어 상태
+## 제어된 상태
 
-기본적으로 `Tooltip`은 앵커에 마우스를 올리면 열리고 숨겨집니다. 이 동작을 수동으로 열린 상태를 설정하도록 변경할 수 있습니다. `open` prop에 상태를 전달하고 `onOpenChange` 콜백에서 상태를 변경하세요.
+기본적으로 `Tooltip`은 앵커에 마우스를 올리면 열리고 닫힙니다. 이 동작을 수동으로 열린 상태를 설정하도록 변경할 수 있습니다. `open` 속성에 상태를 전달하고 `onOpenChange` 콜백에서 상태를 변경합니다.
 `onOpenChange` 콜백은 다음과 같은 시그니처를 가집니다: `(open: boolean, event?: Event, reason: 'hover' | 'focus') => void`.
 
 ## 역할
 
-`Tooltip`은 `role` prop을 받아 접근성 측면에서 어떻게 작동해야 하는지 변경합니다.
+`Tooltip`은 접근성 측면에서 어떻게 작동해야 하는지를 변경하는 `role` 속성을 허용합니다.
 앵커에 자체 텍스트가 있는 경우 `tooltip` 역할이 사용되어야 하며, 그렇지 않은 경우(예: 아이콘 버튼)에는 `label` 역할이 사용되어야 합니다.
+
+## 지연 그룹
+
+`Provider` 아래에 렌더링된 모든 툴팁은 열림 지연 시간을 공유합니다. 첫 번째 툴팁은 자체 `openDelay`를 지불하므로, 실수로 마우스를 움직여도 아무것도 열리지 않습니다. 그룹이 "따뜻한" 상태일 때 — 즉, 툴팁이 열려 있거나 `skipDelay`보다 적은 시간 전에 닫힌 경우 — 다음으로 마우스를 올린 툴팁은 즉시 열리며, 한 번에 하나 이상의 툴팁이 열리지 않습니다. 이는 툴바 및 아이콘 버튼 행에 적합하며, 각 버튼마다 지연 시간을 기다리는 것이 느리게 느껴질 수 있습니다. 포커스로 인한 열림은 그룹 유무에 관계없이 즉시 이루어지므로 키보드 사용에는 영향을 미치지 않습니다.
+
+`skipDelay`(기본값 300ms)는 `Provider`의 `defaultProps`로 구성됩니다.
+
+```tsx
+import {Provider} from '@gravity-ui/uikit';
+
+<Provider defaultProps={{TooltipDelayGroup: {skipDelay: 500}}}>{/* ... */}</Provider>;
+```
 
 ## 속성
 
@@ -57,11 +65,11 @@ import {Tooltip} from '@gravity-ui/uikit';
 | openDelay     | 호버가 시작된 후 `Tooltip`을 표시하기까지 지연되는 밀리초 수                              |                     `number`                     |     `1000`      |
 | placement     | 앵커에 대한 `Tooltip` 위치                                                       | [`PopupPlacement`](../Popup/README.md#placement) |    `bottom`     |
 | qa            | 테스트에 사용되는 `data-qa` HTML 속성                                                      |                     `string`                     |                 |
-| rest          | 열리기 전에 커서가 얼마나 오랫동안 머물러야 하는지 (밀리초)                                        |                     `number`                     |       `0`       |
+| rest          | 열리기 전에 커서가 대기해야 하는 시간(밀리초)                                        |                     `number`                     |       `0`       |
 | role          | `Tooltip`이 사용되는 역할                                                                  |              `"tooltip"` `"label"`               |   `"tooltip"`   |
 | strategy      | 사용할 CSS `position` 속성 유형                                                       |                `absolute` `fixed`                |   `absolute`    |
 | style         | `style` HTML 속성                                                                          |              `React.CSSProperties`               |                 |
-| trigger       | 열림을 트리거해야 하는 이벤트 유형. 기본값 `all`은 `hover`와 `focus` 모두를 참조합니다. |                `"all"` `"focus"`                 |     `"all"`     |
+| trigger       | 열림을 트리거해야 하는 이벤트 유형. 기본 `all` 값은 `hover`와 `focus` 모두를 참조합니다. |                `"all"` `"focus"`                 |     `"all"`     |
 
 ## CSS API
 

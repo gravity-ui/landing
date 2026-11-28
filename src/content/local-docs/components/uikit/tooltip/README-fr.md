@@ -1,18 +1,14 @@
-<!--GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_0_END
 
-# Tooltip
-
-<!--/GITHUB_BLOCK-->
-
-Une astuce textuelle simple qui utilise son nœud enfant comme ancre. Ce composant n'accepte que du contenu textuel et peut être une excellente alternative à l'attribut `title` du navigateur, grâce à sa petite taille et son délai d'apparition long.
+Une astuce textuelle simple qui utilise son nœud enfant comme ancre. Ce composant n'accepte que du contenu textuel et peut être une excellente alternative à l'attribut `title` du navigateur, grâce à sa petite taille et à son long délai d'apparition.
 
 ## Utilisation
 
 ```tsx
 import {Tooltip} from '@gravity-ui/uikit';
 
-<Tooltip content="Content">
-  <div tabIndex={0}>Anchor</div>
+<Tooltip content="Contenu">
+  <div tabIndex={0}>Ancre</div>
 </Tooltip>;
 ```
 
@@ -26,7 +22,7 @@ Alternativement, vous pouvez passer une fonction comme enfant pour fournir manue
 ```tsx
 import {Tooltip} from '@gravity-ui/uikit';
 
-<Tooltip content="Content">
+<Tooltip content="Contenu">
   {(props, ref) => <MyCustomButton buttonProps={props} buttonRef={ref} />}
 </Tooltip>;
 ```
@@ -40,7 +36,23 @@ Le callback `onOpenChange` a la signature suivante : `(open: boolean, event?: Ev
 ## Rôle
 
 `Tooltip` accepte la propriété `role` qui modifie son comportement en termes d'accessibilité.
-Le rôle `tooltip` doit être utilisé lorsque l'ancre a son propre texte et le rôle `label` sinon (par exemple, dans un bouton icône).
+Le rôle `tooltip` doit être utilisé lorsque l'ancre a son propre texte, et le rôle `label` sinon (par exemple, dans un bouton icône).
+
+## Groupe de délai
+
+Tous les tooltips rendus sous `Provider` partagent le délai d'ouverture. Le premier tooltip paie son propre `openDelay`,
+donc un mouvement de souris accidentel n'ouvre toujours rien. Tant que le groupe est chaud — un tooltip est ouvert ou a été fermé
+il y a moins de `skipDelay` — le tooltip suivant survolé s'ouvre instantanément, et pas plus d'un tooltip n'est ouvert
+à la fois. Cela convient aux barres d'outils et aux rangées de boutons icônes, où attendre le délai sur chaque bouton semble lent.
+L'ouverture par focus est instantanée avec ou sans groupe, donc le clavier n'est pas affecté.
+
+`skipDelay` (300 ms par défaut) est configuré avec `defaultProps` de `Provider` :
+
+```tsx
+import {Provider} from '@gravity-ui/uikit';
+
+<Provider defaultProps={{TooltipDelayGroup: {skipDelay: 500}}}>{/* ... */}</Provider>;
+```
 
 ## Propriétés
 
@@ -48,7 +60,7 @@ Le rôle `tooltip` doit être utilisé lorsque l'ancre a son propre texte et le 
 | :----------- | :---------------------------------------------------------------------------------------------- | :----------------------------------------------: | :------------: |
 | children     | Élément d'ancrage pour le `Tooltip`                                                              |         `React.ReactElement` `Function`          |                |
 | className    | Attribut HTML `class`                                                                           |                     `string`                     |                |
-| closeDelay   | Nombre de ms à retarder la fermeture du `Tooltip` après la fin du survol                         |                     `number`                     |      `0`       |
+| closeDelay   | Nombre de ms pour retarder la fermeture du `Tooltip` après la fin du survol                      |                     `number`                     |      `0`       |
 | container    | Élément DOM auquel le composant est monté via `Portal`                                          |                  `HTMLElement`                   | `document.body` |
 | content      | Contenu qui sera affiché dans le `Tooltip`                                                      |                `React.ReactNode`                 |                |
 | disablePortal | Désactive l'utilisation de `Portal`                                                             |                    `boolean`                     |     `false`     |
@@ -56,14 +68,14 @@ Le rôle `tooltip` doit être utilisé lorsque l'ancre a son propre texte et le 
 | offset       | Décalage du `Tooltip` par rapport à son ancrage                                                 |                     `number`                     |      `4`       |
 | onOpenChange | Callback pour gérer le changement d'état d'ouverture                                            |                    `Function`                    |                |
 | open         | État d'ouverture contrôlé                                                                       |                    `boolean`                     |                |
-| openDelay    | Nombre de ms à retarder l'affichage du `Tooltip` après le début du survol                       |                     `number`                     |     `1000`     |
+| openDelay    | Nombre de ms pour retarder l'affichage du `Tooltip` après le début du survol                    |                     `number`                     |     `1000`     |
 | placement    | Position du `Tooltip` par rapport à son ancrage                                                 | [`PopupPlacement`](../Popup/README.md#placement) |    `bottom`    |
 | qa           | Attribut HTML `data-qa`, utilisé pour les tests                                                 |                     `string`                     |                |
-| rest         | Combien de temps en ms le curseur doit être au repos avant l'ouverture.                          |                     `number`                     |      `0`       |
-| role         | Le rôle pour lequel le `Tooltip` est utilisé                                                    |              `"tooltip"` `"label"`               |   `"tooltip"`  |
-| strategy     | Le type de propriété de position CSS à utiliser.                                                |                `absolute` `fixed`                |   `absolute`   |
+| rest         | Combien de temps en ms le curseur doit être au repos avant l'ouverture.                         |                     `number`                     |      `0`       |
+| role         | Le rôle pour lequel le `Tooltip` est utilisé                                                    |              `"tooltip"` `"label"`               |   `"tooltip"`   |
+| strategy     | Le type de propriété de position CSS à utiliser.                                                |                `absolute` `fixed`                |   `absolute`    |
 | style        | Attribut HTML `style`                                                                           |              `React.CSSProperties`               |                |
-| trigger      | Type d'événement qui doit déclencher l'ouverture. La valeur par défaut `all` fait référence à `hover` et `focus`. |                `"all"` `"focus"`                 |     `"all"`    |
+| trigger      | Type d'événement qui doit déclencher l'ouverture. La valeur par défaut `all` fait référence à `hover` et `focus`. |                `"all"` `"focus"`                 |     `"all"`     |
 
 ## API CSS
 

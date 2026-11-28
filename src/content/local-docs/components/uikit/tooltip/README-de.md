@@ -1,8 +1,4 @@
-<!--GITHUB_BLOCK-->
-
-# Tooltip
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_0_END
 
 Ein einfacher Text-Tipp, der seinen Kindknoten als Anker verwendet. Diese Komponente akzeptiert nur Textinhalt und kann eine ausgezeichnete
 Alternative zum `title`-Attribut des Browsers sein, mit ihrer geringen Größe und der langen Verzögerung beim Erscheinen.
@@ -12,14 +8,14 @@ Alternative zum `title`-Attribut des Browsers sein, mit ihrer geringen Größe u
 ```tsx
 import {Tooltip} from '@gravity-ui/uikit';
 
-<Tooltip content="Content">
-  <div tabIndex={0}>Anchor</div>
+<Tooltip content="Inhalt">
+  <div tabIndex={0}>Anker</div>
 </Tooltip>;
 ```
 
 ## Anker
 
-Damit `Tooltip` funktioniert, sollten Sie ein gültiges `ReactElement` als Kind übergeben, das die `ref`-Eigenschaft für `HTMLElement`
+Damit `Tooltip` funktioniert, müssen Sie ein gültiges `ReactElement` als Kind übergeben, das die `ref`-Eigenschaft für `HTMLElement`
 und andere Eigenschaften für `HTMLElement` akzeptiert.
 
 Alternativ können Sie eine Funktion als Kind übergeben, um `ref` und `props` manuell an Ihre zugrunde liegenden Komponenten zu übergeben:
@@ -27,7 +23,7 @@ Alternativ können Sie eine Funktion als Kind übergeben, um `ref` und `props` m
 ```tsx
 import {Tooltip} from '@gravity-ui/uikit';
 
-<Tooltip content="Content">
+<Tooltip content="Inhalt">
   {(props, ref) => <MyCustomButton buttonProps={props} buttonRef={ref} />}
 </Tooltip>;
 ```
@@ -40,8 +36,22 @@ Der `onOpenChange`-Callback hat die folgende Signatur: `(open: boolean, event?: 
 
 ## Rolle
 
-`Tooltip` akzeptiert die `role`-Eigenschaft, die die Zugänglichkeit beeinflusst.
+`Tooltip` akzeptiert die `role`-Eigenschaft, die seine Zugänglichkeit beeinflusst.
 Die Rolle `tooltip` sollte verwendet werden, wenn der Anker seinen eigenen Text hat, und die Rolle `label` andernfalls (z. B. bei einem Icon-Button).
+
+## Verzögerungsgruppe
+
+Alle Tooltips, die unter `Provider` gerendert werden, teilen sich die Öffnungsverzögerung. Der erste Tooltip zahlt seine eigene `openDelay`,
+sodass eine versehentliche Mausbewegung immer noch nichts öffnet. Solange die Gruppe "warm" ist – ein Tooltip ist geöffnet oder wurde vor weniger als `skipDelay` geschlossen – öffnet sich der nächste angehoverte Tooltip sofort, und es ist nicht mehr als ein Tooltip gleichzeitig geöffnet. Dies eignet sich für Symbolleisten und Reihen von Icon-Buttons, bei denen das Warten auf die Verzögerung bei jedem Button langsam erscheint.
+Das Öffnen per Fokus ist mit oder ohne Gruppe sofort möglich, sodass die Tastatur nicht beeinträchtigt wird.
+
+`skipDelay` (standardmäßig 300 ms) wird mit `defaultProps` von `Provider` konfiguriert:
+
+```tsx
+import {Provider} from '@gravity-ui/uikit';
+
+<Provider defaultProps={{TooltipDelayGroup: {skipDelay: 500}}}>{/* ... */}</Provider>;
+```
 
 ## Eigenschaften
 
@@ -49,20 +59,20 @@ Die Rolle `tooltip` sollte verwendet werden, wenn der Anker seinen eigenen Text 
 | :------------ | :----------------------------------------------------------------------------------------------- | :---------------------------------------------: | :------------: |
 | children      | Anker-Element für den `Tooltip`                                                                |         `React.ReactElement` `Function`          |                |
 | className     | `class` HTML-Attribut                                                                          |                     `string`                     |                |
-| closeDelay    | Anzahl der Millisekunden, die das Ausblenden des `Tooltip` nach dem Ende des Hoverens verzögert werden |                     `number`                     |      `0`       |
-| container     | DOM-Element, an das die Komponente über `Portal` angehängt wird                                  |                  `HTMLElement`                   | `document.body` |
-| content       | Inhalt, der im `Tooltip` angezeigt wird                                                          |                `React.ReactNode`                 |                |
-| disablePortal | Deaktiviert die Verwendung von `Portal`                                                          |                    `boolean`                     |     `false`     |
+| closeDelay    | Anzahl der Millisekunden, die das Ausblenden des `Tooltip` nach Ende des Hover verzögert wird                                 |                     `number`                     |       `0`       |
+| container     | DOM-Element, an das die Komponente über `Portal` angehängt wird                                          |                  `HTMLElement`                   | `document.body` |
+| content       | Inhalt, der im `Tooltip` angezeigt wird                                                     |                `React.ReactNode`                 |                |
+| disablePortal | Deaktiviert die Verwendung von `Portal`                                                                         |                    `boolean`                     |     `false`     |
 | disabled      | Verhindert das Öffnen des `Tooltip`                                                              |                    `boolean`                     |                |
-| offset        | `Tooltip`-Abstand vom Anker                                                                      |                     `number`                     |      `4`       |
-| onOpenChange  | Callback zur Behandlung von Änderungen des Öffnungszustands                                      |                    `Function`                    |                |
-| open          | Gesteuerter Öffnungszustand                                                                      |                    `boolean`                     |                |
-| openDelay     | Anzahl der Millisekunden, die das Anzeigen des `Tooltip` nach Beginn des Hoverens verzögert werden |                     `number`                     |     `1000`      |
-| placement     | Position des `Tooltip` relativ zum Anker                                                         | [`PopupPlacement`](../Popup/README.md#placement) |    `bottom`    |
-| qa            | `data-qa` HTML-Attribut, das zum Testen verwendet wird                                           |                     `string`                     |                |
-| rest          | Wie viel Zeit in ms der Cursor ruhen muss, bevor er geöffnet wird.                                |                     `number`                     |      `0`       |
-| role          | Die Rolle, für die der `Tooltip` verwendet wird                                                  |              `"tooltip"` `"label"`               |   `"tooltip"`   |
-| strategy      | Die Art der CSS-Positionseigenschaft, die verwendet werden soll.                                  |                `absolute` `fixed`                |   `absolute`    |
+| offset        | `Tooltip`-Abstand vom Anker                                                                |                     `number`                     |       `4`       |
+| onOpenChange  | Callback zur Behandlung von Änderungen des Öffnungszustands                                                            |                    `Function`                    |                |
+| open          | Gesteuerter Öffnungszustand                                                                           |                    `boolean`                     |                |
+| openDelay     | Anzahl der Millisekunden, die das Anzeigen des `Tooltip` nach Beginn des Hover verzögert wird                              |                     `number`                     |     `1000`      |
+| placement     | `Tooltip`-Position relativ zum Anker                                                       | [`PopupPlacement`](../Popup/README.md#placement) |    `bottom`     |
+| qa            | `data-qa` HTML-Attribut, das zum Testen verwendet wird                                                      |                     `string`                     |                |
+| rest          | Wie viel Zeit in ms der Cursor ruhen muss, bevor er geöffnet wird.                                        |                     `number`                     |       `0`       |
+| role          | Die Rolle, für die der `Tooltip` verwendet wird                                                                  |              `"tooltip"` `"label"`               |   `"tooltip"`   |
+| strategy      | Der Typ der CSS-Position-Eigenschaft, die verwendet werden soll.                                                       |                `absolute` `fixed`                |   `absolute`    |
 | style         | `style` HTML-Attribut                                                                          |              `React.CSSProperties`               |                |
 | trigger       | Ereignistyp, der das Öffnen auslösen soll. Der Standardwert `all` bezieht sich sowohl auf `hover` als auch auf `focus`. |                `"all"` `"focus"`                 |     `"all"`     |
 
@@ -70,8 +80,8 @@ Die Rolle `tooltip` sollte verwendet werden, wenn der Anker seinen eigenen Text 
 
 | Name                           | Beschreibung      |
 | :----------------------------- | :---------------- |
-| `--g-tooltip-text-color`       | Textfarbe         |
-| `--g-tooltip-background-color` | Hintergrundfarbe  |
-| `--g-tooltip-padding`          | Innenabstand      |
-| `--g-tooltip-border-radius`    | Radius der Ecken  |
-| `--g-tooltip-box-shadow`       | Schatten          |
+| `--g-tooltip-text-color`       | Textfarbe       |
+| `--g-tooltip-background-color` | Hintergrundfarbe |
+| `--g-tooltip-padding`          | Innenabstand          |
+| `--g-tooltip-border-radius`    | Radius der Ecken    |
+| `--g-tooltip-box-shadow`       | Schatten           |
