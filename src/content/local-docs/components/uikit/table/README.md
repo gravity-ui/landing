@@ -7,18 +7,23 @@
 A `Table` allows selecting and sorting rows, as well as performing actions on a row.
 
 ```jsx
-import {Table} from '@gravity-ui/uikit';
+import {Table} from '@gravity-ui/uikit/legacy';
 ```
+
+This component is legacy: new features go to [`@gravity-ui/table`](https://github.com/gravity-ui/table), see the
+[migration guide to v8](../../../../docs/migration-to-v8.md#table-and-tablecolumnsetup). Like everything in `@gravity-ui/uikit/legacy`, it needs the optional peer dependencies
+`@hello-pangea/dnd`, `react-window` and `react-virtualized-auto-sizer` installed next to the package: the entry point
+loads all of them, whatever you import from it.
 
 <!--GITHUB_BLOCK-->
 
 Additional features are enabled through HOCs:
 
-- [withTableActions](#usage-with-hoc-withtableactions)
-- [withTableCopy](#usage-with-hoc-withtablecopy)
-- [withTableSelection](#usage-with-hoc-withtableselection)
-- [withTableSettings](#usage-with-hoc-withtablesettings)
-- [withTableSorting](#usage-with-hoc-withtablesorting)
+- [withTableActions](#using-table-with-the-withtableactions-hoc)
+- [withTableCopy](#using-table-with-the-withtablecopy-hoc)
+- [withTableSelection](#using-table-with-the-withtableselection-hoc)
+- [withTableSettings](#using-table-with-the-withtablesettings-hoc)
+- [withTableSorting](#using-table-with-the-withtablesorting-hoc)
 
 <!--/GITHUB_BLOCK-->
 
@@ -114,7 +119,7 @@ type TableActionConfig = TableAction | TableActionGroup;
 ### Example
 
 ```jsx
-import {Table, withTableActions} from '@gravity-ui/uikit';
+import {Table, withTableActions} from '@gravity-ui/uikit/legacy';
 
 const MyTable = withTableActions(Table);
 const data = [
@@ -140,7 +145,7 @@ const table = <MyTable data={data} columns={columns} getRowActions={getRowAction
 ```
 
 ```jsx
-import {Table, withTableActions, RenderRowActionsProps} from '@gravity-ui/uikit';
+import {Table, withTableActions, RenderRowActionsProps} from '@gravity-ui/uikit/legacy';
 
 const MyTable = withTableActions(Table);
 type Item = {id: number; text: string};
@@ -177,7 +182,7 @@ This HOC enables copying the contents of a cell or any other text.
 ### Example
 
 ```jsx
-import {Table, withTableCopy} from '@gravity-ui/uikit';
+import {Table, withTableCopy} from '@gravity-ui/uikit/legacy';
 
 const MyTable = withTableCopy(Table);
 const data = [
@@ -206,7 +211,7 @@ This HOC enables selecting table rows.
 ### Example
 
 ```jsx
-import {Table, withTableSelection} from '@gravity-ui/uikit';
+import {Table, withTableSelection} from '@gravity-ui/uikit/legacy';
 
 const MyTable = withTableSelection(Table);
 const data = [
@@ -236,7 +241,7 @@ function SelectionTable() {
 This HOC enables features for table column settings. You can use it in two ways:
 
 ```jsx
-import {Table, withTableSettings} from './withTableSettings';
+import {Table, withTableSettings} from '@gravity-ui/uikit/legacy';
 
 // No options passed
 const MyTable1 = withTableSettings(Table);
@@ -292,7 +297,7 @@ type RenderControls = (params: {
 ### Example
 
 ```jsx
-import {Table, withTableSettings} from '@gravity-ui/uikit';
+import {Table, withTableSettings} from '@gravity-ui/uikit/legacy';
 
 const MyTable = withTableSettings({width: 100, sortable: false})(Table);
 const data = [
@@ -318,7 +323,7 @@ function SelectionTable() {
         return Promise.resolve();
       }}
       renderControls={({DefaultApplyButton, onApply}) => (
-        <Flex gapRow="1" direction="column">
+        <Flex rowGap="spacing-1" direction="column">
           <Button
             view="outlined-warning"
             onClick={() => {
@@ -349,11 +354,12 @@ This HOC enables column sorting.
 
 ### Properties
 
-| Name              | Description                                         |                 Type                  |
-| :---------------- | :-------------------------------------------------- | :-----------------------------------: |
-| defaultSortState  | Default sorting state for an uncontrolled component |           `TableSortState`            |
-| sortState         | Sorting state                                       |           `TableSortState`            |
-| onSortStateChange | Sorting state change handle                         | `(sortState: TableSortState) => void` |
+| Name               | Description                                                                                |                 Type                  |
+| :----------------- | :----------------------------------------------------------------------------------------- | :-----------------------------------: |
+| defaultSortState   | Default sorting state for an uncontrolled component                                        |           `TableSortState`            |
+| sortState          | Sorting state                                                                              |           `TableSortState`            |
+| onSortStateChange  | Sorting state change handle                                                                | `(sortState: TableSortState) => void` |
+| disableDataSorting | Disables data sorting. Default is `true` if `sortState` and `onSortStateChange` are passed |               `boolean`               |
 
 If the `sortState` and `onSortStateChange` properties are missing, the sorting state is stored in the component itself.
 
@@ -369,7 +375,7 @@ type TableSortState = Array<{
 ### Example
 
 ```jsx
-import {Table, withTableSorting} from '@gravity-ui/uikit';
+import {Table, withTableSorting} from '@gravity-ui/uikit/legacy';
 
 const MyTable = withTableSorting(Table);
 const data = [

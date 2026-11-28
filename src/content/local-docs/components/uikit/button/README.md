@@ -133,7 +133,7 @@ SANDBOX-->
 
 ### Contrast
 
-The `normal-contrast`, `outline-contrast`, and `flat-contrast` buttons highlight actions against complex background, e.g., in a banner, or against an inverse background.
+`contrast` is dark in the light theme and light in the dark theme. `contrast-inverted` reverses those colors. `contrast-light` stays light and `contrast-dark` stays dark in both themes.
 
 <!--SANDBOX
 import {Button} from '@gravity-ui/uikit'
@@ -150,9 +150,10 @@ const containerStyle: CSSProperties = {
 export default function () {
     return (
         <div style={containerStyle}>
-            <Button view="normal-contrast" size="l">Normal Contrast</Button>
-            <Button view="outlined-contrast" size="l">Outlined Contrast</Button>
-            <Button view="flat-contrast" size="l">Flat Contrast</Button>
+            <Button view="contrast" size="l">Contrast</Button>
+            <Button view="contrast-inverted" size="l">Contrast Inverted</Button>
+            <Button view="contrast-light" size="l">Contrast Light</Button>
+            <Button view="contrast-dark" size="l">Contrast Dark</Button>
         </div>
     )
 }
@@ -161,16 +162,26 @@ SANDBOX-->
 <!--GITHUB_BLOCK-->
 
 ```tsx
-<Button view="normal-contrast" size="l">Normal Contrast</Button>
-<Button view="outlined-contrast" size="l">Outlined Contrast</Button>
-<Button view="flat-contrast" size="l">Flat Contrast</Button>
+<Button view="contrast" size="l">Contrast</Button>
+<Button view="contrast-inverted" size="l">Contrast Inverted</Button>
+<Button view="contrast-light" size="l">Contrast Light</Button>
+<Button view="contrast-dark" size="l">Contrast Dark</Button>
 ```
 
 <!--/GITHUB_BLOCK-->
 
 ## Icons
 
-To add an icon to a `Button`, use the [`Icon`](../Icon) component, which is a special wrapper for SVGs.
+To add an icon to a `Button`, use the [`Icon`](../Icon) component, which is a special wrapper for SVGs. The icon size is selected automatically according to the `Button` size. Set the `Icon` `size`, `width`, or `height` explicitly to override it.
+
+To size a custom icon according to the `Button` size, use the `Button.Icon` render function:
+
+```tsx
+<Button size="l">
+  <Button.Icon>{({size}) => <CustomIcon size={size} />}</Button.Icon>
+  Action
+</Button>
+```
 
 <!--SANDBOX
 import {Gear} from '@gravity-ui/icons';
@@ -180,20 +191,20 @@ export default function () {
     return (
         <>
             <Button view="outlined" size="l">
-                <Icon data={Gear} size={18} />
+                <Icon data={Gear} />
                 Start
             </Button>
             <Button view="outlined" size="l">
                 End
-                <Icon data={Gear} size={18} />
+                <Icon data={Gear} />
             </Button>
             <Button view="outlined" size="l">
-                <Icon data={Gear} size={18} />
+                <Icon data={Gear} />
                 Both
-                <Icon data={Gear} size={18} />
+                <Icon data={Gear} />
             </Button>
             <Button view="outlined" size="l">
-                <Icon data={Gear} size={18} />
+                <Icon data={Gear} />
             </Button>
         </>
     );
@@ -204,21 +215,21 @@ SANDBOX-->
 
 ```tsx
 <Button view="outlined" size="l">
-    <Icon data={Gear} size={18} />
+    <Icon data={Gear} />
     Start
 </Button>
 <Button view="outlined" size="l">
     End
-    <Icon data={Gear} size={18} />
+    <Icon data={Gear} />
 </Button>
 <Button view="outlined" size="l">
-    <Icon data={Gear} size={18} />
+    <Icon data={Gear} />
     Both
-    <Icon data={Gear} size={18} />
+    <Icon data={Gear} />
 </Button>
 <Button view="outlined" size="l">
     No text:
-    <Icon data={Gear} size={18} />
+    <Icon data={Gear} />
 </Button>
 ```
 

@@ -206,7 +206,7 @@ import {Label} from '@gravity-ui/uikit';
 export default function () {
     return (
         <>
-            <Label size="xxs">XXS size</Label>
+            <Label size="2xs">2XS size</Label>
             <Label size="xs">XS size</Label>
             <Label size="s">S size</Label>
             <Label size="m">M size</Label>
@@ -218,7 +218,7 @@ SANDBOX-->
 <!--GITHUB_BLOCK-->
 
 ```tsx
-<Label size="xxs">XXS size</Label>
+<Label size="2xs">2XS size</Label>
 <Label size="xs">XS size</Label>
 <Label size="s">S size</Label>
 <Label size="m">M size</Label>
@@ -228,24 +228,24 @@ SANDBOX-->
 
 ## Properties
 
-| Name             | Description                                     |                  Type                   |   Default   |
-| :--------------- | :---------------------------------------------- | :-------------------------------------: | :---------: |
-| children         | Content                                         |            `React.ReactNode`            |             |
-| className        | `class` HTML attribute                          |                `string`                 |             |
-| closeButtonLabel | `aria-label` of the close button                |                `string`                 |             |
-| copyButtonLabel  | `aria-label` of the copy button                 |                `string`                 |             |
-| copyText         | Text to copy                                    |                `string`                 |             |
-| disabled         | Disabled state                                  |                `boolean`                |             |
-| icon             | Label icon (on the left)                        |            `React.ReactNode`            |             |
-| interactive      | Enables hover effect                            |                `boolean`                |             |
-| loading          | Loading state                                   |                `boolean`                |   `false`   |
-| onClick          | `click` event handler                           |               `Function`                |             |
-| onCloseClick     | Close button `click` event handler              |               `Function`                |             |
-| onCopy           | `copy` event handler                            |               `Function`                |             |
-| qa               | `data-qa` HTML attribute, used for testing      |                `string`                 |             |
-| size             | Label size                                      |       `"xxs"` `"xs"` `"s"` `"m"`        |   `"xs"`    |
-| theme            | Label theme                                     |                `string`                 | `"normal"`  |
-| title            | `title` HTML attribute                          |                `string`                 |             |
-| type             | Label type                                      | `"default"` `"copy"` `"close"` `"info"` | `"default"` |
-| value            | Label value (displayed as `"children : value"`) |            `React.ReactNode`            |             |
-| width            | Controls how Label uses parent's space          |                `"auto"`                 |             |
+| Name             | Description                                                                    |                  Type                   |   Default   |
+| :--------------- | :----------------------------------------------------------------------------- | :-------------------------------------: | :---------: |
+| children         | Content                                                                        |            `React.ReactNode`            |             |
+| className        | `class` HTML attribute                                                         |                `string`                 |             |
+| closeButtonLabel | `aria-label` of the close button                                               |                `string`                 |             |
+| copyButtonLabel  | `aria-label` of the copy button                                                |                `string`                 |             |
+| copyText         | Text to copy                                                                   |                `string`                 |             |
+| disabled         | Disabled state                                                                 |                `boolean`                |             |
+| icon             | Label icon (on the left)                                                       |            `React.ReactNode`            |             |
+| interactive      | Enables hover effect. Note: cannot be turned off for `copy` and `info` labels. |                `boolean`                |             |
+| loading          | Loading state                                                                  |                `boolean`                |   `false`   |
+| onClick          | `click` event handler                                                          |               `Function`                |             |
+| onCloseClick     | Close button `click` event handler                                             |               `Function`                |             |
+| onCopy           | `copy` event handler                                                           |               `Function`                |             |
+| qa               | `data-qa` HTML attribute, used for testing                                     |                `string`                 |             |
+| size             | Label size                                                                     |       `"2xs"` `"xs"` `"s"` `"m"`        |   `"xs"`    |
+| theme            | Label theme                                                                    |                `string`                 | `"normal"`  |
+| title            | `title` HTML attribute                                                         |                `string`                 |             |
+| type             | Label type                                                                     | `"default"` `"copy"` `"close"` `"info"` | `"default"` |
+| value            | Label value (displayed as `"children : value"`)                                |            `React.ReactNode`            |             |
+| width            | Controls how Label uses parent's space                                         |                `"auto"`                 |             |

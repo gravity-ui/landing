@@ -7,12 +7,12 @@
 The dropdown menu component provides item grouping, submenus, and a customizable toggle. The dropdown menu items are configured with the `items` property. By default, the menu toggle is a button with the ellipsis icon (**⋯**), which can be overridden with the `renderSwitcher` property.
 
 ```tsx
-import {DropdownMenu} from '@gravity-ui/uikit';
+import {DropdownMenu} from '@gravity-ui/uikit/legacy';
 ```
 
 <!--SANDBOX
-import type {DropdownMenuItem} from '@gravity-ui/uikit';
-import {DropdownMenu} from '@gravity-ui/uikit';
+import type {DropdownMenuItem} from '@gravity-ui/uikit/legacy';
+import {DropdownMenu} from '@gravity-ui/uikit/legacy';
 
 const items: DropdownMenuItem[] = [
     {
@@ -56,8 +56,8 @@ SANDBOX-->
 `DropdownMenu` items can be grouped and visually separated from other menu items by introducing arrays of menu items nested into the `items` array.
 
 <!--SANDBOX
-import type {DropdownMenuItemMixed} from '@gravity-ui/uikit';
-import {DropdownMenu} from '@gravity-ui/uikit';
+import type {DropdownMenuItemMixed} from '@gravity-ui/uikit/legacy';
+import {DropdownMenu} from '@gravity-ui/uikit/legacy';
 
 const items: DropdownMenuItemMixed[] = [
     [
@@ -122,12 +122,12 @@ The `items` property on an individual menu item adds nested sub-items to such it
 
 Menu items with submenus get the following additional class names to allow for extra styling:
 
-- `.g-dropdown-menu__menu-item_with-submenu`: For items with more than one nested item.
-- `.g-dropdown-menu__menu-item_active-parent`: For the item whose submenu is currently open.
+- `.g-dropdown-menu-legacy__menu-item_with-submenu`: For items with more than one nested item.
+- `.g-dropdown-menu-legacy__menu-item_active-parent`: For the item whose submenu is currently open.
 
 <!--SANDBOX
-import type {DropdownMenuItem} from '@gravity-ui/uikit';
-import {DropdownMenu} from '@gravity-ui/uikit';
+import type {DropdownMenuItem} from '@gravity-ui/uikit/legacy';
+import {DropdownMenu} from '@gravity-ui/uikit/legacy';
 
 const items: DropdownMenuItem[] = [
     {
@@ -243,8 +243,8 @@ SANDBOX-->
 To configure the menu toggle, use the `renderSwitcher` property. It can be any function that returns a React component (or any `(props: SwitcherProps) => React.ReactNode` in the TypeScript terms, see [`SwitcherProps`](#switcherprops) below). By default, the menu toggle is a button with the ellipsis icon (**⋯**).
 
 <!--SANDBOX
-import type {DropdownMenuItem} from '@gravity-ui/uikit';
-import {DropdownMenu} from '@gravity-ui/uikit';
+import type {DropdownMenuItem} from '@gravity-ui/uikit/legacy';
+import {DropdownMenu} from '@gravity-ui/uikit/legacy';
 
 const items: DropdownMenuItem[] = [
     {
@@ -307,8 +307,9 @@ You can change the menu toggle icon with the `DropdownMenu`'s `renderSwitcher` p
 
 <!--SANDBOX
 import {Bars, Pencil, TrashBin} from '@gravity-ui/icons';
-import type {DropdownMenuItem} from '@gravity-ui/uikit';
-import {Button, DropdownMenu, Icon} from '@gravity-ui/uikit';
+import type {DropdownMenuItem} from '@gravity-ui/uikit/legacy';
+import {Button, Icon} from '@gravity-ui/uikit';
+import {DropdownMenu} from '@gravity-ui/uikit/legacy';
 
 const items: DropdownMenuItem[] = [
     {

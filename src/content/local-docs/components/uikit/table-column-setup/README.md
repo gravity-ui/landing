@@ -7,11 +7,16 @@
 The `TableColumnSetup` component provides a user interface for configuring table column visibility and order. It displays a button that opens a popup with a list of available columns, allowing users to show/hide columns and optionally reorder them via drag and drop.
 
 ```tsx
-import {TableColumnSetup} from '@gravity-ui/uikit';
+import {TableColumnSetup} from '@gravity-ui/uikit/legacy';
 ```
 
+This component is legacy: new features go to [`@gravity-ui/table`](https://github.com/gravity-ui/table), see the
+[migration guide to v8](../../../../docs/migration-to-v8.md#table-and-tablecolumnsetup). Like everything in `@gravity-ui/uikit/legacy`, it needs the optional peer dependencies
+`@hello-pangea/dnd`, `react-window` and `react-virtualized-auto-sizer` installed next to the package: the entry point
+loads all of them, whatever you import from it.
+
 <!--SANDBOX
-import {TableColumnSetup} from '@gravity-ui/uikit';
+import {TableColumnSetup} from '@gravity-ui/uikit/legacy';
 
 const items = [
     {id: 'name', title: 'Name', selected: true, required: true},
@@ -43,7 +48,7 @@ const items = [
 Enable drag and drop functionality to allow users to reorder columns by setting the `sortable` property to `true`.
 
 <!--SANDBOX
-import {TableColumnSetup} from '@gravity-ui/uikit';
+import {TableColumnSetup} from '@gravity-ui/uikit/legacy';
 
 const items = [
     {id: 'name', title: 'Name', selected: true, required: true},
@@ -78,7 +83,7 @@ Control when changes are applied using the `hideApplyButton` property:
 - `false` - Changes are applied only when user clicks the Apply button
 
 <!--SANDBOX
-import {TableColumnSetup} from '@gravity-ui/uikit';
+import {TableColumnSetup} from '@gravity-ui/uikit/legacy';
 
 const items = [
     {id: 'name', title: 'Name', selected: true, required: true},
@@ -114,7 +119,7 @@ SANDBOX-->
 Show the count of selected columns in the switcher button by enabling the `showStatus` property.
 
 <!--SANDBOX
-import {TableColumnSetup} from '@gravity-ui/uikit';
+import {TableColumnSetup} from '@gravity-ui/uikit/legacy';
 
 const items = [
     {id: 'name', title: 'Name', selected: true, required: true},
@@ -144,7 +149,8 @@ SANDBOX-->
 Customize the trigger button using the `renderSwitcher` property.
 
 <!--SANDBOX
-import {Button, TableColumnSetup} from '@gravity-ui/uikit';
+import {Button} from '@gravity-ui/uikit';
+import {TableColumnSetup} from '@gravity-ui/uikit/legacy';
 
 const items = [
     {id: 'name', title: 'Name', selected: true, required: true},
@@ -194,7 +200,7 @@ SANDBOX-->
 | hideApplyButton | When to apply changes: immediately or manually via Apply button |                          `boolean`                          | `false` |
 | showStatus      | Shows selected/total columns count in switcher button           |                          `boolean`                          | `false` |
 | popupWidth      | Width of the popup                                              |                      `number \| 'fit'`                      |         |
-| popupPlacement  | Popup placement relative to trigger                             |      [`PopupPlacement`](../Popup/README.md#properties)      |         |
+| popupPlacement  | Popup placement relative to trigger                             |    [`PopupPlacement`](../../Popup/README.md#properties)     |         |
 | renderSwitcher  | Custom render function for the switcher button                  | `(props: SwitcherProps) => React.ReactElement \| undefined` |         |
 | switcher        | **Deprecated.** Use `renderSwitcher` instead                    |              `React.ReactElement \| undefined`              |         |
 | getItemTitle    | Function to get item title                                      |      `(item: TableColumnSetupItem) => React.ReactNode`      |         |
