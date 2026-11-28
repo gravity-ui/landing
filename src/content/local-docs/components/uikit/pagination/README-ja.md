@@ -1,16 +1,12 @@
-<!--GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_0_END
 
-# Pagination
-
-<!--/GITHUB_BLOCK-->
-
-`Pagination` は、ページネーションコントロール（ページ番号、前へ/次へボタン、およびオプションのページサイズセレクター）をレンダリングします。これは、長いリストやテーブルをページ分割するために使用されます。
+`Pagination` は、ページネーションコントロール（ページ番号、前へ/次へボタン、オプションのページサイズセレクター）を表示します。これは、長いリストやテーブルをページ分割するために使用されます。
 
 ```tsx
 import {Pagination} from '@gravity-ui/uikit';
 ```
 
-## 使用方法
+## Usage
 
 ```jsx
 import {Pagination, PaginationProps} from '@gravity-ui/uikit';
@@ -23,13 +19,13 @@ const handleUpdate: PaginationProps['onUpdate'] = (page, pageSize) =>
 const pagination = <Pagination page={1} pageSize={100} total={1000} onUpdate={handleUpdate} />;
 ```
 
-## カスタムコンポーネント
+## Custom component
 
-`pageComponent` プロパティを使用して、クリック可能なページネーションアイテム（ナビゲーションボタンとページボタン）のルート要素をオーバーライドできます。`pageComponent="a"` を渡し、`getPageProps` から `href` を返すことで、通常のリンクを使用できます。ルーター統合の場合は、`Link` のようなルーター対応コンポーネントを渡し、`to` のようなルーター固有のプロパティを返します。
+`pageComponent` プロパティを使用して、クリック可能なページネーションアイテム（ナビゲーションボタンとページボタン）のルート要素をオーバーライドできます。`pageComponent="a"` を渡し、`getPageProps` から `href` を返すと、通常のリンクを使用できます。ルーター統合の場合は、`Link` のようなルーター対応コンポーネントを渡し、`to` のようなルーター固有のプロパティを返します。
 
-`getPageProps` は、各クリック可能なアイテム（ページボタンとナビゲーションボタン）に対して呼び出されます。省略記号、"ページ表示" インジケーター、シンプルな（現在の）ページアイテム（モバイルレイアウト）、または無効なナビゲーションボタン（これらは常に不活性なネイティブ `<button disabled>` のままになり、キーボード経由でもアクティブ化できません）には呼び出されません。Pagination によって管理されるプロパティ（`onClick`、`className`、`size`、`view`、`selected`、`disabled`、`qa`、`aria-current`、`extraProps`、`children`）は、`getPageProps` から返された値よりも優先されます。
+`getPageProps` は、各クリック可能なアイテム（ページボタンとナビゲーションボタン）に対して呼び出されます。省略記号、"page of" インジケーター、シンプルな（現在の）ページアイテム（モバイルレイアウト）、または無効なナビゲーションボタン（これらは常に不活性なネイティブ `<button disabled>` のままなので、キーボード経由でもアクティブ化できません）には呼び出されません。Pagination によって管理されるプロパティ（`onClick`、`className`、`size`、`view`、`selected`、`disabled`、`qa`、`aria-current`、`children`）は、`getPageProps` から返された値よりも優先されます。
 
-### 通常のリンク (`pageComponent="a"`)
+### Regular links (`pageComponent="a"`)
 
 ```jsx
 import {Pagination} from '@gravity-ui/uikit';
@@ -55,7 +51,7 @@ const pagination = (
 );
 ```
 
-### ルーターリンク（例: `react-router`）
+### Router links (e.g. `react-router`)
 
 ```jsx
 import {Pagination} from '@gravity-ui/uikit';
@@ -84,20 +80,21 @@ const pagination = (
 );
 ```
 
-## プロパティ
+## Properties
 
-| 名前            | 説明                                                                                                                                                             |            型             |   デフォルト    |
-| :-------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-----------------------: | :-----------: |
-| className       | `class` HTML 属性                                                                                                                                                |          `string`           |               |
-| compact         | `First`、`Previous`、`Next` ボタンのタイトルを非表示にします。モバイルバージョンでは常に `true` に設定されます。                                                                                             |          `boolean`          |    `true`    |
-| onUpdate        | ページ番号または `pageSize` が変更されたときに呼び出されます                                                                                                                             |         `Function`          |               |
-| size            | ページネーションアイテムのサイズ。デフォルトでは、モバイルバージョンでは `l`、デスクトップバージョンでは `m` です                                                                                                                               |          `string`           |               |
-| page            | 現在のページ番号                                                                                                                                                 |          `number`           |               |
-| pageSize        | 1 ページあたりのデータアイテム数                                                                                                                                 |          `number`           |               |
-| pageSizeOptions | `sizeChanger` のオプションを指定できます                                                                                                                             |         `number[]`          |               |
-| total           | データアイテムの総数                                                                                                                                             |          `number`           |               |
-| showInput       | ページに直接移動するための入力を表示します                                                                                                                                         |          `boolean`          |   `false`    |
-| showPages       | ページ番号を表示します                                                                                                                                           |          `boolean`          |    `true`    |
-| qa              | テストに使用される `data-qa` HTML 属性                                                                                                                             |          `string`           |               |
-| view            | ボタンとコントロールの外観を設定します。モバイルでのページネーション入力の外観に影響します。                                                                                                                             |   `"outlined" \| "clear"`   | `"outlined"` |
-| pageComponent   | クリック可能なページネーションアイテム（ナビゲーションおよびページボタン）のルート要素をオーバーライドします。通常のリンクには `"a"` を、ルーター対応コンポーネントにはルーター対応コンポーネントを使用します。
+| 名前            | 説明                                                                                                                                      |            型             |   デフォルト    |
+| :-------------- | :----------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------: | :----------: |
+| className       | `class` HTML属性                                                                                                                           |          `string`           |              |
+| compact         | `First`、`Previous`、`Next` ボタンのタイトルを非表示にします。モバイルバージョンでは常に `true` に設定されます。                                         |          `boolean`          |    `true`    |
+| onUpdate        | ページ番号または `pageSize` が変更されたときに呼び出されます                                                                                             |         `Function`          |              |
+| size            | ページネーションアイテムのサイズ。デフォルトでは、モバイルバージョンでは `l`、デスクトップバージョンでは `m` です                                         |          `string`           |              |
+| page            | 現在のページ番号                                                                                                                              |          `number`           |              |
+| pageSize        | 1ページあたりのデータアイテム数                                                                                                                    |          `number`           |              |
+| pageSizeOptions | `sizeChanger` のオプションを指定できます                                                                                                  |         `number[]`          |              |
+| total           | データアイテムの総数                                                                                                                       |          `number`           |              |
+| showInput       | ページに直接移動するための入力を表示します                                                                                                        |          `boolean`          |   `false`    |
+| showPages       | ページ番号を表示します                                                                                                                             |          `boolean`          |    `true`    |
+| qa              | テストに使用される `data-qa` HTML属性                                                                                                       |          `string`           |              |
+| view            | ボタンとコントロールの外観を設定します。モバイルでのページネーション入力の外観に影響します。                                                               |   `"outlined" \| "clear"`   | `"outlined"` |
+| pageComponent   | クリック可能なページネーションアイテム（ナビゲーションおよびページボタン）のルート要素をオーバーライドします。通常のリンクには `"a"` を、ルーター対応コンポーネントにはそれを使用します |  `PaginationPageComponent`  |              |
+| getPageProps    | クリック可能な各アイテムに追加のプロップを返します（例：`"a"` の場合は `href`、ルーターの `Link` の場合は `to`）。`pageComponent` が設定されている場合にのみ適用されます             | `PaginationPagePropsGetter` |              |
