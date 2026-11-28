@@ -1,14 +1,11 @@
-<!--GITHUB_BLOCK-->
-
-# Select
-
-<!--/GITHUB_BLOCK-->
-
-`Select` ist eine Steuerung, die eine Liste von Optionen bereitstellt, aus denen ein Benutzer auswählen kann.
+`Select` ist eine Steuereinheit, die eine Liste von Optionen bereitstellt, aus denen ein Benutzer auswählen kann.
 
 ```tsx
 import {Select} from '@gravity-ui/uikit';
 ```
+
+> [!NOTE]
+> In v8 werden die Optionen von der neuen Liste gezeichnet. Was sich für den Verbraucher geändert hat, ist im [Migrationsleitfaden](https://github.com/gravity-ui/uikit/blob/main/docs/migration-select-v8.md) gesammelt.
 
 ## Optionen
 
@@ -16,1035 +13,321 @@ Optionen zur Auswahl.
 
 ### Optionen definieren
 
-Sie können Optionen als Array von Objekten oder als Kinder einer Komponente definieren. Der erste Ansatz ist nützlich für Fälle, in denen Optionen eine komplexe Vorbereitung und möglicherweise eine Zwischenspeicherung erfordern. Der zweite ist praktisch, wenn es wenige Optionen gibt und ihre Konfiguration keine komplexen Berechnungen erfordert.
+Sie können Optionen als Array von Objekten oder als Kinder einer Komponente definieren. Der erste Ansatz ist nützlich für Fälle, in denen Optionen eine komplexe Vorbereitung und möglicherweise eine Speicherung erfordern. Der zweite ist praktisch, wenn es wenige Optionen gibt und ihre Konfiguration keine komplexen Berechnungen erfordert.
+
+In einer React Server Component sind `Select.Option` und `Select.OptionGroup` nicht erreichbar: Verwenden Sie stattdessen die benannten `SelectOption` und `SelectOptionGroup`. Ihre Props-Typen sind `SelectOptionProps` und `SelectOptionGroupProps`.
 
 #### Flache Liste
 
-<!--SANDBOX
-import {Flex, Select} from '@gravity-ui/uikit';
+GRAVITY_TRANSLATION_BLOCK_1_END
 
-const options = [
-    {value: 'val_1', content: 'Value 1'},
-    {value: 'val_2', content: 'Value 2'},
-    {value: 'val_3', content: 'Value 3'},
-    {value: 'val_4', content: 'Value 4'},
-];
+GRAVITY_TRANSLATION_BLOCK_2_END
 
-export default function () {
-    return (
-        <>
-            <Flex gap={1} alignItems="center">
-                Array of objects
-                <Select placeholder="value" options={options} />
-            </Flex>
-            <Flex gap={1} alignItems="center">
-                Child nodes
-                <Select placeholder="value">
-                    <Select.Option value="val_1">Value 1</Select.Option>
-                    <Select.Option value="val_2">Value 2</Select.Option>
-                    <Select.Option value="val_3">Value 3</Select.Option>
-                    <Select.Option value="val_4">Value 4</Select.Option>
-                </Select>
-            </Flex>
-        </>
-    );
-}
-SANDBOX-->
+#### Der Text einer Option
 
-<!--GITHUB_BLOCK-->
+Der Text einer Option ist das, was der Trigger für eine ausgewählte Option anzeigt, womit der Filter übereinstimmt und wonach die Suche nach den ersten Buchstaben sucht. Standardmäßig ist dies der Inhalt der Option, wenn dieser eine Zeichenkette oder eine Zahl ist, ihre Kinder, wenn diese es sind, und andernfalls ihr `value` — eine Option, die etwas anderes als eine einfache Zeichenkette rendert, benötigt `getOptionText`, andernfalls wird sie nach ihrem Wert gesucht und benannt.
 
-```tsx
-// Array of objects
-<Select
-  placeholder="value"
-  options={[
-    {value: 'val_1', content: 'Value 1'},
-    {value: 'val_2', content: 'Value 2'},
-    {value: 'val_3', content: 'Value 3'},
-    {value: 'val_4', content: 'Value 4'},
-  ]}
-/>
-// Child nodes
-<Select placeholder="value">
-  <Select.Option value="val_1">Value 1</Select.Option>
-  <Select.Option value="val_2">Value 2</Select.Option>
-  <Select.Option value="val_3">Value 3</Select.Option>
-  <Select.Option value="val_4">Value 4</Select.Option>
-</Select>
-```
+GRAVITY_TRANSLATION_BLOCK_3_END
 
-<!--/GITHUB_BLOCK-->
+`useSelectOptions` nimmt dieselbe Eigenschaft: übergeben Sie sie auch dort, wenn die Optionen außerhalb der Komponente gefiltert werden. Definieren Sie die Funktion außerhalb der Komponente oder memoizen Sie sie — sie nimmt an der Memoization der Liste teil, und eine neue Funktion bei jedem Rendern baut die Zeilen neu auf.
+
+`getOptionText` ersetzt die `text`-Eigenschaft einer Option, die nicht mehr vorhanden ist: Der Text einer Option wird abgefragt und nicht gespeichert, sodass eine Funktion jede Option abdeckt, anstatt ein Feld, das auf jeder von ihnen wiederholt wird.
+
+Der `value` einer Option identifiziert ihre Zeile, daher müssen die Werte über die gesamte Liste, einschließlich Gruppen, eindeutig sein (für einen [nicht-Zeichenkettenwert](#non-string-values) — seinen Schlüssel). Die DOM `id` der Zeile wird daraus abgeleitet, und diese ID ist das, worauf `aria-activedescendant` des Triggers zeigt — lesen Sie sie von dort, anstatt sie von Hand zu erstellen: Das Escaping eines Wertes gehört zur Liste und ist kein Vertrag.
 
 #### Gruppierte Liste
 
-<!--SANDBOX
-import {Flex, Select} from '@gravity-ui/uikit';
+Eine Gruppenüberschrift ist eine Beschriftung und keine Option: Sie trägt `role="presentation"`, bleibt aus dem Tastatur-Walk und aus der Zählung von `role="option"`-Zeilen heraus und beschreibt die darunter liegenden Optionen über `aria-describedby`. Eine Gruppe, deren `label` leer ist, zeichnet eine Trennlinie anstelle einer Überschrift — da sie die erste Zeile der Liste ist, hat sie nichts zu trennen und nimmt keinen Platz ein. Dies ist die Standarddarstellung einer Gruppe: `renderOptionGroup` und `getOptionGroupHeight` werden zuerst abgefragt und rendern und messen, was sie wollen, mit oder ohne leeres Label.
 
-const groupedOptions = [
-    {
-        label: 'Group 1',
-        options: [
-            {value: 'val_1', content: 'Value 1'},
-            {value: 'val_2', content: 'Value 2'},
-        ],
-    },
-    {
-        label: 'Group 2',
-        options: [
-            {value: 'val_3', content: 'Value 3'},
-            {value: 'val_4', content: 'Value 4'},
-        ],
-    },
-];
+GRAVITY_TRANSLATION_BLOCK_4_END
 
-export default function () {
-    return (
-        <>
-            <Flex gap={1} alignItems="center">
-                Array of objects
-                <Select placeholder="value" options={groupedOptions} />
-            </Flex>
-            <Flex gap={1} alignItems="center">
-                Child nodes
-                <Select placeholder="value">
-                    <Select.OptionGroup label="Group 1">
-                        <Select.Option value="val_1" content="Value 1" />
-                        <Select.Option value="val_2" content="Value 2" />
-                    </Select.OptionGroup>
-                    <Select.OptionGroup label="Group 2">
-                        <Select.Option value="val_3" content="Value 3" />
-                        <Select.Option value="val_4" content="Value 4" />
-                    </Select.OptionGroup>
-                </Select>
-            </Flex>
-        </>
-    );
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-// Array of objects
-<Select
-  placeholder="value"
-  options={[
-    {
-      label: 'Group 1',
-      options: [
-        {value: 'val_1', content: 'Value 1'},
-        {value: 'val_2', content: 'Value 2'},
-      ],
-    },
-    {
-      label: 'Group 2',
-      options: [
-        {value: 'val_3', content: 'Value 3'},
-        {value: 'val_4', content: 'Value 4'},
-      ],
-    },
-  ]}
-/>
-// Child nodes
-<Select placeholder="value">
-  <Select.OptionGroup label="Group 1">
-    <Select.Option value="val_1" content="Value 1" />
-    <Select.Option value="val_2" content="Value 2" />
-  </Select.OptionGroup>
-  <Select.OptionGroup label="Group 2">
-    <Select.Option value="val_3" content="Value 3" />
-    <Select.Option value="val_4" content="Value 4" />
-  </Select.OptionGroup>
-</Select>
-```
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_5_END
 
 ### Daten in Optionen speichern
 
-Sie können eindeutige Daten in jeder Option definieren und speichern, indem Sie die Eigenschaft `option.data` verwenden. Dies kann nützlich sein, wenn Sie die Daten beim Verwenden des `onUpdate`-Callbacks anreichern müssen oder beispielsweise beim Rendern Ihrer Optionen mit `renderOption`.
+Sie können eindeutige Daten in jeder Option definieren und speichern, indem Sie die Eigenschaft `option.data` verwenden. Dies kann nützlich sein, wenn Sie Daten beim Verwenden des `onUpdate`-Callbacks anreichern müssen oder beispielsweise beim Rendern Ihrer Optionen mit `renderOption`.
+
+### Nicht-Zeichenkettenwerte
+
+Der Wert einer Option kann von beliebigem Typ sein: Der Typ von `value`, `defaultValue` und `onUpdate` folgt den Optionen. Select kennt einen Wert anhand eines Zeichenketten-Schlüssels — die ID seiner Zeile, das Feld eines Formulars und der Vergleich zweier Werte verwenden ihn. Eine Zeichenkette ist ihr eigener Schlüssel, ein anderer primitiver Wert wird mit `String()` in einen umgewandelt, und ein Objekt benötigt `getValueKey`. Werte mit gleichen Schlüsseln sind ein Wert: Ein Objekt aus einer neuen Antwort wählt die Option aus, die es übereinstimmt. Definieren Sie `getValueKey` außerhalb der Komponente oder memoizen Sie es, wie `getOptionText`.
+
+GRAVITY_TRANSLATION_BLOCK_6_END
+
+Ein Objektwert hat keinen eigenen Text: Geben Sie der Option einen Zeichenketten-`content` oder übergeben Sie `getOptionText`. Ein `Select.Option`-Kind nimmt eine Zeichenkette, es sei denn, sein Typ ist benannt: `<Select.Option<unknown, number> value={1}>`; Select selbst nimmt den Typ von `value` oder ein typisiertes `onUpdate={(value: number[]) => …}`. Ein ausgewählter Wert ohne Option wird durch seinen Schlüssel angezeigt; behalten Sie seine Option in `options` oder rendern Sie sie mit `renderSelectedOptions`. Ein Formular sendet Schlüssel, keine Werte. In einem Union-Typ teilen sich `1` und `"1"` einen Schlüssel und sind ein Wert.
+
+### Nullbare Werte
+
+`''`, `null` und `undefined` bedeuten keinen Wert, es sei denn, eine Option deklariert sie. Ohne eine Option hat ein solcher Wert keinen Text, keine Clear-Schaltfläche oder keine Anzahl, ein Formular sendet ihn als `''`, während `value` und `onUpdate` ihn unverändert lassen. `0` und `false` sind immer Werte.
+
+GRAVITY_TRANSLATION_BLOCK_7_END
 
 ## Mehrere Optionen auswählen
 
 Um die Mehrfachauswahl zu aktivieren, verwenden Sie die Eigenschaft `multiple`. Ihr Standardwert ist `false`.
 
-<!--SANDBOX
-import {Select} from '@gravity-ui/uikit';
+GRAVITY_TRANSLATION_BLOCK_8_END
 
-export default function () {
-    return (
-        <Select multiple placeholder="values">
-            <Select.Option value="val_1">Value 1</Select.Option>
-            <Select.Option value="val_2">Value 2</Select.Option>
-            <Select.Option value="val_3">Value 3</Select.Option>
-            <Select.Option value="val_4">Value 4</Select.Option>
-        </Select>
-    );
-}
-SANDBOX-->
+GRAVITY_TRANSLATION_BLOCK_9_END
 
-<!--GITHUB_BLOCK-->
-
-```tsx
-<Select multiple={true} placeholder="values">
-  <Select.Option value="val_1">Value 1</Select.Option>
-  <Select.Option value="val_2">Value 2</Select.Option>
-  <Select.Option value="val_3">Value 3</Select.Option>
-  <Select.Option value="val_4">Value 4</Select.Option>
-</Select>
-```
-
-<!--/GITHUB_BLOCK-->
+Shift+Klick, Shift+↑/↓ und Shift+Leertaste wählen einen Bereich von Optionen aus, von der zuletzt ausgewählten bis zur Zieloption.
 
 ### Zähler
 
-Sie können dem Steuerelement mit der Eigenschaft `hasCounter` einen Zähler der ausgewählten Elemente hinzufügen.
+Sie können dem Komponenten mit der Eigenschaft `hasCounter` einen Zähler der ausgewählten Elemente hinzufügen.
 
-<!--SANDBOX
-import {Select} from '@gravity-ui/uikit';
+GRAVITY_TRANSLATION_BLOCK_10_END
 
-export default function () {
-    return (
-        <Select multiple hasCounter placeholder="values">
-            <Select.Option value="val_1">Value 1</Select.Option>
-            <Select.Option value="val_2">Value 2</Select.Option>
-            <Select.Option value="val_3">Value 3</Select.Option>
-            <Select.Option value="val_4">Value 4</Select.Option>
-        </Select>
-    );
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-<Select multiple={true} hasCounter={true} placeholder="values">
-  <Select.Option value="val_1">Value 1</Select.Option>
-  <Select.Option value="val_2">Value 2</Select.Option>
-  <Select.Option value="val_3">Value 3</Select.Option>
-  <Select.Option value="val_4">Value 4</Select.Option>
-</Select>
-```
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_11_END
 
 ## Optionen filtern
 
 Um den Filterbereich zu aktivieren, verwenden Sie die Eigenschaft `filterable`. Ihr Standardwert ist `false`.
 
-<!--SANDBOX
-import {Select} from '@gravity-ui/uikit';
+GRAVITY_TRANSLATION_BLOCK_12_END
 
-export default function () {
-    return (
-        <Select filterable placeholder="Filterable">
-            <Select.Option value="val_1">Value 1</Select.Option>
-            <Select.Option value="val_2">Value 2</Select.Option>
-            <Select.Option value="val_3">Value 3</Select.Option>
-            <Select.Option value="val_4">Value 4</Select.Option>
-        </Select>
-    );
-}
-SANDBOX-->
+GRAVITY_TRANSLATION_BLOCK_13_END
 
-<!--GITHUB_BLOCK-->
+## Suche nach den ersten Buchstaben
 
-```tsx
-<Select filterable={true} placeholder="Filterable">
-  <Select.Option value="val_1">Value 1</Select.Option>
-  <Select.Option value="val_2">Value 2</Select.Option>
-  <Select.Option value="val_3">Value 3</Select.Option>
-  <Select.Option value="val_4">Value 4</Select.Option>
-</Select>
-```
+Wenn das Popup geöffnet ist und kein Filter im Weg ist, suchen die Zeichentasten nach einer Option: Die Liste verschiebt die Aktivität zur ersten Option, deren Text **mit** dem eingegebenen Text **beginnt**, der Puffer wird eine Sekunde nach der letzten Taste zurückgesetzt, und das Wiederholen eines Zeichens durchläuft die Optionen, die damit beginnen. Ein Leerzeichen gehört zur Abfrage, während sie eingegeben wird, sodass eine Beschriftung mit einem Leerzeichen erreichbar ist — und sie wählt nichts aus, bis der Puffer wieder leer ist. Ein Zeichen, das die Liste für ihre Suche verwendet hat, erreicht nicht die Hotkeys der umgebenden Anwendung.
 
-<!--/GITHUB_BLOCK-->
+In einem `filterable` Select gehen die Tasten stattdessen in den Filter: Das Tippen dort filtert.
 
 ## Größe
 
-Um die Standardgröße des Steuerelements und der Optionen zu verwalten, verwenden Sie die Eigenschaft `size`. Ihre Standardgröße ist `m`.
+Um die Standardgröße der Steuereinheit und der Optionen zu verwalten, verwenden Sie die Eigenschaft `size`. Ihre Standardgröße ist `m`.
 
-<!--SANDBOX
-import {Select} from '@gravity-ui/uikit';
+GRAVITY_TRANSLATION_BLOCK_14_END
 
-export default function () {
-    return (
-        <>
-            <Select size="s" placeholder="S Size">
-                <Select.Option value="val_1">Value 1</Select.Option>
-            </Select>
-            <Select size="m" placeholder="M Size">
-                <Select.Option value="val_1">Value 1</Select.Option>
-            </Select>
-            <Select size="l" placeholder="L Size">
-                <Select.Option value="val_1">Value 1</Select.Option>
-            </Select>
-            <Select size="xl" placeholder="XL Size">
-                <Select.Option value="val_1">Value 1</Select.Option>
-            </Select>
-        </>
-    );
-}
-SANDBOX-->
+GRAVITY_TRANSLATION_BLOCK_15_END
 
-<!--GITHUB_BLOCK-->
+## Breite der Steuereinheit
+
+Standardmäßig dehnt sich die Breite der Steuereinheit, um dem Inhalt der ausgewählten Optionen zu entsprechen. Sie können sie mit der Eigenschaft `width` verwalten:
+
+`'max'`: Dehnt sich auf die volle Breite des Elternelements aus.
+
+`number`: Wendet die Breite in Pixeln an.
+
+GRAVITY_TRANSLATION_BLOCK_16_END
+
+## Breite des Popups
+
+Sie können die Breite des Popups mit der Eigenschaft `popupWidth` verwalten. Die verfügbaren Werte sind:
+
+`'fit'`: Wendet die Breite der Steuereinheit an.
+
+`number`: Wendet die Breite in Pixeln an.
+
+Punkte, die man sich zum Standardverhalten merken sollte:
+
+- Die Popup-Breite entspricht der Breite der breitesten Option, aber nicht breiter als `90vw`. Dies gilt nicht für eine [virtualisierte](#virtualized-list) `Select`.
+
+- Schmale Optionen werden gestreckt, um der Breite der Steuereinheit zu entsprechen.
+
+GRAVITY_TRANSLATION_BLOCK_17_END
+
+## Virtualisierte Liste
+
+Eine lange Liste von Optionen wird zeilenweise gerendert, es sei denn, Sie fordern etwas anderes an: Jede Option ist eine DOM-Zeile. Um nur die sichtbaren zu rendern, umschließen Sie `Select` mit `ListVirtualizer` aus dem `@gravity-ui/uikit/virtualizer`-Einstiegspunkt — der Wrapper benötigt keine Konfiguration, und das Popup funktioniert weiterhin über das Portal. Ein paar hundert Optionen sind der Punkt, an dem es sich auszuzahlen beginnt; über 150 gibt `Select` dies in einer Entwicklungswarnung aus.
+
+Der Einstiegspunkt benötigt `@tanstack/react-virtual`: Es ist eine optionale Peer-Abhängigkeit des Pakets und muss zusammen mit ihm installiert werden.
 
 ```tsx
-<Select size="s" placeholder="S Size">
-  <Select.Option value="val_1">Value 1</Select.Option>
-</Select>
-<Select size="m" placeholder="M Size">
-  <Select.Option value="val_1">Value 1</Select.Option>
-</Select>
-<Select size="l" placeholder="L Size">
-  <Select.Option value="val_1">Value 1</Select.Option>
-</Select>
-<Select size="xl" placeholder="XL Size">
-  <Select.Option value="val_1">Value 1</Select.Option>
-</Select>
+import {Select} from '@gravity-ui/uikit';
+import {ListVirtualizer} from '@gravity-ui/uikit/virtualizer';
+
+<ListVirtualizer>
+  <Select options={thousandsOfOptions} />
+</ListVirtualizer>;
 ```
 
-<!--/GITHUB_BLOCK-->
+Der Wrapper muss nicht neben dem `Select` stehen: Ein Wrapper mit `minItemsCount` am Stamm der Anwendung deckt jeden `Select` darunter ab. Ein `Select` mit weniger Optionen wird gerendert, als gäbe es keinen Wrapper — jede Option eine DOM-Zeile, das Popup so breit wie die breiteste Option. Der `Select` zählt alle seine Optionen, ohne die Gruppenüberschriften und ohne den Filter, sodass das Tippen die Liste nicht umschaltet.
 
-## Steuerelementbreite
+```tsx
+import {Provider} from '@gravity-ui/uikit';
+import {ListVirtualizer} from '@gravity-ui/uikit/virtualizer';
 
-Standardmäßig dehnt sich die Breite des Steuerelements aus, um der Breite des Inhalts der ausgewählten Optionen zu entsprechen. Sie können sie mit der Eigenschaft `width` verwalten:
+<Provider theme="light">
+  <ListVirtualizer minItemsCount={50}>
+    <App />
+  </ListVirtualizer>
+</Provider>;
+```
 
-`'max'`: Dehnt sich auf die volle Breite des übergeordneten Elements aus.
+Um die Einstellungen für einen einzelnen `Select` zu ändern, platzieren Sie einen zweiten Wrapper direkt darum. Er ändert nur das, was ihm übergeben wird, und übernimmt den Rest von dem am Stamm: `overscan={20}` behält den Schwellenwert bei, `minItemsCount={0}` virtualisiert diesen `Select` unabhängig von der Anzahl seiner Optionen, und `minItemsCount={Infinity}` behält ihn unverändert bei.
 
-`number`: Wendet die Breite in Pixeln an.
+```tsx
+import {Select} from '@gravity-ui/uikit';
+import {ListVirtualizer} from '@gravity-ui/uikit/virtualizer';
 
-<!--SANDBOX
-import {Select, SelectProps} from '@gravity-ui/uikit';
-import {type CSSProperties} from 'react';
+// Unter dem Wrapper am Stamm: Dieser Select wird unabhängig von der Anzahl seiner Optionen virtualisiert
+<ListVirtualizer minItemsCount={0}>
+  <Select options={options} />
+</ListVirtualizer>;
+```
 
-const containerStyle: CSSProperties = {
-    width: 150,
-    border: '2px dashed gray',
-    textAlign: 'center',
-};
+Der Code des Virtualizers ist ein eigener Block und wird für kürzere `Select`s nicht geladen. Ein `Select`, der virtualisiert werden soll, beginnt mit dem Laden beim Mounten; ein Popup, das geöffnet wird, bevor es ankommt, zeigt seine ersten Optionen an, bis das Fenster übernimmt, und scrollt dann zur ausgewählten Option.
 
-function SelectExample(props: SelectProps) {
-    return (
-        <Select {...props}>
-            <Select.Option value="val_1">Value 1</Select.Option>
-            <Select.Option value="val_2">Value 2</Select.Option>
-            <Select.Option value="val_3">Value 3</Select.Option>
-            <Select.Option value="val_4">Value 4</Select.Option>
-        </Select>
-    );
-}
-
-export default function () {
-    return (
-        <>
-            <div style={containerStyle}>
-                <h4>Default</h4>
-                <SelectExample multiple />
-            </div>
-            <div style={containerStyle}>
-                <h4>Max</h4>
-                <SelectExample width="max" multiple />
-            </div>
-            <div style={containerStyle}>
-                <h4>In pixels</h4>
-                <SelectExample width={110} multiple />
-            </div>
-        </>
-    );
-}
-SANDBOX-->
-
-## Popup-Breite
-
-Sie können die Popup-Breite mit der Eigenschaft `popupWidth` verwalten. Die verfügbaren Werte sind:
-
-`'fit'`: Wendet die Steuerelementbreite an.
-
-`number`: Wendet die Breite in Pixeln an.
-
-Hinweise zum Standardverhalten:
-
-- Die Popup-Breite entspricht der Breite der breitesten Option, aber nicht breiter als `90vw`. Dies gilt nicht, wenn Sie [Virtualisierung](#virtualisierte-liste) verwenden.
-
-- Schmale Optionen werden auf die Breite des Steuerelements gestreckt.
-
-<!--SANDBOX
-import {Box, Select, SelectProps} from '@gravity-ui/uikit';
-import {type CSSProperties} from 'react';
-
-const containerStyle: CSSProperties = {
-    width: 200,
-    border: '2px dashed gray',
-    textAlign: 'center',
-};
-
-function ShortValueSelect(props: SelectProps) {
-    return (
-        <Select placeholder="Short value" {...props}>
-            <Select.Option value="val_1">Value 1</Select.Option>
-            <Select.Option value="val_2">Value 2</Select.Option>
-            <Select.Option value="val_3">Value 3</Select.Option>
-            <Select.Option value="val_4">Value 4</Select.Option>
-        </Select>
-    );
-}
-
-function LongValueSelect(props: SelectProps) {
-    return (
-        <Select placeholder="Long value" {...props}>
-            <Select.Option value="val_1">Loooooooooooooooooooong Value 1</Select.Option>
-            <Select.Option value="val_2">Loooooooooooooooooooong Value 2</Select.Option>
-            <Select.Option value="val_3">Loooooooooooooooooooong Value 3</Select.Option>
-            <Select.Option value="val_4">Loooooooooooooooooooong Value 4</Select.Option>
-        </Select>
-    );
-}
-
-export default function () {
-    return (
-        <>
-            <div style={containerStyle}>
-                <h4>Default</h4>
-                <Box spacing={{my: 3}}>
-                    <ShortValueSelect />
-                </Box>
-                <Box spacing={{my: 3}}>
-                    <LongValueSelect />
-                </Box>
-            </div>
-            <div style={containerStyle}>
-                <h4>Fit</h4>
-                <Box spacing={{my: 3}}>
-                    <ShortValueSelect popupWidth="fit" />
-                </Box>
-                <Box spacing={{my: 3}}>
-                    <LongValueSelect popupWidth="fit" />
-                </Box>
-            </div>
-            <div style={containerStyle}>
-                <h4>In pixels</h4>
-                <Box spacing={{my: 3}}>
-                    <ShortValueSelect popupWidth={80} />
-                </Box>
-                <Box spacing={{my: 3}}>
-                    <LongValueSelect popupWidth={80} />
-                </Box>
-            </div>
-        </>
-    );
-}
-SANDBOX-->
-
-### Virtualisierte Liste
-
-Für eine optimale Anzeige einer großen Anzahl von Optionen verfügt `Select` über ein integriertes Virtualisierungstool für Listen. Die Virtualisierung wird nach Überschreiten des Schwellenwerts für die Anzahl der Optionen (standardmäßig `50`) aktiviert. Sie können diesen Wert mit der Eigenschaft `virtualizationThreshold` verwalten.
-
-Bei Verwendung der Virtualisierung gelten einige Einschränkungen für das Popup-Element:
+Dinge, die man bei einem virtualisierten `Select` beachten sollte:
 
 - Die Popup-Breite wird nicht mehr an die Länge der längsten Option angepasst.
 
-- Die Mindestbreite des Popups entspricht der Breite des Steuerelements oder `100px`, wenn das Steuerelement kürzer ist.
+- Die minimale Breite des Popups entspricht der Breite des Steuerelements oder `100px`, wenn das Steuerelement kürzer ist.
 
-<!--SANDBOX
-import {Box, Select} from '@gravity-ui/uikit';
-import {type CSSProperties} from 'react';
+- Die Höhe einer Zeile vor dem Rendern wird von [getOptionHeight](#rendering-options-with-different-heights) und der `size` des `Select` übernommen; die `estimateItemSize` des Wrappers wird nicht verwendet, da der Typ einer Optionszeile den `Select` nicht verlässt — die Übergabe führt zu einer Warnung in der Entwicklung. Die Eigenschaften `measure` und `overscan` des Wrappers funktionieren wie [beschrieben](https://github.com/gravity-ui/uikit/blob/main/src/components/List/README.md#virtualization) für die `List`.
 
-const containerStyle: CSSProperties = {
-    width: 200,
-    border: '2px dashed gray',
-    textAlign: 'center',
-};
+- Ein auf dem Server gerendertes Popup erhält seine ersten Optionen anstelle des Fensters — es gibt kein Viewport zum Messen — und das Fenster übernimmt nach der Hydration.
 
-const shortOptions = Array.from({length: 1000}, (_, index) => ({
-    value: String(index),
-    content: `Value ${index}`,
-}));
+- Der Wrapper deckt die Liste dieses `Select` ab, auch die, die [renderPopup](#rendering-options-list) auf der Seite platziert. Eine Liste innerhalb einer Zeile davon oder ein `Select`, der in einer solchen Zeile platziert ist, rendert jeweils seine eigenen Zeilen: Die Virtualisierung einer Liste erreicht nicht, was ihre Zeilen zeichnen.
 
-const longOptions = Array.from({length: 1000}, (_, index) => ({
-    value: String(index),
-    content: `Loooooooooooooooooooong Value ${index}`,
-}));
+- Definieren Sie `getOptionHeight` und `renderOption` außerhalb der Komponente oder memoïsieren Sie sie: Eine neue Funktion bei jedem Rendern lässt den Virtualizer seine Messungen neu starten und die Zeilen neu rendern.
 
-export default function () {
-    return (
-        <>
-            <div style={containerStyle}>
-                <h4>Default</h4>
-                <Box spacing={{my: 3}}>
-                    <Select placeholder="Short value" options={shortOptions} />
-                </Box>
-                <Box spacing={{my: 3}}>
-                    <Select placeholder="Long value" options={longOptions} />
-                </Box>
-            </div>
-            <div style={containerStyle}>
-                <h4>In pixels</h4>
-                <Box spacing={{my: 3}}>
-                    <Select placeholder="Short value" popupWidth={80} options={shortOptions} />
-                </Box>
-                <Box spacing={{my: 3}}>
-                    <Select placeholder="Long value" popupWidth={80} options={longOptions} />
-                </Box>
-            </div>
-        </>
-    );
-}
-SANDBOX-->
+GRAVITY_TRANSLATION_BLOCK_18_END
 
-## Erweiterte Nutzung
+## Zugänglicher Name
 
-Es gibt viele Möglichkeiten, Ihr `Select` anzupassen.
+Der Trigger benötigt einen Namen: `label`, `aria-label`, `aria-labelledby` oder ein `<label htmlFor>`, das auf die `id` des `Select` verweist. `label` benennt den Trigger und bleibt außerhalb seines Werts; ein Platzhalter ist kein Name. Mit `renderControl` wird das Label nicht gezeichnet, also benennen Sie das benutzerdefinierte Steuerelement selbst.
 
-### Benutzerdefiniertes Steuerelement rendern
+## Fortgeschrittene Nutzung
+
+Es gibt viele Möglichkeiten, Ihren `Select` anzupassen.
+
+### Rendern eines benutzerdefinierten Steuerelements
 
 Um ein benutzerdefiniertes Steuerelement zu rendern, verwenden Sie die Eigenschaft `renderControl`.
-Hinweis: Sie sollten alle Argumente an Ihren Knoten weiterleiten, um ein konsistentes Verhalten zu ermöglichen, genau wie bei der Verwendung des Standardsteuerelements.
 
-<!--SANDBOX
-import {Button, Select} from '@gravity-ui/uikit';
+Übergeben Sie `ref` an Ihr Element und verteilen Sie `triggerProps` darauf: Sie öffnen und schließen das Popup, tragen die Tastatur der Liste und die ARIA des Combobox (`role`, `aria-expanded`, `aria-controls`, `aria-activedescendant`). Ein Steuerelement, das diese bei sich behält, öffnet sich nicht und navigiert nicht. `triggerProps` enthält auch `disabled`. Gießen Sie den generischen `ref` in einen Button-Ref, wenn Sie `Button` verwenden.
 
-export default function () {
-    return (
-        <Select
-            renderControl={({onClick, onKeyDown, ref}) => (
-                <Button ref={ref} onClick={onClick} extraProps={{onKeyDown}}>
-                    Custom control
-                </Button>
-            )}
-        >
-            <Select.Option value="val_1">Value 1</Select.Option>
-            <Select.Option value="val_2">Value 2</Select.Option>
-            <Select.Option value="val_3">Value 3</Select.Option>
-            <Select.Option value="val_4">Value 4</Select.Option>
-        </Select>
-    );
-}
-SANDBOX-->
+GRAVITY_TRANSLATION_BLOCK_19_END
 
-<!--GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_20_END
 
-```tsx
-import {Button} from '@gravity-ui/uikit';
-
-const MyComponent = () => {
-  const renderControl: SelectProps['renderControl'] = ({onClick, onKeyDown, ref}) => {
-    return (
-      <Button
-        ref={ref}
-        onClick={onClick}
-        extraProps={{
-          onKeyDown,
-        }}
-      >
-        Your control
-      </Button>
-    );
-  };
-
-  return <Select renderControl={renderControl}>/* Your options here */</Select>;
-};
-```
-
-<!--/GITHUB_BLOCK-->
-
-### Benutzerdefinierten Filterbereich rendern
+### Rendern eines benutzerdefinierten Filterbereichs
 
 Um einen benutzerdefinierten Filterbereich zu rendern, verwenden Sie die Eigenschaft `renderFilter` und setzen Sie die Eigenschaft `filterable` auf `true`.
-Hinweis: Sie müssen alle Argumente an Ihren Knoten weiterleiten, um einen ordnungsgemäß funktionierenden Filter zu ermöglichen, genau wie bei der Verwendung der Standardkonfiguration.
-
-<!--SANDBOX
-import type {SelectProps} from '@gravity-ui/uikit';
-import {Button, Flex, Select, TextInput} from '@gravity-ui/uikit';
-
-const renderFilter: SelectProps['renderFilter'] = (props) => {
-    const {value, ref, onChange, onKeyDown} = props;
-
-    return (
-        <Flex direction="column" gap={1}>
-            <TextInput
-                controlRef={ref}
-                controlProps={{size: 1}}
-                value={value}
-                onUpdate={onChange}
-                onKeyDown={onKeyDown}
-            />
-            <Button size="xs">Do smth</Button>
-        </Flex>
-    );
-};
-
-export default function () {
-    return (
-        <Select placeholder="Custom filter" filterable renderFilter={renderFilter}>
-            <Select.Option value="val_1">Value 1</Select.Option>
-            <Select.Option value="val_2">Value 2</Select.Option>
-            <Select.Option value="val_3">Value 3</Select.Option>
-            <Select.Option value="val_4">Value 4</Select.Option>
-        </Select>
-    );
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-import {Button, TextInput} from '@gravity-ui/uikit';
-import type {SelectProps} from '@gravity-ui/uikit';
-
-const MyComponent = () => {
-  const renderFilter: SelectProps['renderFilter'] = (props) => {
-    const {value, ref, onChange, onKeyDown} = props;
-
-    return (
-      <div>
-        <TextInput
-          controlRef={ref}
-          controlProps={{size: 1}}
-          value={value}
-          onUpdate={onChange}
-          onKeyDown={onKeyDown}
-        />
-        <Button>Do smth</Button>
-      </div>
-    );
-  };
-
-  return (
-    <Select filterable={true} renderFilter={renderFilter}>
-      /* Your options here */
-    </Select>
-  );
-};
-```
-
-<!--/GITHUB_BLOCK-->
-
-### Benutzerdefinierte Optionen rendern
-
-Um benutzerdefinierte Optionen zu rendern, verwenden Sie die Eigenschaft `renderOption`:
-
-<!--SANDBOX
-import type {SelectProps} from '@gravity-ui/uikit';
-import {Select} from '@gravity-ui/uikit';
-
-const renderOption: SelectProps['renderOption'] = (option) => {
-    return <div style={{color: option.data.color}}>{option.children}</div>;
-};
-
-export default function () {
-    return (
-        <Select placeholder="Custom options" renderOption={renderOption}>
-            <Select.Option value="val_1" data={{color: '#8FE1A1'}}>
-                Value 1
-            </Select.Option>
-            <Select.Option value="val_2" data={{color: '#38C0A8'}}>
-                Value 2
-            </Select.Option>
-            <Select.Option value="val_3" data={{color: '#3A7AC3'}}>
-                Value 3
-            </Select.Option>
-            <Select.Option value="val_4" data={{color: '#534581'}}>
-                Value 4
-            </Select.Option>
-        </Select>
-    );
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-import type {SelectProps} from '@gravity-ui/uikit';
-
-const MyComponent = () => {
-  const renderOption: SelectProps['renderOption'] = (option) => {
-    return <div style={{color: option.data.color}}>{option.children}</div>;
-  };
-
-  return (
-    <Select renderOption={renderOption}>
-      <Select.Option value="val_1" data={{color: '#8FE1A1'}}>
-        Value 1
-      </Select.Option>
-      <Select.Option value="val_2" data={{color: '#38C0A8'}}>
-        Value 2
-      </Select.Option>
-      <Select.Option value="val_3" data={{color: '#3A7AC3'}}>
-        Value 3
-      </Select.Option>
-      <Select.Option value="val_4" data={{color: '#534581'}}>
-        Value 4
-      </Select.Option>
-    </Select>
-  );
-};
-```
-
-<!--/GITHUB_BLOCK-->
-
-### Benutzerdefinierte ausgewählte Optionen rendern
-
-Um benutzerdefinierte ausgewählte Optionen zu rendern, verwenden Sie die Eigenschaft `renderSelectedOption`:
-
-<!--SANDBOX
-import type {SelectProps} from '@gravity-ui/uikit';
-import {Select} from '@gravity-ui/uikit';
-
-const renderSelectedOption: SelectProps['renderSelectedOption'] = (option) => {
-    return <div style={{color: option.data.color}}>{option.children}</div>;
-};
-
-export default function () {
-    return (
-        <Select placeholder="Custom selected options" renderSelectedOption={renderSelectedOption}>
-            <Select.Option value="val_1" data={{color: '#8FE1A1'}}>
-                Value 1
-            </Select.Option>
-            <Select.Option value="val_2" data={{color: '#38C0A8'}}>
-                Value 2
-            </Select.Option>
-            <Select.Option value="val_3" data={{color: '#3A7AC3'}}>
-                Value 3
-            </Select.Option>
-            <Select.Option value="val_4" data={{color: '#534581'}}>
-                Value 4
-            </Select.Option>
-        </Select>
-    );
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-import type {SelectProps} from '@gravity-ui/uikit';
-
-const MyComponent = () => {
-  const renderSelectedOption: SelectProps['renderSelectedOption'] = (option) => {
-    return <div style={{color: option.data.color}}>{option.children}</div>;
-  };
-
-  return (
-    <Select renderSelectedOption={renderSelectedOption}>
-      <Select.Option value="val_1" data={{color: '#8FE1A1'}}>
-        Value 1
-      </Select.Option>
-      <Select.Option value="val_2" data={{color: '#38C0A8'}}>
-        Value 2
-      </Select.Option>
-      <Select.Option value="val_3" data={{color: '#3A7AC3'}}>
-        Value 3
-      </Select.Option>
-      <Select.Option value="val_4" data={{color: '#534581'}}>
-        Value 4
-      </Select.Option>
-    </Select>
-  );
-};
-```
-
-<!--/GITHUB_BLOCK-->
-
-### Optionen mit unterschiedlichen Höhen rendern
-
-Optionen haben eine feste Höhe gemäß der Eigenschaft `size`. Wenn Sie Optionen mit unterschiedlichen Höhen rendern müssen, können Sie die Eigenschaft `option.data` verwenden. Sie speichert Informationen darüber, welche Höhe Sie für die Optionen festlegen müssen, sowie die Eigenschaft `getOptionHeight`, um diesen Wert festzulegen.
-
-<!--SANDBOX
-import type {SelectProps} from '@gravity-ui/uikit';
-import {Select} from '@gravity-ui/uikit';
-
-const getOptionHeight: SelectProps['getOptionHeight'] = (option) => option.data.height;
-
-export default function () {
-    return (
-        <Select placeholder="Different heights" getOptionHeight={getOptionHeight}>
-            <Select.Option value="val_1" data={{height: 20}}>
-                Value 1
-            </Select.Option>
-            <Select.Option value="val_2" data={{height: 40}}>
-                Value 2
-            </Select.Option>
-            <Select.Option value="val_3" data={{height: 60}}>
-                Value 3
-            </Select.Option>
-            <Select.Option value="val_4" data={{height: 80}}>
-                Value 4
-            </Select.Option>
-        </Select>
-    );
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-import type {SelectProps} from '@gravity-ui/uikit';
-
-const MyComponent = () => {
-  const getOptionHeight: SelectProps['getOptionHeight'] = (option) => option.data.height;
-
-  return (
-    <Select getOptionHeight={getOptionHeight}>
-      <Select.Option value="val_1" data={{height: 20}}>
-        Value 1
-      </Select.Option>
-      <Select.Option value="val_2" data={{height: 40}}>
-        Value 2
-      </Select.Option>
-      <Select.Option value="val_3" data={{height: 60}}>
-        Value 3
-      </Select.Option>
-      <Select.Option value="val_4" data={{height: 80}}>
-        Value 4
-      </Select.Option>
-    </Select>
-  );
-};
-```
-
-<!--/GITHUB_BLOCK-->
-
-### Benutzerdefinierten Zähler rendern
-
-Um einen benutzerdefinierten Zähler zu rendern, verwenden Sie die Eigenschaft `renderCounter`. Der Zähler wird nur angezeigt, wenn die Mehrfachauswahl aktiviert ist (`multiple={true}`) und `hasCounter={true}`.
-
-<!--SANDBOX
-import type {SelectProps} from '@gravity-ui/uikit';
-import {Select} from '@gravity-ui/uikit';
-
-const renderCounter: SelectProps['renderCounter'] = (_, {count, disabled}) => {
-    if (count === 0) {
-        return null;
-    }
-
-    if (count >= 2) {
-        return (
-            <div
-                style={{
-                    padding: '0 8px',
-                    color: disabled ? '#999' : '#027bf3',
-                    fontWeight: 'bold',
-                }}
-            >
-                +{count}
-            </div>
-        );
-    }
-
-    return count;
-};
-
-export default function () {
-    return (
-        <Select multiple hasCounter renderCounter={renderCounter}>
-            <Select.Option value="val_1">Value 1</Select.Option>
-            <Select.Option value="val_2">Value 2</Select.Option>
-            <Select.Option value="val_3">Value 3</Select.Option>
-            <Select.Option value="val_4">Value 4</Select.Option>
-        </Select>
-    );
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-import type {SelectProps} from '@gravity-ui/uikit';
-
-const MyComponent = () => {
-  const renderCounter: SelectProps['renderCounter'] = (_, {count, disabled}) => {
-    if (count === 0) {
-      return null;
-    }
-    if (count >= 2) {
-      return (
-        <div
-          style={{
-            padding: '0 8px',
-            color: disabled ? '#999' : '#027bf3',
-            fontWeight: 'bold',
-          }}
-        >
-          +{count}
-        </div>
-      );
-    }
-    return count;
-  };
-
-  return (
-    <Select multiple={true} hasCounter={true} renderCounter={renderCounter}>
-      <Select.Option value="val_1">Value 1</Select.Option>
-      <Select.Option value="val_2">Value 2</Select.Option>
-      <Select.Option value="val_3">Value 3</Select.Option>
-      <Select.Option value="val_4">Value 4</Select.Option>
-    </Select>
-  );
-};
-```
-
-<!--/GITHUB_BLOCK-->
-
-### Optionsliste rendern
-
-Die Eigenschaft `renderPopup` ermöglicht es Ihnen, den Inhalt der Optionsliste zu steuern: Ändern Sie die Reihenfolge der Standardelemente (Filter, Liste), blenden Sie sie aus oder fügen Sie benutzerdefinierte Elemente dazwischen, davor oder danach ein.
-
-<!--SANDBOX
-import type {SelectProps} from '@gravity-ui/uikit';
-import {Select} from '@gravity-ui/uikit';
-
-const renderPopup: SelectProps['renderPopup'] = ({renderList, renderFilter}) => {
-    return (
-        <>
-            {renderFilter()}
-            <div style={{width: '100%', height: 20, backgroundColor: 'tomato'}} />
-            {renderList()}
-        </>
-    );
-};
-
-export default function () {
-    return (
-        <Select filterable placeholder="Custom popup" renderPopup={renderPopup}>
-            <Select.Option value="val_1" data={{color: '#8FE1A1'}}>
-                Value 1
-            </Select.Option>
-            <Select.Option value="val_2" data={{color: '#38C0A8'}}>
-                Value 2
-            </Select.Option>
-            <Select.Option value="val_3" data={{color: '#3A7AC3'}}>
-                Value 3
-            </Select.Option>
-            <Select.Option value="val_4" data={{color: '#534581'}}>
-                Value 4
-            </Select.Option>
-        </Select>
-    );
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-import type {SelectProps} from '@gravity-ui/uikit';
-
-const renderPopup: SelectProps['renderPopup'] = ({renderList, renderFilter}) => {
-  return (
-    <React.Fragment>
-      {renderFilter()}
-      <div className="CustomElement" />
-      {renderList()}
-    </React.Fragment>
-  );
-};
-
-const MyComponent = () => {
-  return (
-    <Select filterable renderPopup={renderPopup}>
-      <Select.Option value="val_1" data={{color: '#8FE1A1'}}>
-        Value 1
-      </Select.Option>
-      <Select.Option value="val_2" data={{color: '#38C0A8'}}>
-        Value 2
-      </Select.Option>
-      <Select.Option value="val_3" data={{color: '#3A7AC3'}}>
-        Value 3
-      </Select.Option>
-      <Select.Option value="val_4" data={{color: '#534581'}}>
-        Value 4
-      </Select.Option>
-    </Select>
-  );
-};
-```
-
-<!--/GITHUB_BLOCK-->
-
-### Fehler
-
-Dieser `Select`-Zustand ist für eine fehlerhafte Benutzereingabe. Um das Erscheinungsbild von `Select` zu ändern, verwenden Sie die Eigenschaft `validationState` mit dem Wert `"invalid"`. Optional können Sie eine Fehlermeldung über die Eigenschaft `errorMessage` bereitstellen. Standardmäßig wird der Meldungstext außerhalb der Komponente gerendert.
-Sie können dies mit der Eigenschaft `errorPlacement` ändern.
-
-<!--SANDBOX
-import {Select} from '@gravity-ui/uikit';
-
-export default function () {
-    return (
-        <>
-            <Select placeholder="Placeholder" errorMessage="Error message" validationState="invalid">
-                <Select.Option value="val_1">Value 1</Select.Option>
-                <Select.Option value="val_2">Value 2</Select.Option>
-                <Select.Option value="val_3">Value 3</Select.Option>
-                <Select.Option value="val_4">Value 4</Select.Option>
-            </Select>
-            <Select
-                placeholder="Placeholder"
-                errorPlacement="inside"
-                errorMessage="Error message"
-                validationState="invalid"
-            >
-                <Select.Option value="val_1">Value 1</Select.Option>
-                <Select.Option value="val_2">Value 2</Select.Option>
-                <Select.Option value="val_3">Value 3</Select.Option>
-                <Select.Option value="val_4">Value 4</Select.Option>
-            </Select>
-        </>
-    );
-}
-SANDBOX-->
-
-## Eigenschaften
-
-| Name                                                      | Description                                                                                                                      | Typ                                      | Standardwert                                             |
-| :-------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------- | :------------------------------------------------------- |
-| className                                                 | Steuert die Klasse des Elements                                                                                                  | `string`                                 |                                                          |
-| defaultValue                                              | Standardwerte, die ausgewählte Optionen darstellen, falls ein unkontrollierter Zustand verwendet wird                            | `string[]`                               |                                                          |
-| disabled                                                  | Zeigt an, dass der Benutzer nicht mit dem Steuerelement interagieren kann                                                        | `boolean`                                | `false`                                                  |
-| [filterable](#filtering-options)                          | Zeigt an, dass das Auswahl-Popup einen Filterbereich hat                                                                         | `boolean`                                | `false`                                                  |
-| filterOption                                              | Wird verwendet, um eine Option mit dem Filter zu vergleichen                                                                     | `function`                               |                                                          |
-| filterPlaceholder                                         | Standardtext für den Platzhalter des Filterfelds                                                                                 | `string`                                 |                                                          |
-| [getOptionHeight](#render-options-with-different-heights) | Wird verwendet, um die Höhe von benutzerdefinierten Optionen festzulegen                                                         | `function`                               |                                                          |
-| getOptionGroupHeight                                      | Wird verwendet, um die Höhe von benutzerdefinierten Optionsgruppen festzulegen                                                   | `function`                               |                                                          |
-| hasClear                                                  | Ermöglicht die Anzeige eines Symbols zum Löschen ausgewählter Optionen                                                           | `boolean`                                | `false`                                                  |
-| id                                                        | `id` HTML-Attribut                                                                                                               | `string`                                 |                                                          |
-| label                                                     | Beschriftung des Steuerelements                                                                                                  | `string`                                 |                                                          |
-| loading                                                   | Fügt das Ladeelement am Ende der Optionsliste hinzu. Funktioniert wie eine permanente Ladeanzeige, während die Optionsliste leer ist. | `boolean`                                |                                                          |
-| [multiple](#selecting-multiple-options)                   | Zeigt an, ob mehrere Optionen in der Liste ausgewählt werden können                                                               | `boolean`                                | `false`                                                  |
-| name                                                      | Name des Steuerelements                                                                                                          | `string`                                 |                                                          |
-| onBlur                                                    | Handler, der aufgerufen wird, wenn das Element den Fokus verliert.                                                               | `function`                               |                                                          |
-| filter                                                    | Gesteuerter Filterwert                                                                                                           | `string`                                 | `''`                                                     |
-| onFilterChange                                            | Wird jedes Mal nach der Änderung des Filters ausgelöst                                                                          | `function`                               |                                                          |
-| onFocus                                                   | Handler, der aufgerufen wird, wenn das Element den Fokus erhält                                                                  | `function`                               |                                                          |
-| onLoadMore                                                | Wird ausgelöst, wenn die Ladeanzeige sichtbar wird                                                                              | `function`                               |                                                          |
-| onOpenChange                                              | Wird jedes Mal nach der Änderung der Sichtbarkeit des Popups ausgelöst                                                          | `function`                               |                                                          |
-| onUpdate                                                  | Wird ausgelöst, wenn eine Änderung am `Select`-Wert vom Benutzer bestätigt wird                                                  | `function`                               |                                                          |
-| [options](#options)                                       | Optionen zur Auswahl                                                                                                             | `(SelectOption \| SelectOptionGroup)[]`  |                                                          |
-| pin                                                       | Ansicht des Steuerelementrahmens                                                                                                 | `string`                                 | `'round-round'`                                          |
-| placeholder                                               | Platzhaltertext                                                                                                                  | `string`                                 |                                                          |
-| popupClassName                                            | Klasse des Popups mit der Optionsliste                                                                                           | `string`                                 |                                                          |
-| popupPlacement                                            | Platzierung des Popups                                                                                                           | `PopupPlacement` `Array<PopupPlacement>` | `['bottom-start', 'bottom-end', 'top-start', 'top-end']` |
-| [popupWidth](#popup-width)                                | Breite des Popups                                                                                                                | `number \| 'fit' \| 'outfit'`            | `'outfit'`                                               |
-| qa                                                        | Test-ID-Attribut (`data-qa`)                                                                                                     | `string`                                 |                                                          |
-| [renderControl](#render-custom-control)                   | Wird zum Rendern eines benutzerdefinierten Steuerelements verwendet                                                              | `function`                               |                                                          |
-| [renderCounter](#rendering-custom-counter)                | Wird zum Rendern eines benutzerdefinierten Zählers verwendet. Funktioniert nur mit [hasCounter](#counter).                        | `function`                               |                                                          |
-| renderEmptyOptions                                        | Wird zum Rendern eines Knotens für eine leere Optionsliste verwendet                                                             | `function`                               |                                                          |
-| [renderFilter](#render-custom-filter-section)             | Wird zum Rendern eines benutzerdefinierten Filterbereichs verwendet                                                               | `function`                               |                                                          |
-| [renderOption](#render-custom-options)                    | Wird zum Rendern von benutzerdefinierten Optionen verwendet                                                                       | `function`                               |                                                          |
-| renderOptionGroup                                         | Wird zum Rendern von benutzerdefinierten Optionsgruppen verwendet                                                                | `function`                               |                                                          |
-| [renderSelectedOption](#render-custom-selected-options)   | Wird zum Rendern von benutzerdefinierten ausgewählten Optionen verwendet                                                          | `function`                               |                                                          |
-| [renderPopup](#rendering-options-list)                    | Wird zum Rendern des Inhalts der Optionsliste verwendet                                                                          | `function`                               |                                                          |
-| [size](#size)                                             | Größe des Steuerelements / der Optionen                                                                                          | `string`                                 | `'m'`                                                    |
-| value                                                     | Werte, die ausgewählte Optionen darstellen                                                                                      | `string[]`                               |                                                          |
-| view                                                      | Ansicht des Steuerelements                                                                                                       | `string`                                 | `'normal'`                                               |
-| [virtualizationThreshold](#virtualized-list)              | Schwellenwert für die Anzahl der Optionen, nach dem die Virtualisierung aktiviert wird                                          | `number`                                 | `50`                                                     |
-| [width](#control-width)                                   | Breite des Steuerelements                                                                                                        | `string \| number`                       | `undefined`                                              |
-| errorMessage                                              | Fehlermeldungstext                                                                                                               | `string`                                 |                                                          |
-| errorPlacement                                            | Position des Fehlers                                                                                                             | `outside` `inside`                       | `outside`                                                |
-| validationState                                           | Validierungsstatus                                                                                                               | `"invalid"`                              |                                                          |
-| [hasCounter](#counter)                                    | Zeigt die Anzahl der ausgewählten Optionen an. Der Zähler erscheint nur, wenn die Mehrfachauswahl [multiple](#selecting-multiple-options) aktiviert ist. | `boolean`                                |                                                          |
+
+`inputProps` trägt alles, was das Eingabefeld eines Combobox benötigt: den Wert, die Handler, den Platzhalter und die ARIA-Verbindung — `role`, `aria-label`, `aria-controls`, `aria-activedescendant`, `aria-expanded`, `aria-autocomplete`. Es trägt auch `size: 1`, einen Hinweis auf die Breite anstelle von ARIA: Es ermöglicht dem Eingabefeld, sich an das Popup anzupassen, anstatt die zwanzig Zeichen zu behalten, die ein `input` standardmäßig benötigt. Ohne sie hat der Filter keinen zugänglichen Namen und benennt keine aktive Option für einen Screenreader. Verteilen Sie ihn auf ein einfaches `input` zusammen mit `ref`. Eine Komponente mit einer eigenen API — sagen wir `TextInput` — nimmt die Eigenschaften, die sie besitzt (`value`, `placeholder`, `onChange`, `onKeyDown`), und übergibt den Rest über `controlProps` an das Element, was eine Zeile Destrukturierung erledigt; `onKeyDown` muss darunter sein, es trägt die gesamte Tastatur der Liste.
+
+GRAVITY_TRANSLATION_BLOCK_21_END
+
+GRAVITY_TRANSLATION_BLOCK_22_END
+
+### Rendern benutzerdefinierter Optionen
+
+Um benutzerdefinierte Optionen zu rendern, verwenden Sie die Eigenschaft `renderOption`. Sie wird mit der Option und dem Status ihrer Zeile aufgerufen: `isItemActive`, ob die Zeile die aktive ist (die, auf die `Enter` angewendet wird); `selected`, ob die Option ausgewählt ist; und `itemHeight`, die Höhe, die die Zeile hat — die von [getOptionHeight](#rendering-options-with-different-heights) zurückgegebene oder das Minimum der [size](#size). Die Zeile selbst zeigt die Auswahl neben dem, was diese rendert: ein Häkchen in einem [mehrfachen](#selecting-multiple-options) `Select` und eine Hervorhebung in einem einzelnen. Eine Option, die ihre eigene Anzeige zeichnet — ein `Radio` oder ein `Checkbox` basierend auf `selected` — schaltet diese mit `selectionStyle="none"` aus; ohne eine eigene wird die Auswahl unsichtbar. Ein solches Steuerelement ist Dekoration — die Zeile wählt die Option aus, und ein interaktives Element ist darin nicht erlaubt: Umschließen Sie das Steuerelement mit einem Element mit `inert` (`inert=""` vor React 19) und halten Sie den Text der Option außerhalb davon.
+
+`renderOptionGroup` ist dasselbe für die Überschrift einer Gruppe: die Gruppe und `{isItemActive, itemHeight}`.
+
+GRAVITY_TRANSLATION_BLOCK_23_END
+
+GRAVITY_TRANSLATION_BLOCK_24_END
+
+### Rendern ausgewählter benutzerdefinierter Optionen
+
+Um die Auswahl im Steuerelement zu rendern, verwenden Sie die Eigenschaft `renderSelectedOptions`. Sie wird mit allen ausgewählten Optionen in der Reihenfolge von `value` aufgerufen — ein Array mit einem Element in einem einzelnen Select — und nur, wenn ein Wert vorhanden ist. Ein Wert ohne Option wird als `{value}` übergeben, ohne `content`. Geben Sie den zurückgegebenen Elementen Schlüssel, wenn sie Zustand enthalten. Das Label, der Platzhalter, der Zähler und die Löschschaltfläche bleiben beim `Select`. Ohne die Eigenschaft zeigt das Steuerelement die Texte der Optionen, verbunden mit `, `.
+
+GRAVITY_TRANSLATION_BLOCK_25_END
+
+GRAVITY_TRANSLATION_BLOCK_26_END
+
+### Rendering options with different heights
+
+Eine Zeile ist so hoch wie ihr Inhalt und nicht kürzer als das Minimum ihrer `size` (24, 28, 36 und 44 Pixel, wie die Steuerelemente gleicher Größe; auf Mobilgeräten nimmt jede Zeile die 44 von `xl` ein) – es sei denn, Sie legen die Höhe selbst fest. Wenn Sie Optionen mit unterschiedlichen Höhen rendern müssen, können Sie die `option.data`-Eigenschaft verwenden. Sie speichert Informationen darüber, welche Höhe Sie für die Optionen festlegen müssen, sowie die `getOptionHeight`-Eigenschaft, um diesen Wert festzulegen: Die von ihr zurückgegebene Zahl wird zur Höhe der Zeile und zur Schätzung, mit der der [Virtualizer](#virtualized-list) die Zeilen positioniert.
+
+GRAVITY_TRANSLATION_BLOCK_27_END
+
+GRAVITY_TRANSLATION_BLOCK_28_END
+
+### Rendering custom counter
+
+Um einen benutzerdefinierten Zähler zu rendern, verwenden Sie die `renderCounter`-Eigenschaft. Der Zähler wird nur angezeigt, wenn die Mehrfachauswahl aktiviert ist (`multiple={true}`) und `hasCounter={true}`.
+
+GRAVITY_TRANSLATION_BLOCK_29_END
+
+GRAVITY_TRANSLATION_BLOCK_30_END
+
+### Rendering options list
+
+Die `renderPopup`-Eigenschaft ermöglicht es Ihnen, den Inhalt der Optionsliste zu steuern: Ändern Sie die Reihenfolge der Standardelemente (Filter, Liste), blenden Sie sie aus oder fügen Sie benutzerdefinierte Elemente dazwischen, davor oder danach ein.
+
+GRAVITY_TRANSLATION_BLOCK_31_END
+
+GRAVITY_TRANSLATION_BLOCK_32_END
+
+### Error
+
+Dieser `Select`-Status ist für falsche Benutzereingaben. Um das Erscheinungsbild von `Select` zu ändern, verwenden Sie die `validationState`-Eigenschaft mit dem Wert `"invalid"`. Optional können Sie eine Fehlermeldung über die `errorMessage`-Eigenschaft angeben. Standardmäßig wird der Nachrichtentext außerhalb der Komponente gerendert.
+Sie können dies mit der `errorPlacement`-Eigenschaft ändern.
+
+GRAVITY_TRANSLATION_BLOCK_33_END
+
+## Properties
+
+| Name                                                         | Beschreibung                                                                                                                     | Typ                                      | Standardwert                                             |
+| :----------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------- | :------------------------------------------------------- |
+| className                                                    | Steuert die Klasse des Steuerelements                                                                                            | `string`                                 |                                                          |
+| defaultValue                                                 | Standardwerte, die ausgewählte Optionen darstellen, falls ein unkontrollierter Zustand verwendet wird                           | `V[]`                                    |                                                          |
+| disabled                                                     | Zeigt an, dass der Benutzer nicht mit dem Steuerelement interagieren kann                                                       | `boolean`                                | `false`                                                  |
+| [filterable](#filtering-options)                             | Zeigt an, dass das Auswahl-Popup einen Filterbereich hat                                                                        | `boolean`                                | `false`                                                  |
+| filterOption                                                 | Wird verwendet, um eine Option mit dem Filter zu vergleichen                                                                     | `function`                               |                                                          |
+| filterPlaceholder                                            | Standardtext für den Platzhalter des Filterfelds                                                                                 | `string`                                 |                                                          |
+| [getOptionText](#the-text-of-an-option)                      | Der Text einer Option: der Trigger, der Filter und die Suche nach den ersten Buchstaben verwenden ihn                               | `function`                               | Zeichenfolgeninhalt, andernfalls der Wert                |
+| [getValueKey](#non-string-values)                            | Der Zeichenfolgenschlüssel eines Werts: die ID seiner Zeile, das Formularfeld, die Gleichheit von Werten                         | `(value: V) => string`                   | die Zeichenfolge selbst, `String()` für andere primitive |
+| [getOptionHeight](#rendering-options-with-different-heights) | Wird verwendet, um die Höhe von benutzerdefinierten Optionen festzulegen                                                         | `function`                               |                                                          |
+| getOptionGroupHeight                                         | Wird verwendet, um die Höhe von benutzerdefinierten Optionsgruppen festzulegen                                                   | `function`                               |                                                          |
+| hasClear                                                     | Aktiviert die Anzeige eines Symbols zum Löschen ausgewählter Optionen                                                           | `boolean`                                | `false`                                                  |
+| id                                                           | `id` HTML-Attribut                                                                                                               | `string`                                 |                                                          |
+| label                                                        | Beschriftung des Steuerelements; auf Mobilgeräten auch der Titel des Blattes                                                    | `string`                                 |                                                          |
+| loading                                                      | Fügt das Ladeelement am Ende der Optionsliste hinzu. Funktioniert wie eine permanente Ladeanzeige, während die Optionsliste leer ist. | `boolean`                                |                                                          |
+| [multiple](#selecting-multiple-options)                      | Zeigt an, ob mehrere Optionen in der Liste ausgewählt werden können                                                               | `boolean`                                | `false`                                                  |
+| name                                                         | Name des Steuerelements                                                                                                          | `string`                                 |                                                          |
+| onBlur                                                       | Handler, der aufgerufen wird, wenn das Element den Fokus verliert.                                                               | `function`                               |                                                          |
+| filter                                                       | Gesteuerter Filterwert                                                                                                           | `string`                                 | `''`                                                     |
+| onFilterChange                                               | Wird jedes Mal nach der Änderung des Filters ausgelöst                                                                          | `function`                               |                                                          |
+| onFocus                                                      | Handler, der aufgerufen wird, wenn das Element den Fokus erhält                                                                  | `function`                               |                                                          |
+| onLoadMore                                                   | Wird ausgelöst, wenn die Ladeanzeige sichtbar wird                                                                              | `function`                               |                                                          |
+| onOpenChange                                                 | Wird jedes Mal nach der Änderung der Sichtbarkeit des Popups ausgelöst                                                          | `function`                               |                                                          |
+| onUpdate                                                     | Wird ausgelöst, wenn eine Änderung des `Select`-Werts vom Benutzer bestätigt wird                                                | `function`                               |                                                          |
+| [options](#options)                                          | Zu wählende Optionen                                                                                                             | `SelectOptions`                          |                                                          |
+| pin                                                          | Ansicht des Steuerelementrahmens                                                                                                 | `string`                                 | `'round-round'`                                          |
+| placeholder                                                  | Platzhaltertext                                                                                                                  | `string`                                 |                                                          |
+| popupClassName                                               | Klasse des Popups mit der Optionsliste                                                                                           | `string`                                 |                                                          |
+| popupPlacement                                               | Position des Popups                                                                                                              | `PopupPlacement` `Array<PopupPlacement>` | `['bottom-start', 'bottom-end', 'top-start', 'top-end']` |
+| [popupWidth](#popup-width)                                   | Breite des Popups                                                                                                                | `number \| 'fit'`                        |                                                          |
+| sheetClassName                                               | Klasse des Blattes                                                                                                               | `string`                                 |                                                          |
+| qa                                                           | Test-ID-Attribut (`data-qa`)                                                                                                     | `string`                                 |                                                          |
+| [renderControl](#rendering-custom-control)                   | Wird verwendet, um das Steuerelement des Benutzers zu rendern                                                                    | `function`                               |                                                          |
+| [renderCounter](#rendering-custom-counter)                   | Wird verwendet, um den Zähler des Benutzers zu rendern. Funktioniert nur mit [hasCounter](#counter).                               | `function`                               |                                                          |
+| renderEmptyOptions                                           | Wird verwendet, um einen Knoten für eine leere Optionsliste zu rendern                                                           | `function`                               |                                                          |
+| [renderFilter](#rendering-custom-filter-section)             | Wird verwendet, um den Filterbereich des Benutzers zu rendern                                                                    | `function`                               |                                                          |
+| [renderOption](#rendering-custom-options)                    | Wird verwendet, um die Optionen des Benutzers zu rendern                                                                        | `function`                               |                                                          |
+| renderOptionGroup                                            | Wird verwendet, um die Optionsgruppen des Benutzers zu rendern                                                                  | `function`                               |                                                          |
+| [renderSelectedOptions](#rendering-custom-selected-options)  | Wird verwendet, um die Auswahl im Steuerelement zu rendern                                                                       | `function`                               |                                                          |
+| [renderPopup](#rendering-options-list)                       | Wird verwendet, um den Inhalt der Optionsliste zu rendern                                                                       | `function`                               |                                                          |
+| [selectionStyle](#rendering-custom-options)                  | Wie eine Zeile anzeigt, dass ihre Option ausgewählt ist: das Häkchen oder die Hervorhebung (`auto`) oder nichts (`none`)       | `'auto' \| 'none'`                       | `'auto'`                                                 |
+| [size](#size)                                                | Größe des Steuerelements / der Optionen                                                                                          | `string`                                 | `'m'`                                                    |
+| value                                                        | Werte, die ausgewählte Optionen darstellen                                                                                      | `V[]`                                    |                                                          |
+| view                                                         | Ansicht des Steuerelements                                                                                                       | `string`                                 | `'normal'`                                               |
+| [width](#control-width)                                      | Breite des Steuerelements                                                                                                        | `string \| number`                       | `undefined`                                              |
+| errorMessage                                                 | Fehlermeldung                                                                                                                    | `string`                                 |                                                          |
+| errorPlacement                                               | Position des Fehlers                                                                                                             | `outside` `inside`                       | `outside`                                                |
+| validationState                                              | Validierungsstatus                                                                                                               | `"invalid"`                              |                                                          |
+| [hasCounter](#counter)                                       | Zeigt die Anzahl der ausgewählten Optionen an. Der Zähler erscheint nur, wenn die [multiple](#selecting-multiple-options) Auswahl aktiviert ist. | `boolean`                                |                                                          |
 
 ## CSS API
+
+Die Klassennamen des Markup sind kein öffentlicher Vertrag – die Zeilen des Popups werden von der
+Liste und ihrer Zeilenansicht gerendert, und ihr Markup ändert sich mit dem Kit. Was unterstützt wird:
+
+- die untenstehenden Variablen;
+- das Aussehen einer Zeile, über die `--g-list-item-view-*` Variablen der
+  [Zeilenansicht](../ListItemView/README.md#css-api): ihre Farben, ihre Höhe, ihr Padding und ihr Radius,
+  die ansonsten der [Größe](#size) des `Select` folgen. Setzen Sie sie auf `popupClassName` oder
+  `sheetClassName` – zum Beispiel `--g-list-item-view-min-height: 48px` für höhere Zeilen auf Mobilgeräten.
+  Die Schätzung des [Virtualizers](#virtualized-list) und die `itemHeight` von `renderOption` stammen immer noch
+  von der Größe: wenn die genaue Zahl wichtig ist, verwenden Sie `getOptionHeight`;
+- der Inhalt einer Zeile, über `renderOption`, `renderOptionGroup` und `renderSelectedOptions`.
 
 | Name                             | Beschreibung                                   |
 | :------------------------------- | :-------------------------------------------- |
