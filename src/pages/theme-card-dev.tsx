@@ -2,12 +2,11 @@ import type {GetServerSideProps} from 'next';
 import React from 'react';
 
 import {Layout} from '../components/Layout/Layout';
-import {allThemes, loadThemePayload} from '../components/Themes/gallery';
+import {loadThemePayload, useThemePages} from '../components/Themes/gallery';
 import {ThemeCard} from '../components/Themes/ui/ThemeCard/ThemeCard';
 import {getI18nProps} from '../utils/i18next';
 
-// Developer-only scratch page; 404s in production unless the preview-routes
-// flag is set (same gate as the card-preview capture route).
+// Developer-only scratch page; returns 404 unless preview routes are explicitly enabled.
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
     if (process.env.NEXT_PUBLIC_ENABLE_PREVIEW_ROUTES !== '1') {
         return {notFound: true};
@@ -20,6 +19,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 };
 
 export const ThemeCardDevPage = () => {
+    const {themes: allThemes, hasMore, loadMore} = useThemePages(true);
     const [selectedId, setSelectedId] = React.useState<string | null>(null);
     const [lastApplied, setLastApplied] = React.useState<string | null>(null);
     const [payloadInfo, setPayloadInfo] = React.useState<string>('');
@@ -66,6 +66,11 @@ export const ThemeCardDevPage = () => {
                         />
                     ))}
                 </div>
+                {hasMore && (
+                    <button type="button" onClick={loadMore} style={{marginTop: '24px'}}>
+                        Load more
+                    </button>
+                )}
             </div>
         </Layout>
     );

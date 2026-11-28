@@ -17,8 +17,7 @@ import {getI18nProps} from '../utils/i18next';
 
 const PREVIEW_CLASS = 'theme-gallery-drawer-dev-preview';
 
-// Developer-only scratch page; 404s in production unless the preview-routes
-// flag is set (same gate as the card-preview capture route).
+// Developer-only scratch page; returns 404 unless preview routes are explicitly enabled.
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
     if (process.env.NEXT_PUBLIC_ENABLE_PREVIEW_ROUTES !== '1') {
         return {notFound: true};

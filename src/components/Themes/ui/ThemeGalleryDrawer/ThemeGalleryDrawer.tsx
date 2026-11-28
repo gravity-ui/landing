@@ -1,13 +1,14 @@
 import {Xmark} from '@gravity-ui/icons';
 import {BREAKPOINTS} from '@gravity-ui/page-constructor';
-import {Button, Drawer, Icon, Text} from '@gravity-ui/uikit';
+import {Button, Drawer, Flex, Icon, Loader, Text} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
 
 import {useWindowBreakpoint} from '../../../../hooks/useWindowBreakpoint';
 import {block, getContentScrollElement} from '../../../../utils';
 import type {ThemePreviewMode} from '../../gallery';
-import {featuredThemes} from '../../gallery';
+import {useFeaturedThemes} from '../../gallery';
+import {GalleryLoadError} from '../GalleryLoadError/GalleryLoadError';
 import {ThemeCard} from '../ThemeCard/ThemeCard';
 
 import './ThemeGalleryDrawer.scss';
@@ -61,6 +62,7 @@ export const ThemeGalleryDrawer: React.FC<ThemeGalleryDrawerProps> = ({
     onOpenAllThemes,
 }) => {
     const {t} = useTranslation('themes');
+    const {themes: featuredThemes, loading, error, retry} = useFeaturedThemes(open);
     const breakpoint = useWindowBreakpoint();
     // page-constructor's hook returns at most xl=1185 (its BREAKPOINTS map
     // tops out there), so we can't ask it about >= xxl. Track the xxl
@@ -110,6 +112,21 @@ export const ThemeGalleryDrawer: React.FC<ThemeGalleryDrawerProps> = ({
         };
     }, [open, isDesktop]);
 
+    let status: React.ReactNode = null;
+    if (loading) {
+        status = (
+            <Flex alignItems="center" justifyContent="center" className={b('status')}>
+                <Loader size="m" />
+            </Flex>
+        );
+    } else if (error) {
+        status = (
+            <Flex alignItems="center" justifyContent="center" className={b('status')}>
+                <GalleryLoadError onRetry={retry} />
+            </Flex>
+        );
+    }
+
     const handleOpenChange = (next: boolean) => {
         if (!next) {
             onClose();
@@ -156,12 +173,14 @@ export const ThemeGalleryDrawer: React.FC<ThemeGalleryDrawerProps> = ({
                         <ThemeCard
                             key={theme.id}
                             metadata={theme}
+                            active={open}
                             selected={theme.id === activeThemeId}
                             onApply={onApplyTheme}
                             className={b('card')}
                         />
                     ))}
                 </div>
+                {status}
                 {/* Figma 3325:119973 / 3325:124927 places the "All Gallery
                     Themes" CTA as the last card-sized slot at the end of the
                     tablet drawer's horizontal scroll; desktop renders it under

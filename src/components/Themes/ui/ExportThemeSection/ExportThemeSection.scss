@@ -1,4 +1,5 @@
 @use '../../../../variables.scss';
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
 
 $block: '.#{variables.$ns}export-theme-section';
 
@@ -7,5 +8,15 @@ $block: '.#{variables.$ns}export-theme-section';
 
     & &__export-button {
         width: min-content;
+    }
+
+    @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
+        &__actions {
+            flex-direction: column;
+        }
+
+        & &__export-button {
+            width: 100%;
+        }
     }
 }

@@ -1,0 +1,177 @@
+import {SUBMISSION_STEP} from '../../../../api/themes/types';
+import type {SubmissionEvent, ThemeInput} from '../../../../api/themes/types';
+
+import {ERROR_KEYS} from './submissionErrors';
+
+export const API_BASE = '/api/themes';
+export const ACTIVE_JOB_KEY = 'themes.activeSubmissionReceipt';
+
+export interface StoredSubmission {
+    receipt: string;
+    input: ThemeInput;
+    expiresAt: number;
+    dispatchAttempted: boolean;
+    userId: number;
+    requestFingerprint: string;
+    // Workflow run reported by the server; sent back so it does not search for the run again.
+    runId?: number;
+}
+
+export function loadSubmission(key: string): StoredSubmission | null {
+    const value = localStorage.getItem(key);
+    return value ? JSON.parse(value) : null;
+}
+
+export function saveSubmission(key: string, job: StoredSubmission) {
+    localStorage.setItem(key, JSON.stringify(job));
+}
+
+export function clearSubmission(key: string) {
+    localStorage.removeItem(key);
+}
+
+const isFiniteNumber = (value: unknown): value is number =>
+    typeof value === 'number' && Number.isFinite(value);
+
+function isSubmissionEvent(value: unknown): value is SubmissionEvent {
+    if (!value || typeof value !== 'object') {
+        return false;
+    }
+    const event = value as Record<string, unknown>;
+    switch (event.type) {
+        case 'step':
+            return (
+                isFiniteNumber(event.index) &&
+                isFiniteNumber(event.count) &&
+                (event.runId === undefined || isFiniteNumber(event.runId))
+            );
+        case 'done':
+            return (
+                typeof event.pullRequestUrl === 'string' && isFiniteNumber(event.pullRequestNumber)
+            );
+        case 'error':
+            return (
+                typeof event.code === 'string' &&
+                (event.code === 'run-invalid' ||
+                    Object.prototype.hasOwnProperty.call(ERROR_KEYS, event.code))
+            );
+        default:
+            return false;
+    }
+}
+
+// A body that is not JSON (a proxy error page) did not come from the submission API:
+// the caller handles it as a lost response.
+async function readJson(response: Response): Promise<unknown> {
+    try {
+        return await response.json();
+    } catch {
+        throw new Error(`Unreadable response ${response.status}`);
+    }
+}
+
+// Guard rejections such as {error: 'forbidden'} carry no submission code: show the generic error.
+function toSubmissionEvent(body: unknown): SubmissionEvent {
+    return isSubmissionEvent(body) ? body : {type: 'error', code: 'github'};
+}
+
+async function requestJob(path: string, body: unknown, signal: AbortSignal) {
+    const response = await fetch(`${API_BASE}/${path}`, {
+        method: 'POST',
+        credentials: 'same-origin',
+        signal,
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(body),
+    });
+    if (response.status === 401) {
+        return {type: 'error', code: 'session-expired'} as const;
+    }
+    return toSubmissionEvent(await readJson(response));
+}
+
+async function dispatchJob(job: StoredSubmission, key: string, signal: AbortSignal) {
+    if (job.dispatchAttempted || loadSubmission(key)?.dispatchAttempted) {
+        return null;
+    }
+    // Persist before the write: a lost response must only be reconciled by polling.
+    saveSubmission(key, {...job, dispatchAttempted: true});
+    let response: Response;
+    try {
+        response = await fetch(`${API_BASE}/dispatch`, {
+            method: 'POST',
+            credentials: 'same-origin',
+            signal,
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({receipt: job.receipt, input: job.input}),
+        });
+    } catch {
+        return null;
+    }
+    if (response.ok) {
+        return null;
+    }
+    let body: unknown;
+    if (response.status !== 401) {
+        try {
+            body = await readJson(response);
+        } catch {
+            // A proxy error page may hide an accepted dispatch, like a lost response.
+            return null;
+        }
+    }
+    // An explicit rejection is not an ambiguous write. Retry can dispatch this receipt.
+    saveSubmission(key, {...job, dispatchAttempted: false});
+    if (response.status === 401) {
+        return {type: 'error', code: 'session-expired'} as const;
+    }
+    return toSubmissionEvent(body);
+}
+
+// Storage is fresher than the job object the polling loop started with.
+function storedRunId(job: StoredSubmission, key: string) {
+    const stored = loadSubmission(key);
+    return stored?.receipt === job.receipt ? stored.runId : undefined;
+}
+
+function saveRunId(job: StoredSubmission, key: string, runId: number | undefined) {
+    const stored = loadSubmission(key);
+    if (stored?.receipt !== job.receipt || stored.runId === runId) {
+        return;
+    }
+    saveSubmission(key, {...stored, runId});
+}
+
+export async function advanceSubmission(
+    job: StoredSubmission,
+    key: string,
+    signal: AbortSignal,
+    onFinalizing: (count: number) => void,
+): Promise<SubmissionEvent> {
+    const rejection = await dispatchJob(job, key, signal);
+    if (rejection) {
+        return rejection;
+    }
+    const runId = storedRunId(job, key);
+    const event = await requestJob('status', {receipt: job.receipt, runId}, signal);
+    if (event.type === 'error' && event.code === 'run-invalid') {
+        saveRunId(job, key, undefined);
+        return event;
+    }
+    if (event.type !== 'step') {
+        return event;
+    }
+    saveRunId(job, key, event.runId);
+    if (event.index === SUBMISSION_STEP.pullRequest && !signal.aborted) {
+        onFinalizing(event.count);
+        const finalized = await requestJob(
+            'finalize',
+            {receipt: job.receipt, runId: event.runId},
+            signal,
+        );
+        if (finalized.type === 'error' && finalized.code === 'run-invalid') {
+            saveRunId(job, key, undefined);
+        }
+        return finalized;
+    }
+    return event;
+}

@@ -201,9 +201,7 @@ $contentMaxWidth: calc(1232px + 16px + 80px);
         }
     }
 
-    // Phone: keep only the tabs in the sticky bar. Import/Export wrapped onto
-    // a second row and doubled the bar's height; both stay available in the
-    // in-flow toolbar above (DATAUI-3748, lead review).
+    // Phone: keep actions in the in-flow toolbar and only tabs in the sticky bar.
     @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
         &__sticky-bar &__header-action-buttons {
             display: none;
@@ -241,11 +239,7 @@ $contentMaxWidth: calc(1232px + 16px + 80px);
         }
     }
 
-    // Sticky bar's inner row uses the same wrap behaviour as the in-flow
-    // wrapper — when the cluster of tabs + toggle + Import/Export doesn't
-    // fit on one line it breaks to two, and each row scrolls horizontally
-    // on its own if still too wide (handled by `__tags` / `__header-
-    // action-buttons` below).
+    // Sticky and in-flow toolbars share the same wrapping action row.
     &__sticky-bar &__header-actions {
         // The base `header-actions` rule below applies `margin: 0 -16px;
         // padding-inline: 16px` on phone to give the in-flow wrapper a
@@ -268,12 +262,7 @@ $contentMaxWidth: calc(1232px + 16px + 80px);
         max-width: 100vw;
     }
 
-    // Tabs cluster and action-buttons cluster both sit on the parent
-    // `__header-actions` row. When the row wraps (narrow viewport), each
-    // cluster occupies its own line. Within a line, each cluster scrolls
-    // horizontally on its own if its natural width still exceeds the line
-    // — that way long tabs scroll independently of the Import/Export
-    // cluster on the next line.
+    // Tabs scroll independently; actions wrap within the available width.
 
     &__header-action-buttons {
         display: flex;
@@ -282,26 +271,20 @@ $contentMaxWidth: calc(1232px + 16px + 80px);
         gap: var(--g-spacing-2);
         max-width: 100%;
         min-width: 0;
-        overflow-x: auto;
-        scrollbar-width: none;
 
-        &::-webkit-scrollbar {
-            display: none;
-        }
-
-        // Phone: the cluster wraps to its own line — claim the full row so
-        // Import / Export can stretch 50/50 across it (see __theme-action-
-        // btn below). Without this the cluster only takes intrinsic width
-        // and the buttons collapse to fit the small content.
+        // Phone: all three actions share a row below the tabs.
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
             flex: 1 1 100%;
-            overflow-x: visible;
 
             > * {
                 flex: 1 1 0;
                 min-width: 0;
             }
         }
+    }
+
+    &__theme-action-buttons {
+        min-width: 0;
     }
 
     &__tags {
@@ -317,12 +300,7 @@ $contentMaxWidth: calc(1232px + 16px + 80px);
         }
     }
 
-    // Inside-the-scroll gutter — only inside the sticky bar, where the bar
-    // spans edge-to-edge and we want the tabs to scroll up to the viewport
-    // edge with a visual margin at rest. The in-flow wrapper sits inside
-    // gridContainerOffsets() so it doesn't need this. Same idea for the
-    // Import / Export cluster (which has overflow-x: visible on phone, so
-    // the padding here is a plain inset).
+    // Match the in-flow toolbar gutters inside the full-width sticky bar.
     @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
         &__sticky-bar &__tags,
         &__sticky-bar &__header-action-buttons {
@@ -335,8 +313,7 @@ $contentMaxWidth: calc(1232px + 16px + 80px);
         border-radius: var(--g-border-radius-m);
         width: fit-content;
 
-        // Phone: Import + Export share the cluster row 50/50 instead of
-        // each demanding 100% of the parent (which would overflow).
+        // Phone: share the available row equally with compact labels.
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
             flex: 1 1 0;
             min-width: 0;

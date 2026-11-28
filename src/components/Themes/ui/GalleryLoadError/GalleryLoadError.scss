@@ -1,0 +1,16 @@
+@use '../../../../variables.scss';
+@use '@gravity-ui/illustrations/styles/theme.scss' as illustrations;
+
+$block: '.#{variables.$ns}gallery-load-error';
+
+// The landing does not load the illustration palette globally: the Themer
+// sets `--gil-*` only inside its previews, so the error state brings its own.
+.g-root_theme_light #{$block},
+.g-root_theme_light-hc #{$block} {
+    @include illustrations.g-illustrations-colors-light;
+}
+
+.g-root_theme_dark #{$block},
+.g-root_theme_dark-hc #{$block} {
+    @include illustrations.g-illustrations-colors-dark;
+}

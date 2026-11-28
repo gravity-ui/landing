@@ -1,0 +1,176 @@
+import {randomUUID} from 'crypto';
+
+import {
+    RendererWorkflowFailedError,
+    assertJobConfiguration,
+    ciConfig,
+    collectResult,
+    createCiOctokit,
+    dispatchRun,
+    findRun,
+    parseRunId,
+    workflowDispatchBody,
+} from './ci';
+import {DISPATCH_RECONCILIATION_MS, DISPATCH_WINDOW_MS} from './config';
+import {buildGalleryFiles} from './gallery-files';
+import {commitGalleryFiles, openPullRequest, prepareFork} from './github-pr';
+import {hashJobInput, isJobInputValid} from './job-input';
+import {
+    UserSessionExpiredError,
+    createUserOctokit,
+    fetchGithubProfile,
+    getErrorStatus,
+} from './oauth';
+import {reserveDispatch, submissionJobId} from './quota';
+import {RECEIPT_TTL_SECONDS, ReceiptError, signReceipt, verifyReceipt} from './receipt';
+import {validateThemeSubmission} from './submission-validation';
+import {SUBMISSION_STEP, SUBMISSION_STEP_COUNT} from './types';
+import type {SubmissionEvent, ThemeInput} from './types';
+
+// Preparation has no external write or quota charge: save its response before dispatch.
+export async function submitTheme(token: string, body: unknown) {
+    const config = ciConfig();
+    const {profile, metadata, payload, upstreamState} = await validateThemeSubmission(token, body);
+    const createdAt = Date.now();
+    const job = {
+        id: submissionJobId(profile.id, randomUUID()),
+        userId: profile.id,
+        createdAt,
+        dispatchBefore: createdAt + DISPATCH_WINDOW_MS,
+        themeHash: hashJobInput(metadata, payload),
+        revision: config.revision,
+        repository: `${config.owner}/${config.repo}`,
+        rendererTag: config.tag,
+        upstream: upstreamState,
+    };
+    const input = {metadata, payload};
+    workflowDispatchBody(job, input);
+    return {
+        receipt: await signReceipt(job),
+        input,
+        expiresAt: createdAt + RECEIPT_TTL_SECONDS * 1000,
+    };
+}
+
+async function authenticate(token: string, receipt: unknown) {
+    const octokit = createUserOctokit(token);
+    const profile = await fetchGithubProfile(octokit).catch((error: unknown) => {
+        if (getErrorStatus(error) === 401) {
+            throw new UserSessionExpiredError();
+        }
+        throw error;
+    });
+    const job = await verifyReceipt(receipt, profile.id);
+    assertJobConfiguration(job);
+    return {octokit, profile, job};
+}
+
+export async function dispatchThemeJob(token: string, receipt: unknown, input: ThemeInput) {
+    const {job} = await authenticate(token, receipt);
+    if (!isJobInputValid(input, job.themeHash)) {
+        throw new ReceiptError('receipt-input');
+    }
+    const ci = createCiOctokit();
+    if (await findRun(ci, job)) {
+        return {accepted: true};
+    }
+    if (Date.now() > job.dispatchBefore) {
+        throw new ReceiptError('dispatch-expired');
+    }
+    workflowDispatchBody(job, input);
+    await reserveDispatch(ci, job.userId);
+    await dispatchRun(ci, job, input);
+    return {accepted: true};
+}
+
+// No dispatch, quota reservation, fork or PR mutation in status requests.
+// A known run id skips the run search: one App request per poll instead of two.
+export async function readThemeJob(
+    token: string,
+    receipt: unknown,
+    knownRunId: unknown,
+): Promise<SubmissionEvent> {
+    const {job} = await authenticate(token, receipt);
+    let runId = parseRunId(knownRunId);
+    const ci = createCiOctokit();
+    if (runId === undefined) {
+        const run = await findRun(ci, job);
+        if (!run) {
+            if (Date.now() > job.dispatchBefore + DISPATCH_RECONCILIATION_MS) {
+                return {type: 'error', code: 'dispatch-unconfirmed', terminal: true};
+            }
+            return {type: 'step', index: SUBMISSION_STEP.waiting, count: SUBMISSION_STEP_COUNT};
+        }
+        runId = run.id;
+    }
+    try {
+        const result = await collectResult(ci, {...job, runId});
+        return {
+            type: 'step',
+            index: result ? SUBMISSION_STEP.pullRequest : SUBMISSION_STEP.rendering,
+            count: SUBMISSION_STEP_COUNT,
+            runId,
+        };
+    } catch (error) {
+        if (error instanceof RendererWorkflowFailedError) {
+            return {type: 'error', code: 'preview', terminal: true};
+        }
+        throw error;
+    }
+}
+
+export async function finalizeThemeJob(
+    token: string,
+    receipt: unknown,
+    knownRunId: unknown,
+): Promise<SubmissionEvent> {
+    const {octokit, profile, job} = await authenticate(token, receipt);
+    let runId = parseRunId(knownRunId);
+    const ci = createCiOctokit();
+    if (runId === undefined) {
+        const run = await findRun(ci, job);
+        if (!run) {
+            throw new Error('Workflow not found');
+        }
+        runId = run.id;
+    }
+    const result = await collectResult(ci, {...job, runId});
+    if (!result) {
+        return {
+            type: 'step',
+            index: SUBMISSION_STEP.rendering,
+            count: SUBMISSION_STEP_COUNT,
+            runId,
+        };
+    }
+    const {metadata, payload} = result.input;
+    const fork = await prepareFork(octokit);
+    if (fork.owner.toLowerCase() !== profile.login.toLowerCase()) {
+        throw new Error('Fork ownership mismatch');
+    }
+    const {branch, commitSha} = await commitGalleryFiles({
+        octokit,
+        fork,
+        state: job.upstream,
+        metadata,
+        files: buildGalleryFiles({metadata, payload, previews: result.previews}),
+        jobId: job.id,
+    });
+    const {data: ref} = await octokit.git.getRef({
+        owner: fork.owner,
+        repo: fork.repo,
+        ref: `heads/${branch}`,
+    });
+    if (ref.object.sha !== commitSha) {
+        throw new Error('Submission branch changed externally');
+    }
+    const pr = await openPullRequest({
+        octokit,
+        fork,
+        metadata,
+        login: profile.login,
+        branch,
+        commitSha,
+    });
+    return {type: 'done', pullRequestUrl: pr.url, pullRequestNumber: pr.number};
+}

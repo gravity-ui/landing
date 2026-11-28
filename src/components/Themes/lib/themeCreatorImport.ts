@@ -11,7 +11,7 @@ const getThemeFromJson = (userString: string) => {
     // generateJSON emits color refs as raw CSS-var names, which parseJSON keeps
     // as-is but generateCSS doesn't understand — so without this the colors of
     // any pasted JSON theme (incl. our own JSON export) fall back to default.
-    return normalizeImportedTheme(parseJSON(parsedUserInput));
+    return normalizeImportedTheme(parseJSON(parsedUserInput), parsedUserInput);
 };
 
 const getThemeFromCss = (userString: string) => {
