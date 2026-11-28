@@ -1,9 +1,3 @@
-<!--GITHUB_BLOCK-->
-
-# Button
-
-<!--/GITHUB_BLOCK-->
-
 Os botões atuam como um gatilho para certas ações. Embora este seja o seu propósito principal, em alguns casos muito raros, eles podem ser usados como links para navegar para outras páginas.
 
 ```tsx
@@ -24,29 +18,9 @@ Recomendamos o uso de apenas um botão desse tipo por página.
 
 `raised`: Colocado acima do conteúdo como um elemento flutuante, geralmente com uma localização fixa.
 
-<!--SANDBOX
-import {Button} from '@gravity-ui/uikit'
+GRAVITY_TRANSLATION_BLOCK_0_END
 
-export default function () {
-    return (
-        <>
-            <Button view="action" size="l">Action</Button>
-            <Button view="normal" size="l">Normal</Button>
-            <Button view="raised" size="l">Raised</Button>
-        </>
-    )
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-<Button view="action" size="l">Action</Button>
-<Button view="normal" size="l">Normal</Button>
-<Button view="raised" size="l">Raised</Button>
-```
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_1_END
 
 ### Contornado
 
@@ -56,37 +30,9 @@ SANDBOX-->
 
 Este tipo também possui variações semânticas que podem ser usadas quando semânticas adicionais são necessárias: `outlined-info`, `outlined-success`, `outlined-warning` e `outlined-danger`.
 
-<!--SANDBOX
-import {Button} from '@gravity-ui/uikit';
+GRAVITY_TRANSLATION_BLOCK_2_END
 
-export default function () {
-    return (
-        <>
-            <Button view="outlined" size="l">Outlined</Button>
-            <Button view="outlined-action" size="l">Outlined Action</Button>
-            <Button view="outlined-info" size="l">Outlined Info</Button>
-            <Button view="outlined-success" size="l">Outlined Success</Button>
-            <Button view="outlined-warning" size="l">Outlined Warning</Button>
-            <Button view="outlined-danger" size="l">Outlined Danger</Button>
-            <Button view="outlined-utility" size="l">Outlined Utility</Button>
-        </>
-    );
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-<Button view="outlined" size="l">Outlined</Button>
-<Button view="outlined-action" size="l">Outlined Action</Button>
-<Button view="outlined-info" size="l">Outlined Info</Button>
-<Button view="outlined-success" size="l">Outlined Success</Button>
-<Button view="outlined-warning" size="l">Outlined Warning</Button>
-<Button view="outlined-danger" size="l">Outlined Danger</Button>
-<Button view="outlined-utility" size="l">Outlined Utility</Button>
-```
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_3_END
 
 ### Plano
 
@@ -98,131 +44,34 @@ SANDBOX-->
 
 Ele também possui variações semânticas que podem ser usadas onde semânticas adicionais são necessárias: `outlined-info`, `outlined-success`, `outlined-warning` e `outlined-danger`.
 
-<!--SANDBOX
-import {Button} from '@gravity-ui/uikit';
+GRAVITY_TRANSLATION_BLOCK_4_END
 
-export default function () {
-    return (
-        <>
-            <Button view="flat" size="l">Flat</Button>
-            <Button view="flat-action" size="l">Flat Action</Button>
-            <Button view="flat-info" size="l">Flat Info</Button>
-            <Button view="flat-success" size="l">Flat Success</Button>
-            <Button view="flat-warning" size="l">Flat Warning</Button>
-            <Button view="flat-danger" size="l">Flat Danger</Button>
-            <Button view="flat-utility" size="l">Flat Utility</Button>
-        </>
-    );
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-<Button view="flat" size="l">Flat</Button>
-<Button view="flat-secondary" size="l">Flat Secondary</Button>
-<Button view="flat-action" size="l">Flat Action</Button>
-<Button view="flat-info" size="l">Flat Info</Button>
-<Button view="flat-success" size="l">Flat Success</Button>
-<Button view="flat-warning" size="l">Flat Warning</Button>
-<Button view="flat-danger" size="l">Flat Danger</Button>
-<Button view="flat-utility" size="l">Flat Utility</Button>
-```
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_5_END
 
 ### Contraste
 
-Os botões `normal-contrast`, `outline-contrast` e `flat-contrast` destacam ações contra fundos complexos, por exemplo, em um banner, ou contra um fundo inverso.
+`contrast` é escuro no tema claro e claro no tema escuro. `contrast-inverted` inverte essas cores. `contrast-light` permanece claro e `contrast-dark` permanece escuro em ambos os temas.
 
-<!--SANDBOX
-import {Button} from '@gravity-ui/uikit'
-import {type CSSProperties} from 'react';
+GRAVITY_TRANSLATION_BLOCK_6_END
 
-const containerStyle: CSSProperties = {
-    display: 'flex',
-    gap: 16,
-    backgroundColor: 'rgb(68, 38, 204)',
-    padding: '20px',
-    borderRadius: '8px'
-}
-
-export default function () {
-    return (
-        <div style={containerStyle}>
-            <Button view="normal-contrast" size="l">Normal Contrast</Button>
-            <Button view="outlined-contrast" size="l">Outlined Contrast</Button>
-            <Button view="flat-contrast" size="l">Flat Contrast</Button>
-        </div>
-    )
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-<Button view="normal-contrast" size="l">Normal Contrast</Button>
-<Button view="outlined-contrast" size="l">Outlined Contrast</Button>
-<Button view="flat-contrast" size="l">Flat Contrast</Button>
-```
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_7_END
 
 ## Ícones
 
-Para adicionar um ícone a um `Button`, use o componente [`Icon`](../Icon), que é um wrapper especial para SVGs.
+Para adicionar um ícone a um `Button`, use o componente [`Icon`](../Icon), que é um wrapper especial para SVGs. O tamanho do ícone é selecionado automaticamente de acordo com o tamanho do `Button`. Defina explicitamente o `size`, `width` ou `height` do `Icon` para substituí-lo.
 
-<!--SANDBOX
-import {Gear} from '@gravity-ui/icons';
-import {Button, Icon} from '@gravity-ui/uikit';
-
-export default function () {
-    return (
-        <>
-            <Button view="outlined" size="l">
-                <Icon data={Gear} size={18} />
-                Start
-            </Button>
-            <Button view="outlined" size="l">
-                End
-                <Icon data={Gear} size={18} />
-            </Button>
-            <Button view="outlined" size="l">
-                <Icon data={Gear} size={18} />
-                Both
-                <Icon data={Gear} size={18} />
-            </Button>
-            <Button view="outlined" size="l">
-                <Icon data={Gear} size={18} />
-            </Button>
-        </>
-    );
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
+Para dimensionar um ícone personalizado de acordo com o tamanho do `Button`, use a função de renderização `Button.Icon`:
 
 ```tsx
-<Button view="outlined" size="l">
-    <Icon data={Gear} size={18} />
-    Start
-</Button>
-<Button view="outlined" size="l">
-    End
-    <Icon data={Gear} size={18} />
-</Button>
-<Button view="outlined" size="l">
-    <Icon data={Gear} size={18} />
-    Both
-    <Icon data={Gear} size={18} />
-</Button>
-<Button view="outlined" size="l">
-    No text:
-    <Icon data={Gear} size={18} />
+<Button size="l">
+  <Button.Icon>{({size}) => <CustomIcon size={size} />}</Button.Icon>
+  Action
 </Button>
 ```
 
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_8_END
+
+GRAVITY_TRANSLATION_BLOCK_9_END
 
 ## Estados
 
@@ -234,87 +83,25 @@ Um `Button` pode ter diferentes estados:
 
 `selected`: Quando o usuário pode **Ativar** e **Desativar** o botão.
 
-<!--SANDBOX
-import {Button} from '@gravity-ui/uikit';
+GRAVITY_TRANSLATION_BLOCK_10_END
 
-export default function () {
-    return (
-        <>
-            <Button size="l" disabled>Disabled</Button>
-            <Button size="l" loading>Loading</Button>
-            <Button size="l" selected>Selected</Button>
-        </>
-    );
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-<Button size="l" disabled>Disabled</Button>
-<Button size="l" loading>Loading</Button>
-<Button size="l" selected>Selected</Button>
-```
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_11_END
 
 ### Gatilho de menu
 
 O `Button` muda automaticamente sua aparência quando atributos aria correspondentes (`aria-haspopup`, `aria-expanded`) são passados:
 
-<!--SANDBOX
-import {Button} from '@gravity-ui/uikit';
+GRAVITY_TRANSLATION_BLOCK_12_END
 
-export default function () {
-    return (
-        <>
-            <Button aria-haspopup="menu" aria-expanded="true">Menu</Button>
-        </>
-    );
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-<Button aria-haspopup="menu" aria-expanded="true">
-  Menu
-</Button>
-```
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_13_END
 
 ## Tamanho
 
 Use a propriedade `size` para gerenciar o tamanho do `Button`. O tamanho padrão é `m`.
 
-<!--SANDBOX
-import {Button} from '@gravity-ui/uikit';
+GRAVITY_TRANSLATION_BLOCK_14_END
 
-export default function () {
-    return (
-        <>
-            <Button size="xs">XS Size</Button>
-            <Button size="s">S Size</Button>
-            <Button size="m">M Size</Button>
-            <Button size="l">L Size</Button>
-            <Button size="xl">XL Size</Button>
-        </>
-    );
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-<Button size="xs">XS Size</Button>
-<Button size="s">S Size</Button>
-<Button size="m">M Size</Button>
-<Button size="l">L Size</Button>
-<Button size="xl">XL Size</Button>
-```
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_15_END
 
 ## Largura
 
@@ -324,107 +111,17 @@ Use a propriedade `width` para gerenciar como o `Button` se comporta dentro do c
 
 `max`: Corresponde à largura do `Button` à largura do contêiner pai, também ocultando o conteúdo transbordante com reticências.
 
-<!--SANDBOX
-import {Button} from '@gravity-ui/uikit';
-import {type CSSProperties} from 'react';
+GRAVITY_TRANSLATION_BLOCK_16_END
 
-const containerStyle: CSSProperties = {
-    width: 100,
-    border: '2px dashed gray',
-};
-
-const titleStyle: CSSProperties = {
-    textAlign: 'center',
-};
-
-export default function () {
-    return (
-        <>
-            <div style={containerStyle}>
-                <h4 style={titleStyle}>Default</h4>
-                <p>
-                    <Button>Text</Button>
-                </p>
-                <p>
-                    <Button>Very Long Text</Button>
-                </p>
-            </div>
-            <div style={containerStyle}>
-                <h4 style={titleStyle}>Auto</h4>
-                <p>
-                    <Button width="auto">Text</Button>
-                </p>
-                <p>
-                    <Button width="auto">Very Long Text</Button>
-                </p>
-            </div>
-            <div style={containerStyle}>
-                <h4 style={titleStyle}>Max</h4>
-                <p>
-                    <Button width="max">Text</Button>
-                </p>
-                <p>
-                    <Button width="max">Very Long Text</Button>
-                </p>
-            </div>
-        </>
-    );
-}
-SANDBOX-->
-
-## Pino
+## Pin
 
 A propriedade `pin` permite gerenciar a forma das bordas _início_ e _fim_ e é geralmente usada para combinar vários botões em uma única unidade.
 O valor da propriedade `pin` consiste nos nomes de estilo _início_ e _fim_ separados por um hífen, por exemplo, `round-brick`.
 Os estilos de borda são: `round` (padrão), `circle`, `brick` e `clear`.
 
-<!--SANDBOX
-import {Button} from '@gravity-ui/uikit';
+GRAVITY_TRANSLATION_BLOCK_17_END
 
-export default function () {
-    return (
-        <>
-            <div>
-                <Button view="action" size="l" pin="round-clear">Create</Button>
-                <Button view="action" size="l" pin="brick-round">...</Button>
-            </div>
-            <div>
-                <Button view="normal" size="l" pin="circle-clear">Start</Button>
-                <Button view="normal" size="l" pin="brick-brick" selected>Center</Button>
-                <Button view="normal" size="l" pin="clear-circle">End</Button>
-            </div>
-            <div>
-                <Button view="outlined" pin="brick-clear">1</Button>
-                <Button view="outlined" pin="clear-clear">2</Button>
-                <Button view="outlined" pin="clear-clear">3</Button>
-                <Button view="outlined" pin="clear-brick">4</Button>
-            </div>
-        </>
-    );
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-<div>
-    <Button view="action" size="l" pin="round-brick">Create</Button>
-    <Button view="action" size="l" pin="brick-round">...</Button>
-</div>
-<div>
-    <Button view="normal" size="l" pin="circle-clear">Start</Button>
-    <Button view="normal" size="l" pin="brick-brick" selected>Center</Button>
-    <Button view="normal" size="l" pin="clear-circle">End</Button>
-</div>
-<div>
-    <Button view="outlined" pin="brick-clear">1</Button>
-    <Button view="outlined" pin="clear-clear">2</Button>
-    <Button view="outlined" pin="clear-clear">3</Button>
-    <Button view="outlined" pin="clear-brick">4</Button>
-</div>
-```
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_18_END
 
 ## Propriedades
 
@@ -461,7 +158,7 @@ O `Button` aceita quaisquer props válidos de elemento `button` ou `a`, além de
 | `--g-button-focus-outline-offset`   | Deslocamento do contorno de foco      |
 | `--g-button-height`                 | Altura (altura da linha)      |
 | `--g-button-padding`                | Preenchimentos laterais             |
-| `--g-button-border-radius`          | Raio da borda             |
+| `--g-button-border-radius`          | Raio da borda           |
 | `--g-button-font-size`              | Tamanho da fonte do texto            |
 | `--g-button-icon-space`             | Espaço disponível para o ícone      |
 | `--g-button-icon-offset`            | Deslocamento do ícone               |
