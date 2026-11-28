@@ -1,4 +1,4 @@
-import {Button, Sheet} from '@gravity-ui/uikit';
+import {Button, Sheet} from '@gravity-ui/uikit-v8';
 import React from 'react';
 
 const getRandomText = (length: number) => {
@@ -33,8 +33,8 @@ export const SheetComponent = ({
         <React.Fragment>
             <Button onClick={() => setVisible(true)}>Show Sheet</Button>
             <Sheet
-                visible={visible}
-                onClose={() => setVisible(false)}
+                open={visible}
+                onOpenChange={setVisible}
                 title={title}
                 hideTopBar={hideTopBar}
                 allowHideOnContentScroll={allowHideOnContentScroll}

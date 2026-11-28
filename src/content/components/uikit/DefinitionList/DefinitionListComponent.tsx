@@ -1,4 +1,4 @@
-import {DefinitionList, DefinitionListProps} from '@gravity-ui/uikit';
+import {DefinitionList, DefinitionListProps} from '@gravity-ui/uikit-v8';
 import React from 'react';
 
 export const DefinitionListComponent = (props: DefinitionListProps) => {

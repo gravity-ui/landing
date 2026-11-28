@@ -1,11 +1,10 @@
 <!--GITHUB_BLOCK-->
 
-# 工具提示
+# Tooltip
 
 <!--/GITHUB_BLOCK-->
 
-一个使用其子节点作为锚点的简单文本提示。该组件仅接受文本内容，可能是一个很好的选择
-浏览器 `title` 属性的替代方案，它体积小，出现延迟时间长。
+一个简单的文本提示，它使用其子节点作为锚点。此组件仅接受文本内容，并且由于其体积小巧和延迟显示，可能是浏览器 `title` 属性的一个极佳替代方案。
 
 ## 用法
 
@@ -17,12 +16,11 @@ import {Tooltip} from '@gravity-ui/uikit';
 </Tooltip>;
 ```
 
-## 锚
+## 锚点
 
-`Tooltip` 为了工作，你应该通过有效的子女 `ReactElement` 身份获得接受 `ref` 财产的证书 `HTMLElement`
-以及其他的属性 `HTMLElement`。
+为了使 `Tooltip` 生效，您应该将一个有效的 `ReactElement` 作为子节点传递，该子节点接受用于 `HTMLElement` 的 `ref` 属性以及用于 `HTMLElement` 的其他属性。
 
-或者，你可以将函数作为子组件传递，手动为底层组件提供 ref 和 props：
+或者，您可以将函数作为子节点传递，以便手动为您的底层组件提供 ref 和 props：
 
 ```tsx
 import {Tooltip} from '@gravity-ui/uikit';
@@ -34,41 +32,44 @@ import {Tooltip} from '@gravity-ui/uikit';
 
 ## 受控状态
 
-默认情况下，通过将鼠标悬停在锚点上来 `Tooltip` 打开和隐藏。您可以更改此行为以手动设置打开状态。
-将你的状态传递给道 `open` 具并从 `onOpenChange` 回调中进行更改。
-`onOpenChange` 回调具有以下签名： `（打开：布尔值，事件？:事件，原因：“悬停” | '焦点') => 空白。`
+默认情况下，`Tooltip` 会在鼠标悬停在锚点上时打开和隐藏。您可以将此行为更改为手动设置打开状态。
+将您的状态传递给 `open` 属性，并通过 `onOpenChange` 回调进行更改。
+`onOpenChange` 回调具有以下签名：`(open: boolean, event?: Event, reason: 'hover' | 'focus') => void`。
 
-## 角色
+## Role
 
-`Tooltip` 接受更改其行为方式的可访问性条款的 `role` 财产。
-`tooltip` 当锚有自己的文本和其他 `label` 角色时，应使用角色（例如在图标按钮中）。
+`Tooltip` 接受 `role` 属性，该属性会改变其在可访问性方面的行为方式。
+当锚点具有自己的文本时，应使用 `tooltip` role；否则（例如在图标按钮中），应使用 `label` role。
 
 ## 属性
 
-| 姓名         | 描述                                                       |                       类型                       |    默认     |
-| :----------- | ---------------------------------------------------------- | :----------------------------------------------: | :---------: |
-| 儿童         | 的锚元素 `Tooltip`                                         |         `React.ReactElement` `Function`          |             |
-| className    | `class` HTML 属性                                          |                     `string`                     |             |
-| closeDelay   | 悬停 `Tooltip` 结束后要延迟隐藏的毫秒数                    |                     `number`                     |     `0`     |
-| 内容         | 内容将显示在 `Tooltip`                                     |                `React.ReactNode`                 |             |
-| 残疾的       | `Tooltip` 防止打开                                         |                    `boolean`                     |             |
-| 抵消         | `Tooltip` 与其锚点相抵消                                   |                     `number`                     |     `4`     |
-| onOpenChange | 处理打开状态变化的回调                                     |                    `Function`                    |             |
-| 打开         | 受控的开启状态                                             |                    `boolean`                     |             |
-| openDelay    | 显示悬停开始 `Tooltip` 后的延迟毫秒数                      |                     `number`                     |   `1000`    |
-| 放置         | `Tooltip` 相对于其锚点的位置                               | [`PopupPlacement`](../Popup/README.md#placement) |  `bottom`   |
-| qa           | `data-qa` HTML 属性，用于测试                              |                     `string`                     |             |
-| 角色         | 该角色用 `Tooltip` 于                                      |              `"tooltip"` `"label"`               | `"tooltip"` |
-| 战略         | 要使用的 CSS 位置属性的类型。                              |                `absolute` `fixed`                | `absolute`  |
-| 风格         | `style` HTML 属性                                          |              `React.CSSProperties`               |             |
-| 触发         | 应该触发打开的事件类型。默认情况下，鼠标悬停和聚焦都可以。 |                    `"focus"`                     |             |
+| 名称          | 描述                                                                                     |                       类型                       |     默认值     |
+| :------------ | :----------------------------------------------------------------------------------------------- | :----------------------------------------------: | :-------------: |
+| children      | `Tooltip` 的锚点元素                                                                                               |         `React.ReactElement` `Function`          |                 |
+| className     | `class` HTML 属性                                                                          |                     `string`                     |                 |
+| closeDelay    | 鼠标悬停结束后隐藏 `Tooltip` 的延迟毫秒数                                                                                               |                     `number`                     |       `0`       |
+| container     | 通过 `Portal` 组件挂载的 DOM 元素                                                                                                     |                  `HTMLElement`                   | `document.body` |
+| content       | 将在 `Tooltip` 中显示的内容                                                                                                     |                `React.ReactNode`                 |                 |
+| disablePortal | 禁用 `Portal`                                                                         |                    `boolean`                     |     `false`     |
+| disabled      | 防止 `Tooltip` 打开                                                                                             |                    `boolean`                     |                 |
+| offset        | `Tooltip` 相对于其锚点的偏移量                                                                                              |                     `number`                     |       `4`       |
+| onOpenChange  | 处理打开状态变化的事件                                                                                           |                    `Function`                    |                 |
+| open          | 受控的打开状态                                                                           |                    `boolean`                     |                 |
+| openDelay     | 鼠标悬停开始后显示 `Tooltip` 的延迟毫秒数                                                                                               |                     `number`                     |     `1000`      |
+| placement     | `Tooltip` 相对于其锚点的位置                                                                                      | [`PopupPlacement`](../Popup/README.md#placement) |    `bottom`     |
+| qa            | `data-qa` HTML 属性，用于测试                                                                                     |                     `string`                     |                 |
+| rest          | 光标在打开前必须静止的毫秒数。                                                                       |                     `number`                     |       `0`       |
+| role          | `Tooltip` 用于的 `role`                                                                  |              `"tooltip"` `"label"`               |   `"tooltip"`   |
+| strategy      | 要使用的 CSS `position` 属性的类型。                                                                                      |                `absolute` `fixed`                |   `absolute`    |
+| style         | `style` HTML 属性                                                                          |              `React.CSSProperties`               |                 |
+| trigger       | 应触发打开的事件类型。默认的 `all` 值同时指 `hover` 和 `focus`。                                                               |                `"all"` `"focus"`                 |     `"all"`     |
 
 ## CSS API
 
-| 姓名                           | 描述     |
-| :----------------------------- | :------- |
-| `--g-tooltip-text-color`       | 文字颜色 |
-| `--g-tooltip-background-color` | 背景颜色 |
-| `--g-tooltip-padding`          | 填充     |
-| `--g-tooltip-border-radius`    | 边框半径 |
-| `--g-tooltip-box-shadow`       | 影子     |
+| 名称                           | 描述      |
+| :----------------------------- | :-------- |
+| `--g-tooltip-text-color`       | 文本颜色  |
+| `--g-tooltip-background-color` | 背景颜色  |
+| `--g-tooltip-padding`          | 内边距    |
+| `--g-tooltip-border-radius`    | 圆角      |
+| `--g-tooltip-box-shadow`       | 阴影      |

@@ -1,14 +1,14 @@
 # ExpressKit
 
-ExpressKit は、[express.js](https://expressjs.com/) をラップした軽量ライブラリで、[NodeKit](https://github.com/gravity-ui/nodekit) と統合されており、リクエストロギング、トレーシングサポート、非同期コントローラーとミドルウェア、詳細なルート説明などの便利な機能を提供します。
+ExpressKit は、[express.js](https://expressjs.com/) の軽量ラッパーで、[NodeKit](https://github.com/gravity-ui/nodekit) と統合され、リクエストロギング、トレーシングサポート、非同期コントローラーとミドルウェア、詳細なルート説明などの便利な機能を提供します。
 
-インストール:
+## インストール
 
 ```bash
 npm install --save @gravity-ui/nodekit @gravity-ui/expresskit
 ```
 
-基本的な使い方:
+## 使用方法
 
 ```typescript
 import {ExpressKit} from '@gravity-ui/expresskit';
@@ -89,13 +89,13 @@ export default config;
 | オプション              | タイプ                 | デフォルト                              | 説明                                                                                     |
 | ------------------- | -------------------- | ------------------------------------ | ----------------------------------------------------------------------------------------------- |
 | `appCsrfSecret`     | `string \| string[]` | -                                    | **必須。** HMAC トークン生成用のシークレットキー。複数のシークレットでキーローテーションが可能です。 |
-| `appCsrfLifetime`   | `number`             | `2592000` (30 日)                  | トークンの有効期間 (秒)。`0` に設定すると有効期限なしになります。                                        |
+| `appCsrfLifetime`   | `number`             | `2592000` (30 日)                  | トークンの有効期間 (秒)。`0` に設定すると期限なしになります。                                        |
 | `appCsrfHeaderName` | `string`             | `'x-csrf-token'`                     | トークン検証用の HTTP ヘッダー名。                                                          |
 | `appCsrfMethods`    | `string[]`           | `['POST', 'PUT', 'DELETE', 'PATCH']` | CSRF 検証が必要な HTTP メソッド。                                                      |
 
 ### 使用方法
 
-設定後、CSRF 保護は指定された HTTP メソッドを持つすべてのルートに自動的に適用されます。
+設定が完了すると、CSRF 保護は指定された HTTP メソッドを持つすべてのルートに自動的に適用されます。
 
 ```typescript
 import {ExpressKit, AuthPolicy} from '@gravity-ui/expresskit';
@@ -126,7 +126,7 @@ const app = new ExpressKit(nodekit, {
 
 ### ルートごとの設定
 
-特定のルートで CSRF 保護を無効にすることができます。
+特定のルートの CSRF 保護を無効にすることができます。
 
 ```typescript
 const app = new ExpressKit(nodekit, {
@@ -167,8 +167,39 @@ const app = new ExpressKit(nodekit, {
 });
 ```
 
-ルートレベルの `enableCaching` はグローバル設定を上書きします。キャッシュの状態は `req.routeInfo.enableCaching` で利用可能です。
+ルートレベルの `enableCaching` はグローバル設定を上書きします。キャッシュの状態は `req.routeInfo.enableCaching` で利用できます。
 
 ## 検証とレスポンスシリアライゼーション
 
 - [リクエストバリデーションとレスポンスシリアライゼーション](https://github.com/gravity-ui/expresskit/blob/main/docs/VALIDATOR.md) - Zodスキーマを使用して、リクエストのバリデーションとレスポンスのシリアライゼーションを自動化します。
+
+## ライセンス
+
+MIT License に基づいて配布されています。詳細は [LICENSE](LICENSE) を参照してください。
+
+## AIエージェント向け
+
+NodeKit の上に構築された薄い Express.js ラッパーで、リクエストロギング、トレーシング、非同期コントローラー/ミドルウェア、宣言的なルートマップを追加します。Express ミドルウェアと NodeKit を手動で配線する代わりに、NodeKit のロギング/テレメトリ スパインを持つ HTTP サーバーが必要な場合に利用してください。
+
+### 使用する場面
+
+- NodeKit のロギング、トレーシング、設定を共有する必要がある Express HTTP サービスを構築する場合。
+- 宣言的なルート (`{'GET /path': handler}`) で、ルートごとの認証、CSRF、キャッシュポリシーを設定する場合。
+- リクエストコンテキストと統合された組み込みのセキュリティ機能（CSRFトークン、CSPヘッダー）。
+
+### 使用しない場面
+
+- HTTP レイヤーなしの基本的なロギング/テレメトリ/設定には、[`@gravity-ui/nodekit`](https://github.com/gravity-ui/nodekit) を直接使用してください。ExpressKit はそれに依存していますが、HTTP 部分が必要ない場合もあります。
+- Express 以外のフレームワーク（Fastify、Koa、NestJS）の場合、ExpressKit は Express 専用です。そのフレームワーク固有のツールを使用してください。
+
+### よくある落とし穴
+
+- **`NodeKit` インスタンスなしで `ExpressKit` を構築する** - コンストラクタは最初の引数として `NodeKit` インスタンスを必要とします。まず `new NodeKit()` を作成してください。
+- **`app.get`/`app.post` の誤解** - ルートは、Express スタイルのメソッドチェーンではなく、`new ExpressKit(nodekit, routes)` に渡される `'METHOD /path': handler` のマップとして宣言されます。
+- **`app.run()` の呼び忘れ** - ルートは構築時に登録されますが、サーバーは `app.run()` を呼び出したときにのみ起動します。
+- **CSRF が認証コンテキストを期待している** - CSRF トークンの生成には、`appAuthHandler` が元のコンテキストにユーザー ID を設定する必要があります。それがなければ、トークン生成は失敗します。
+- **コンテキストをバイパスする Express スタイルのミドルウェアの使用** - 非同期コントローラー/ミドルウェアは、トレーシングを維持するために ExpressKit のコンテキストを使用する必要があります。生の Express ハンドラはそれを失います。
+
+## AIエージェント向けドキュメント
+
+インストールされているバージョンのエージェント読み取り可能なドキュメントは、`node_modules/@gravity-ui/expresskit/dist/docs/INDEX.md` にあります。

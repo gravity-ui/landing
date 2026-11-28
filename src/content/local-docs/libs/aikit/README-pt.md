@@ -25,7 +25,7 @@ Biblioteca de componentes de UI para chats de IA construída com princípios de 
 ### Principais Recursos
 
 - 🎨 **Atomic Design** — hierarquia clara de componentes, de átomos a páginas
-- 🔧 **Independente de SDK** — não depende de SDKs de IA específicos
+- 🔧 **Independente de SDK** — independente de SDKs de IA específicos
 - 🎭 **Abordagem de Dois Níveis** — componentes prontos + hooks para personalização
 - 🎨 **Variáveis CSS** — temas fáceis sem sobrescrever componentes
 - 📦 **TypeScript** — segurança de tipo completa "out of the box"
@@ -42,7 +42,7 @@ src/
 │   ├── templates/      # Layouts completos
 │   └── pages/          # Integrações completas com dados
 ├── hooks/              # Hooks de propósito geral
-├── types/              # Tipos do TypeScript
+├── types/              # Tipos TypeScript
 ├── utils/              # Utilitários
 └── themes/             # Temas CSS e variáveis
 ```
@@ -52,6 +52,10 @@ src/
 ```bash
 npm install @gravity-ui/aikit
 ```
+
+AIKit 3 requer `@gravity-ui/uikit@^8.0.0`, React/React DOM 18 ou 19, e Node.js 20.19+ dentro da v20 ou 22.12+. Envolva a aplicação no `Provider` do UIKit, como mostrado em [Primeiros Passos](./docs/GETTING_STARTED.md).
+
+Atualizando da v2? Leia o [guia de migração](./docs/migration-to-v3.md) ([Русский](./docs/migration-to-v3-ru.md)) e as [notas de lançamento da v3](./docs/changelog-v3.md).
 
 ## Início Rápido
 
@@ -87,11 +91,11 @@ function App() {
 
 ## Arquitetura
 
-A biblioteca é construída com base nos princípios de **Atomic Design**:
+A biblioteca é construída sobre os princípios de **Atomic Design**:
 
 ### 🔹 Átomos
 
-Elementos básicos de UI indivisíveis, sem lógica de negócios:
+Elementos básicos de UI indivisíveis sem lógica de negócios:
 
 - `ActionButton` — botão com tooltip integrado
 - `Alert` — mensagens de alerta com variantes
@@ -118,7 +122,7 @@ Combinações simples de átomos:
 - `PromptInputBody` — área de texto com auto-redimensionamento
 - `PromptInputFooter` — rodapé com ícones de ação e botão de envio
 - `PromptInputHeader` — cabeçalho com itens de contexto e indicador
-- `PromptInputPanel` — painel para conteúdo personalizado
+- `PromptInputPanel` — painel contêiner para conteúdo personalizado
 - `Suggestions` — botões de sugestão clicáveis
 - `Tabs` — abas de navegação com funcionalidade de exclusão
 - `ToolFooter` — rodapé de mensagem de ferramenta com ações
@@ -142,7 +146,7 @@ Layouts completos:
 
 - `ChatContent` — conteúdo principal do chat
 - `EmptyContainer` — estado vazio
-- `History` — histórico de chat
+- `History` — histórico do chat
 
 ### 📱 Páginas
 
@@ -153,6 +157,7 @@ Integrações completas:
 ## Documentação
 
 - [Guia de Início Rápido](./docs/GETTING_STARTED.md)
+- [Renderização de Markdown Personalizada sem o motor embutido](./docs/custom-markdown.md)
 - [Arquitetura](./docs/ARCHITECTURE.md)
 - [Estrutura do Projeto](./docs/PROJECT_STRUCTURE.md)
 - [Guia de Testes](./docs/TESTING.md)
@@ -167,16 +172,16 @@ O projeto utiliza o Playwright Component Testing para testes de regressão visua
 **Importante**: Todos os testes devem ser executados via Docker para garantir capturas de tela consistentes entre diferentes ambientes.
 
 ```bash
-# Executar todos os testes de componente no Docker (recomendado)
+# Executa todos os testes de componente no Docker (recomendado)
 npm run playwright:docker
 
-# Atualizar as linhas de base das capturas de tela no Docker
+# Atualiza as linhas de base das capturas de tela no Docker
 npm run playwright:docker:update
 
-# Executar um teste específico por padrão de grep no Docker
+# Executa um teste específico por padrão grep no Docker
 npm run playwright:docker -- --grep "@ComponentName"
 
-# Limpar o cache do Docker, se necessário
+# Limpa o cache do Docker, se necessário
 npm run playwright:docker:clear-cache
 ```
 
@@ -185,11 +190,11 @@ npm run playwright:docker:clear-cache
 Se você estiver no Linux, pode executar os testes localmente:
 
 ```bash
-# Instalar navegadores do Playwright (executar uma vez)
+# Instala os navegadores do Playwright (execute uma vez)
 npm run playwright:install
-# Executar todos os testes de componente
+# Executa todos os testes de componente
 npm run playwright
-# Atualizar as linhas de base das capturas de tela
+# Atualiza as linhas de base das capturas de tela
 npm run playwright:update
 ```
 
@@ -197,7 +202,7 @@ Para documentação detalhada de testes, consulte [Guia do Playwright](./playwri
 
 ## Desenvolvimento
 
-As instruções de desenvolvimento e contribuição estão disponíveis em [CONTRIBUTING.md](./CONTRIBUTING.md).
+Instruções de desenvolvimento e contribuição estão disponíveis em [CONTRIBUTING.md](./CONTRIBUTING.md).
 
 ## Licença
 
@@ -205,7 +210,7 @@ MIT
 
 ## Para agentes de IA
 
-Uma biblioteca de componentes React para construir interfaces de chat de IA, organizada por Atomic Design (átomos → moléculas → organismos → templates → páginas) e agnóstica de SDK — utilize-a para montar uma UI de chat (listas de mensagens, entrada de prompt, chamadas de ferramentas, anexos) em vez de compor esses primitivos manualmente a partir do `@gravity-ui/uikit`.
+Uma biblioteca de componentes React para construir interfaces de chat de IA, organizada por Design Atômico (átomos → moléculas → organismos → templates → páginas) e agnóstica ao SDK — use-a para montar uma UI de chat (listas de mensagens, entrada de prompt, chamadas de ferramentas, anexos) em vez de compor esses primitivos manualmente a partir do `@gravity-ui/uikit`.
 
 ### Quando usar
 
@@ -221,11 +226,17 @@ Uma biblioteca de componentes React para construir interfaces de chat de IA, org
 
 ### Armadilhas comuns
 
-- **Alucinar uma importação de SDK de IA** — AIKit é agnóstico de SDK; ele fornece componentes/hooks, não um cliente LLM. Traga sua própria fonte de dados e alimente mensagens via props.
-- **Procurar por `<Chat>` / `<AIChat>`** — a exportação em nível de página é `ChatContainer` (e `AIStudioChat`); não há um componente literalmente chamado `Chat`.
+- **Alucinar uma importação de SDK de IA** — AIKit é agnóstico ao SDK; ele fornece componentes/hooks, não um cliente LLM. Traga sua própria fonte de dados e alimente as mensagens via props.
+- **Procurar por `<Chat>` / `<AIChat>`** — a exportação no nível da página é `ChatContainer` (e `AIStudioChat`); não há um componente chamado literalmente `Chat`.
 - **Pular o registro do tipo de mensagem para tipos personalizados** — tipos de mensagem personalizados devem ser registrados no sistema de tipos de mensagem, ou eles serão renderizados como desconhecidos.
-- **Editar componentes base em vez de usar hooks** — o design de dois níveis espera que você personalize via hooks/composição; sobrescrever os internos diretamente quebra as atualizações.
+- **Editar componentes base em vez de usar hooks** — o design de dois níveis espera que você personalize via hooks/composição; substituir os internos diretamente quebra as atualizações.
 
 ## Documentação para agentes de IA
 
 A documentação legível por agente para a versão instalada está localizada em `node_modules/@gravity-ui/aikit/build/docs/INDEX.md`.
+
+## Componentes experimentais
+
+Componentes de espaço de trabalho de agente estão disponíveis apenas em `@gravity-ui/aikit/experimental`.
+Suas APIs podem mudar ou ser removidas em lançamentos menores; lançamentos de patch preservam a compatibilidade.
+Fixe uma versão exata ao adotar um experimento. Veja [a política de API experimental](docs/experimental.md).

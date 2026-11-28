@@ -53,6 +53,10 @@ src/
 npm install @gravity-ui/aikit
 ```
 
+AIKit 3 requires `@gravity-ui/uikit@^8.0.0`, React/React DOM 18 or 19, and Node.js 20.19+ within v20 or 22.12+. Wrap the application in UIKit's `Provider` as shown in [Getting started](./docs/GETTING_STARTED.md).
+
+Upgrading from v2? Read the [migration guide](./docs/migration-to-v3.md) ([Русский](./docs/migration-to-v3-ru.md)) and [v3 release notes](./docs/changelog-v3.md).
+
 ## Quick Start
 
 ```typescript
@@ -153,6 +157,7 @@ Full integrations:
 ## Documentation
 
 - [Quick Start Guide](./docs/GETTING_STARTED.md)
+- [Custom Markdown rendering without the built-in engine](./docs/custom-markdown.md)
 - [Architecture](./docs/ARCHITECTURE.md)
 - [Project Structure](./docs/PROJECT_STRUCTURE.md)
 - [Testing Guide](./docs/TESTING.md)
@@ -229,3 +234,9 @@ A React component library for building AI chat interfaces, organized by Atomic D
 ## Documentation for AI agents
 
 Agent-readable documentation for the installed version is located in `node_modules/@gravity-ui/aikit/build/docs/INDEX.md`.
+
+## Experimental components
+
+Agent workspace components are available only from `@gravity-ui/aikit/experimental`.
+Their APIs may change or be removed in minor releases; patch releases preserve compatibility.
+Pin an exact version when adopting an experiment. See [the experimental API policy](docs/experimental.md).

@@ -1,4 +1,4 @@
-import {Button, Link, Modal} from '@gravity-ui/uikit';
+import {Button, Link, Modal} from '@gravity-ui/uikit-v8';
 import React from 'react';
 
 type ModalComponentProps = {

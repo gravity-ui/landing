@@ -32,6 +32,15 @@ function getTransformLang(locale: string): Lang {
     return locale === 'ru' ? Lang.Ru : Lang.En;
 }
 
+const getReadmeExamples = (readme: string) =>
+    (
+        readme.match(
+            /<!--SANDBOX[\s\S]*?SANDBOX-->|<!--LANDING_BLOCK[\s\S]*?LANDING_BLOCK-->|^<List\w+ *\/>$/gm,
+        ) ?? []
+    )
+        .map((example) => example.replace(/\r\n/g, '\n'))
+        .join('\n');
+
 export class ServerApi {
     private static _instance: ServerApi;
 
@@ -529,10 +538,18 @@ export class ServerApi {
                 }
             }
 
-            if (!readmeContent && locale !== i18n.defaultLocale) {
-                const fallbackRes = await fetch(readmeUrl[i18n.defaultLocale], {headers});
-                if (fallbackRes.status >= 200 && fallbackRes.status < 300) {
-                    readmeContent = await fallbackRes.text();
+            if (locale !== i18n.defaultLocale) {
+                if ((libId === 'uikit' && locale !== 'ru') || !readmeContent) {
+                    const fallbackRes = await fetch(readmeUrl[i18n.defaultLocale], {headers});
+                    if (fallbackRes.ok) {
+                        const publishedReadme = await fallbackRes.text();
+                        if (
+                            !readmeContent ||
+                            getReadmeExamples(readmeContent) !== getReadmeExamples(publishedReadme)
+                        ) {
+                            return publishedReadme;
+                        }
+                    }
                 }
             }
         } catch (err) {

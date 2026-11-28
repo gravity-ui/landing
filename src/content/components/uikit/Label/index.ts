@@ -14,7 +14,7 @@ export const labelConfig = {
         readmeUrl: getReadmeUrl(getterOptions),
     },
     sandbox: {
-        component: dynamic(() => import('@gravity-ui/uikit').then((mod) => mod.Label)),
+        component: dynamic(() => import('@gravity-ui/uikit-v8').then((mod) => mod.Label)),
         props: {
             theme: {
                 type: 'select',

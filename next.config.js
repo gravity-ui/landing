@@ -12,10 +12,53 @@ const withBundleAnalyzer = bundleAnalyzer({
     enabled: process.env.ANALYZE_BUNDLE === 'true',
 });
 
+// css-loader serializes this function and executes it in the browser.
+function insertLandingStyle(element) {
+    const document = element.ownerDocument;
+    if (document.documentElement.hasAttribute('data-uikit-demo')) {
+        return;
+    }
+
+    const anchor = document.getElementById('__next_css__DO_NOT_USE__');
+    anchor.parentNode.insertBefore(element, anchor);
+}
+
 /** @type {import('next').NextConfig} */
 module.exports = withBundleAnalyzer({
     webpack: (config, options) => {
         patchWebpackConfig(config, options);
+
+        if (options.dev && !options.isServer) {
+            for (const rule of config.module.rules.flatMap((item) => item.oneOf ?? [item])) {
+                for (const loader of Array.isArray(rule.use) ? rule.use : []) {
+                    if (!loader || loader.loader !== 'next-style-loader') {
+                        continue;
+                    }
+
+                    loader.options.insert = insertLandingStyle;
+                }
+            }
+        }
+
+        // UIKit 8 styles are loaded inside the demo document. Its component
+        // imports must not add styles to Next's UIKit 7 stylesheets.
+        config.plugins.push(
+            new options.webpack.NormalModuleReplacementPlugin(/\.css$/, (resource) => {
+                if (
+                    resource.context.includes(
+                        `${path.sep}@gravity-ui${path.sep}uikit-v8${path.sep}`,
+                    )
+                ) {
+                    resource.request = path.resolve(__dirname, 'scripts/empty-style.cjs');
+                }
+            }),
+        );
+        config.plugins.push(
+            new options.webpack.NormalModuleReplacementPlugin(/\.css\?uikit-demo$/, (resource) => {
+                const loader = path.resolve(__dirname, 'scripts/uikit-demo-css-loader.cjs');
+                resource.request = `!!${loader}!${resource.request}`;
+            }),
+        );
 
         config.module.rules.push({
             issuer: /\.(tsx|ts|js|cjs|mjs|jsx)$/,
@@ -77,6 +120,8 @@ module.exports = withBundleAnalyzer({
         config.resolve.alias = {
             ...config.resolve.alias,
             'rc-slider$': path.resolve(__dirname, 'node_modules/rc-slider/es/index.js'),
+            // Suppress the remote Google Fonts import from the page and blog constructors.
+            '@gravity-ui/uikit/styles/fonts.css': path.resolve(__dirname, 'src/noop.css'),
         };
 
         if (!options.isServer) {
@@ -134,7 +179,9 @@ module.exports = withBundleAnalyzer({
     },
     // Transpile ESM-only packages to work with SSR
     transpilePackages: [
+        '@bem-react/classname',
         '@gravity-ui/uikit',
+        '@gravity-ui/uikit-v8',
         '@gravity-ui/page-constructor',
         '@gravity-ui/blog-constructor',
         '@gravity-ui/components',

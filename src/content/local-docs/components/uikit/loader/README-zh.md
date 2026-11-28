@@ -1,30 +1,30 @@
 <!--GITHUB_BLOCK-->
 
-# 装载机
+# Loader
 
 <!--/GITHUB_BLOCK-->
+
+`Loader` 组件以闪烁的条形图显示加载进度。与 `Spin` 不同，此组件用于全局场景，例如整个页面或 `Dialog`。
 
 ```tsx
 import {Loader} from '@gravity-ui/uikit';
 ```
 
-该 `Loader` 组件以闪烁条显示加载进度。与之不同的是 `Spin` ，此组件用于全局场景，例如，用于整个页面或 `Dialog`.
+### Size
 
-### 大小
+<!--SANDBOX
+import {Loader} from '@gravity-ui/uikit';
 
-<!--LANDING_BLOCK
-<ExampleBlock
-    code={`
-<Loader size="s" />
-<Loader size="m" />
-<Loader size="l" />
-`}
->
-    <UIKit.Loader size="s" />
-    <UIKit.Loader size="m" />
-    <UIKit.Loader size="l" />
-</ExampleBlock>
-LANDING_BLOCK-->
+export default function () {
+    return (
+        <>
+            <Loader size="s" />
+            <Loader size="m" />
+            <Loader size="l" />
+        </>
+    );
+}
+SANDBOX-->
 
 <!--GITHUB_BLOCK-->
 
@@ -36,15 +36,15 @@ LANDING_BLOCK-->
 
 <!--/GITHUB_BLOCK-->
 
-`S`:体积小，在普通装载机过大时使用。
+`S`: 小尺寸，当常规加载器太大时使用。
 
-`M`:中号（基本）尺寸，在大多数情况下使用。
+`M`: 中等（基本）尺寸，在大多数情况下使用。
 
-`L`:大尺寸，在普通装载机太小时使用。
+`L`: 大尺寸，当常规加载器太小时使用。
 
-## 属性
+## Properties
 
-| 姓名      | 描述                  |    类型     | 默认  |
-| :-------- | :-------------------- | :---------: | :---: |
-| 尺寸      | 装载机尺寸            | `"s"` `"l"` | `"s"` |
-| className | 根元素的自定义 CSS 类 |  `string`   |       |
+| Name      | Description                           |       Type        | Default |
+| :-------- | :------------------------------------ | :---------------: | :-----: |
+| size      | Loader size                           | `"s"` `"m"` `"l"` |  `"s"`  |
+| className | Custom CSS class for the root element |     `string`      |         |

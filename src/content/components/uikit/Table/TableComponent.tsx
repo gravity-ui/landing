@@ -1,6 +1,6 @@
 import {Printer, TrashBin} from '@gravity-ui/icons';
+import {Icon} from '@gravity-ui/uikit-v8';
 import {
-    Icon,
     Table,
     TableAction,
     TableColumnConfig,
@@ -10,7 +10,7 @@ import {
     withTableCopy,
     withTableSelection,
     withTableSorting,
-} from '@gravity-ui/uikit';
+} from '@gravity-ui/uikit-v8/legacy';
 import React from 'react';
 
 export interface DataItem {

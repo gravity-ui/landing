@@ -1,5 +1,5 @@
-import {Container, Divider, Flex, Label} from '@gravity-ui/uikit';
-import type {DividerProps} from '@gravity-ui/uikit';
+import {Container, Divider, Flex, Label} from '@gravity-ui/uikit-v8';
+import type {DividerProps} from '@gravity-ui/uikit-v8';
 import React from 'react';
 
 type DividerComponentProps = Pick<DividerProps, 'orientation' | 'align' | 'children'>;
@@ -13,7 +13,7 @@ export const DividerComponent = ({orientation, align, children}: DividerComponen
 
     return (
         <Container>
-            <Flex gap={3} direction={orientation === 'horizontal' ? 'column' : 'row'}>
+            <Flex gap="spacing-3" direction={orientation === 'horizontal' ? 'column' : 'row'}>
                 <Label>Label</Label>
                 {divider}
                 <Label>Label</Label>

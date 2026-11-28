@@ -14,8 +14,8 @@ Install these in the host project at a compatible version:
 
 | Package | Version range |
 | --- | --- |
-| `@playwright/experimental-ct-react` | `^1.22` |
 | `@playwright/test` | `^1.22` |
+| `@playwright/experimental-ct-react` | `^1.22` |
 
 ## Links
 

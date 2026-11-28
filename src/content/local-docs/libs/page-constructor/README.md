@@ -27,6 +27,7 @@ npm install @gravity-ui/page-constructor @diplodoc/transform @gravity-ui/uikit
 Insert the `Page Constructor` to the page. To work correctly, it must be wrapped in a `PageConstructorProvider`:
 
 ```tsx
+import {Provider} from '@gravity-ui/uikit';
 import {PageConstructor, PageConstructorProvider} from '@gravity-ui/page-constructor';
 import '@gravity-ui/page-constructor/styles/styles.scss';
 
@@ -44,9 +45,11 @@ const App = () => {
   };
 
   return (
-    <PageConstructorProvider>
-      <PageConstructor content={content} />
-    </PageConstructorProvider>
+    <Provider>
+      <PageConstructorProvider>
+        <PageConstructor content={content} />
+      </PageConstructorProvider>
+    </Provider>
   );
 };
 
@@ -90,6 +93,7 @@ app.listen(3000);
 On the client, add an endpoint call to receive content:
 
 ```tsx
+import {Provider} from '@gravity-ui/uikit';
 import {PageConstructor, PageConstructorProvider} from '@gravity-ui/page-constructor';
 import '@gravity-ui/page-constructor/styles/styles.scss';
 import {useEffect, useState} from 'react';
@@ -105,9 +109,11 @@ const App = () => {
   }, []);
 
   return (
-    <PageConstructorProvider>
-      <PageConstructor content={content} />
-    </PageConstructorProvider>
+    <Provider>
+      <PageConstructorProvider>
+        <PageConstructor content={content} />
+      </PageConstructorProvider>
+    </Provider>
   );
 };
 
@@ -286,6 +292,16 @@ type FetchLoadableData<TData = any> = (blockKey: string) => Promise<TData>;
 ### Grid
 
 The page constructor uses the `bootstrap` grid and its implementation based on React components that you can use in your own project (including separately from the constructor).
+
+The grid expects the host application to set a global `box-sizing: border-box` reset (most app scaffolds do). The package does not ship one, so with the browser default `content-box` the container padding is added to its `width: 100%` and the page overflows horizontally:
+
+```css
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+```
 
 Usage example:
 
@@ -658,6 +674,7 @@ A library for rendering whole web pages or page sections from declarative JSON/Y
 - **YFM in block text needs server processing.** Markdown-like fields render as plain text unless you run content through `contentTransformer`/`fullTransform` from `@gravity-ui/page-constructor/server`; `@diplodoc/transform` is a required peer dependency.
 - **Import the SCSS styles.** Add `@gravity-ui/page-constructor/styles/styles.scss` (SCSS, not CSS); custom blocks import the same file to reuse mixins/variables.
 - **Vite needs `vite-plugin-dynamic-import`.** Dynamic block imports fail under Vite without it.
+- **The grid needs a global `box-sizing: border-box` reset.** The package does not ship one; without it the container padding overflows the viewport horizontally while typecheck and build stay green. Add `*, *::before, *::after { box-sizing: border-box; }` to the host app styles.
 
 ## Documentation for AI agents
 

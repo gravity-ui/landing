@@ -1,4 +1,4 @@
-import {TextInput, TextInputProps} from '@gravity-ui/uikit';
+import {TextInput, TextInputProps} from '@gravity-ui/uikit-v8';
 import React from 'react';
 
 export const TextInputComponent = (props: TextInputProps) => {

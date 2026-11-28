@@ -11,19 +11,19 @@ npm install react react-dom @gravity-ui/uikit @gravity-ui/date-components @gravi
 ```jsx
 import {createRoot} from 'react-dom/client';
 import {DatePicker} from '@gravity-ui/date-components';
-import {ThemeProvider} from '@gravity-ui/uikit';
+import {Provider} from '@gravity-ui/uikit';
 
 import '@gravity-ui/uikit/styles/styles.css';
 
 function App() {
   return (
-    <ThemeProvider>
+    <Provider>
       <h1>DatePicker</h1>
       <form>
         <label htmlFor="date-picker">Date: </label>
         <DatePicker id="date-picker" name="date" />
       </form>
-    </ThemeProvider>
+    </Provider>
   );
 }
 
@@ -42,18 +42,18 @@ await settings.loadLocale('ru');
 function App() {
   return (
     // コンポーネントで使用する言語を設定します。
-    <ThemeProvider lang="ru">
+    <Provider lang="ru">
       <h1>DatePicker</h1>
       <form>
         <label htmlFor="date-picker">Дата: </label>
         <DatePicker id="date-picker" name="date" />
       </form>
-    </ThemeProvider>
+    </Provider>
   );
 }
 ```
 
-アプリが言語切り替えをサポートしている場合、アプリが最初に読み込まれるときにサポートされているすべてのロケールをプリロードするか、言語を切り替える前にロケールをロードしてください。
+アプリが言語切り替えをサポートしている場合、アプリ初回ロード時にサポートされているすべてのロケールをプリロードするか、言語を切り替える前にロケールをロードしてください。
 
 ```jsx
 // ロケールをプリロード
@@ -73,7 +73,7 @@ function App() {
     });
   };
 
-  return <ThemeProvider lang={lang}>...</ThemeProvider>;
+  return <Provider lang={lang}>...</Provider>;
 }
 ```
 
@@ -93,9 +93,13 @@ addLanguageKeysets<PartialKeysets>(lang, {...});
 addLanguageKeysets<Pick<Keysets, 'g-date-calendar' | 'g-date-date-field' | 'g-date-date-picker'>>(lang, {...});
 ```
 
+## マイグレーション
+
+- 4.x から 5.x へ (`@gravity-ui/uikit` v8): [docs/migration-4-to-5.md](docs/migration-4-to-5.md)
+
 ## 開発
 
-ストーリーブックで開発サーバーを起動するには、以下を実行します。
+ストーリーブックで開発サーバーを起動するには、以下を実行してください。
 
 ```shell
 npm start
@@ -103,31 +107,31 @@ npm start
 
 ## ライセンス
 
-MIT License に基づいて配布されています。詳細については [LICENSE](LICENSE) を参照してください。
+MIT License に基づいて配布されています。詳細は [LICENSE](LICENSE) を参照してください。
 
-## AI エージェント向け
+## AIエージェント向け
 
-React の日付と時刻のコントロール。Gravity UI アプリケーション向けに、`@gravity-ui/date-utils` をベースにした日付/時刻ピッカー、カレンダー、絶対/相対範囲セレクターを提供します。
+Gravity UI アプリケーション向けの React による日付・時刻コントロール — `@gravity-ui/date-utils` を基盤とした日付/時刻ピッカー、カレンダー、絶対/相対範囲セレクター。
 
-### 使用する場面
+### 使用すべき場合
 
 - 単一の日付または日時入力: `DatePicker`, `DateField`。
 - 月/日の選択用カレンダー: `Calendar`, `CalendarView`。
 - 日付範囲: `RangeDatePicker`, `RangeCalendar`, `RangeDateField`。
 - 相対および混合絶対/相対範囲（例：「過去7日間」）: `RelativeDatePicker`, `RelativeRangeDatePicker`, `RelativeDateField`。
 
-### 使用しない場面
+### 使用すべきでない場合
 
-- プレーンテキストまたは数値入力、ボタン、その他の汎用コントロール — [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit) を使用してください。
-- UI なしの低レベルな日付計算、解析、フォーマット、タイムゾーン処理 — 直接 [`@gravity-ui/date-utils`](https://github.com/gravity-ui/date-utils) を使用してください。
+- 単純なテキストまたは数値入力、ボタン、その他の汎用コントロール — [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit) を使用してください。
+- UI を伴わない低レベルの日付計算、解析、フォーマット、タイムゾーン処理 — 直接 [`@gravity-ui/date-utils`](https://github.com/gravity-ui/date-utils) を使用してください。
 
 ### よくある落とし穴
 
-- **値は JS `Date` ではなく `DateTime` オブジェクトです。** コンポーネントは [`@gravity-ui/date-utils`](https://github.com/gravity-ui/date-utils) の `dateTime()` で動作します。ネイティブの `Date` や ISO 文字列ではなく、`DateTime` を渡して読み込んでください。
-- **uikit のセットアップが必要です。** `ThemeProvider` 内でレンダリングし、`@gravity-ui/uikit/styles/styles.css` をインポートしてください。`@gravity-ui/uikit` および `@gravity-ui/date-utils` は必須の peer 依存関係です。
-- **ロケールはロードされ、単に設定されるだけではありません。** `ThemeProvider` の `lang` で言語を設定しますが、`@gravity-ui/date-utils` から `settings.loadLocale('ru')` を使用してロケールデータを先にロードしないと、日付はデフォルトのロケールでレンダリングされます。
+- **値は JS `Date` ではなく `DateTime` オブジェクトです。** コンポーネントは [`@gravity-ui/date-utils`](https://github.com/gravity-ui/date-utils) の `dateTime()` で動作します。ネイティブの `Date` や ISO 文字列ではなく、`DateTime` を渡して読み取ってください。
+- **uikit のセットアップが必要です。** `@gravity-ui/uikit` の `Provider` 内でレンダリングし、`@gravity-ui/uikit/styles/styles.css` をインポートしてください。`@gravity-ui/uikit` v8 および `@gravity-ui/date-utils` は必須の peerDependencies です。
+- **ロケールはロードされるもので、設定されるだけではありません。** `Provider` の `lang` で言語を設定しますが、まず `@gravity-ui/date-utils` から `settings.loadLocale('ru')` でロケールデータをロードしないと、日付はデフォルトのロケールでレンダリングされます。
 - **コンポーネント固有の翻訳には `addLanguageKeysets` を使用します。** `en`/`ru` 以外の言語については、ここでエクスポートされる `Keysets`/`PartialKeysets` 型を使用して、`@gravity-ui/uikit/i18n` から `addLanguageKeysets` を介してキーセットを登録してください。
 
-## AI エージェント向けドキュメント
+## AIエージェント向けドキュメント
 
-インストールされているバージョンのエージェント読み取り可能なドキュメントは、`node_modules/@gravity-ui/date-components/dist/docs/INDEX.md` にあります。
+インストールされているバージョン向けの、エージェントが読み取り可能なドキュメントは `node_modules/@gravity-ui/date-components/dist/docs/INDEX.md` にあります。

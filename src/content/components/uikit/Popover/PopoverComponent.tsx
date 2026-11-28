@@ -1,5 +1,5 @@
-import {Button, Popover} from '@gravity-ui/uikit';
-import type {PopoverProps} from '@gravity-ui/uikit';
+import {Button, Popover} from '@gravity-ui/uikit-v8';
+import type {PopoverProps} from '@gravity-ui/uikit-v8';
 import React from 'react';
 
 type PopupComponentProps = Pick<PopoverProps, 'placement' | 'hasArrow' | 'disabled' | 'trigger'>;

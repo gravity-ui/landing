@@ -22,7 +22,12 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          npm i @gravity-ui/uikit@latest @gravity-ui/components@latest @gravity-ui/date-components@latest @gravity-ui/icons@latest @gravity-ui/navigation@latest
+          # Keep the site shell and its peer dependencies on their declared major versions.
+          # The component catalog uses a separately pinned UIKit 8 alias.
+          npm update @gravity-ui/uikit @gravity-ui/components @gravity-ui/date-components @gravity-ui/icons @gravity-ui/navigation
+          if git diff --quiet -- package.json package-lock.json; then
+            exit 0
+          fi
           git config user.email ""
           git config user.name "Upgrade sandbox packages action"
           git checkout -b upgrade-sandbox-packages
@@ -30,4 +35,4 @@ jobs:
           export COMMIT_MESSAGE="chore(sandbox): upgrade sandbox packages"
           git commit -m "$COMMIT_MESSAGE"
           git push --set-upstream origin upgrade-sandbox-packages --force
-          gh pr create --title "$COMMIT_MESSAGE" --body "" -a "imsitnikov" -a "amje" -a "korvin89" -a "vvtimofeev" || gh pr edit --title "$COMMIT_MESSAGE" --body ""
+          gh pr create --title "$COMMIT_MESSAGE" --body "" -a "dgaponov" -a "amje" -a "korvin89" -a "vvtimofeev" || gh pr edit --title "$COMMIT_MESSAGE" --body ""

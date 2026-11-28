@@ -4,8 +4,8 @@ import {
     ToasterComponent,
     ToasterProvider,
     useToaster,
-} from '@gravity-ui/uikit';
-import {toaster} from '@gravity-ui/uikit/toaster-singleton';
+} from '@gravity-ui/uikit-v8';
+import {toaster} from '@gravity-ui/uikit-v8/toaster-singleton';
 import React, {FC} from 'react';
 
 export interface SandboxProps {

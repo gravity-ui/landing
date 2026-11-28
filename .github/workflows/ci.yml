@@ -9,7 +9,8 @@ on:
 jobs:
   verify_files:
     name: Verify Files
-    runs-on: ubuntu-latest
+    # Keep the runner compatible with the locked Playwright browser builds.
+    runs-on: ubuntu-24.04
     env:
       GITHUB_TOKEN: ${{ github.token }}
     steps:
@@ -21,9 +22,13 @@ jobs:
         node-version: 24
         cache: npm
     - name: Install Packages
-      run: npm ci
-    - name: Shape packages-versions.json
-      run: npm run get-packages-versions
+      run: npm ci --onnxruntime-node-install-cuda=skip
+    - name: Prepare build metadata
+      run: npm run prepare-metadata
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+    - name: Test metadata generators
+      run: npm run test:unit
     - name: Lint Files
       run: npm run lint
     - name: Typecheck

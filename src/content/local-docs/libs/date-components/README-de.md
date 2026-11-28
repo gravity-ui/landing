@@ -11,19 +11,19 @@ npm install react react-dom @gravity-ui/uikit @gravity-ui/date-components @gravi
 ```jsx
 import {createRoot} from 'react-dom/client';
 import {DatePicker} from '@gravity-ui/date-components';
-import {ThemeProvider} from '@gravity-ui/uikit';
+import {Provider} from '@gravity-ui/uikit';
 
 import '@gravity-ui/uikit/styles/styles.css';
 
 function App() {
   return (
-    <ThemeProvider>
+    <Provider>
       <h1>DatePicker</h1>
       <form>
         <label htmlFor="date-picker">Datum: </label>
         <DatePicker id="date-picker" name="date" />
       </form>
-    </ThemeProvider>
+    </Provider>
   );
 }
 
@@ -36,27 +36,27 @@ root.render(<App />);
 ```jsx
 import {settings} from '@gravity-ui/date-utils';
 
-// Lade die Datum-Locales, die in der Anwendung verwendet werden sollen.
+// Lade die Datums-Locales, die in der Anwendung verwendet werden sollen.
 await settings.loadLocale('ru');
 
 function App() {
   return (
     // Setze die Sprache, die mit den Komponenten verwendet werden soll.
-    <ThemeProvider lang="ru">
+    <Provider lang="ru">
       <h1>DatePicker</h1>
       <form>
         <label htmlFor="date-picker">Datum: </label>
         <DatePicker id="date-picker" name="date" />
       </form>
-    </ThemeProvider>
+    </Provider>
   );
 }
 ```
 
-Wenn die App Sprachwechsel unterstützt, lade alle unterstützten Locales vorab, wenn die App zum ersten Mal geladen wird, oder lade die Locales vor dem Sprachwechsel:
+Wenn die App Sprachwechsel unterstützt, lade alle unterstützten Locales vor, wenn die App zum ersten Mal geladen wird, oder lade die Locales vor dem Sprachwechsel:
 
 ```jsx
-// Locales vorab laden
+// Locales vorladen
 await Promise.all([settings.loadLocale('ru'), settings.loadLocale('nl')]);
 
 const root = createRoot(document.getElementById('root'));
@@ -73,7 +73,7 @@ function App() {
     });
   };
 
-  return <ThemeProvider lang={lang}>...</ThemeProvider>;
+  return <Provider lang={lang}>...</Provider>;
 }
 ```
 
@@ -93,6 +93,10 @@ addLanguageKeysets<PartialKeysets>(lang, {...});
 addLanguageKeysets<Pick<Keysets, 'g-date-calendar' | 'g-date-date-field' | 'g-date-date-picker'>>(lang, {...});
 ```
 
+## Migration
+
+- Von 4.x zu 5.x (`@gravity-ui/uikit` v8): [docs/migration-4-to-5.md](docs/migration-4-to-5.md)
+
 ## Entwicklung
 
 Um den Entwicklungsserver mit Storybook zu starten, führe Folgendes aus:
@@ -103,20 +107,20 @@ npm start
 
 ## Lizenz
 
-Verteilt unter der MIT-Lizenz. Details findest du in [LICENSE](LICENSE).
+Verteilt unter der MIT-Lizenz. Details siehe [LICENSE](LICENSE).
 
 ## Für KI-Agenten
 
-React-Datums- und Zeitsteuerungen für Gravity UI-Apps – Datums-/Zeitauswähler, Kalender und absolute/relative Bereichsauswähler, die auf `@gravity-ui/date-utils` basieren.
+React-Datums- und Zeitsteuerelemente für Gravity UI-Apps – Datums-/Zeitauswahl, Kalender und absolute/relative Bereichsauswahlen, die auf `@gravity-ui/date-utils` basieren.
 
-### Wann verwenden
+### Wann zu verwenden
 
-- Eingabe für ein einzelnes Datum oder Datum/Uhrzeit: `DatePicker`, `DateField`.
-- Kalender zur Auswahl von Monat/Tag: `Calendar`, `CalendarView`.
+- Eine einzelne Datums- oder Datums-/Zeiteingabe: `DatePicker`, `DateField`.
+- Kalender für Monats-/Tagesauswahl: `Calendar`, `CalendarView`.
 - Datumsbereiche: `RangeDatePicker`, `RangeCalendar`, `RangeDateField`.
 - Relative und gemischte absolute/relative Bereiche (z. B. "letzte 7 Tage"): `RelativeDatePicker`, `RelativeRangeDatePicker`, `RelativeDateField`.
 
-### Wann nicht verwenden
+### Wann nicht zu verwenden
 
 - Reine Text- oder Zahleneingaben, Schaltflächen oder andere generische Steuerelemente – verwende [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
 - Low-Level-Datumsberechnungen, Parsen, Formatieren oder Zeitzonenbehandlung ohne Benutzeroberfläche – verwende direkt [`@gravity-ui/date-utils`](https://github.com/gravity-ui/date-utils).
@@ -124,9 +128,9 @@ React-Datums- und Zeitsteuerungen für Gravity UI-Apps – Datums-/Zeitauswähle
 ### Häufige Fallstricke
 
 - **Werte sind `DateTime`-Objekte, nicht JS `Date`.** Komponenten arbeiten mit `dateTime()` aus [`@gravity-ui/date-utils`](https://github.com/gravity-ui/date-utils); übergib und lies `DateTime`, nicht native `Date` oder ISO-Strings.
-- **Benötigt uikit-Setup.** Rendere innerhalb von `ThemeProvider` und importiere `@gravity-ui/uikit/styles/styles.css`; `@gravity-ui/uikit` und `@gravity-ui/date-utils` sind erforderliche Peer-Abhängigkeiten.
-- **Locale wird geladen, nicht nur gesetzt.** Setze die Sprache über den `lang`-Parameter von `ThemeProvider`, aber lade zuerst die Locale-Daten mit `settings.loadLocale('ru')` aus `@gravity-ui/date-utils`, sonst werden Daten in der Standard-Locale gerendert.
-- **Komponentenspezifische Übersetzungen verwenden `addLanguageKeysets`.** Für Sprachen, die über `en`/`ru` hinausgehen, registriere Keyset über `addLanguageKeysets` aus `@gravity-ui/uikit/i18n` unter Verwendung der hier exportierten Typen `Keysets`/`PartialKeysets`.
+- **Benötigt uikit-Setup.** Rendere innerhalb von `Provider` aus `@gravity-ui/uikit` und importiere `@gravity-ui/uikit/styles/styles.css`; `@gravity-ui/uikit` v8 und `@gravity-ui/date-utils` sind erforderliche Peer-Abhängigkeiten.
+- **Locale wird geladen, nicht nur gesetzt.** Setze die Sprache über den `Provider` `lang`, aber lade zuerst die Locale-Daten mit `settings.loadLocale('ru')` aus `@gravity-ui/date-utils`, sonst werden Daten in der Standard-Locale gerendert.
+- **Komponentenspezifische Übersetzungen verwenden `addLanguageKeysets`.** Für Sprachen über `en`/`ru` hinaus registriere Keysets über `addLanguageKeysets` aus `@gravity-ui/uikit/i18n` unter Verwendung der hier exportierten Typen `Keysets`/`PartialKeysets`.
 
 ## Dokumentation für KI-Agenten
 

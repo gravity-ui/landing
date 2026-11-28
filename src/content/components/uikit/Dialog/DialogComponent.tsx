@@ -1,15 +1,15 @@
-import {Button, Dialog} from '@gravity-ui/uikit';
-import type {DialogFooterProps, DialogProps} from '@gravity-ui/uikit';
+import {Button, Dialog} from '@gravity-ui/uikit-v8';
+import type {DialogFooterProps, DialogProps} from '@gravity-ui/uikit-v8';
 import React from 'react';
 
 type DialogComponentProps = Pick<
     DialogProps,
-    'size' | 'hasCloseButton' | 'disableOutsideClick' | 'disableEscapeKeyDown' | 'children'
+    'maxWidth' | 'hasCloseButton' | 'disableOutsideClick' | 'disableEscapeKeyDown' | 'children'
 > &
     Pick<DialogFooterProps, 'showError'>;
 
 export const DialogComponent = ({
-    size,
+    maxWidth,
     hasCloseButton,
     disableOutsideClick,
     disableEscapeKeyDown,
@@ -21,14 +21,11 @@ export const DialogComponent = ({
     const dialog = (
         <Dialog
             open={open}
-            size={size}
+            maxWidth={maxWidth}
             hasCloseButton={hasCloseButton}
             disableOutsideClick={disableOutsideClick}
             disableEscapeKeyDown={disableEscapeKeyDown}
-            onClose={() => setOpen(false)}
-            onEnterKeyDown={() => {
-                alert('onEnterKeyDown');
-            }}
+            onOpenChange={setOpen}
         >
             <Dialog.Header caption="Header" />
             <Dialog.Body>

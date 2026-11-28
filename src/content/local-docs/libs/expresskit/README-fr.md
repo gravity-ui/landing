@@ -2,13 +2,13 @@
 
 ExpressKit est un wrapper léger pour [express.js](https://expressjs.com/) qui s'intègre à [NodeKit](https://github.com/gravity-ui/nodekit) et offre des fonctionnalités utiles telles que la journalisation des requêtes, la prise en charge du traçage, les contrôleurs et middlewares asynchrones, ainsi qu'une description détaillée des routes.
 
-Installation :
+## Installation
 
 ```bash
 npm install --save @gravity-ui/nodekit @gravity-ui/expresskit
 ```
 
-Utilisation de base :
+## Utilisation
 
 ```typescript
 import {ExpressKit} from '@gravity-ui/expresskit';
@@ -67,7 +67,7 @@ export default config;
 
 ## Protection CSRF
 
-ExpressKit fournit une protection intégrée contre les falsifications de requêtes intersites (CSRF) pour sécuriser vos applications contre les requêtes inter-origines malveillantes. Le middleware CSRF génère et valide automatiquement les jetons pour les requêtes HTTP modifiant l'état.
+ExpressKit fournit une protection intégrée contre le Cross-Site Request Forgery (CSRF) pour sécuriser vos applications contre les requêtes inter-origines malveillantes. Le middleware CSRF génère et valide automatiquement les jetons pour les requêtes HTTP modifiant l'état.
 
 ### Configuration de base
 
@@ -161,14 +161,45 @@ const app = new ExpressKit(nodekit, {
     handler: (req, res) => res.json({data: 'cacheable'}),
   },
   'GET /api/fresh': {
-    enableCaching: false, // Force le no-cache
+    enableCaching: false, // Force no-cache
     handler: (req, res) => res.json({data: 'toujours frais'}),
   },
 });
 ```
 
-Le paramètre `enableCaching` au niveau de la route remplace le réglage global. L'état de la mise en cache est disponible dans `req.routeInfo.enableCaching`.
+Le `enableCaching` au niveau de la route remplace le réglage global. L'état de la mise en cache est disponible dans `req.routeInfo.enableCaching`.
 
 ## Validation et sérialisation des réponses
 
-- [Validation des requêtes et sérialisation des réponses](https://github.com/gravity-ui/expresskit/blob/main/docs/VALIDATOR.md) - utilisez les schémas Zod pour la validation automatique des requêtes et la sérialisation des réponses.
+- [Validation de requêtes et sérialisation de réponses](https://github.com/gravity-ui/expresskit/blob/main/docs/VALIDATOR.md) - utilise les schémas Zod pour la validation automatique des requêtes et la sérialisation des réponses.
+
+## Licence
+
+Distribué sous la licence MIT. Voir [LICENSE](LICENSE) pour plus de détails.
+
+## Pour les agents IA
+
+Une fine couche d'abstraction Express.js par-dessus NodeKit qui ajoute la journalisation des requêtes, le traçage, les contrôleurs/middleware asynchrones et une carte de routes déclarative — utilisez-la lorsque vous avez besoin d'un serveur HTTP avec la colonne vertébrale de journalisation/télémétrie de NodeKit, au lieu de câbler Express middleware et NodeKit manuellement.
+
+### Quand l'utiliser
+
+- Construction d'un service HTTP Express qui doit partager la journalisation, le traçage et la configuration de NodeKit.
+- Routes déclaratives (`{'GET /path': handler}`) avec authentification par route, politique CSRF et de mise en cache.
+- Préoccupations de sécurité intégrées (jetons CSRF, en-têtes CSP) intégrées au contexte de la requête.
+
+### Quand ne pas l'utiliser
+
+- Pour la journalisation/télémétrie/configuration fondamentale sans couche HTTP, utilisez [`@gravity-ui/nodekit`](https://github.com/gravity-ui/nodekit) directement — ExpressKit en dépend mais vous n'avez peut-être pas besoin des parties HTTP.
+- Pour un framework non-Express (Fastify, Koa, NestJS), ExpressKit est spécifique à Express ; utilisez les outils propres à ce framework.
+
+### Pièges courants
+
+- **Construction de `ExpressKit` sans instance `NodeKit`** — le constructeur nécessite une instance NodeKit comme premier argument ; créez d'abord `new NodeKit()`.
+- **Hallucination de `app.get`/`app.post`** — les routes sont déclarées comme une carte de `'METHOD /path': handler` passée à `new ExpressKit(nodekit, routes)`, et non via un chaînage de méthodes de style Express.
+- **Oubli d'appeler `app.run()`** — les routes sont enregistrées à la construction, mais le serveur ne démarre que lorsque vous appelez `app.run()`.
+- **CSRF attendant un contexte d'authentification** — la génération de jetons CSRF nécessite que `appAuthHandler` définisse l'ID utilisateur dans le contexte d'origine ; sans cela, la génération de jetons échoue.
+- **Utilisation de middleware de style Express qui contourne le contexte** — les contrôleurs/middleware asynchrones doivent utiliser le contexte d'ExpressKit pour préserver le traçage ; les gestionnaires Express bruts le perdent.
+
+## Documentation pour les agents IA
+
+La documentation lisible par agent pour la version installée se trouve dans `node_modules/@gravity-ui/expresskit/dist/docs/INDEX.md`.

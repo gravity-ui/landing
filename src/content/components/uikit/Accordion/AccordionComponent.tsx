@@ -1,4 +1,4 @@
-import {Accordion, AccordionProps} from '@gravity-ui/uikit';
+import {Accordion, AccordionProps} from '@gravity-ui/uikit-v8';
 
 type Props = {
     size: AccordionProps['size'];

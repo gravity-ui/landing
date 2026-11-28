@@ -13,7 +13,7 @@ export const arrowToggleConfig = {
         readmeUrl: getReadmeUrl(getterOptions),
     },
     sandbox: {
-        component: dynamic(() => import('@gravity-ui/uikit').then((mod) => mod.ArrowToggle)),
+        component: dynamic(() => import('@gravity-ui/uikit-v8').then((mod) => mod.ArrowToggle)),
         props: {
             direction: {
                 type: 'select',

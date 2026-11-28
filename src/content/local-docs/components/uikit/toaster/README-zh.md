@@ -1,14 +1,14 @@
 <!--GITHUB_BLOCK-->
 
-# 烤面包机
+# Toaster
 
 <!--/GITHUB_BLOCK-->
 
-这是一个用于可调整通知的组件，也称为祝酒词。
+这是一个可配置的通知组件，也称为 toasts。
 
-## 使用烤面包机
+## 使用 Toaster
 
-要在应用程序中显示祝酒词，你需要将应用程序打包进 `ToasterProvider`去。
+要在您的应用程序中显示 toasts，您需要将应用程序包装在 `ToasterProvider` 中。
 
 ```jsx
 import {Toaster, ToasterComponent, ToasterProvider} from '@gravity-ui/uikit';
@@ -24,9 +24,9 @@ root.render(
 );
 ```
 
-`toaster` 这是该类的实例，它保存了所有祝酒的状态，并在 `useToaster` hook and HO `withToaster` C 的幕后使用。
+这里的 `toaster` 是类的实例，它保存了所有 toasts 的状态，并在 `useToaster` hook 和 `withToaster` HOC 中被底层使用。
 
-但是你也可以 `toaster` 直接在应用程序的不同部分（React 之外）中使用：
+但您也可以在应用程序的不同部分（React 外部）直接使用 `toaster`：
 
 ```js
 toaster.add({
@@ -34,8 +34,8 @@ toaster.add({
 });
 ```
 
-你必须 `Toaster` 在 React 中和之外使用相同的实例，才能在屏幕上显示同一个容器中的所有祝酒词。
-你可以自己实现这个逻辑，也可以从 `toaster-singleton` 模块中导入即用型实例。
+您必须在 React 内外使用相同的 `Toaster` 实例，才能在屏幕上的同一个容器中显示所有 toasts。
+您可以自己实现此逻辑，或从 `toaster-singleton` 模块导入现成的实例。
 
 ```js
 import {toaster} from '@gravity-ui/uikit/toaster-singleton';
@@ -43,7 +43,7 @@ import {toaster} from '@gravity-ui/uikit/toaster-singleton';
 
 ## 使用 `useToaster`
 
-你可以在应用程序组件中使用 `useToaster` 挂钩显示祝酒词：
+您可以在您的应用组件中使用 `useToaster` hook 来显示 toasts：
 
 ```jsx
 import {useToaster} from '@gravity-ui/uikit';
@@ -62,11 +62,11 @@ export function FoobarComponent() {
 }
 ```
 
-该挂接返回 `add` 、 `update` `remove` 、和 `removeAll` 方法（有关详细信息，请参见下文）。
+该 hook 返回 `add`、`update`、`remove` 和 `removeAll` 方法（详情请参见下文）。
 
-## `Toaster` 作为 HOC 使用
+## 使用 `Toaster` 作为 HOC
 
-对于类组件，可以使用 `withToaster` HOC，它会将 `toaster` 属性注入到组件中。
+对于类组件，您可以使用 `withToaster` HOC，它会将 `toaster` 属性注入到组件中。
 
 ```jsx
 import {Component} from 'react';
@@ -81,52 +81,62 @@ class FoobarComponent extends Component {
 const FoobarWithToaster = withToaster()(FoobarComponent);
 ```
 
-## 构造器参数
+## 属性
 
-| 参数      | 类型      | 默认        | 描述                         |
-| :-------- | :-------- | :---------- | :--------------------------- |
-| className | `string`  | `undefined` | 要添加到组件容器的自定义类名 |
-| 移动设备  | `boolean` | `false`     | 管理移动/桌面视图的配置      |
+这些是 `ToasterComponent` 组件的 props。
+
+| 名称      | 描述                                         |   类型    | 默认值 |
+| :-------- | :------------------------------------------- | :-------: | :-----: |
+| className | 添加到组件容器的自定义类名                   | `string`  |         |
+| mobile    | 管理移动/桌面视图的配置                      | `boolean` |         |
+| hasPortal | 启用时在 `Portal` 内渲染 toaster             | `boolean` | `true`  |
+
+## 构造函数参数
+
+| 参数    | 类型      | 默认值      | 描述                                         |
+| :------ | :-------- | :---------- | :------------------------------------------- |
+| className | `string`  | `undefined` | 添加到组件容器的自定义类名                   |
+| mobile  | `boolean` | `false`     | 管理移动/桌面视图的配置                      |
 
 ## 方法
 
-| 方法名                 | 参数               | 描述                                                                                                      |
-| :--------------------- | :----------------- | :-------------------------------------------------------------------------------------------------------- |
-| 添加（ToastOptions）   | `Object`           | 创建新通知                                                                                                |
-| 移除（名称）           | `string`           | 手动删除现有通知                                                                                          |
-| 全部移除 ()            |                    | 删除所有现有通知                                                                                          |
-| 更新（名称，覆盖选项） | `string`, `Object` | 更改已呈现的通知内容。在中 `overrideOptions` ， `title` 、 `type` `content` 、和 `actions` 字段是可选的。 |
-| 有（名字）             | `string`           | 检查显示的祝酒列表中是否有具有特定名称的吐司                                                              |
+| 方法名                   | 参数             | 描述                                                                                                                             |
+| :----------------------- | :--------------- | :------------------------------------------------------------------------------------------------------------------------------- |
+| add(toastOptions)        | `Object`         | 创建一个新通知                                                                                                                   |
+| remove(name)             | `string`         | 手动删除现有通知                                                                                                                 |
+| removeAll()              |                  | 删除所有现有通知                                                                                                                 |
+| update(name, overrideOptions) | `string`, `Object` | 更改已渲染的通知内容。在 `overrideOptions` 中，`title`、`type`、`content` 和 `actions` 字段是可选的。 |
+| has(name)                | `string`         | 检查显示通知列表中是否存在具有特定名称的 toast                                                                                     |
 
-## 更多关于 `add`
+## 关于 `add` 的更多信息
 
-它接受带有持续通知详细信息的 `toastOptions` 参数：
+它接受 `toastOptions` 参数，其中包含正在进行的通知的详细信息：
 
-| 参数       | 类型                                    | 必填项 | 默认        | 描述                                                                                                                                                                                             |
-| :--------- | :-------------------------------------- | :----- | :---------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 名称       | `string`                                | 是的   |             | 唯一的通知名称。具有相同名称的通知会合并为一个                                                                                                                                                   |
-| 标题       | `string`                                |        |             | 通知标题                                                                                                                                                                                         |
-| className  | `string`                                |        |             | CSS 类                                                                                                                                                                                           |
-| autoHiding | `number` 或者 `false`                   |        | 5000        | 延迟隐藏通知的毫秒数。用于禁 `false` 用在超时后隐藏吐司                                                                                                                                          |
-| 内容       | `node`                                  |        | `undefined` | 通知内容。这可以是 [任何可以呈现的东西：数字、字符串、元素或数组](https://reactjs.org/docs/typechecking-with-proptypes.html#proptypes)                                                           |
-| 主题       | `string`                                |        | `"normal"`  | 通知主题。可能的值为 `"normal"` `"info"` 、 `"success"` 、 `"warning"` 、 `danger` 、和 `"utility"`。如果设置 `theme` 为任何值 `"normal"` ，则该图标将添加到通知标题中。_默认情况下，没有图标_。 |
-| isClosable | `boolean`                               |        | `true`      | 管理 X 图标可见性的配置，允许用户关闭通知                                                                                                                                                        |
-| 行动       | `ToastAction[]`                         |        | `undefined` | 之后显示的 [操作](./types.ts#L9) 数组 `content`                                                                                                                                                  |
-| renderIcon | `(toastProps: ToastProps) => ReactNode` |        | `undefined` | 用于自定义吐司图标。默认情况下使用基于类型的行为                                                                                                                                                 |
+| 参数 | 类型 | 是否必填 | 默认值 | 描述 |
+| :-- | :-------------------------------------- | :------- | :---------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| name | `string` | 是 |  | 唯一的通知名称。具有相同名称的通知将被折叠成一个。 |
+| title | `string` |  |  | 通知标题。 |
+| className | `string` |  |  | CSS 类名。 |
+| autoHiding | `number` 或 `false` |  | 5000 | 延迟隐藏通知的毫秒数。使用 `false` 可禁用超时后隐藏 toast。 |
+| content | `node` |  | `undefined` | 通知内容。这可以是 [任何可渲染的内容：数字、字符串、元素或数组](https://reactjs.org/docs/typechecking-with-proptypes.html#proptypes)。 |
+| theme | `string` |  | `"normal"` | 通知主题。可能的值为 `"normal"`、`"info"`、`"success"`、`"warning"`、`danger` 和 `"utility"`。如果 `theme` 设置为 `"normal"` 以外的值，则会在通知标题中添加图标。_默认情况下，没有图标_。 |
+| isClosable | `boolean` |  | `true` | 管理 X 图标可见性的配置，该图标允许用户关闭通知。 |
+| actions | `ToastAction[] \| () => ReactElement` |  | `undefined` | 在 `content` 之后显示的 [操作](./types.ts#L9) 数组，或返回所需操作的回调。 |
+| renderIcon | `(toastProps: ToastProps) => ReactNode` |  | `undefined` | 用于自定义 toast 图标。默认使用基于类型的行为。 |
 
-每个 `action` 都是具有以下参数的对象：
+每个 `action` 是一个具有以下参数的对象：
 
-| 参数             | 类型                                      | 必填项 | 默认       | 描述                             |
-| :--------------- | :---------------------------------------- | :----- | :--------- | :------------------------------- |
-| 标签             | `string`                                  | 是的   |            | 操作描述                         |
-| onClick          | `() => void`                              | 是的   |            | 操作中的点击处理器               |
-| 观点             | [`ButtonView`](../Button/README.md#props) |        | `outlined` | 动作外观， `view` 与 `<Button/>` |
-| removeAfterClick | `boolean`                                 |        | `true`     | 启用或禁用单击操作后关闭通知     |
+| 参数           | 类型                                      | 是否必填 | 默认值   | 描述                                                                 |
+| :------------- | :---------------------------------------- | :------- | :------- | :------------------------------------------------------------------- |
+| label          | `string`                                  | 是       |          | 操作描述                                                             |
+| onClick        | `() => void`                              | 是       |          | 操作点击处理函数                                                     |
+| view           | [`ButtonView`](../Button/README.md#props) |          | `outlined` | 操作外观，与 `<Button/>` 的 `view` 相同                               |
+| removeAfterClick | `boolean`                                 |          | `true`   | 点击操作后启用或禁用关闭通知                                         |
 
 ## CSS API
 
-| 姓名                       | 描述     |
-| :------------------------- | :------- |
-| `--g-toaster-width`        | 容器宽度 |
-| `--g-toaster-item-padding` | 物品填充 |
-| `--g-toaster-item-gap`     | 物品间隙 |
+| 名称                       | 描述       |
+| :------------------------- | :--------- |
+| `--g-toaster-width`        | 容器宽度   |
+| `--g-toaster-item-padding` | 项目内边距 |
+| `--g-toaster-item-gap`     | 项目间距   |

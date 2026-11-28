@@ -4,7 +4,7 @@
 
 ## Editor WYSIWYG y de marcado Markdown
 
-MarkdownEditor es una herramienta potente para trabajar con Markdown, que combina los modos WYSIWYG y de marcado. Esto significa que puedes crear y editar contenido en un modo visual conveniente, además de tener control total sobre el marcado.
+MarkdownEditor es una herramienta potente para trabajar con Markdown, que combina los modos WYSIWYG y de marcado. Esto significa que puedes crear y editar contenido en un modo visual cómodo, además de tener control total sobre el marcado.
 
 ### 🔧 Características principales
 
@@ -36,7 +36,7 @@ function Editor({onSubmit}) {
 
   React.useEffect(() => {
     function submitHandler() {
-      // Serializar el contenido actual a marcado Markdown
+      // Serializa el contenido actual a marcado markdown
       const value = editor.getValue();
       onSubmit(value);
     }
@@ -51,21 +51,21 @@ function Editor({onSubmit}) {
 }
 ```
 Lee más:
-- [Cómo conectar el editor en Create React App](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-getting-started-create-react-app--docs)
-- [Cómo añadir una vista previa para el modo de marcado](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-getting-started-preview--docs)
-- [Cómo añadir una extensión HTML](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-extensions-html-block--docs)
-- [Cómo añadir una extensión LaTeX](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-extensions-latex-extension--docs)
-- [Cómo añadir una extensión Mermaid](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-extensions-mermaid-extension--docs)
-- [Cómo escribir una extensión](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-develop-extension-creation--docs)
-- [Cómo añadir una extensión GPT](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-extensions-gpt--docs)
-- [Cómo añadir una extensión de enlace de texto en Markdown](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-develop-extension-with-popup--docs)
+- [Cómo conectar el editor en Create React App](https://gravity-ui.github.io/markdown-editor/getting-started/create-react-app.html)
+- [Cómo añadir una vista previa para el modo de marcado](https://gravity-ui.github.io/markdown-editor/getting-started/preview.html)
+- [Cómo añadir una extensión HTML](https://gravity-ui.github.io/markdown-editor/extensions/html-block.html)
+- [Cómo añadir una extensión LaTeX](https://gravity-ui.github.io/markdown-editor/extensions/latex-extension.html)
+- [Cómo añadir una extensión Mermaid](https://gravity-ui.github.io/markdown-editor/extensions/mermaid-extension.html)
+- [Cómo escribir una extensión](https://gravity-ui.github.io/markdown-editor/develop/extension-creation.html)
+- [Cómo añadir una extensión GPT](https://gravity-ui.github.io/markdown-editor/extensions/gpt.html)
+- [Cómo añadir una extensión de enlace de texto en markdown](https://gravity-ui.github.io/markdown-editor/develop/extension-with-popup.html)
 
 ### Desarrollo
 
 1. Instala el entorno de Nodejs, la versión se especifica en el archivo `.nvmrc`. Recomendamos usar [NVM](https://github.com/nvm-sh/nvm) o una herramienta similar.
-2. Instala [pnpm](https://pnpm.io/installation), la versión se especifica en la propiedad "packageManager" de `package.json`.
+2. Instala [pnpm](https://pnpm.io/installation), la versión se especifica en `package.json` en la propiedad "packageManager".
 3. Instala las dependencias: `pnpm i`
-4. Ejecuta el servidor de desarrollo de Storybook: `pnpm start`
+4. Ejecuta el servidor de desarrollo de storybook: `pnpm start`
 
 
 ### i18n
@@ -84,7 +84,7 @@ No olvides llamar a `configure()` desde [UIKit](https://github.com/gravity-ui/ui
 
 ### Contribución
 
-- [Directrices para colaboradores](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-contributing--docs)
+- [Directrices para colaboradores](https://gravity-ui.github.io/markdown-editor/contributing.html)
 
 ## Licencia
 
@@ -103,15 +103,15 @@ Un editor Markdown de doble modo para React que combina un modo WYSIWYG (ProseMi
 ### Cuándo no usarlo
 
 - Renderizado de Markdown a HTML de solo lectura sin edición: transfórmalo con [`@diplodoc/transform`](https://github.com/diplodoc-platform/transform) y renderiza la salida en su lugar.
-- Entrada de texto multilínea simple: usa `TextArea` de [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
+- Entrada de texto simple multilínea: usa `TextArea` de [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
 - Texto enriquecido que no sea Markdown/YFM: este editor está centrado en Markdown.
 
 ### Errores comunes
 
 - **Es un hook más una vista, no un solo componente.** Crea la instancia con `useMarkdownEditor(...)` y pásala a `<MarkdownEditorView editor={editor} />`; no hay un único `<MarkdownEditor>` que renderices directamente.
 - **Lee el valor a través de la instancia, no de una prop `value` controlada.** Llama a `editor.getValue()` (por ejemplo, en el evento `submit`) para serializar a Markdown; el editor gestiona su propio estado.
-- **Se requieren dependencias peer.** Tu proyecto debe proporcionar `@diplodoc/transform`, `@gravity-ui/uikit`, `@gravity-ui/components`, `react` y `react-dom`: consulta las `peerDependencies` en `package.json`.
-- **Los estilos y la internacionalización provienen de uikit.** Configura los temas/estilos según la documentación de uikit y llama a `configure({lang})` tanto desde este paquete como desde `@gravity-ui/uikit`.
+- **Se requieren dependencias peer.** Tu proyecto debe proporcionar `@diplodoc/transform`, `@gravity-ui/uikit`, `@gravity-ui/components`, `react` y `react-dom`: consulta `peerDependencies` en `package.json`.
+- **Los estilos y la i18n provienen de uikit.** Configura los temas/estilos según la documentación de uikit y llama a `configure({lang})` tanto desde este paquete como desde `@gravity-ui/uikit`.
 
 ## Documentación para agentes de IA
 

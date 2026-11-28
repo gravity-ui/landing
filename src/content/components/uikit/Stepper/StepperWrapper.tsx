@@ -1,4 +1,4 @@
-import {Stepper, type StepperItemView, type StepperProps} from '@gravity-ui/uikit';
+import {Stepper, type StepperItemView, type StepperProps} from '@gravity-ui/uikit-v8';
 
 const items = ['Step 1', 'Step 2', 'Step 3', 'Step 4 with very long title'];
 

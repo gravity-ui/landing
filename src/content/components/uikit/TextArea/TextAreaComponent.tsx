@@ -1,4 +1,4 @@
-import {TextArea, TextAreaProps} from '@gravity-ui/uikit';
+import {TextArea, TextAreaProps} from '@gravity-ui/uikit-v8';
 import React from 'react';
 
 export const TextAreaComponent = (props: TextAreaProps) => {

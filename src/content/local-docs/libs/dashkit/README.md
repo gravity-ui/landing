@@ -4,6 +4,12 @@
 
 A dashboard grid rendering library.
 
+The opt-in `@gravity-ui/dashkit/gridstack` entry exports `DashKitGridStack` for flat and nested saved layouts using GridStack 12.6.0. It shares plugin registration, controlled updates, refs, readiness and autoheight with DashKit. Native dragging supports transfers between zones and containers, including whole container subtrees. External palette drops preview and apply the complete document, including displaced containers. See the [GridStack documentation](docs/gridstack.md) for the supported API, [nested document format](docs/gridstack.md#nested-document-format), and palette drop payload.
+
+`DashKitGridStack` validates config before rendering and before static edits. Invalid geometry, duplicate widget/selector ids, orphan layout entries and nested documents throw `DashKitGridStack:` errors; hosts should validate saved documents or use an error boundary. Items without layout entries remain unmounted. Controlled layouts use the configured compaction mode; set `compactType: null` to retain gaps.
+
+Both renderers also deliver acknowledged move/resize geometry to plugin props and layout context. Legacy `DashKit` consumes acknowledgments during an active drag without replaying older geometry when that gesture ends.
+
 ## Installation
 
 ```bash
@@ -77,7 +83,7 @@ interface DashKitProps {
 - **onItemRender**: Called when item render complete
 - **defaultGlobalParams**, **globalParams**: [Parameters](#Params) that affect all widgets. In DataLens, `defaultGlobalParams` are global parameters set in the dashboard settings. `globalParams` are globals parameters that can be set in the url.
 - **itemsStateAndParams**: [itemsStateAndParams](#itemsStateAndParams).
-- **settings**: DashKit settings.
+- **settings**: DashKit settings. Optional `isolateItemUpdates: true` suppresses renderer updates caused only by other widgets' layout changes. Own data, state, params, geometry, settings, context and callbacks still update; the default keeps full-layout renderer updates. Memoize `settings` and `context` between renders: new object references trigger renderer updates even with isolation enabled. With isolation enabled, plugins reading sibling geometry through `layout` may observe stale sibling values.
 - **context**: Object that will be propped up on all widgets.
 - **overlayControls**: Object that overrides widget controls at the time of editing. If not transmitted, basic controls will be displayed. If `null` passed only close button or custom menu will be displayed.
 - **overlayMenuItems**: Custom dropdown menu items
@@ -487,7 +493,7 @@ interface DashKitDnDWrapperProps {
 }
 ```
 
-- **dragImageSrc**: Drag image preview, by default used transparent 1px png base64
+- **dragImageSrc**: Optional custom drag image. By default, the dragged ActionPanel item is shown as the preview.
 - **onDragStart**: Callback called when element is dragged from ActionPanel
 - **onDragEnd**: Callback called when element dropped or drag canceled
 
@@ -550,7 +556,9 @@ const onDrop = (dropProps: ItemDropProps) => {
 | `--dashkit-action-panel-item-color`            | Backgroud color       |
 | `--dashkit-action-panel-item-text-color`       | Text color            |
 | `--dashkit-action-panel-item-color-hover`      | Hover backgroud color |
+| `--dashkit-action-panel-item-color-dragging`   | Drag background color |
 | `--dashkit-action-panel-item-text-color-hover` | Hover text color      |
+| `--dashkit-action-panel-item-text-color-dragging` | Drag text color     |
 | Overlay variables                              |                       |
 | `--dashkit-overlay-border-color`               | Border color          |
 | `--dashkit-overlay-color`                      | Background color      |

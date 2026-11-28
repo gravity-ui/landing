@@ -1,0 +1,183 @@
+<!--GITHUB_BLOCK-->
+
+# Popup
+
+<!--/GITHUB_BLOCK-->
+
+`Popup` positions floating content above the page, anchored to a reference element — the low-level primitive behind tooltips, popovers, and menus, built on [Floating UI](https://floating-ui.com). Its visibility is controlled with the `open` property; its children render inside the [`Portal`](../Portal) component unless you set the `disablePortal` property.
+
+```tsx
+import {Popup} from '@gravity-ui/uikit';
+```
+
+## Anchor
+
+To specify the anchor of a floating element, you can use the `anchorElement` property.
+
+<!--SANDBOX
+import {useState} from 'react';
+import {Button, Popup} from '@gravity-ui/uikit';
+
+export default function () {
+    const [buttonElement, setButtonElement] = useState<HTMLButtonElement | null>(null);
+    const [open, setOpen] = useState(false);
+
+    return (
+        <>
+            <Button ref={setButtonElement} onClick={() => setOpen((prevOpen) => !prevOpen)}>
+                Toggle Popup
+            </Button>
+            <Popup anchorElement={buttonElement} open={open} placement="bottom">
+                <div style={{padding: 5}}>
+                    Content
+                </div>
+            </Popup>
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+const [buttonElement, setButtonElement] = React.useState(null);
+const [open, setOpen] = React.useState(false);
+
+<Button ref={setButtonElement} onClick={() => setOpen((prevOpen) => !prevOpen)}>
+  Toggle Popup
+</Button>
+<Popup anchorElement={buttonElement} open={open} placement="bottom">
+  Content
+</Popup>
+```
+
+<!--/GITHUB_BLOCK-->
+
+## Placement
+
+Use the `placement` property to manage the `Popup` position around the anchor element.
+By default, `Popup` uses [flip middleware](https://floating-ui.com/docs/flip) to prevent overflow.
+If the property is set to an array, the first element will be used as the default placement value, the rest will be used as [fallback placements](https://floating-ui.com/docs/flip#fallbackplacements).
+It is also acceptable to use the values `auto`, `auto-start`, `auto-end` to use [autoPlacement middleware](https://floating-ui.com/docs/autoPlacement) instead of flip.
+
+<!--SANDBOX
+import {Popup, PopupProps} from '@gravity-ui/uikit';
+import {CSSProperties, useState} from 'react';
+
+const anchorStyles: CSSProperties = {
+    margin: '40px 100px',
+    width: 320,
+    height: 140,
+    border: '2px dashed',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: '1.5em',
+};
+
+function PopupInstance({children, ...props}: PopupProps) {
+    return (
+        <Popup open disablePortal {...props}>
+            <div style={{padding: 5}}>{children}</div>
+        </Popup>
+    );
+}
+
+export default function () {
+    const [anchorElement, setAnchorElement] = useState<HTMLDivElement | null>(null);
+
+    return (
+        <div>
+            <div ref={setAnchorElement} style={anchorStyles}>
+                Anchor
+            </div>
+            <PopupInstance anchorElement={anchorElement} placement="top-start">
+                Top Start
+            </PopupInstance>
+            <PopupInstance anchorElement={anchorElement} placement="top">
+                Top
+            </PopupInstance>
+            <PopupInstance anchorElement={anchorElement} placement="top-end">
+                Top End
+            </PopupInstance>
+            <PopupInstance anchorElement={anchorElement} placement="right-start">
+                Right Start
+            </PopupInstance>
+            <PopupInstance anchorElement={anchorElement} placement="right">
+                Right
+            </PopupInstance>
+            <PopupInstance anchorElement={anchorElement} placement="right-end">
+                Right End
+            </PopupInstance>
+            <PopupInstance anchorElement={anchorElement} placement="bottom-end">
+                Bottom End
+            </PopupInstance>
+            <PopupInstance anchorElement={anchorElement} placement="bottom">
+                Bottom
+            </PopupInstance>
+            <PopupInstance anchorElement={anchorElement} placement="bottom-start">
+                Bottom Start
+            </PopupInstance>
+            <PopupInstance anchorElement={anchorElement} placement="left-end">
+                Left End
+            </PopupInstance>
+            <PopupInstance anchorElement={anchorElement} placement="left">
+                Left
+            </PopupInstance>
+            <PopupInstance anchorElement={anchorElement} placement="left-start">
+                Left Start
+            </PopupInstance>
+        </div>
+    );
+};
+SANDBOX-->
+
+## Properties
+
+| Name                    | Description                                                                                |                             Type                              |     Default     |
+| :---------------------- | :----------------------------------------------------------------------------------------- | :-----------------------------------------------------------: | :-------------: |
+| anchorElement           | Anchor element. Can also be a `VirtualElement`                                             |                     `PopupAnchorElement`                      |                 |
+| aria-describedby        | `aria-describedby` attribute. Use it if you have both label and description nodes          |                           `string`                            |                 |
+| aria-label              | `aria-label` attribute. Use it only if you do not have any visible caption                 |                           `string`                            |                 |
+| aria-labelledby         | `aria-labelledby` attribute. Preferable if you have visible caption                        |                           `string`                            |                 |
+| children                | Any React content                                                                          |                       `React.ReactNode`                       |                 |
+| className               | `class` HTML attribute for the root node                                                   |                           `string`                            |                 |
+| container               | DOM element to which component is mounted via `Portal`                                     |                         `HTMLElement`                         | `document.body` |
+| disableEscapeKeyDown    | Disables triggering close on `Esc`                                                         |                           `boolean`                           |     `false`     |
+| disableFocusOut         | Disables triggering close on focusout                                                      |                           `boolean`                           |     `false`     |
+| disableOutsideClick     | Disables triggering close on outside clicks                                                |                           `boolean`                           |     `false`     |
+| disablePortal           | Disables using `Portal`                                                                    |                           `boolean`                           |     `false`     |
+| disableTransition       | Disables animation of popup appearing/disappearing                                         |                           `boolean`                           |     `false`     |
+| floatingClassName       | Additional class to apply to the `Floating UI` element                                     |                           `string`                            |                 |
+| floatingContext         | `Floating UI` context to provide interactions                                              |                     `FloatingRootContext`                     |                 |
+| floatingInteractions    | Override `Floating UI` interactions                                                        |                     `Array<ElementProps>`                     |                 |
+| floatingMiddlewares     | `Floating UI` middlewares. If set, they will completely overwrite the default middlewares. |                      `Array<Middleware>`                      |                 |
+| floatingStyles          | Styles to apply to the `Floating UI` element                                               |                     `React.CSSProperties`                     |                 |
+| focusOrder              | The order in which focus circle                                                            |        `Array<'reference' \| 'floating' \| 'content'>`        |  `['content']`  |
+| hasArrow                | Renders arrow pointing to the anchor                                                       |                           `boolean`                           |     `false`     |
+| id                      | `id` HTML attribute                                                                        |                           `string`                            |                 |
+| initialFocus            | Initial element to be focused. Positive number is the index of tabbable element.           |               `number` `React.Ref<HTMLElement>`               |                 |
+| keepMounted             | `Popup` will not be removed from the DOM upon hiding                                       |                           `boolean`                           |     `false`     |
+| modal                   | Enables focus trapping behaviour                                                           |                           `boolean`                           |     `false`     |
+| offset                  | `Floating UI` offset value                                                                 |                         `PopupOffset`                         |       `4`       |
+| onOpenChange            | Handles `Popup` open change event                                                          |                          `Function`                           |                 |
+| onTransitionIn          | On start open popup animation                                                              |                          `Function`                           |                 |
+| onTransitionInComplete  | On finish open popup animation                                                             |                          `Function`                           |                 |
+| onTransitionOut         | On start close popup animation                                                             |                          `Function`                           |                 |
+| onTransitionOutComplete | On finish close popup animation                                                            |                          `Function`                           |                 |
+| open                    | Manages `Popup` visibility                                                                 |                           `boolean`                           |     `false`     |
+| placement               | `Floating UI` placement                                                                    | `Placement` `Array<Placement>` `auto` `auto-start` `auto-end` |                 |
+| qa                      | Test attribute (`data-qa`)                                                                 |                           `string`                            |                 |
+| returnFocus             | Element to be focused on closing                                                           |              `boolean` `React.Ref<HTMLElement>`               |     `true`      |
+| role                    | Accessibility role for popup                                                               |                           `string`                            |                 |
+| strategy                | `Floating UI` positioning strategy                                                         |                      `absolute` `fixed`                       |   `absolute`    |
+| style                   | `style` HTML attribute for root node                                                       |                     `React.CSSProperties`                     |                 |
+
+## CSS API
+
+| Name                         | Description      |
+| :--------------------------- | :--------------- |
+| `--g-popup-background-color` | Background color |
+| `--g-popup-border-color`     | Border color     |
+| `--g-popup-border-radius`    | Border radius    |
+| `--g-popup-border-width`     | Border width     |

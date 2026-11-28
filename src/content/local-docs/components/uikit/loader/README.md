@@ -1,0 +1,50 @@
+<!--GITHUB_BLOCK-->
+
+# Loader
+
+<!--/GITHUB_BLOCK-->
+
+The `Loader` component displays the loading progress as flashing bars. Unlike `Spin`, this component is used in global scenarios, e.g., for an entire page or `Dialog`.
+
+```tsx
+import {Loader} from '@gravity-ui/uikit';
+```
+
+### Size
+
+<!--SANDBOX
+import {Loader} from '@gravity-ui/uikit';
+
+export default function () {
+    return (
+        <>
+            <Loader size="s" />
+            <Loader size="m" />
+            <Loader size="l" />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Loader size="s" />
+<Loader size="m" />
+<Loader size="l" />
+```
+
+<!--/GITHUB_BLOCK-->
+
+`S`: Small size, used when the regular loader is too large.
+
+`M`: Medium (basic) size, used in most cases.
+
+`L`: Large size, used when the regular loader is too small.
+
+## Properties
+
+| Name      | Description                           |       Type        | Default |
+| :-------- | :------------------------------------ | :---------------: | :-----: |
+| size      | Loader size                           | `"s"` `"m"` `"l"` |  `"s"`  |
+| className | Custom CSS class for the root element |     `string`      |         |

@@ -2,7 +2,7 @@
 
 ## 페이지 생성기
 
-`Page-constructor`는 `JSON` 데이터를 기반으로 웹 페이지 또는 그 일부를 렌더링하는 라이브러리입니다 (향후 `YAML` 형식도 지원할 예정입니다).
+`Page-constructor`는 `JSON` 데이터를 기반으로 웹 페이지 또는 그 일부를 렌더링하는 라이브러리입니다. (향후 `YAML` 형식 지원이 추가될 예정입니다.)
 
 페이지를 생성할 때 컴포넌트 기반 접근 방식이 사용됩니다. 페이지는 준비된 블록 세트를 사용하여 구축되며, 이 블록들은 어떤 순서로든 배치될 수 있습니다. 각 블록은 특정 타입과 입력 데이터 매개변수 세트를 가집니다.
 
@@ -16,7 +16,7 @@ npm install @gravity-ui/page-constructor
 
 ## 빠른 시작
 
-먼저 React 프로젝트와 서버가 필요합니다. 예를 들어, Vite와 Express 서버를 사용하여 React 프로젝트를 생성하거나, Next.js 애플리케이션을 생성할 수 있습니다. Next.js는 클라이언트와 서버 측을 동시에 제공합니다.
+먼저 React 프로젝트와 어떤 종류의 서버가 필요합니다. 예를 들어, Vite와 Express 서버를 사용하여 React 프로젝트를 생성하거나, 클라이언트와 서버 측을 모두 갖춘 Next.js 애플리케이션을 생성할 수 있습니다.
 
 필요한 종속성을 설치합니다:
 
@@ -27,6 +27,7 @@ npm install @gravity-ui/page-constructor @diplodoc/transform @gravity-ui/uikit
 페이지에 `Page Constructor`를 삽입합니다. 올바르게 작동하려면 `PageConstructorProvider`로 감싸야 합니다:
 
 ```tsx
+import {Provider} from '@gravity-ui/uikit';
 import {PageConstructor, PageConstructorProvider} from '@gravity-ui/page-constructor';
 import '@gravity-ui/page-constructor/styles/styles.scss';
 
@@ -44,9 +45,11 @@ const App = () => {
   };
 
   return (
-    <PageConstructorProvider>
-      <PageConstructor content={content} />
-    </PageConstructorProvider>
+    <Provider>
+      <PageConstructorProvider>
+        <PageConstructor content={content} />
+      </PageConstructorProvider>
+    </Provider>
   );
 };
 
@@ -90,6 +93,7 @@ app.listen(3000);
 클라이언트에서는 콘텐츠를 받기 위해 엔드포인트 호출을 추가합니다:
 
 ```tsx
+import {Provider} from '@gravity-ui/uikit';
 import {PageConstructor, PageConstructorProvider} from '@gravity-ui/page-constructor';
 import '@gravity-ui/page-constructor/styles/styles.scss';
 import {useEffect, useState} from 'react';
@@ -105,9 +109,11 @@ const App = () => {
   }, []);
 
   return (
-    <PageConstructorProvider>
-      <PageConstructor content={content} />
-    </PageConstructorProvider>
+    <Provider>
+      <PageConstructorProvider>
+        <PageConstructor content={content} />
+      </PageConstructorProvider>
+    </Provider>
   );
 };
 
@@ -116,7 +122,7 @@ export default App;
 
 ### 준비된 템플릿
 
-새 프로젝트를 시작하려면 준비된 [Next.js 템플릿](https://github.com/gravity-ui/page-constructor-website-template)을 사용할 수 있습니다.
+새 프로젝트를 시작하려면, 저희가 준비한 [Next.js 기반의 준비된 템플릿](https://github.com/gravity-ui/page-constructor-website-template)을 사용할 수 있습니다.
 
 ### 정적 사이트 빌더
 
@@ -129,18 +135,18 @@ export default App;
 ```typescript
 interface PageConstructorProps {
   content: PageContent; // 블록 데이터를 JSON 형식으로 제공합니다.
-  shouldRenderBlock?: ShouldRenderBlock; // 각 블록을 렌더링할 때 호출되며, 표시 조건을 설정할 수 있습니다.
+  shouldRenderBlock?: ShouldRenderBlock; // 각 블록을 렌더링할 때 호출되며, 표시 조건을 설정할 수 있는 함수입니다.
   custom?: Custom; // 사용자 정의 블록 (참조: `Customization`).
-  renderMenu?: () => React.ReactNode; // 페이지 메뉴와 네비게이션을 렌더링하는 함수입니다 (기본 메뉴 버전 렌더링을 추가할 예정입니다).
-  navigation?: NavigationData; // JSON 형식의 네비게이션 데이터를 사용하여 네비게이션 컴포넌트를 사용합니다.
-  isBranded?: boolean; // true인 경우, https://gravity-ui.com/로 연결되는 푸터를 추가합니다. BrandFooter 컴포넌트를 사용하여 더 많은 사용자 정의가 가능합니다.
+  renderMenu?: () => React.ReactNode; // 페이지 메뉴와 네비게이션을 렌더링하는 함수입니다. (기본 메뉴 버전 렌더링을 추가할 예정입니다.)
+  navigation?: NavigationData; // 네비게이션 컴포넌트 사용을 위한 JSON 형식의 네비게이션 데이터입니다.
+  isBranded?: boolean; // true인 경우, https://gravity-ui.com/로 연결되는 푸터를 추가합니다. 더 많은 사용자 정의를 위해 BrandFooter 컴포넌트를 사용해 보세요.
 }
 
 interface PageConstructorProviderProps {
   isMobile?: boolean; // 모바일 모드에서 코드가 실행되고 있음을 나타내는 플래그입니다.
-  locale?: LocaleContextProps; // 언어 및 도메인에 대한 정보입니다 (링크 생성 및 형식 지정 시 사용됩니다).
-  location?: Location; // 브라우저 또는 라우터 히스토리의 API, 페이지 URL입니다.
-  analytics?: AnalyticsContextProps; // 분석 이벤트 처리를 위한 함수입니다.
+  locale?: LocaleContextProps; // 언어 및 도메인에 대한 정보입니다. (링크 생성 및 형식 지정 시 사용됩니다.)
+  location?: Location; // 브라우저 또는 라우터 히스토리 API, 페이지 URL입니다.
+  analytics?: AnalyticsContextProps; // 분석 이벤트를 처리하는 함수입니다.
 
   ssrConfig?: SSR; // 서버 측에서 코드가 실행되고 있음을 나타내는 플래그입니다.
   theme?: 'light' | 'dark'; // 페이지를 렌더링할 테마입니다.
@@ -178,7 +184,9 @@ interface Locale {
 interface SSR {
   isServer?: boolean;
 }
+```
 
+```typescript
 interface NavigationData {
   logo: NavigationLogo;
   header: HeaderData;
@@ -194,9 +202,7 @@ interface HeaderData {
   leftItems: NavigationItem[];
   rightItems?: NavigationItem[];
 }
-```
 
-```markdown
 interface NavigationLogo {
   icon: ImageProps;
   text?: string;
@@ -242,7 +248,7 @@ const post = {
 
 ### 서버 유틸리티 및 트랜스포머에 대한 자세한 문서
 
-서버 유틸리티 사용에 대한 포괄적인 가이드, 상세 설명 및 고급 사용 사례는 [서버 유틸리티 사용에 대한 추가 챕터](./docs/data-preparation.md)를 방문하십시오.
+서버 유틸리티 사용에 대한 포괄적인 가이드, 상세 설명 및 고급 사용 사례는 [서버 유틸리티 사용에 대한 추가 장](./docs/data-preparation.md)을 참조하십시오.
 
 ### 사용자 정의 블록
 
@@ -254,7 +260,7 @@ const post = {
 
 2. 코드에서 블록 유형(문자열)을 키로, 가져온 블록 컴포넌트를 값으로 하는 객체를 생성합니다.
 
-3. 생성한 객체를 `PageConstructor` 컴포넌트의 `custom.blocks`, `custom.headers` 또는 `custom.subBlocks` 매개변수에 전달합니다. (`custom.headers`는 일반 콘텐츠 위에 별도로 렌더링될 블록 헤더를 지정합니다.)
+3. 생성한 객체를 `PageConstructor` 컴포넌트의 `custom.blocks`, `custom.headers` 또는 `custom.subBlocks` 매개변수에 전달합니다. (`custom.headers`는 일반 콘텐츠 위에 별도로 렌더링될 헤더 블록을 지정합니다.)
 
 4. 이제 입력 데이터(`content` 매개변수)에서 블록 유형과 데이터를 지정하여 생성한 블록을 사용할 수 있습니다.
 
@@ -272,9 +278,9 @@ const post = {
 
 ### 로드 가능한 블록
 
-때로는 블록이 로드될 데이터를 기반으로 자체를 렌더링해야 하는 경우가 있습니다. 이 경우 로드 가능한 블록이 사용됩니다.
+블록이 로드될 데이터를 기반으로 자체를 렌더링해야 하는 경우가 있습니다. 이 경우 로드 가능한 블록이 사용됩니다.
 
-사용자 정의 `loadable` 블록을 추가하려면 `PageConstructor`에 `custom.loadable` 속성을 전달합니다. 이 속성은 컴포넌트에 대한 데이터 소스 이름(문자열)을 키로 하고 객체를 값으로 합니다.
+사용자 정의 `loadable` 블록을 추가하려면 `PageConstructor`에 `custom.loadable` 속성을 전달합니다. 이 속성은 컴포넌트에 전달될 데이터 소스 이름(문자열)을 키로 하고 객체를 값으로 합니다.
 
 ```typescript
 export interface LoadableConfigItem {
@@ -287,7 +293,17 @@ type FetchLoadableData<TData = any> = (blockKey: string) => Promise<TData>;
 
 ### 그리드
 
-페이지 생성기는 `bootstrap` 그리드와 이를 기반으로 하는 React 컴포넌트 구현을 사용하며, 이를 자체 프로젝트에서도 사용할 수 있습니다(생성기와 별도로도 사용 가능).
+페이지 생성기는 `bootstrap` 그리드와 이를 기반으로 하는 React 컴포넌트 구현을 사용하며, 이는 프로젝트에서도 사용할 수 있습니다(생성기와 별도로도 사용 가능).
+
+그리드는 호스트 애플리케이션이 전역 `box-sizing: border-box` 리셋을 설정한다고 가정합니다(대부분의 앱 스캐폴드는 이를 포함합니다). 이 패키지는 이를 제공하지 않으므로 브라우저 기본값인 `content-box`를 사용할 경우 컨테이너 패딩이 `width: 100%`에 추가되어 페이지가 가로로 넘칠 수 있습니다.
+
+```css
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+```
 
 사용 예시:
 
@@ -325,7 +341,7 @@ const Page= ({data, logo}: React.PropsWithChildren<PageProps>) => <Navigation da
 
 1. `src/blocks` 또는 `src/sub-blocks` 디렉토리에 블록 또는 하위 블록 코드를 담은 폴더를 생성합니다.
 
-2. `src/models/constructor-items/blocks.ts` 또는 `src/models/constructor-items/sub-blocks.ts` 파일에서 `BlockType` 또는 `SubBlockType` 열거형에 블록 또는 하위 블록 이름을 추가하고 기존과 유사하게 해당 속성을 설명합니다.
+2. `src/models/constructor-items/blocks.ts` 또는 `src/models/constructor-items/sub-blocks.ts` 파일에서 기존 항목과 유사하게 `BlockType` 또는 `SubBlockType` 열거형에 블록 또는 하위 블록 이름을 추가하고 해당 속성을 설명합니다.
 
 3. `src/blocks/index.ts` 파일에 블록을, `src/sub-blocks/index.ts` 파일에 하위 블록을 내보냅니다.
 
@@ -352,7 +368,7 @@ const Page= ({data, logo}: React.PropsWithChildren<PageProps>) => <Navigation da
 
 2. 블록의 `react` 컴포넌트가 있는 파일에서 `getThemedValue` 및 `useTheme` 훅을 사용하여 테마가 적용된 속성 값을 가져옵니다(예: `MediaBlock.tsx` 블록 참조).
 
-3. 블록의 `schema.ts` 파일에서 해당 속성을 `withTheme`으로 감싸서 속성 유효성 검사기에 테마 지원을 추가합니다.
+3. 속성 유효성 검사기에 테마 지원을 추가합니다. 블록의 `schema.ts` 파일에서 해당 속성을 `withTheme`으로 래핑합니다.
 
 ### i18n
 
@@ -368,22 +384,22 @@ configure({
 
 ### 지도
 
-지도를 사용하려면 `PageConstructorProvider`의 `mapContext` 필드에 지도 유형, `scriptSrc` 및 `apiKey`를 입력합니다.
+지도를 사용하려면 `PageConstructorProvider`의 `mapContext` 필드에 지도 유형, `scriptSrc`, `apiKey`를 입력하세요.
 
-프로젝트 루트의 .env.development 파일에서 개발 모드에 대한 환경 변수를 정의할 수 있습니다.
+프로젝트 루트의 `.env.development` 파일에서 개발 모드 환경 변수를 정의할 수 있습니다.
 `STORYBOOK_GMAP_API_KEY` - Google 지도 API 키
 
 ### 분석
 
 #### 초기화
 
-분석을 시작하려면 생성기에 핸들러를 전달합니다. 핸들러는 프로젝트 측에서 생성되어야 합니다. 세 가지 이벤트 클래스를 받습니다.
+분석을 시작하려면 생성자에 핸들러를 전달하세요. 핸들러는 프로젝트 측에서 생성되어야 합니다. 세 가지 이벤트 클래스를 받습니다.
 
-- **기본 이벤트**는 버튼, 링크, 네비게이션 및 컨트롤 상호 작용을 위해 생성된 일반적인 페이지 생성기 이벤트입니다. `autoEvents.enabled`를 `true`로 설정하여 이벤트를 발생시킵니다.
-- **확장 이벤트**는 컴포징 라이브러리에서 제공하는 등록된 이벤트입니다. `autoEvents.extendedEvents`의 존재는 `enabled`와 독립적으로 이벤트를 활성화하며 선택적으로 접두사와 카운터를 추가합니다.
-- **사용자 정의 이벤트**는 `analyticsEvents`를 통해 소비자가 제공합니다. 자동 이벤트 구성은 이를 변경하지 않습니다.
+- **기본 이벤트**: 버튼, 링크, 탐색 및 컨트롤 상호 작용에 대해 생성되는 일반적인 페이지 생성기 이벤트입니다. `autoEvents.enabled`를 `true`로 설정하여 이벤트를 발생시키세요.
+- **확장 이벤트**: 컴포징 라이브러리에서 제공하는 등록된 이벤트입니다. `autoEvents.extendedEvents`의 존재는 `enabled`와 독립적으로 이벤트를 활성화하고 선택적으로 접두사와 카운터를 추가합니다.
+- **사용자 정의 이벤트**: `analyticsEvents`를 통해 소비자가 제공합니다. 자동 이벤트 구성은 이를 변경하지 않습니다.
 
-객체 형태가 선호되는 구성입니다.
+객체 형식이 선호되는 구성입니다.
 
 ```ts
 function sendEvents(events: MyEventType []) {
@@ -420,7 +436,7 @@ type AutoEventsConfig = {
 };
 ```
 
-하위 호환성을 위해 이전의 불리언 형태도 지원됩니다. `true`는 `{enabled: true}`와 같고, `false`는 `{enabled: false}`와 같습니다. `autoEvents`가 생략되면 기본 이벤트와 확장 이벤트 모두 비활성화됩니다. `extendedEvents` 객체는 `enabled`가 `false`일 때도 제공된 확장 이벤트를 활성화합니다.
+하위 호환성을 위해 이전의 불리언 형식도 지원됩니다. `true`는 `{enabled: true}`와 같고, `false`는 `{enabled: false}`와 같습니다. `autoEvents`가 생략되면 기본 이벤트와 확장 이벤트 모두 비활성화됩니다. `extendedEvents` 객체는 `enabled`가 `false`일 때도 제공된 확장 이벤트를 활성화합니다.
 
 확장 이벤트는 `type: 'extended-event'`여야 합니다. 접두사는 구성된 대로 정확하게 연결되며, 대소문자, 구분 기호 또는 공백은 변경되지 않습니다. `counter`가 설정되면 확장 이벤트에 대한 `counters.include`를 정의합니다.
 
@@ -428,7 +444,7 @@ type AutoEventsConfig = {
 // 제공된 이벤트
 {name: 'REGISTERED_CLICK', type: 'extended-event'}
 
-// 위 구성으로 sendEvents에서 수신된 이벤트
+// 위 구성으로 sendEvents에서 받은 이벤트
 {
   name: 'LIBRARY_REGISTERED_CLICK',
   type: 'extended-event',
@@ -436,9 +452,9 @@ type AutoEventsConfig = {
 }
 ```
 
-이벤트는 이 순서대로 전송됩니다. 먼저 생성된 기본 이벤트(활성화된 경우), 그 다음 제공된 확장 이벤트 및 사용자 정의 이벤트가 원래 순서대로 전송됩니다. `extendedEvents`가 구성되지 않은 경우 확장 이벤트는 생략됩니다. 상호 작용별 추가 컨텍스트는 마지막에 모든 발생 이벤트에 병합됩니다.
+이벤트는 이 순서로 전송됩니다. (활성화된 경우) 생성된 기본 이벤트가 먼저 전송되고, 그 다음 제공된 확장 이벤트와 사용자 정의 이벤트가 원래 순서대로 전송됩니다. `extendedEvents`가 구성되지 않은 경우 확장 이벤트는 생략됩니다. 상호 작용별 추가 컨텍스트는 마지막으로 내보내지는 모든 이벤트에 병합됩니다.
 
-이벤트 객체는 `name`이라는 필수 필드만 가집니다. 또한 복잡한 로직 관리에 도움이 되는 사전 정의된 필드도 있습니다. 예를 들어, `counter.include`는 여러 분석 시스템이 프로젝트에서 사용되는 경우 특정 카운터로 이벤트를 보내는 데 도움이 될 수 있습니다.
+이벤트 객체에는 필수 필드가 `name` 하나뿐입니다. 또한 복잡한 로직 관리에 도움이 되는 사전 정의된 필드가 있습니다. 예를 들어, `counter.include`는 여러 분석 시스템이 프로젝트에서 사용되는 경우 특정 카운터로 이벤트를 보내는 데 도움이 될 수 있습니다.
 
 ```ts
 type AnalyticsEvent<T = {}> = T & {
@@ -459,7 +475,7 @@ type MyEventType = AnalyticsEvent<{
 
 #### 카운터 선택기
 
-이벤트가 전송될 분석 시스템을 구성할 수 있습니다.
+분석 시스템으로 보낼 이벤트를 구성할 수 있습니다.
 
 ```ts
 type AnalyticsCounters = {
@@ -470,7 +486,7 @@ type AnalyticsCounters = {
 
 #### context 매개변수
 
-이벤트가 발생하는 프로젝트의 위치를 정의하기 위해 `context` 값을 전달합니다.
+이벤트가 발생하는 프로젝트 내 위치를 정의하려면 `context` 값을 전달하세요.
 
 아래 선택기를 사용하거나 프로젝트 요구 사항에 맞는 로직을 생성하세요.
 
@@ -483,7 +499,7 @@ if (isCounterAllowed(counterName, counters)) {
 
 #### 예약된 이벤트 유형
 
-자동으로 구성된 이벤트를 표시하기 위해 몇 가지 사전 정의된 이벤트 유형이 사용됩니다. 예를 들어, 이 유형을 사용하여 기본 이벤트를 필터링할 수 있습니다.
+자동으로 구성된 이벤트를 표시하는 데 사용되는 몇 가지 사전 정의된 이벤트 유형이 있습니다. 예를 들어, 이러한 유형을 사용하여 기본 이벤트를 필터링할 수 있습니다.
 
 ```ts
 enum PredefinedEventTypes {
@@ -517,15 +533,15 @@ export default defineConfig({
 });
 ```
 
-Vite의 경우 `vite-plugin-dynamic-import` 플러그인을 설치하고 동적 가져오기가 작동하도록 설정을 구성해야 합니다.
+Vite의 경우 `vite-plugin-dynamic-import` 플러그인을 설치하고 동적 가져오기가 작동하도록 구성을 설정해야 합니다.
 
 ## 릴리스 흐름
 
 일반적으로 두 가지 유형의 커밋을 사용합니다.
 
-1. `fix`: `fix` 유형의 커밋은 코드베이스의 버그를 수정합니다 (이는 Semantic Versioning의 PATCH에 해당합니다).
-2. `feat`: `feat` 유형의 커밋은 코드베이스에 새로운 기능을 도입합니다 (이는 Semantic Versioning의 MINOR에 해당합니다).
-3. `BREAKING CHANGE`: `BREAKING CHANGE:` 푸터를 포함하거나 타입/스코프 뒤에 `!`를 추가하는 커밋은 API 변경을 도입합니다 (이는 Semantic Versioning의 MAJOR에 해당합니다). `BREAKING CHANGE`는 모든 유형의 커밋에 포함될 수 있습니다.
+1. `fix`: 코드베이스의 버그를 수정하는 커밋입니다 (시맨틱 버전 관리의 PATCH에 해당).
+2. `feat`: 코드베이스에 새로운 기능을 도입하는 커밋입니다 (시맨틱 버전 관리의 MINOR에 해당).
+3. `BREAKING CHANGE`: `BREAKING CHANGE:` 푸터를 포함하거나 타입/스코프 뒤에 `!`를 추가하는 커밋은 API 변경을 유발합니다 (시맨틱 버전 관리의 MAJOR에 해당). `BREAKING CHANGE`는 모든 유형의 커밋에 포함될 수 있습니다.
 4. 릴리스 패키지 버전을 수동으로 설정하려면 커밋 메시지에 `Release-As: <version>`을 추가해야 합니다. 예:
 
 ```bash
@@ -536,60 +552,59 @@ Release-As: 1.2.3'
 
 모든 정보는 [여기](https://www.conventionalcommits.org/en/v1.0.0/)에서 확인할 수 있습니다.
 
-코드 소유자로부터 풀 리퀘스트 승인을 받고 모든 검사를 통과하면 다음을 수행하십시오.
+코드 소유자의 풀 리퀘스트 승인을 받고 모든 검사를 통과하면 다음을 수행하십시오.
 
 1. 다른 기여자의 변경 사항이 포함된 로봇의 릴리스 풀 리퀘스트가 있는지 확인합니다 (`chore(main): release 0.0.0`과 같은 형식). 있다면 왜 병합되지 않았는지 확인합니다. 기여자가 공유 버전을 릴리스하는 데 동의하면 다음 단계를 따릅니다. 그렇지 않으면 해당 버전을 릴리스하도록 요청한 다음 다음 단계를 따릅니다.
-2. PR을 스쿼시하고 병합합니다 (Github-Actions를 사용하여 새 버전을 릴리스하는 것이 중요합니다).
+2. PR을 스쿼시하고 병합합니다 (Github-Actions로 새 버전을 릴리스하는 것이 중요합니다).
 3. 로봇이 패키지의 새 버전과 CHANGELOG.md의 변경 사항에 대한 정보가 포함된 PR을 생성할 때까지 기다립니다. [Actions 탭](https://github.com/gravity-ui/page-constructor/actions)에서 프로세스를 볼 수 있습니다.
 4. CHANGELOG.md에서 변경 사항을 확인하고 로봇의 PR을 승인합니다.
 5. PR을 스쿼시하고 병합합니다. [Actions 탭](https://github.com/gravity-ui/page-constructor/actions)에서 릴리스 프로세스를 볼 수 있습니다.
 
 ### 알파 버전 릴리스
 
-자신의 브랜치에서 패키지의 알파 버전을 릴리스하려면 수동으로 수행할 수 있습니다.
+브랜치에서 패키지의 알파 버전을 릴리스하려면 수동으로 수행할 수 있습니다.
 
 1. Actions 탭으로 이동합니다.
 2. 왼쪽 페이지에서 "Release alpha version" 워크플로를 선택합니다.
 3. 오른쪽에서 "Run workflow" 버튼을 볼 수 있습니다. 여기서 브랜치를 선택할 수 있습니다.
-4. 수동 버전 필드도 볼 수 있습니다. 자신의 브랜치에서 처음 알파를 릴리스하는 경우 여기에 아무것도 설정하지 마십시오. 첫 번째 릴리스 후에는 브랜치가 곧 만료될 수 있으므로 `package.json`을 변경하지 않으므로 수동으로 새 버전을 설정해야 합니다. 그렇지 않으면 오류가 발생하므로 수동 버전에 `alpha` 접두사를 사용하십시오.
-5. "Run workflow"를 누르고 작업이 완료될 때까지 기다립니다. 원하는 만큼 버전을 릴리스할 수 있지만 남용하지 말고 정말 필요한 경우에만 버전을 릴리스하십시오. 다른 경우에는 [npm pack](https://docs.npmjs.com/cli/v7/commands/npm-pack)을 사용하십시오.
+4. 수동 버전 필드도 볼 수 있습니다. 브랜치에서 처음 알파를 릴리스하는 경우 여기에 아무것도 설정하지 마세요. 첫 릴리스 후에는 브랜치가 곧 만료될 수 있으므로 `package.json`을 변경하지 않으므로 수동으로 새 버전을 설정해야 합니다. 오류가 발생하면 수동 버전에 `alpha` 접두사를 사용하세요.
+5. "Run workflow"를 누르고 작업이 완료될 때까지 기다립니다. 원하는 만큼 버전을 릴리스할 수 있지만 남용하지 말고 정말 필요한 경우에만 버전을 릴리스하세요. 그렇지 않은 경우에는 [npm pack](https://docs.npmjs.com/cli/v7/commands/npm-pack)을 사용하세요.
 
-### 베타-메이저 버전 릴리스
+### 베타-주요 버전 릴리스
 
-새로운 메이저 버전을 릴리스하는 경우 안정적인 버전 전에 베타 버전이 필요할 수 있습니다. 다음을 수행하십시오.
+새로운 메이저 버전을 출시하려면 안정 버전 전에 베타 버전을 먼저 출시해야 할 수 있습니다. 다음 단계를 따르세요.
 
 1. `beta` 브랜치를 생성하거나 업데이트합니다.
-2. 변경 사항을 추가합니다.
-3. 새 베타 버전을 준비하면 빈 커밋으로 수동으로 릴리스합니다 (또는 마지막 커밋에 다음 푸터가 포함된 커밋 메시지를 추가할 수 있습니다).
+2. 변경 사항을 해당 브랜치에 추가합니다.
+3. 새 베타 버전을 출시할 준비가 되면 빈 커밋으로 수동 출시하거나 마지막 커밋에 다음 커밋 메시지를 추가합니다.
 
 ```bash
-git commit -m 'fix: last commit
+git commit -m 'fix: 마지막 커밋
 
-```
 Release-As: 3.0.0-beta.0' --allow-empty
 ```
 
-4. Release please 봇이 `beta` 브랜치에 `CHANGELOG.md`를 업데이트하고 패키지 버전을 올린 새로운 PR을 생성합니다.
-5. 원하시는 만큼 반복할 수 있습니다. 베타 태그 없이 최신 메이저 버전을 출시할 준비가 되면, `beta` 브랜치에서 `main` 브랜치로 PR을 생성해야 합니다. 패키지 버전이 베타 태그를 포함하는 것은 정상입니다. 봇은 이를 인지하고 적절하게 변경합니다. `3.0.0-beta.0`은 `3.0.0`으로 변경됩니다.
+4. Release please 로봇이 업데이트된 CHANGELOG.md와 함께 `beta` 브랜치로 새 PR을 생성하고 패키지 버전을 올립니다.
+5. 원하는 만큼 반복할 수 있습니다. 베타 태그 없이 최신 메이저 버전을 출시할 준비가 되면 `beta` 브랜치에서 `main` 브랜치로 PR을 생성해야 합니다. 패키지 버전이 베타 태그와 함께 표시되는 것은 정상입니다. 로봇은 이를 인지하고 올바르게 변경합니다. `3.0.0-beta.0`은 `3.0.0`이 됩니다.
 
-### 이전 메이저 버전 릴리스 흐름
+### 이전 메이저 버전의 릴리스 흐름
 
-메인에 커밋한 후 이전 메이저 버전에 대한 새 버전을 출시하려면 다음 단계를 따르세요.
+`main`에 커밋한 후 이전 메이저 버전에 대한 새 버전을 출시하려면 다음 단계를 따르세요.
 
 1. 필요한 브랜치를 업데이트합니다. 이전 메이저 릴리스 브랜치 이름은 다음과 같습니다.
-   1. `version-1.x.x/fixes` - 메이저 1.x.x용
-   2. `version-2.x.x` - 메이저 2.x.x용
+   1. `version-1.x.x/fixes` - 메이저 1.x.x의 경우
+   2. `version-2.x.x` - 메이저 2.x.x의 경우
 2. 이전 메이저 릴리스 브랜치에서 새 브랜치를 체크아웃합니다.
-3. `main` 브랜치의 커밋을 체리픽합니다.
-4. PR을 생성하고 승인을 받은 후 이전 메이저 릴리스 브랜치로 병합합니다.
-5. PR을 스쿼시 및 병합합니다. (Github-Actions로 새 버전을 출시하는 것이 중요합니다.)
-6. 봇이 패키지의 새 버전과 `CHANGELOG.md`에 대한 변경 사항에 대한 PR을 생성할 때까지 기다립니다. [Actions 탭](https://github.com/gravity-ui/page-constructor/actions)에서 진행 상황을 볼 수 있습니다.
-7. `CHANGELOG.md`에서 변경 사항을 확인하고 봇의 PR을 승인합니다.
-8. PR을 스쿼시 및 병합합니다. [Actions 탭](https://github.com/gravity-ui/page-constructor/actions)에서 릴리스 프로세스를 볼 수 있습니다.
+3. `main` 브랜치의 커밋을 Cherry-pick합니다.
+4. PR을 생성하고 승인을 받은 후 이전 메이저 릴리스 브랜치에 병합합니다.
+5. PR을 Squash and merge합니다. (Github-Actions를 사용하여 새 버전을 출시하는 것이 중요합니다.)
+6. 로봇이 새 패키지 버전과 CHANGELOG.md의 변경 사항에 대한 정보를 포함한 PR을 생성할 때까지 기다립니다. [Actions 탭](https://github.com/gravity-ui/page-constructor/actions)에서 프로세스를 확인할 수 있습니다.
+7. CHANGELOG.md에서 변경 사항을 확인하고 로봇의 PR을 승인합니다.
+8. PR을 Squash and merge합니다. [Actions 탭](https://github.com/gravity-ui/page-constructor/actions)에서 릴리스 프로세스를 확인할 수 있습니다.
 
-## 페이지 생성기 에디터
+## Page constructor editor
 
-에디터는 실시간 미리보기와 함께 페이지 콘텐츠 관리를 위한 사용자 인터페이스를 제공합니다.
+에디터는 실시간 미리 보기와 함께 페이지 콘텐츠 관리를 위한 사용자 인터페이스를 제공합니다.
 
 사용 방법:
 
@@ -607,18 +622,18 @@ export const MyAppEditor = ({initialContent, onChange, transformContent}: MyAppE
 );
 ```
 
-## 메모리 뱅크
+## Memory Bank
 
-이 프로젝트에는 포괄적인 **메모리 뱅크**가 포함되어 있습니다. 이는 프로젝트의 아키텍처, 구성 요소 및 사용 패턴에 대한 자세한 정보를 제공하는 Markdown 문서 모음입니다. 메모리 뱅크는 AI 에이전트와 함께 작업할 때 특히 유용합니다. 구조화된 정보를 포함하고 있기 때문입니다.
+이 프로젝트에는 프로젝트의 아키텍처, 구성 요소 및 사용 패턴에 대한 자세한 정보를 제공하는 Markdown 문서 모음인 포괄적인 **Memory Bank**가 포함되어 있습니다. Memory Bank는 구조화된 정보를 포함하고 있어 AI 에이전트와 작업할 때 특히 유용합니다.
 
 - **프로젝트 개요**: 핵심 요구 사항, 목표 및 컨텍스트
 - **구성 요소 문서**: 모든 구성 요소에 대한 자세한 사용 가이드
 - **시스템 아키텍처**: 기술 패턴 및 설계 결정
 - **개발 진행 상황**: 현재 상태 및 구현 세부 정보
 
-### 메모리 뱅크 사용하기
+### Memory Bank 사용하기
 
-메모리 뱅크는 `memory-bank/` 디렉토리에 있으며 다른 문서와 마찬가지로 읽을 수 있는 일반 Markdown 파일로 구성됩니다.
+Memory Bank는 `memory-bank/` 디렉토리에 있으며 다른 문서와 마찬가지로 읽을 수 있는 일반 Markdown 파일로 구성됩니다.
 
 - `projectbrief.md` - 핵심 요구 사항이 포함된 기본 문서
 - `productContext.md` - 프로젝트 목적 및 사용자 경험 목표
@@ -631,7 +646,7 @@ export const MyAppEditor = ({initialContent, onChange, transformContent}: MyAppE
 
 ## 테스트
 
-포괄적인 문서는 제공된 [링크](./test-utils/docs/README.md)에서 확인할 수 있습니다.
+전체 문서는 제공된 [링크](./test-utils/docs/README.md)에서 확인할 수 있습니다.
 
 ## 라이선스
 
@@ -639,11 +654,11 @@ MIT 라이선스에 따라 배포됩니다. 자세한 내용은 [LICENSE](LICENS
 
 ## AI 에이전트용
 
-준비된 순서대로 구성 가능한 블록 세트를 사용하여 선언적 JSON/YAML 구성에서 전체 웹 페이지 또는 페이지 섹션을 렌더링하는 라이브러리입니다. 마케팅/랜딩 페이지를 구축할 때 사용하세요. 일반 애플리케이션 UI에는 사용하지 마세요.
+선언적 JSON/YAML 구성에서 준비된 순서대로 블록 세트를 사용하여 전체 웹 페이지 또는 페이지 섹션을 렌더링하는 라이브러리입니다. 마케팅/랜딩 페이지를 구축할 때 사용하세요. 일반 애플리케이션 UI에는 사용하지 마세요.
 
 ### 언제 사용해야 할까요?
 
-- 데이터 기반 페이지: `PageConstructorProvider`로 래핑된 `PageConstructor`를 사용하여 타입화된 블록의 `content` 구성을 렌더링합니다.
+- 데이터 기반 페이지: `PageConstructorProvider`로 감싸진 `PageConstructor`를 사용하여 타입화된 블록의 `content` 구성을 렌더링합니다.
 - 사전 구축된 블록(헤더, 미디어, 카드 등)으로 조립된 마케팅, 랜딩 및 문서 페이지.
 - `@gravity-ui/page-constructor/server` 유틸리티(`contentTransformer`, `fullTransform`)를 통한 서버 측 YFM 처리.
 - 반응형 그리드(`Grid`/`Row`/`Col`) 또는 `Navigation` 구성 요소만 독립적으로 재사용.
@@ -651,18 +666,18 @@ MIT 라이선스에 따라 배포됩니다. 자세한 내용은 [LICENSE](LICENS
 ### 언제 사용하지 않아야 할까요?
 
 - 일반 애플리케이션 UI(버튼, 양식, 모달) - [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit)을 사용하세요.
-- Markdown/YFM 콘텐츠 편집 - [`@gravity-ui/markdown-editor`](https://github.com/gravity-ui/markdown-editor)를 사용하세요.
+- Markdown/YFM 콘텐츠 편집 - [`@gravity-ui/markdown-editor`](https://github.com/gravity-ui/markdown-editor)을 사용하세요.
 - 앱 탐색 셸(측면 헤더) - [`@gravity-ui/navigation`](https://github.com/gravity-ui/navigation)을 사용하세요. 이 패키지의 `Navigation`은 페이지 수준의 상단 탐색입니다.
 
-### 일반적인 함정
+### 일반적인 주의 사항
 
-- **`PageConstructor`는 `PageConstructorProvider`로 래핑되어야 합니다.** 이를 그대로 렌더링하면 컨텍스트(로케일, 테마, SSR, 분석)가 깨집니다.
-- **`content` 속성은 `{blocks: [...]}` 모양의 `content`입니다.** 각 블록 객체는 알려진 블록과 일치하는 `type`과 해당 데이터 필드가 필요합니다. `data`/`config` 속성은 없습니다.
-- **블록 텍스트의 YFM은 서버 처리가 필요합니다.** Markdown과 유사한 필드는 `@gravity-ui/page-constructor/server`의 `contentTransformer`/`fullTransform`을 통해 콘텐츠를 실행하지 않으면 일반 텍스트로 렌더링됩니다. `@diplodoc/transform`은 필수 피어 종속성입니다.
-- **SCSS 스타일을 가져옵니다.** `@gravity-ui/page-constructor/styles/styles.scss`(CSS가 아닌 SCSS)를 추가합니다. 사용자 정의 블록은 동일한 파일을 가져와 믹스인/변수를 재사용합니다.
-- **Vite에는 `vite-plugin-dynamic-import`가 필요합니다.** 동적 블록 가져오기는 이것 없이는 Vite에서 실패합니다.
+- **`PageConstructor`는 `PageConstructorProvider`로 감싸야 합니다.** 이를 감싸지 않으면 컨텍스트(로케일, 테마, SSR, 분석)가 깨집니다.
+- **`content` 속성은 `{blocks: [...]}` 형태입니다.** 각 블록 객체에는 알려진 블록과 일치하는 `type`과 해당 데이터 필드가 필요합니다. `data`/`config` 속성은 없습니다.
+- **블록 텍스트의 YFM은 서버 처리가 필요합니다.** `@gravity-ui/page-constructor/server`의 `contentTransformer`/`fullTransform`을 통해 콘텐츠를 실행하지 않으면 Markdown과 유사한 필드는 일반 텍스트로 렌더링됩니다. `@diplodoc/transform`은 필수 피어 종속성입니다.
+- **SCSS 스타일을 가져와야 합니다.** `@gravity-ui/page-constructor/styles/styles.scss` (CSS가 아닌 SCSS)를 추가하세요. 사용자 정의 블록은 동일한 파일을 가져와 믹스인/변수를 재사용합니다.
+- **Vite에는 `vite-plugin-dynamic-import`가 필요합니다.** 이것 없이는 Vite에서 동적 블록 가져오기가 실패합니다.
+- **그리드에는 전역 `box-sizing: border-box` 재설정이 필요합니다.** 이 패키지는 이를 제공하지 않습니다. 이것이 없으면 컨테이너 패딩이 뷰포트 너비를 초과하며 타입 검사 및 빌드는 정상적으로 유지됩니다. 호스트 앱 스타일에 `*, *::before, *::after { box-sizing: border-box; }`를 추가하세요.
 
 ## AI 에이전트용 문서
 
-설치된 버전에 대한 에이전트 읽기 가능 문서는 `node_modules/@gravity-ui/page-constructor/build/docs/INDEX.md`에 있습니다.
-```
+설치된 버전에 대한 에이전트가 읽을 수 있는 문서는 `node_modules/@gravity-ui/page-constructor/build/docs/INDEX.md`에 있습니다.

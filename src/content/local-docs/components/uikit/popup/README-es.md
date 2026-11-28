@@ -1,38 +1,41 @@
 <!--GITHUB_BLOCK-->
 
-# Ventana emergente
+# Popup
 
 <!--/GITHUB_BLOCK-->
+
+`Popup` posiciona contenido flotante sobre la página, anclado a un elemento de referencia — la primitiva de bajo nivel detrás de tooltips, popovers y menús, construida sobre [Floating UI](https://floating-ui.com). Su visibilidad se controla con la propiedad `open`; sus hijos se renderizan dentro del componente [`Portal`](../Portal) a menos que establezcas la propiedad `disablePortal`.
 
 ```tsx
 import {Popup} from '@gravity-ui/uikit';
 ```
 
-Puedes usar un `Popup` para mostrar contenido flotante sobre la página. Técnicamente, es un envoltorio de una [interfaz de usuario flotante](https://floating-ui.com) con algunos valores predeterminados. Para gestionar `Popup` la visibilidad, utilice la `open` propiedad.
-Los componentes `Popup` secundarios se representan dentro del [`Portal`](../Portal) componente. Para deshabilitar este comportamiento, utilice la `disablePortal` propiedad.
-
 ## Ancla
 
-Para especificar el ancla de un elemento flotante, puede usar la `anchorElement` propiedad.
+Para especificar el ancla de un elemento flotante, puedes usar la propiedad `anchorElement`.
 
-<!--LANDING_BLOCK
+<!--SANDBOX
+import {useState} from 'react';
+import {Button, Popup} from '@gravity-ui/uikit';
 
-<ExampleBlock
-    code={`
-const [buttonElement, setButtonElement] = React.useState(null);
-const [open, setOpen] = React.useState(false);
+export default function () {
+    const [buttonElement, setButtonElement] = useState<HTMLButtonElement | null>(null);
+    const [open, setOpen] = useState(false);
 
-<Button ref={setButtonElement} onClick={() => setOpen((prevOpen) => !prevOpen)}>
-  Toggle Popup
-</Button>
-<Popup anchorElement={buttonElement} open={open} placement="bottom">
-  Content
-</Popup>
-`}>
-    <UIKitExamples.PopupAnchorExample/>
-</ExampleBlock>
-
-LANDING_BLOCK-->
+    return (
+        <>
+            <Button ref={setButtonElement} onClick={() => setOpen((prevOpen) => !prevOpen)}>
+                Toggle Popup
+            </Button>
+            <Popup anchorElement={buttonElement} open={open} placement="bottom">
+                <div style={{padding: 5}}>
+                    Content
+                </div>
+            </Popup>
+        </>
+    );
+}
+SANDBOX-->
 
 <!--GITHUB_BLOCK-->
 
@@ -50,82 +53,131 @@ const [open, setOpen] = React.useState(false);
 
 <!--/GITHUB_BLOCK-->
 
-## Colocación
+## Posicionamiento
 
-Utilice la `placement` propiedad para gestionar la `Popup` posición alrededor del elemento de anclaje.
-De forma predeterminada, `Popup` usa [flip middleware](https://floating-ui.com/docs/flip) para evitar el desbordamiento.
-Si la propiedad se establece en una matriz, el primer elemento se usará como valor de ubicación predeterminado y el resto se usará como [ubicaciones alternativas](https://floating-ui.com/docs/flip#fallbackplacements).
-También es aceptable usar los valores `auto`, `auto-start`, `auto-end` para usar el [middleware AutoPlacement](https://floating-ui.com/docs/autoPlacement) en lugar de flip.
+Usa la propiedad `placement` para gestionar la posición del `Popup` alrededor del elemento ancla.
+Por defecto, `Popup` utiliza el [middleware flip](https://floating-ui.com/docs/flip) para prevenir desbordamientos.
+Si la propiedad se establece a un array, el primer elemento se usará como valor de posicionamiento predeterminado, los restantes se usarán como [posicionamientos de respaldo](https://floating-ui.com/docs/flip#fallbackplacements).
+También es aceptable usar los valores `auto`, `auto-start`, `auto-end` para usar el [middleware autoPlacement](https://floating-ui.com/docs/autoPlacement) en lugar de flip.
 
-<!--LANDING_BLOCK
+<!--SANDBOX
+import {Popup, PopupProps} from '@gravity-ui/uikit';
+import {CSSProperties, useState} from 'react';
 
-<ExampleBlock
-    code={`
-const [boxElement, setBoxElement] = React.useState(null);
+const anchorStyles: CSSProperties = {
+    margin: '40px 100px',
+    width: 320,
+    height: 140,
+    border: '2px dashed',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: '1.5em',
+};
 
-<div ref={setBoxElement} />
-<Popup open anchorElement={boxElement} placement="top-start">Top Start</Popup>
-<Popup open anchorElement={boxElement} placement="top">Top</Popup>
-<Popup open anchorElement={boxElement} placement="top-end">Top End</Popup>
-<Popup open anchorElement={boxElement} placement="right-start">Right Start</Popup>
-<Popup open anchorElement={boxElement} placement="right">Right</Popup>
-<Popup open anchorElement={boxElement} placement="right-end">Right End</Popup>
-<Popup open anchorElement={boxElement} placement="bottom-end">Bottom End</Popup>
-<Popup open anchorElement={boxElement} placement="bottom">Bottom</Popup>
-<Popup open anchorElement={boxElement} placement="bottom-start">Bottom Start</Popup>
-<Popup open anchorElement={boxElement} placement="left-end">Left End</Popup>
-<Popup open anchorElement={boxElement} placement="left">Left</Popup>
-<Popup open anchorElement={boxElement} placement="left-start">Left Start</Popup>
-`}>
-    <UIKitExamples.PopupPlacementExample/>
-</ExampleBlock>
+function PopupInstance({children, ...props}: PopupProps) {
+    return (
+        <Popup open disablePortal {...props}>
+            <div style={{padding: 5}}>{children}</div>
+        </Popup>
+    );
+}
 
-LANDING_BLOCK-->
+export default function () {
+    const [anchorElement, setAnchorElement] = useState<HTMLDivElement | null>(null);
+
+    return (
+        <div>
+            <div ref={setAnchorElement} style={anchorStyles}>
+                Anchor
+            </div>
+            <PopupInstance anchorElement={anchorElement} placement="top-start">
+                Top Start
+            </PopupInstance>
+            <PopupInstance anchorElement={anchorElement} placement="top">
+                Top
+            </PopupInstance>
+            <PopupInstance anchorElement={anchorElement} placement="top-end">
+                Top End
+            </PopupInstance>
+            <PopupInstance anchorElement={anchorElement} placement="right-start">
+                Right Start
+            </PopupInstance>
+            <PopupInstance anchorElement={anchorElement} placement="right">
+                Right
+            </PopupInstance>
+            <PopupInstance anchorElement={anchorElement} placement="right-end">
+                Right End
+            </PopupInstance>
+            <PopupInstance anchorElement={anchorElement} placement="bottom-end">
+                Bottom End
+            </PopupInstance>
+            <PopupInstance anchorElement={anchorElement} placement="bottom">
+                Bottom
+            </PopupInstance>
+            <PopupInstance anchorElement={anchorElement} placement="bottom-start">
+                Bottom Start
+            </PopupInstance>
+            <PopupInstance anchorElement={anchorElement} placement="left-end">
+                Left End
+            </PopupInstance>
+            <PopupInstance anchorElement={anchorElement} placement="left">
+                Left
+            </PopupInstance>
+            <PopupInstance anchorElement={anchorElement} placement="left-start">
+                Left Start
+            </PopupInstance>
+        </div>
+    );
+};
+SANDBOX-->
 
 ## Propiedades
 
-| Nombre                  | Descripción                                                                                              |                                       Tipo                                        | Predeterminado |
-| :---------------------- | :------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------: | :------------: |
-| anchorElement           | Elemento de anclaje. También puede ser un `VirtualElement`                                               |                               `PopupAnchorElement`                                |                |
-| aria, descrita por      | `aria-describedby` atributo. Úselo si tiene nodos de etiqueta y descripción                              |                                     `string`                                      |                |
-| etiqueta aria           | `aria-label` atributo. Úselo solo si no tiene ningún subtítulo visible                                   |                                     `string`                                      |                |
-| aria - etiquetada por   | `aria-labelledby` atributo. Es preferible si tiene subtítulos visibles                                   |                                     `string`                                      |                |
-| niños                   | Cualquier contenido de React                                                                             |                                 `React.ReactNode`                                 |                |
-| className               | `class` Atributo HTML para el nodo raíz                                                                  |                                     `string`                                      |                |
-| disableEscapeKeyDown    | Deshabilita la activación de cerca `Esc`                                                                 |                                     `boolean`                                     |    `false`     |
-| disableFocusOut         | Desactiva la activación del cierre al enfocar                                                            |                                     `boolean`                                     |    `false`     |
-| disableOutsideClick     | Desactiva la activación de clics cercanos al hacer clic desde el exterior                                |                                     `boolean`                                     |    `false`     |
-| disablePortal           | Deshabilita el uso `Portal` para niños                                                                   |                                     `boolean`                                     |    `false`     |
-| disableTransition       | Desactiva la animación de la apertura/desaparición de ventanas emergentes                                |                                     `boolean`                                     |    `false`     |
-| floatingClassName       | Clase adicional para aplicar al `Floating UI` elemento                                                   |                                     `string`                                      |                |
-| floatingContext         | `Floating UI` contexto para proporcionar interacciones                                                   |                               `FloatingRootContext`                               |                |
-| floatingInteractions    | Anular interacciones `Floating UI`                                                                       |                              `Matriz<ElementProps>`                               |                |
-| floatingMiddlewares     | `Floating UI` middleware. Si se configuran, sobrescribirán por completo los middlewares predeterminados. |                               `Matriz<Middleware>`                                |                |
-| floatingStyles          | Estilos que se van a aplicar al `Floating UI` elemento                                                   |                               `React.CSSProperties`                               |                |
-| focusOrder              | El orden en el que se centra el círculo                                                                  |                 `Matriz<'referencia'\| 'flotante'\| 'contenido'>`                 | `['content']`  |
-| hasArrow                | Representa la flecha que apunta al ancla                                                                 |                                     `boolean`                                     |    `false`     |
-| identificación          | `id` Atributo HTML                                                                                       |                                     `string`                                      |                |
-| initialFocus            | Elemento inicial en el que centrarse. El número positivo es el índice del elemento tabulable.            |                        `number` `Reactar.Ref<HTMLElement>`                        |                |
-| keepMounted             | `Popup` no se eliminará del DOM al ocultarse                                                             |                                     `boolean`                                     |    `false`     |
-| modal                   | Permite un comportamiento de captura de enfoque                                                          |                                     `boolean`                                     |    `false`     |
-| compensar               | `Floating UI` valor de compensación                                                                      |                                   `PopupOffset`                                   |      `4`       |
-| onOpenChange            | Maneja `Popup` el evento de cambio abierto                                                               |                                    `Function`                                     |                |
-| onTransitionIn          | Animación emergente abierta al iniciar                                                                   |                                    `Function`                                     |                |
-| onTransitionInComplete  | Al terminar, abre la animación emergente                                                                 |                                    `Function`                                     |                |
-| onTransitionOut         | Animación emergente al iniciar y cerrar                                                                  |                                    `Function`                                     |                |
-| onTransitionOutComplete | Al terminar, cierre la animación emergente                                                               |                                    `Function`                                     |                |
-| abierto                 | Gestiona `Popup` la visibilidad                                                                          |                                     `boolean`                                     |    `false`     |
-| colocación              | `Floating UI` colocación                                                                                 | `Placement` `Array:` `inicio<Placement>` `automático` `, finalización automática` |                |
-| qa                      | Atributo de prueba (`data-qa`)                                                                           |                                     `string`                                      |                |
-| returnFocus             | Elemento en el que centrarse el cierre                                                                   |                       `boolean` `Reactar.Ref<HTMLElement>`                        |     `true`     |
-| papel                   | Función de accesibilidad de la ventana emergente                                                         |                                     `string`                                      |                |
-| estrategia              | `Floating UI` estrategia de posicionamiento                                                              |                                `absolute` `fixed`                                 |   `absolute`   |
-| estilo                  | `style` Atributo HTML para nodo raíz                                                                     |                               `React.CSSProperties`                               |                |
+| Nombre                    | Descripción                                                                                |                             Tipo                              |     Predeterminado     |
+| :---------------------- | :----------------------------------------------------------------------------------------- | :-----------------------------------------------------------: | :--------------------: |
+| anchorElement           | Elemento ancla. También puede ser un `VirtualElement`                                      |                     `PopupAnchorElement`                      |                        |
+| aria-describedby        | Atributo `aria-describedby`. Úsalo si tienes nodos de etiqueta y descripción               |                           `string`                            |                        |
+| aria-label              | Atributo `aria-label`. Úsalo solo si no tienes ningún título visible                       |                           `string`                            |                        |
+| aria-labelledby         | Atributo `aria-labelledby`. Preferible si tienes un título visible                         |                           `string`                            |                        |
+| children                | Cualquier contenido de React                                                                 |                       `React.ReactNode`                       |                        |
+| className               | Atributo HTML `class` para el nodo raíz                                                    |                           `string`                            |                        |
+| container               | Elemento DOM al que se monta el componente a través de `Portal`                            |                         `HTMLElement`                         |    `document.body`     |
+| disableEscapeKeyDown    | Deshabilita el cierre al presionar `Esc`                                                  |                           `boolean`                           |        `false`         |
+| disableFocusOut         | Deshabilita el cierre al perder el foco                                                    |                           `boolean`                           |        `false`         |
+| disableOutsideClick     | Deshabilita el cierre al hacer clic fuera                                                  |                           `boolean`                           |        `false`         |
+| disablePortal           | Deshabilita el uso de `Portal`                                                             |                           `boolean`                           |        `false`         |
+| disableTransition       | Deshabilita la animación de aparición/desaparición del popup                              |                           `boolean`                           |        `false`         |
+| floatingClassName       | Clase adicional para aplicar al elemento `Floating UI`                                     |                           `string`                            |                        |
+| floatingContext         | Contexto `Floating UI` para proporcionar interacciones                                     |                     `FloatingRootContext`                     |                        |
+| floatingInteractions    | Sobrescribe las interacciones de `Floating UI`                                             |                     `Array<ElementProps>`                     |                        |
+| floatingMiddlewares     | Middlewares de `Floating UI`. Si se establecen, sobrescribirán completamente los middlewares predeterminados. |                      `Array<Middleware>`                      |                        |
+| floatingStyles          | Estilos para aplicar al elemento `Floating UI`                                             |                     `React.CSSProperties`                     |                        |
+| focusOrder              | El orden en el que el foco circula                                                         |        `Array<'reference' \| 'floating' \| 'content'>`        |      `['content']`     |
+| hasArrow                | Renderiza una flecha apuntando al ancla                                                    |                           `boolean`                           |        `false`         |
+| id                      | Atributo HTML `id`                                                                         |                           `string`                            |                        |
+| initialFocus            | Elemento inicial a enfocar. Un número positivo es el índice del elemento tabulable.        |               `number` `React.Ref<HTMLElement>`               |                        |
+| keepMounted             | `Popup` no se eliminará del DOM al ocultarse                                               |                           `boolean`                           |        `false`         |
+| modal                   | Habilita el comportamiento de captura de foco                                              |                           `boolean`                           |        `false`         |
+| offset                  | Valor de offset de `Floating UI`                                                           |                         `PopupOffset`                         |           `4`            |
+| onOpenChange            | Maneja el evento de cambio de apertura de `Popup`                                          |                          `Function`                           |                        |
+| onTransitionIn          | Al inicio de la animación de apertura del popup                                            |                          `Function`                           |                        |
+| onTransitionInComplete  | Al finalizar la animación de apertura del popup                                            |                          `Function`                           |                        |
+| onTransitionOut         | Al inicio de la animación de cierre del popup                                              |                          `Function`                           |                        |
+| onTransitionOutComplete | Al finalizar la animación de cierre del popup                                              |                          `Function`                           |                        |
+| open                    | Gestiona la visibilidad de `Popup`                                                         |                           `boolean`                           |        `false`         |
+| placement               | Ubicación de `Floating UI`                                                                 | `Placement` `Array<Placement>` `auto` `auto-start` `auto-end` |                        |
+| qa                      | Atributo de prueba (`data-qa`)                                                             |                           `string`                            |                        |
+| returnFocus             | Elemento a enfocar al cerrar                                                               |              `boolean` `React.Ref<HTMLElement>`               |         `true`         |
+| role                    | Rol de accesibilidad para el popup                                                         |                           `string`                            |                        |
+| strategy                | Estrategia de posicionamiento de `Floating UI`                                             |                      `absolute` `fixed`                       |       `absolute`       |
+| style                   | Atributo HTML `style` para el nodo raíz                                                    |                     `React.CSSProperties`                     |                        |
 
 ## API CSS
 
-| Nombre                       | Descripción     |
-| :--------------------------- | :-------------- |
-| `--g-popup-background-color` | Color de fondo  |
-| `--g-popup-border-color`     | Color del borde |
-| `--g-popup-border-width`     | Ancho del borde |
+| Nombre                         | Descripción      |
+| :--------------------------- | :--------------- |
+| `--g-popup-background-color` | Color de fondo |
+| `--g-popup-border-color`     | Color del borde     |
+| `--g-popup-border-radius`    | Radio del borde    |
+| `--g-popup-border-width`     | Ancho del borde     |

@@ -1,0 +1,149 @@
+name: Update component READMEs
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 6 * * *'
+
+concurrency: update-component-readmes
+
+permissions:
+  contents: read
+
+jobs:
+  sync:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+      pull-requests: write
+    outputs:
+      matrix: ${{ steps.readmes.outputs.matrix }}
+      pr: ${{ steps.prepare.outputs.pr }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci --onnxruntime-node-install-cuda=skip
+      - run: npm run generate-component-catalog
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+      - name: Fetch tagged component READMEs
+        id: readmes
+        run: node scripts/update-component-readmes.mjs
+      - name: Open draft for component documentation
+        id: prepare
+        if: >-
+          steps.readmes.outputs.matrix != '[]' &&
+          github.ref_name == github.event.repository.default_branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BASE: ${{ github.event.repository.default_branch }}
+        run: |
+          existing=$(gh pr list --base "$BASE" --limit 100 --json headRefName \
+            --jq '[.[] | select(.headRefName | startswith("automation/component-readmes/"))] | length')
+          if [ "$existing" != 0 ]; then
+            echo "A component README update is already open."
+            exit 0
+          fi
+
+          branch="automation/component-readmes/${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          git switch -c "$branch"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- src/content/local-docs/components
+          if git diff --cached --quiet; then
+            touch src/content/local-docs/components/.translation-pending
+            git add src/content/local-docs/components/.translation-pending
+          fi
+          git commit -m 'docs: sync component READMEs'
+          git push origin "$branch"
+          gh pr create --draft --base "$BASE" --head "$branch" \
+            --title 'docs: update component READMEs and translations' \
+            --body 'Refreshes component documentation from the exact installed Gravity UI package tags.'
+          echo "pr=$(gh pr view "$branch" --json number --jq .number)" >> "$GITHUB_OUTPUT"
+
+  translate:
+    needs: sync
+    if: needs.sync.outputs.pr != ''
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+      pull-requests: write
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix:
+        readme: ${{ fromJSON(needs.sync.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: refs/pull/${{ needs.sync.outputs.pr }}/head
+      - name: Protect component README blocks
+        id: protect
+        env:
+          SOURCE: ${{ matrix.readme.input }}
+        run: |
+          input="${SOURCE%.md}.translation-input.md"
+          node scripts/component-catalog/translation-markdown.mjs protect "$SOURCE" "$input"
+          echo "input=$input" >> "$GITHUB_OUTPUT"
+      - name: Translate component README
+        uses: dgaponov/gpt-translate@master
+        with:
+          provider: openrouter
+          apikey: ${{ secrets.OPENROUTER_API_KEY }}
+          model: google/gemini-2.5-flash-lite
+          inputFiles: ${{ steps.protect.outputs.input }}
+          outputFiles: ${{ join(matrix.readme.outputs, ' ') }}
+          languages: ${{ matrix.readme.locales }}
+          pullRequestNumber: ${{ needs.sync.outputs.pr }}
+          commitMessage: 'docs: translate ${{ matrix.readme.input }}'
+          prompt: |
+            Translate the Markdown documentation to {targetLanguage}.
+            Preserve component names, API identifiers, links, and code blocks.
+            Copy each GRAVITY_TRANSLATION_BLOCK_<number>_END placeholder verbatim on its
+            own line, in the original order. Keep placeholders outside Markdown code fences.
+            Translate the surrounding prose and table descriptions. Return Markdown without an outer code fence.
+
+  finish:
+    needs: [sync, translate]
+    if: always() && needs.sync.outputs.pr != ''
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+      pull-requests: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      PR: ${{ needs.sync.outputs.pr }}
+      RESULT: ${{ needs.translate.result }}
+    steps:
+      - uses: actions/checkout@v4
+        if: env.RESULT == 'success'
+        with:
+          ref: refs/pull/${{ needs.sync.outputs.pr }}/head
+      - name: Verify and publish the documentation draft
+        if: env.RESULT == 'success'
+        env:
+          PLAN: ${{ needs.sync.outputs.matrix }}
+        run: |
+          while IFS=$'\t' read -r source output; do
+            node scripts/component-catalog/translation-markdown.mjs restore "$source" "$output"
+            git add -- "$output"
+          done < <(jq -r '.[] | .input as $source | .outputs[] | [$source, .] | @tsv' <<< "$PLAN")
+
+          marker=src/content/local-docs/components/.translation-pending
+          if [ -f "$marker" ]; then
+            git rm "$marker"
+          fi
+          if ! git diff --cached --quiet; then
+            branch=$(gh pr view "$PR" --json headRefName --jq .headRefName)
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git commit -m 'docs: restore protected README blocks'
+            git push origin "HEAD:refs/heads/$branch"
+          fi
+          gh pr ready "$PR" --repo "$GITHUB_REPOSITORY"
+      - name: Close an incomplete documentation draft
+        if: always() && (env.RESULT != 'success' || failure())
+        run: gh pr close "$PR" --repo "$GITHUB_REPOSITORY"

@@ -1,6 +1,6 @@
 # AIKit &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/aikit?logo=npm)](https://www.npmjs.com/package/@gravity-ui/aikit) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/aikit/.github/workflows/ci.yml?branch=main&label=CI&logo=github)](https://github.com/gravity-ui/aikit/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685?logo=storybook)](https://preview.gravity-ui.com/aikit/?path=/docs/pages-chatcontainer--docs)
 
-为 AI 聊天构建的 UI 组件库，遵循原子设计原则。
+一套基于原子设计原则构建的 AI 聊天 UI 组件库。
 
 <!--GITHUB_BLOCK-->
 
@@ -10,7 +10,7 @@
 
 ## 资源
 
-### ![Globe Logo Light](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/globe_light.svg#gh-light-mode-only) ![Globe Logo Dark](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/globe_dark.svg#gh-dark-mode-only) [网站](https://gravity-ui.com/libraries/aikit)
+### ![Globe Logo Light](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/globe_light.svg#gh-light-mode-only) ![Globe Logo Dark](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/globe_dark.svg#gh-dark-mode-only) [官网](https://gravity-ui.com/libraries/aikit)
 
 ### ![Storybook Logo Light](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/storybook_light.svg#gh-light-mode-only) ![Storybook Logo Dark](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/storybook_dark.svg#gh-dark-mode-only) [Storybook](https://preview.gravity-ui.com/aikit/)
 
@@ -18,31 +18,31 @@
 
 <!--/GITHUB_BLOCK-->
 
-## 描述
+## 简介
 
-**@gravity-ui/aikit** 是一个灵活且可扩展的 React 组件库，用于构建任意复杂度的 AI 聊天。该库提供了一系列现成的组件，可以直接使用或根据您的需求进行定制。
+**@gravity-ui/aikit** 是一个灵活且可扩展的 React 组件库，用于构建各种复杂度的 AI 聊天应用。该库提供了一系列现成的组件，您可以直接使用，也可以根据您的需求进行定制。
 
 ### 主要特性
 
 - 🎨 **原子设计** — 从原子到页面的清晰组件层级结构
 - 🔧 **SDK 无关** — 不依赖于特定的 AI SDK
-- 🎭 **两级方法** — 现成组件 + 用于定制的 Hooks
-- 🎨 **CSS 变量** — 无需覆盖组件即可轻松实现主题化
+- 🎭 **两层方法** — 提供现成组件和用于定制的 Hooks
+- 🎨 **CSS 变量** — 无需覆盖组件即可轻松实现主题切换
 - 📦 **TypeScript** — 开箱即用的完整类型安全
-- 🔌 **可扩展** — 自定义消息类型注册系统
+- 🔌 **可扩展性** — 支持自定义消息类型注册系统
 
 ## 项目结构
 
 ```
 src/
 ├── components/
-│   ├── atoms/          # 基本不可分割的 UI 元素
+│   ├── atoms/          # 基础不可分割的 UI 元素
 │   ├── molecules/      # 原子的简单组合
-│   ├── organisms/      # 带有逻辑的复杂组件
+│   ├── organisms/      # 包含逻辑的复杂组件
 │   ├── templates/      # 完整的布局
-│   └── pages/          # 与数据完全集成
+│   └── pages/          # 与数据完全集成的页面
 ├── hooks/              # 通用 Hooks
-├── types/              # TypeScript 类型
+├── types/              # TypeScript 类型定义
 ├── utils/              # 工具函数
 └── themes/             # CSS 主题和变量
 ```
@@ -53,7 +53,11 @@ src/
 npm install @gravity-ui/aikit
 ```
 
-## 快速入门
+AIKit 3 需要 `@gravity-ui/uikit@^8.0.0`、React/React DOM 18 或 19，以及 Node.js 20.19+（v20 版本）或 22.12+。请按照 [入门指南](./docs/GETTING_STARTED.md) 中的说明，将应用程序包裹在 UIKit 的 `Provider` 中。
+
+从 v2 升级？请阅读 [迁移指南](./docs/migration-to-v3.md) ([中文](./docs/migration-to-v3-zh.md)) 和 [v3 发布说明](./docs/changelog-v3.md)。
+
+## 快速开始
 
 ```typescript
 import { ChatContainer } from '@gravity-ui/aikit';
@@ -91,13 +95,13 @@ function App() {
 
 ### 🔹 Atoms (原子)
 
-不包含业务逻辑的基本 UI 元素：
+不包含业务逻辑的基础 UI 元素：
 
 - `ActionButton` — 带集成工具提示的按钮
-- `Alert` — 带变体的警告消息
-- `ChatDate` — 带相对日期的日期格式化
+- `Alert` — 带不同变体的提示消息
+- `ChatDate` — 支持相对日期的日期格式化
 - `ContextIndicator` — token 上下文使用指示器
-- `ContextItem` — 带删除操作的上下文标签
+- `ContextItem` — 带移除操作的上下文标签
 - `DiffStat` — 代码变更统计显示
 - `Disclaimer` — 免责声明文本组件
 - `InlineCitation` — 行内引用
@@ -115,44 +119,45 @@ function App() {
 - `BaseMessage` — 所有消息类型的基本包装器
 - `ButtonGroup` — 支持方向的按钮组
 - `InputContext` — 上下文管理
-- `PromptInputBody` — 自动扩展的文本区域
+- `PromptInputBody` — 支持自动扩展的文本区域
 - `PromptInputFooter` — 带操作图标和提交按钮的页脚
-- `PromptInputHeader` — 带上下文项和指示器的页眉
-- `PromptInputPanel` — 自定义内容面板容器
+- `PromptInputHeader` — 带上下文项和指示器的标题
+- `PromptInputPanel` — 自定义内容的面板容器
 - `Suggestions` — 可点击的建议按钮
 - `Tabs` — 带删除功能的导航标签页
 - `ToolFooter` — 带操作的工具消息页脚
-- `ToolHeader` — 带图标和操作的工具消息页眉
+- `ToolHeader` — 带图标和操作的工具消息标题
 
 ### 🔶 Organisms (有机体)
 
-带有内部逻辑的复杂组件：
+包含内部逻辑的复杂组件：
 
 - `AssistantMessage` — AI 助手消息
-- `Header` — 聊天标题
+- `Header` — 聊天头部
 - `MessageList` — 消息列表
 - `PromptInput` — 消息输入框
 - `ThinkingMessage` — AI 思考过程
 - `ToolMessage` — 工具执行
 - `UserMessage` — 用户消息
 
-### 📄 Templates (模板)
+### 📄 模板
 
 完整的布局：
 
 - `ChatContent` — 主要聊天内容
 - `EmptyContainer` — 空状态
-- `History` — 聊天记录
+- `History` — 聊天历史
 
-### 📱 Pages (页面)
+### 📱 页面
 
-完全集成：
+完整的集成：
 
-- `ChatContainer` — 完全组装的聊天界面
+- `ChatContainer` — 完全组装的聊天
 
 ## 文档
 
 - [快速入门指南](./docs/GETTING_STARTED.md)
+- [无需内置引擎即可自定义 Markdown 渲染](./docs/custom-markdown.md)
 - [架构](./docs/ARCHITECTURE.md)
 - [项目结构](./docs/PROJECT_STRUCTURE.md)
 - [测试指南](./docs/TESTING.md)
@@ -164,7 +169,7 @@ function App() {
 
 ### 运行测试
 
-**重要提示**: 所有测试都必须通过 Docker 运行，以确保不同环境中截图的一致性。
+**重要提示**: 所有测试必须通过 Docker 运行，以确保不同环境中截图的一致性。
 
 ```bash
 # 在 Docker 中运行所有组件测试（推荐）
@@ -185,7 +190,7 @@ npm run playwright:docker:clear-cache
 如果您使用的是 Linux 系统，可以在本地运行测试：
 
 ```bash
-# 安装 Playwright 浏览器（只需运行一次）
+# 安装 Playwright 浏览器（运行一次）
 npm run playwright:install
 # 运行所有组件测试
 npm run playwright
@@ -203,29 +208,35 @@ npm run playwright:update
 
 MIT
 
-## 致 AI 代理
+## 面向 AI 代理
 
-一个用于构建 AI 聊天界面的 React 组件库，遵循原子设计（原子 → 分子 → 器官 → 模板 → 页面）组织，并且 SDK 无关——您可以直接使用它来组装聊天 UI（消息列表、提示输入、工具调用、附件），而不是手动从 `@gravity-ui/uikit` 中组合这些基础组件。
+一个用于构建 AI 聊天界面的 React 组件库，遵循原子设计（原子 → 分子 → 器官 → 模板 → 页面）组织，并且与 SDK 无关——使用它来组装聊天 UI（消息列表、提示输入、工具调用、附件），而不是手动从 `@gravity-ui/uikit` 中组合这些基础组件。
 
 ### 何时使用
 
 - 构建 AI/LLM 聊天 UI（助手/用户/工具消息、带建议的提示输入、附件上传、思考状态）。
-- 需要现成的聊天布局（`ChatContainer`、`MessageList`、`PromptInput`）以及用于自定义行为的 Hooks。
+- 需要现成的聊天布局（`ChatContainer`、`MessageList`、`PromptInput`）以及用于自定义行为的钩子。
 - 嵌入到 Gravity UI 生态系统中，通过 CSS 变量共享主题。
 
 ### 何时**不**使用
 
-- 对于通用 UI 组件（按钮、输入框、模态框），请直接使用 [`@gravity-ui/uikit`](https://gravity-ui.com/uikit) — AIKit 在其基础上构建，以满足聊天特定需求。
-- 要在消息中渲染富文本 Markdown，AIKit 的 `MarkdownRenderer` 包装了 [`@gravity-ui/markdown-editor`](https://github.com/gravity-ui/markdown-editor)；如果需要独立的 Markdown 渲染，请直接使用该包。
-- 对于单个聊天气泡而无需聊天编排，使用 uikit 的 `MarkdownRenderer`/文本块比完整的 AIKit 消息流程更轻量。
+- 对于通用的 UI 基础组件（按钮、输入框、模态框），请直接使用 [`@gravity-ui/uikit`](https://gravity-ui.com/uikit) — AIKit 在其基础上构建，以满足聊天特定需求。
+- 要在消息中渲染丰富的 Markdown，AIKit 的 `MarkdownRenderer` 包装了 [`@gravity-ui/markdown-editor`](https://github.com/gravity-ui/markdown-editor)；要独立渲染 Markdown，请直接使用该包。
+- 对于单个聊天气泡而无需聊天编排，使用 uikit 的 `MarkdownRenderer`/文本块比完整的 AIKit 消息管道更轻量。
 
 ### 常见陷阱
 
-- **误以为导入了 AI SDK** — AIKit 是 SDK 无关的；它提供组件/Hooks，而不是 LLM 客户端。请自行提供数据源并通过 props 传递消息。
+- **误以为导入了 AI SDK** — AIKit 与 SDK 无关；它提供组件/钩子，而不是 LLM 客户端。请自行提供数据源并通过 props 传递消息。
 - **寻找 `<Chat>` / `<AIChat>`** — 页面级别的导出是 `ChatContainer`（以及 `AIStudioChat`）；没有名为 `Chat` 的组件。
-- **跳过自定义类型的消息类型注册** — 自定义消息类型必须在消息类型系统中注册，否则将渲染为未知类型。
-- **直接编辑基础组件而非使用 Hooks** — 两层设计期望您通过 Hooks/组合进行自定义；直接覆盖内部实现会破坏升级。
+- **跳过自定义类型的消息类型注册** — 自定义消息类型必须在消息类型系统中注册，否则会渲染为未知类型。
+- **直接编辑基础组件而不是使用钩子** — 两级设计期望您通过钩子/组合进行自定义；直接覆盖内部组件会破坏升级。
 
-## AI 代理文档
+## 面向 AI 代理的文档
 
 已安装版本的代理可读文档位于 `node_modules/@gravity-ui/aikit/build/docs/INDEX.md`。
+
+## 实验性组件
+
+代理工作区组件仅从 `@gravity-ui/aikit/experimental` 提供。
+它们的 API 可能会在次要版本中更改或移除；补丁版本会保持兼容性。
+采用实验性功能时，请固定确切的版本。请参阅 [实验性 API 政策](docs/experimental.md)。

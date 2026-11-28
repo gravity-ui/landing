@@ -6,6 +6,7 @@ import themeIcon from '../../../assets/icons/theme.svg';
 import {block} from '../../../utils';
 import {ClipboardArea} from '../../ClipboardArea/ClipboardArea';
 import {ClipboardIcon} from '../../ClipboardIcon/ClipboardIcon';
+import {UIKitDemoFrame} from '../../UIKitDemoFrame/UIKitDemoFrame';
 
 import './ExampleBlock.scss';
 
@@ -13,11 +14,12 @@ const b = block('example-block');
 
 export type ExampleBlockProps = {
     code?: string;
+    uikit8?: boolean;
     background?: string;
     children: React.ReactNode;
 };
 
-export const ExampleBlock: React.FC<ExampleBlockProps> = ({code, background, children}) => {
+export const ExampleBlock: React.FC<ExampleBlockProps> = ({code, background, children, uikit8}) => {
     const [isOpen, setIsOpen] = React.useState(false);
     const [theme, setTheme] = React.useState<Theme>('dark');
 
@@ -25,12 +27,21 @@ export const ExampleBlock: React.FC<ExampleBlockProps> = ({code, background, chi
 
     return (
         <div className={b()}>
-            {/*Workaround for missing theme class in ThemeProvider*/}
-            <ThemeProvider theme={theme} scoped rootClassName={b('theme-root', {theme}, 'sandbox')}>
-                <div className={b('content')} {...(background ? {style: {background}} : {})}>
+            {uikit8 ? (
+                <UIKitDemoFrame theme={theme} title="UIKit example" background={background}>
                     {children}
-                </div>
-            </ThemeProvider>
+                </UIKitDemoFrame>
+            ) : (
+                <ThemeProvider
+                    theme={theme}
+                    scoped
+                    rootClassName={b('theme-root', {theme}, 'sandbox')}
+                >
+                    <div className={b('content')} style={{background}}>
+                        {children}
+                    </div>
+                </ThemeProvider>
+            )}
             <div className={b('controls')}>
                 {codePrepared ? (
                     <div

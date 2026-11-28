@@ -11,19 +11,19 @@ npm install react react-dom @gravity-ui/uikit @gravity-ui/date-components @gravi
 ```jsx
 import {createRoot} from 'react-dom/client';
 import {DatePicker} from '@gravity-ui/date-components';
-import {ThemeProvider} from '@gravity-ui/uikit';
+import {Provider} from '@gravity-ui/uikit';
 
 import '@gravity-ui/uikit/styles/styles.css';
 
 function App() {
   return (
-    <ThemeProvider>
+    <Provider>
       <h1>DatePicker</h1>
       <form>
         <label htmlFor="date-picker">Data: </label>
         <DatePicker id="date-picker" name="date" />
       </form>
-    </ThemeProvider>
+    </Provider>
   );
 }
 
@@ -42,13 +42,13 @@ await settings.loadLocale('ru');
 function App() {
   return (
     // Define o idioma a ser usado com os componentes.
-    <ThemeProvider lang="ru">
+    <Provider lang="ru">
       <h1>DatePicker</h1>
       <form>
         <label htmlFor="date-picker">Data: </label>
         <DatePicker id="date-picker" name="date" />
       </form>
-    </ThemeProvider>
+    </Provider>
   );
 }
 ```
@@ -73,7 +73,7 @@ function App() {
     });
   };
 
-  return <ThemeProvider lang={lang}>...</ThemeProvider>;
+  return <Provider lang={lang}>...</Provider>;
 }
 ```
 
@@ -93,6 +93,10 @@ addLanguageKeysets<PartialKeysets>(lang, {...});
 addLanguageKeysets<Pick<Keysets, 'g-date-calendar' | 'g-date-date-field' | 'g-date-date-picker'>>(lang, {...});
 ```
 
+## Migração
+
+- Do 4.x para 5.x (`@gravity-ui/uikit` v8): [docs/migration-4-to-5.md](docs/migration-4-to-5.md)
+
 ## Desenvolvimento
 
 Para iniciar o servidor de desenvolvimento com storybook, execute o seguinte:
@@ -107,26 +111,26 @@ Distribuído sob a Licença MIT. Veja [LICENSE](LICENSE) para detalhes.
 
 ## Para agentes de IA
 
-Controles de data e hora em React para aplicativos Gravity UI — seletores de data/hora, calendários e seletores de intervalo absoluto/relativo construídos sobre `@gravity-ui/date-utils`.
+Controles de data e hora React para aplicativos Gravity UI — seletores de data/hora, calendários e seletores de intervalo absoluto/relativo construídos sobre `@gravity-ui/date-utils`.
 
 ### Quando usar
 
-- Entrada de data ou data/hora única: `DatePicker`, `DateField`.
+- Entrada de data única ou data/hora: `DatePicker`, `DateField`.
 - Calendários para seleção de mês/dia: `Calendar`, `CalendarView`.
 - Intervalos de datas: `RangeDatePicker`, `RangeCalendar`, `RangeDateField`.
-- Intervalos relativos e mistos absoluto/relativo (por exemplo, "últimos 7 dias"): `RelativeDatePicker`, `RelativeRangeDatePicker`, `RelativeDateField`.
+- Intervalos relativos e mistos absolutos/relativos (por exemplo, "últimos 7 dias"): `RelativeDatePicker`, `RelativeRangeDatePicker`, `RelativeDateField`.
 
 ### Quando não usar
 
 - Entradas de texto simples ou numéricas, botões ou outros controles genéricos — use [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
-- Matemática de data de baixo nível, análise, formatação ou manipulação de fuso horário sem interface — use [`@gravity-ui/date-utils`](https://github.com/gravity-ui/date-utils) diretamente.
+- Matemática de data de baixo nível, análise, formatação ou manipulação de fuso horário sem interface — use diretamente [`@gravity-ui/date-utils`](https://github.com/gravity-ui/date-utils).
 
 ### Armadilhas comuns
 
-- **Valores são objetos `DateTime`, não `Date` do JS.** Os componentes trabalham com `dateTime()` de [`@gravity-ui/date-utils`](https://github.com/gravity-ui/date-utils); passe e leia `DateTime`, não `Date` nativo ou strings ISO.
-- **Requer configuração do uikit.** Renderize dentro de `ThemeProvider` e importe `@gravity-ui/uikit/styles/styles.css`; `@gravity-ui/uikit` e `@gravity-ui/date-utils` são dependências obrigatórias.
-- **Local é carregado, não apenas definido.** Defina o idioma via `ThemeProvider` `lang`, mas carregue os dados de local primeiro com `settings.loadLocale('ru')` de `@gravity-ui/date-utils`, ou as datas serão renderizadas no local padrão.
-- **Traduções específicas de componentes usam `addLanguageKeysets`.** Para idiomas além de `en`/`ru`, registre conjuntos de chaves via `addLanguageKeysets` de `@gravity-ui/uikit/i18n` usando os tipos `Keysets`/`PartialKeysets` exportados aqui.
+- **Valores são objetos `DateTime`, não `Date` do JS.** Os componentes funcionam com `dateTime()` de [`@gravity-ui/date-utils`](https://github.com/gravity-ui/date-utils); passe e leia `DateTime`, não `Date` nativo ou strings ISO.
+- **Requer configuração do uikit.** Renderize dentro de `Provider` de `@gravity-ui/uikit` e importe `@gravity-ui/uikit/styles/styles.css`; `@gravity-ui/uikit` v8 e `@gravity-ui/date-utils` são dependências peer obrigatórias.
+- **O local é carregado, não apenas definido.** Defina o idioma através do `lang` do `Provider`, mas carregue os dados do local primeiro com `settings.loadLocale('ru')` de `@gravity-ui/date-utils`, ou as datas serão renderizadas no local padrão.
+- **Traduções específicas do componente usam `addLanguageKeysets`.** Para idiomas além de `en`/`ru`, registre os conjuntos de chaves via `addLanguageKeysets` de `@gravity-ui/uikit/i18n` usando os tipos `Keysets`/`PartialKeysets` exportados aqui.
 
 ## Documentação para agentes de IA
 

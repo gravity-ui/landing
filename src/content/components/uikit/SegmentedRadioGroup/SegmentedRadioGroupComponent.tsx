@@ -2,7 +2,7 @@ import {
     SegmentedRadioGroup,
     SegmentedRadioGroupOptionProps,
     SegmentedRadioGroupProps,
-} from '@gravity-ui/uikit';
+} from '@gravity-ui/uikit-v8';
 
 type SegmentedRadioGroupComponentProps = {
     size?: SegmentedRadioGroupProps['size'];

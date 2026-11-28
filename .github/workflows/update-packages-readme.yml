@@ -49,7 +49,7 @@ jobs:
           export COMMIT_MESSAGE="docs: update packages readme"
           git commit -m "$COMMIT_MESSAGE" || true
           git push --set-upstream origin update-packages-readme --force
-          gh pr create --title "$COMMIT_MESSAGE" --body "" -a "dgaponov" -a "imsitnikov" -a "vvtimofeev" 2>/dev/null || true
+          gh pr create --title "$COMMIT_MESSAGE" --body "" -a "dgaponov" -a "vvtimofeev" 2>/dev/null || true
           PR_NUMBER=$(gh pr view --json number -q ".number")
 
           echo "pr_number=$PR_NUMBER" >> $GITHUB_OUTPUT
