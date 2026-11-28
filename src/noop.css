@@ -1,0 +1,8 @@
+/*
+ * Empty stylesheet used to alias @gravity-ui/uikit/styles/fonts.css.
+ *
+ * That file's entire content is a remote `@import url(https://fonts.googleapis.com/...)`.
+ * blog-constructor and page-constructor pull it in transitively, which re-introduced the
+ * render-blocking third-party font request that src/fonts.ts exists to remove. Inter is now
+ * self-hosted via next/font, so the remote stylesheet is redundant.
+ */

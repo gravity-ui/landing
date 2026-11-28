@@ -120,6 +120,8 @@ module.exports = withBundleAnalyzer({
         config.resolve.alias = {
             ...config.resolve.alias,
             'rc-slider$': path.resolve(__dirname, 'node_modules/rc-slider/es/index.js'),
+            // Suppress the remote Google Fonts import from the page and blog constructors.
+            '@gravity-ui/uikit/styles/fonts.css': path.resolve(__dirname, 'src/noop.css'),
         };
 
         if (!options.isServer) {
