@@ -13,6 +13,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
+          # Publish generated docs from the current PR base, including on reruns.
+          ref: ${{ github.event.repository.default_branch }}
           fetch-depth: 0
       - uses: actions/setup-node@v3
         with:
