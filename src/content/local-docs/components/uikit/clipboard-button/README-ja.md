@@ -1,42 +1,39 @@
-<!--GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_0_END
 
-# ClipboardButton
-
-<!--/GITHUB_BLOCK-->
-
-`ClipboardButton` は、指定されたテキストをクリップボードにコピーし、成功アニメーションを再生するすぐに使えるボタンです。[`CopyToClipboard`](../CopyToClipboard/README.md)（コピー動作）と [`ClipboardIcon`](../ClipboardIcon/README.md)（アニメーションアイコン）を組み合わせています。
+`ClipboardButton` は、指定されたテキストをクリップボードにコピーし、成功アニメーションを再生する、すぐに使えるボタンです。[`CopyToClipboard`](../CopyToClipboard/README.md)（コピーの動作）と [`ClipboardIcon`](../ClipboardIcon/README.md)（アニメーションアイコン）を組み合わせています。
 
 ```tsx
 import {ClipboardButton} from '@gravity-ui/uikit';
 ```
 
-<!--SANDBOX
-import {ClipboardButton} from '@gravity-ui/uikit';
+GRAVITY_TRANSLATION_BLOCK_1_END
 
-export default function () {
-    return <ClipboardButton text="Some text to copy" />;
-}
-SANDBOX-->
+GRAVITY_TRANSLATION_BLOCK_2_END
 
-<!--GITHUB_BLOCK-->
+## Tooltip
+
+`tooltipProps` を使用して、ツールチップの配置やポータル動作などを設定できます。これは、基盤となる [`ActionTooltip`](../ActionTooltip/README.md) を設定するためのものです。
 
 ```tsx
-<ClipboardButton text="Some text to copy" />
+<ClipboardButton text="Some text to copy" tooltipProps={{placement: 'top', disablePortal: true}} />
 ```
 
-<!--/GITHUB_BLOCK-->
+サポートされているプロパティは、`onOpenChange`、`strategy`、`placement`、`offset`、`disabled`、`container`、`disablePortal`、および `DOMProps`（`className`、`style`）と `QAProps`（`qa`）プロパティです。
+
+ツールチップを無効にするには、`tooltipProps.disabled` を `true` に設定します。`hasTooltip={false}` およびコピーフィードバックのタイムアウトも、`tooltipProps.disabled` が `false` であってもツールチップを無効にします。コピーフィードバックを設定するには、`tooltipInitialText`、`tooltipSuccessText`、および `timeout` を使用します。
 
 ## プロパティ
 
 `ClipboardButton` のプロパティは、`Button` の[プロパティ](../Button/README.md#properties)から継承されます。
 
-| 名前               | 説明                                                              |            型            |   デフォルト   |
-| :----------------- | :---------------------------------------------------------------- | :------------------------: | :---------: |
-| hasTooltip         | ツールチップの表示を切り替えます                                  |         `boolean`          |   `true`    |
-| onCopy             | コピー後のコールバック `(text: string, result: boolean) => void`  |         `Function`         |             |
-| text               | コピーするテキスト（文字列または文字列を返す関数）                |  `string \| () => string`  |             |
-| timeout            | ボタンがクリックされた後、状態が通常に戻るまでの時間              |          `number`          |   `1000`    |
-| tooltipInitialText | コピー前に表示されるテキスト                                      |          `string`          |  `"Copy"`   |
-| tooltipSuccessText | コピー後に表示されるテキスト                                      |          `string`          | `"Copied!"` |
-| icon               | カスタムアイコン                                                  |     `React.ReactNode`      |             |
-| iconPosition       | アイコンの位置                                                    | `start          \|    end` |   `start`   |
+| 名前               | 説明                                                               |            型            |   デフォルト   |
+| :----------------- | :------------------------------------------------------------------------ | :------------------------: | :---------: |
+| hasTooltip         | ツールチップの表示を切り替えます                                            |         `boolean`          |   `true`    |
+| onCopy             | コピー後のコールバック `(text: string, result: boolean) => void`          |         `Function`         |             |
+| text               | コピーするテキスト（文字列または文字列を返す関数）                                |  `string \| () => string`  |             |
+| timeout            | ボタンがクリックされた後、状態が通常に戻るまでの時間                                |          `number`          |   `1000`    |
+| tooltipInitialText | コピー前に表示されるテキスト                                                 |          `string`          |  `"Copy"`   |
+| tooltipSuccessText | コピー後に表示されるテキスト                                                 |          `string`          | `"Copied!"` |
+| tooltipProps       | ツールチップの設定。 [サポートされているプロパティ](#tooltip) を参照してください。              |          `object`          |             |
+| icon               | カスタムアイコン                                                              |     `React.ReactNode`      |             |
+| iconPosition       | アイコンの位置                                                              | `start          \|    end` |   `start`   |
