@@ -1,0 +1,233 @@
+GRAVITY_TRANSLATION_BLOCK_0_END
+
+入口点，使 [List](../List/README.md) 可重新排序，使用 `@hello-pangea/dnd`，推荐的拖放库。
+
+```tsx
+import {ListHelloPangeaDnd} from '@gravity-ui/uikit/hello-pangea-dnd';
+```
+
+此入口点需要 `@hello-pangea/dnd` 和 React 18 或更高版本：将库安装在 `@gravity-ui/uikit` 的旁边，只安装一个副本 — 您代码中的 `Draggable` 和 `DragDropContext` 必须与套件来自同一个副本。
+
+## 用法
+
+包装列表并为其提供 `role="grid"`：拖动句柄是交互式的，并且在网格角色模型中，行内的交互式内容是有效的。包装器拥有 `DragDropContext` 和 `Droppable`，接收与列表相同的 `items`，并返回重新排序的数组。
+
+```tsx
+import {List} from '@gravity-ui/uikit';
+import {ListHelloPangeaDnd} from '@gravity-ui/uikit/hello-pangea-dnd';
+
+function Playlist() {
+  const [tracks, setTracks] = React.useState(initialTracks);
+
+  return (
+    <ListHelloPangeaDnd items={tracks} onItemsUpdate={setTracks}>
+      <List role="grid" aria-label="Playlist" items={tracks} getItemContent={(t) => t.title} />
+    </ListHelloPangeaDnd>
+  );
+}
+```
+
+每行在其最外侧边缘都有一个句柄。鼠标通过句柄拖动行；键盘使用 `←`/`→` 键到达句柄，使用 `Space` 键提起行，使用 `↑`/`↓` 键移动行，并使用 `Space` 键放下行（`Escape` 取消）。列表中禁用的行不可拖动，`getItemDragDisabled` 会固定更多行。句柄的名称以及库为屏幕阅读器提供的说明遵循使用 `configure` 设置的语言（在您自己的 `DragDropContext` 下，自行传递其 `dragHandleUsageInstructions`）。
+
+`Sheet`、`Dialog` 或动画弹出窗口中的列表拖动方式相同：套件会补偿已转换的祖先。对于内存中不是数组的数据，请使用 `onDrop` 而不是 `onItemsUpdate`。
+
+套件涵盖扁平列表：库需要连续的索引，并且这些索引是根据 `items` 计算的。分区不可拖动。
+
+包装器的子元素是列表，仅此而已：适配器会找到下面的最近的 List，因此放在列表旁边的 Select 或 Menu 会将其拾取。`getItemId` 和 `getItemDragDisabled` 必须是稳定的 — 内联函数会在父组件每次渲染时重新渲染每一行。
+
+### 行的插槽
+
+默认行是 `ListHelloPangeaDnd.Row`。在 `renderItem` 中渲染它以填充行视图的插槽。
+
+```tsx
+<List
+  role="grid"
+  aria-label="Playlist"
+  items={tracks}
+  getItemContent={(t) => t.title}
+  renderItem={(ctx, helpers) => (
+    <ListHelloPangeaDnd.Row
+      ctx={ctx}
+      helpers={helpers}
+      description={ctx.item.artist}
+      endContent={<Label>{ctx.item.duration}</Label>}
+      handlePlacement="end"
+    />
+  )}
+/>
+```
+
+### 自定义标记
+
+当行不是 `List.ItemView` 时，请自行编写 `Draggable` 并从 `getHelloPangeaRowProps` 获取连接；句柄和内容各占一个单元格。`Draggable` 的索引是 `items` 中项的位置。
+
+```tsx
+import {Draggable} from '@hello-pangea/dnd';
+import {HelloPangeaDragHandle, getHelloPangeaRowProps} from '@gravity-ui/uikit/hello-pangea-dnd';
+
+<List
+  role="grid"
+  aria-label="Speakers"
+  items={people}
+  renderItem={(ctx, helpers) => (
+    <Draggable draggableId={ctx.id} index={people.indexOf(ctx.item)}>
+      {(provided, snapshot) => {
+        const {rowProps, handleProps, cellProps} = getHelloPangeaRowProps({
+          ctx,
+          helpers,
+          provided,
+          snapshot,
+        });
+        return (
+          <article {...rowProps}>
+            <span {...cellProps}>
+              <HelloPangeaDragHandle {...handleProps} />
+            </span>
+            <span {...cellProps}>{ctx.item.name}</span>
+          </article>
+        );
+      }}
+    </Draggable>
+  )}
+/>;
+```
+
+展开 `handleProps` 而不是库的 `dragHandleProps`：除了网格契约之外，它们在虚拟化下也能保持触摸拖动。
+
+`HelloPangeaDragHandle` 是带有可访问名称的抓手；它的子元素会替换图标。
+
+### 虚拟化
+
+将 `ListVirtualizer` 放在包装器 **外部**：包装器会读取列表的虚拟化并切换 `Droppable` 到虚拟模式。在 `minItemsCount` 下，它会像列表计算行一样计算其 `items`，因此低于阈值的列表会保持标准模式。
+
+```tsx
+import {ListVirtualizer} from '@gravity-ui/uikit/virtualizer';
+
+<ListVirtualizer estimateItemSize={28}>
+  <ListHelloPangeaDnd items={tracks} onItemsUpdate={setTracks}>
+    <List
+      role="grid"
+      aria-label="Archive"
+      style={{height: 480}}
+      items={tracks}
+      getItemContent={(t) => t.title}
+    />
+  </ListHelloPangeaDnd>
+</ListVirtualizer>;
+```
+
+拖动的行由一个克隆 — `Row` 的副本 — 绘制，因此自定义行需要 `renderClone`：它会接收克隆的 `{item, provided, snapshot}`。行高在拖动过程中不得更改：库会在提起时测量它们。
+
+### 多个列表
+
+在您自己的 `DragDropContext` 下 — 多个列表，它们之间的移动 — 包装器不渲染上下文。为每个列表提供 `useListHelloPangeaDnd` 的状态和 `droppableId`，并从上下文中调用每个状态的处理程序；包装器的 `onItemsUpdate` 和 `onDrop` 按原样工作。一个状态只重新排序其自己的列表；将一个列表移动到另一个列表的操作由您在 `onDragEnd` 中处理。
+
+```tsx
+import {DragDropContext} from '@hello-pangea/dnd';
+import {List} from '@gravity-ui/uikit';
+import {ListHelloPangeaDnd, useListHelloPangeaDnd} from '@gravity-ui/uikit/hello-pangea-dnd';
+
+const todo = useListHelloPangeaDnd();
+const done = useListHelloPangeaDnd();
+```
+
+<DragDropContext
+  onDragStart={(start) => {
+    todo.onDragStart(start);
+    done.onDragStart(start);
+  }}
+  onDragEnd={(result) => {
+    todo.onDragEnd(result);
+    done.onDragEnd(result);
+  }}
+>
+  <ListHelloPangeaDnd
+    items={todoItems}
+    onItemsUpdate={setTodoItems}
+    state={todo}
+    droppableId="todo"
+  >
+    <List role="grid" aria-label="待办" items={todoItems} getItemContent={(i) => i.title} />
+  </ListHelloPangeaDnd>
+  <ListHelloPangeaDnd
+    items={doneItems}
+    onItemsUpdate={setDoneItems}
+    state={done}
+    droppableId="done"
+  >
+    <List role="grid" aria-label="已完成" items={doneItems} getItemContent={(i) => i.title} />
+  </ListHelloPangeaDnd>
+</DragDropContext>;
+```
+
+没有 `state`，每个包装器都会渲染自己的 `DragDropContext`，而嵌套的上下文会复制库的传感器。
+
+## 属性
+
+### ListHelloPangeaDnd
+
+| 名称                | 描述                                                                                        |                                      类型                                       |        默认值        |
+| :------------------ | :------------------------------------------------------------------------------------------------- | :-----------------------------------------------------------------------------: | :-------------------: |
+| items               | 列表中的项目，保持原有顺序                                                    |                                 `readonly T[]`                                  |                       |
+| getItemId           | 项目的 ID；保持与 `List` 的 `getItemId` 相同                                    |                              `(item: T) => string`                              | `List` 的那个 |
+| onItemsUpdate       | 重排后的数组，已应用 `moveItem`                                                    |                             `(items: T[]) => void`                              |                       |
+| onDrop              | 拖放操作，包含 ID 和边缘信息                                                                        |     `(fromId: string, toId: string, position: 'before' \| 'after') => void`     |                       |
+| droppableId         | `Droppable` 的 ID                                                                          |                                    `string`                                     |      自动生成ID       |
+| getItemDragDisabled | 不能拖动的行，除了已禁用的行                                      |                             `(item: T) => boolean`                              |                       |
+| renderClone         | 虚拟模式：拖动行的副本，自定义行时必需                                  |                `({item, provided, snapshot}) => React.ReactNode`                |  `Row` 的副本  |
+| state               | `useListHelloPangeaDnd` 的状态，用于您自己的 `DragDropContext` — 请参阅 [多个列表](#several-lists) |                          `UseListHelloPangeaDndResult`                          |                       |
+| droppableProps      | 传递给 `Droppable` 的属性                                                                          | `Pick<DroppableProps, 'isDropDisabled' \| 'ignoreContainerClipping' \| 'type'>` |                       |
+| children            | `List` 组件，带有 `role="grid"` 属性                                                                     |                                   `ReactNode`                                   |                       |
+
+### ListHelloPangeaDnd.Row
+
+| 名称            | 描述                                                               |         类型          |      默认值      |
+| :-------------- | :----------------------------------------------------------------- | :-------------------: | :--------------: |
+| ctx             | `renderItem` 的第一个参数                                          |   `ListItemContext`   |                  |
+| helpers         | `renderItem` 的第二个参数                                          |   `ListItemHelpers`   |                  |
+| children        | 行的内容                                                           |      `ReactNode`      |   `ctx.content`  |
+| startContent    | 视图的起始插槽                                                     |      `ReactNode`      |                  |
+| description     | 视图的第二行                                                       |      `ReactNode`      |                  |
+| endContent      | 视图的结束插槽                                                     |      `ReactNode`      |                  |
+| handleLabel     | 手柄的可访问名称                                                   |       `string`        | "Drag to reorder" |
+| handlePlacement | 手柄的边缘：最外层插槽或 `endContent` 之后                         |  `'start' \| 'end'`   |     `'start'`     |
+| className       | 行的 CSS 类                                                        |       `string`        |                  |
+| style           | 行的内联样式                                                       | `React.CSSProperties` |                  |
+| qa              | 行的 `data-qa` 属性                                                |       `string`        |                  |
+
+### getHelloPangeaRowProps
+
+接收 `{ctx, helpers, provided, snapshot, handleLabel?}` — `renderItem` 和 `Draggable` 的渲染函数的参数 — 并返回：
+
+| 名称        | 描述                                                                                             |            类型             |
+| :---------- | :----------------------------------------------------------------------------------------------- | :-------------------------: |
+| rowProps    | 行的 props：列表的 props，加上拖拽 props 和库的 ref                                              |     `ListItemDOMProps`      |
+| handleProps | 手柄的 props：`dragHandleProps`、`tabIndex={-1}` 和名称；禁用时为装饰性                               | `HelloPangeaHandleDOMProps` |
+| cellProps   | 单元格的 props                                                                                   |     `ListCellDOMProps`      |
+
+### HelloPangeaDragHandle
+
+接收 `span` 的 props（除了 `tabIndex`），以及：
+
+| 名称       | 描述                       |    类型     |      默认值      |
+| :--------- | :------------------------- | :---------: | :--------------: |
+| aria-label | 手柄的可访问名称           |  `string`   | "Drag to reorder" |
+| qa         | `data-qa` 属性             |  `string`   |                  |
+| children   | 手柄的替代内容             | `ReactNode` |   手柄图标       |
+
+### useListHelloPangeaDnd
+
+用于您自己的 `DragDropContext` 的拖拽状态 — 包装器的 `state`（无需 props），或者手动连接的列表的 `dnd` prop。所有 props 都是可选的：
+
+| 名称   | 描述                                                                                                                             |                                  类型                                   |
+| :----- | :------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------: |
+| ids    | 行的 ID，按列表顺序排列；默认值 — `ListHelloPangeaDnd` 在给定状态下的 ID                                                              |                           `readonly string[]`                           |
+| onDrop | 放置事件 — 与 `moveItem(items, fromId, toId, position)` 配对使用；在 `ListHelloPangeaDnd` 下是可选的                                        | `(fromId: string, toId: string, position: 'before' \| 'after') => void` |
+
+它返回：
+
+| 名称        | 描述                                                              |              类型              |
+| :---------- | :---------------------------------------------------------------- | :----------------------------: |
+| draggingId  | 正在拖动的项 — 用于列表的适配器                                     |        `string \| null`        |
+| onDragStart | 用于 `DragDropContext`                                            |  `(start: DragStart) => void`  |
+| onDragEnd   | 用于 `DragDropContext`；在实际移动时调用 `onDrop`                     | `(result: DropResult) => void` |
