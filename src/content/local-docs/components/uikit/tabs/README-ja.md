@@ -1,65 +1,14 @@
-<!--GITHUB_BLOCK-->
-
-# Tabs components
-
-<!--/GITHUB_BLOCK-->
-
 Tabs コンポーネントは、コンテンツの探索、整理、および異なるビューの切り替えに使用されます。
 
 ```tsx
 import {TabProvider, TabList, Tab, TabPanel} from '@gravity-ui/uikit';
 ```
 
-<!--SANDBOX
-import {useState} from 'react';
-import {Tab, TabList, TabPanel, TabProvider} from '@gravity-ui/uikit';
+従来の `Tabs` から移行しますか？ [移行ガイド](https://github.com/gravity-ui/uikit/blob/main/docs/migration-from-legacy-tabs.md) を参照してください。
 
-export default function () {
-    const [activeTab, setActiveTab] = useState('second');
+GRAVITY_TRANSLATION_BLOCK_0_END
 
-    return (
-        <TabProvider value={activeTab} onUpdate={setActiveTab}>
-            <TabList>
-                <Tab value="first">First Tab</Tab>
-                <Tab value="second">Active Tab</Tab>
-                <Tab value="third" disabled>
-                    Disabled Tab
-                </Tab>
-            </TabList>
-            <div>
-                <TabPanel value="first">First Panel</TabPanel>
-                <TabPanel value="second">Second Panel</TabPanel>
-                <TabPanel value="third">Third Panel</TabPanel>
-            </div>
-        </TabProvider>
-    );
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-const [activeTab, setActiveTab] = React.useState('second');
-
-return (
-  <TabProvider value={activeTab} onUpdate={setActiveTab}>
-    <TabList>
-      <Tab value="first">First Tab</Tab>
-      <Tab value="second">Active Tab</Tab>
-      <Tab value="third" disabled>
-        Disabled Tab
-      </Tab>
-    </TabList>
-    <div>
-      <TabPanel value="first">First Panel</TabPanel>
-      <TabPanel value="second">Second Panel</TabPanel>
-      <TabPanel value="third">Third Panel</TabPanel>
-    </div>
-  </TabProvider>
-);
-```
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_1_END
 
 ### コンポーネント
 
@@ -75,8 +24,8 @@ return (
 ## プロパティ
 
 | 名前     | 説明                                       |           タイプ            | デフォルト |
-| :------- | :----------------------------------------- | :-----------------------: | :-----: |
-| children | タブとタブパネルのリスト、おそらくいくつかのラッパーを含む |     `React.ReactNode`     |         |
+| :------- | :----------------------------------------- | :-------------------------: | :-----: |
+| children | タブとタブパネルのリスト、おそらくラッパー付き |     `React.ReactNode`     |         |
 | value    | アクティブなタブの値                       |         `string`          |         |
 | onUpdate | タブ更新ハンドラー                         | `(value: string) => void` |         |
 
@@ -86,49 +35,11 @@ return (
 
 ### サイズ
 
-`tabs` のサイズを制御するには、`size` プロパティを使用します。デフォルトのサイズは `m` です。
+`tabs` のサイズを制御するには、`size` プロパティを使用します。デフォルトサイズは `m` です。
 
-<!--SANDBOX
-import {Tab, TabList} from '@gravity-ui/uikit';
+GRAVITY_TRANSLATION_BLOCK_2_END
 
-export default function () {
-    return (
-        <>
-            <TabList value="second" size="m">
-                <Tab value="first">M Size first</Tab>
-                <Tab value="second">M Size second</Tab>
-            </TabList>
-            <TabList value="second" size="l">
-                <Tab value="first">L Size first</Tab>
-                <Tab value="second">L Size second</Tab>
-            </TabList>
-            <TabList value="second" size="xl">
-                <Tab value="first">XL Size first</Tab>
-                <Tab value="second">v Size second</Tab>
-            </TabList>
-        </>
-    );
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-<TabList value="second" size="m">
-    <Tab value="first">M Size first</Tab>
-    <Tab value="second">M Size second</Tab>
-</TabList>
-<TabList value="second" size="l">
-    <Tab value="first">L Size first</Tab>
-    <Tab value="second">L Size second</Tab>
-</TabList>
-<TabList value="second" size="xl">
-    <Tab value="first">XL Size first</Tab>
-    <Tab value="second">v Size second</Tab>
-</TabList>
-```
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_3_END
 
 ### プロパティ
 
@@ -136,7 +47,7 @@ SANDBOX-->
 
 | 名前            | 説明                                                                            |               タイプ               | デフォルト  |
 | :-------------- | :------------------------------------------------------------------------------ | :------------------------------: | :------: |
-| children        | タブのリスト、おそらくいくつかのラッパーを含む                                  |        `React.ReactNode`         |          |
+| children        | タブのリスト、おそらくラッパー付き                                              |        `React.ReactNode`         |          |
 | value           | アクティブなタブの値                                                            |             `string`             |          |
 | onUpdate        | タブ更新ハンドラー                                                              |    `(value: string) => void`     |          |
 | className       | 要素の CSS クラス                                                               |             `string`             |          |
@@ -148,201 +59,64 @@ SANDBOX-->
 
 ## Tab
 
-タブアイテムをレンダリングするために使用されるコンポーネント。
+タブアイテムのレンダリングに使用されるコンポーネント。
 
 ### アイコン
 
 タブアイテムのアイコンを表示する必要がある場合に使用します。
 
-<!--SANDBOX
-import {Gear} from '@gravity-ui/icons';
-import {Icon, Tab, TabList} from '@gravity-ui/uikit';
+GRAVITY_TRANSLATION_BLOCK_4_END
 
-export default function () {
-    return (
-        <TabList value="first">
-            <Tab value="first" icon={<Icon size={16} data={Gear} />}>
-                Tab with icon
-            </Tab>
-            <Tab value="second">Tab without icon</Tab>
-        </TabList>
-    );
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-<TabList value="first">
-  <Tab value="first" icon={<Icon size={16} data={GearIcon} />}>
-    Tab with icon
-  </Tab>
-  <Tab value="second">Tab without icon</Tab>
-</TabList>
-```
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_5_END
 
 ### ステート
 
 タブアイテムには無効フラグがあります。
 
-<!--SANDBOX
-import {Tab, TabList} from '@gravity-ui/uikit';
+GRAVITY_TRANSLATION_BLOCK_6_END
 
-export default function () {
-    return (
-        <TabList value="first">
-            <Tab value="first">First Tab</Tab>
-            <Tab value="second" disabled>
-                Disabled Tab
-            </Tab>
-        </TabList>
-    );
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-<TabList value="first">
-  <Tab value="first">First Tab</Tab>
-  <Tab value="second" disabled>
-    Disabled Tab
-  </Tab>
-</TabList>
-```
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_7_END
 
 ### カウンター
 
-タブアイテムに数値を表示する必要がある場合に使用します。
+タブアイテムの数値を表示する必要がある場合に使用します。
 
-<!--SANDBOX
-import {Tab, TabList} from '@gravity-ui/uikit';
+GRAVITY_TRANSLATION_BLOCK_8_END
 
-export default function () {
-    return (
-        <TabList value="first">
-            <Tab value="first" counter={13}>
-                First Tab
-            </Tab>
-            <Tab value="second" counter={3}>
-                Second Tab
-            </Tab>
-        </TabList>
-    );
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-<TabList value="first">
-  <Tab value="first" counter={13}>
-    First Tab
-  </Tab>
-  <Tab value="second" counter={3}>
-    Second Tab
-  </Tab>
-</TabList>
-```
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_9_END
 
 ### ラベル
 
 タブアイテムのラベルを表示する必要がある場合に使用します。
 
-<!--SANDBOX
-import {Tab, TabList} from '@gravity-ui/uikit';
+GRAVITY_TRANSLATION_BLOCK_10_END
 
-export default function () {
-    return (
-        <TabList value="first">
-            <Tab value="first" label={{content: 'Label 1'}}>
-                First Tab
-            </Tab>
-            <Tab value="second" label={{content: 'Label 2'}}>
-                Second Tab
-            </Tab>
-        </TabList>
-    );
-}
-SANDBOX-->
+GRAVITY_TRANSLATION_BLOCK_11_END
 
-<!--GITHUB_BLOCK-->
-
-```tsx
-<TabList value="first">
-  <Tab value="first" label={{content: 'Label 1'}}>
-    First Tab
-  </Tab>
-  <Tab value="second" label={{content: 'Label 2'}}>
-    Second Tab
-  </Tab>
-</TabList>
-```
-
-<!--/GITHUB_BLOCK-->
-
-### コンテンツオーバーフロー
+### コンテンツのオーバーフロー
 
 タブアイテムを折りたたむ必要がある場合に使用します。
 
-<!--LANDING_BLOCK
-<ExampleBlock
-    code={`
-<TabList value="first" contentOverflow="collapse" style={{maxWidth: 320}}>
-    <Tab value="first">First Tab</Tab>
-    <Tab value="second">Second Tab</Tab>
-    <Tab value="third">Third Tab</Tab>
-    <Tab value="fourth">Fourth Tab</Tab>
-    <Tab value="fifth">Fifth Tab</Tab>
-</TabList>
-`}
->
-    <UIKit.TabList value="first" contentOverflow="collapse" style={{maxWidth: 320}}>
-        <UIKit.Tab value="first">First Tab</UIKit.Tab>
-        <UIKit.Tab value="second">Second Tab</UIKit.Tab>
-        <UIKit.Tab value="third">Third Tab</UIKit.Tab>
-        <UIKit.Tab value="fourth">Fourth Tab</UIKit.Tab>
-        <UIKit.Tab value="fifth">Fifth Tab</UIKit.Tab>
-    </UIKit.TabList>
-</ExampleBlock>
-LANDING_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_12_END
 
-<!--GITHUB_BLOCK-->
-
-```tsx
-<TabList value="first" contentOverflow="collapse" style={{maxWidth: 320}}>
-  <Tab value="first">First Tab</Tab>
-  <Tab value="second">Second Tab</Tab>
-  <Tab value="third">Third Tab</Tab>
-  <Tab value="fourth">Fourth Tab</Tab>
-  <Tab value="fifth">Fifth Tab</Tab>
-</TabList>
-```
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_13_END
 
 ### プロパティ
 
 `Tab` は、これらのプロパティに加えて、有効な `button` または `a` 要素のプロパティをすべて受け入れます。
 
-| 名前      | 説明                             |        型         | デフォルト |
-| :-------- | :------------------------------- | :---------------: | :-------: |
-| value     | タブの値                         |      `string`     |           |
-| title     | タブのタイトル                   |      `string`     |           |
-| icon      | 先頭に表示されるアイコン         |  `React.ReactNode`  |           |
-| counter   | 末尾に表示されるコンテンツ       |  `number` `string`  |           |
-| href      | リンク先のURL                    |      `string `      |           |
-| label     | 末尾に表示される`<Label>`        |  `React.ReactNode`  |           |
-| disabled  | 非アクティブ状態                 |      `boolean`      |           |
-| component | ルートコンポーネントをオーバーライド | `React.ElementType` |           |
-| children  | タブのコンテンツ                 |  `React.ReactNode`  |           |
-| qa        | テストで使用されるHTML `data-qa` 属性 |      `string`     |           |
+| 名前      | 説明                             |        タイプ         | デフォルト |
+| :-------- | :------------------------------- | :-----------------: | :-----: |
+| value     | タブの値                         |      `string`       |         |
+| title     | タブのタイトル                   |      `string`       |         |
+| icon      | 先頭に表示されるアイコン         |  `React.ReactNode`  |         |
+| counter   | 末尾に表示されるコンテンツ       |  `number` `string`  |         |
+| href      | リンク先のURL                    |      `string `      |         |
+| label     | 末尾に表示される`<Label>`        |  `React.ReactNode`  |         |
+| disabled  | 非アクティブ状態                 |      `boolean`      |         |
+| component | ルートコンポーネントをオーバーライド | `React.ElementType` |         |
+| children  | タブのコンテンツ                 |  `React.ReactNode`  |         |
+| qa        | テストで使用されるHTML `data-qa` 属性 |      `string`       |         |
 
 ## TabPanel
 
@@ -352,19 +126,17 @@ LANDING_BLOCK-->
 
 `TabPanel` は、有効な `div` 要素のプロパティに加えて、以下のプロパティを受け入れます。
 
-| 名前     | 説明         |       型        | デフォルト |
-| :------- | :----------- | :-------------: | :-------: |
-| children | パネルのコンテンツ | `React.ReactNode` |           |
-| value    | アクティブなタブの値 |     `string`    |           |
-| qa       | テストで使用されるHTML `data-qa` 属性 |     `string`    |           |
+| 名前     | 説明         |       タイプ        | デフォルト |
+| :------- | :----------- | :---------------: | :-----: |
+| children | パネルのコンテンツ | `React.ReactNode` |         |
+| value    | アクティブなタブの値 |     `string`      |         |
+| qa       | テストで使用されるHTML `data-qa` 属性 |     `string`      |         |
 
 ## CSS API
 
-| 名前                             | 説明             |
-| :------------------------------- | :--------------- |
-| `--g-tabs-border-width`          | タブの境界線の幅 |
-| `--g-tabs-item-height`           | タブ項目の高さ   |
-| `--g-tabs-item-border-width`     | タブ項目の境界線の幅 |
-| `--g-tabs-item-gap`              | タブ間の距離     |
-| `--g-tabs-vertical-item-height`  | 縦型タブ項目の高さ |
-| `--g-tabs-vertical-item-padding` | 縦型タブ項目のパディング |
+| 名前                         | 説明           |
+| :--------------------------- | :------------- |
+| `--g-tabs-border-width`      | タブの境界線の幅 |
+| `--g-tabs-item-height`       | タブ項目の高さ |
+| `--g-tabs-item-border-width` | タブ項目の境界線の幅 |
+| `--g-tabs-item-gap`          | タブ間の距離   |
