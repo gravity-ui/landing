@@ -1,4 +1,4 @@
-> Generated for `@gravity-ui/dashkit@9.3.2`
+> Generated for `@gravity-ui/dashkit@9.3.0`
 
 # DashKit
 
@@ -553,4 +553,4 @@ const CustomThemeWrapper = (props: {
 
 ---
 
-> Docs for `@gravity-ui/dashkit@9.3.2`. Versioned at: `https://gravity-ui.com/llms/dashkit/9.3.2/llms.txt` (exact), `https://gravity-ui.com/llms/dashkit/9/llms.txt` (latest of major 9), `https://gravity-ui.com/llms/dashkit/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+> Docs for `@gravity-ui/dashkit@9.3.0`. Versioned at: `https://gravity-ui.com/llms/dashkit/9.3.0/llms.txt` (exact), `https://gravity-ui.com/llms/dashkit/9/llms.txt` (latest of major 9), `https://gravity-ui.com/llms/dashkit/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
