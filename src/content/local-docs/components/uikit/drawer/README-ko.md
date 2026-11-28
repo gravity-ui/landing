@@ -1,8 +1,4 @@
-<!--GITHUB_BLOCK-->
-
-# Drawer
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_0_END
 
 `Drawer` 컴포넌트는 웹 애플리케이션에서 화면 가장자리에서 나타나는 슬라이딩 패널을 제공하는 다목적 인터페이스 요소입니다. 이 패널에는 탐색, 도구 또는 추가 콘텐츠가 포함될 수 있습니다. 이 컴포넌트는 React와 CSS 전환을 사용하여 부드러운 애니메이션을 구현합니다.
 
@@ -23,9 +19,9 @@ const App = () => {
 
   return (
     <div>
-      <button onClick={() => setVisible(true)}>Open Drawer</button>
+      <button onClick={() => setVisible(true)}>Drawer 열기</button>
       <Drawer onOpenChange={setVisible} open={isVisible}>
-        <p>Content of the drawer</p>
+        <p>Drawer 내용</p>
       </Drawer>
     </div>
   );
@@ -40,16 +36,16 @@ export default App;
 
 ```tsx
 <Drawer onOpenChange={setVisible} open={isVisible} placement="left">
-  <p>Content of the drawer</p>
+  <p>Drawer 내용</p>
 </Drawer>
 <Drawer onOpenChange={setVisible} open={isVisible} placement="right">
-  <p>Content of the drawer</p>
+  <p>Drawer 내용</p>
 </Drawer>
 <Drawer onOpenChange={setVisible} open={isVisible} placement="top">
-  <p>Content of the drawer</p>
+  <p>Drawer 내용</p>
 </Drawer>
 <Drawer onOpenChange={setVisible} open={isVisible} placement="bottom">
-  <p>Content of the drawer</p>
+  <p>Drawer 내용</p>
 </Drawer>
 ```
 
@@ -59,7 +55,7 @@ export default App;
 
 ```tsx
 <Drawer onOpenChange={setVisible} open={isVisible} disableTransition>
-  <p>Content of the drawer</p>
+  <p>Drawer 내용</p>
 </Drawer>
 ```
 
@@ -69,7 +65,7 @@ export default App;
 
 ```tsx
 <Drawer onOpenChange={setVisible} open={isVisible} resizable>
-  <p>Content of the drawer</p>
+  <p>Drawer 내용</p>
 </Drawer>
 ```
 
@@ -79,7 +75,7 @@ export default App;
 const [size, setSize] = useState(500);
 
 <Drawer onOpenChange={setVisible} open={isVisible} resizable size={size} onResize={setSize}>
-  <p>Content of the drawer</p>
+  <p>Drawer 내용</p>
 </Drawer>;
 ```
 
@@ -96,7 +92,7 @@ const [size, setSize] = useState(500);
 | aria-details            | 사용자 `Drawer` 요소에 대한 `aria-details`                                                                                      |              `string`              |                |
 | returnFocus             | 닫을 때 포커스될 요소                                                                                                           | `boolean` `React.Ref<HTMLElement>` |     `true`     |
 | initialFocus            | 초기 포커스될 요소. 양수는 탭 가능한 요소의 인덱스입니다.                                                                       | `number` `React.Ref<HTMLElement>`  |                |
-| placement               | 서랍이 나타날 측면을 지정합니다.                                                                                                |              `string`              |     `left`     |
+| placement               | 서랍이 나타날 방향을 지정합니다.                                                                                                |              `string`              |     `left`     |
 | contentClassName        | 콘텐츠 노드의 `class` HTML 속성                                                                                                 |              `string`              |                |
 | children                | 모든 React 콘텐츠                                                                                                               |         `React.ReactNode`          |                |
 | container               | `Portal`을 통해 컴포넌트가 마운트될 DOM 요소                                                                                    |           `HTMLElement`            | `document.body` |
@@ -105,21 +101,21 @@ const [size, setSize] = useState(500);
 | disableEscapeKeyDown    | `Esc` 키로 닫는 것을 비활성화합니다.                                                                                            |             `boolean`              |     `false`    |
 | disableOutsideClick     | 외부 클릭으로 닫는 것을 비활성화합니다.                                                                                         |             `boolean`              |     `false`    |
 | disableTransition       | 서랍의 애니메이션을 비활성화합니다.                                                                                             |             `boolean`              |     `false`    |
+| disableModal            | 모달 포커스 관리를 비활성화합니다.                                                                                              |             `boolean`              |     `false`    |
+| disableLayer            | 레이어 관리자에 `Drawer`를 등록하는 것을 비활성화합니다.                                                                        |             `boolean`              |     `true`     |
 | disablePortal           | `Portal` 사용을 비활성화합니다.                                                                                                 |             `boolean`              |     `false`    |
 | keepMounted             | 숨겨질 때 `Drawer`가 DOM에서 제거되지 않습니다.                                                                                 |             `boolean`              |     `false`    |
-| resizable               | 포인터를 통해 서랍의 크기 조절을 활성화합니다.                                                                                  |             `boolean`              |     `false`    |
+| resizable               | 포인터를 통해 서랍 크기 조절을 활성화합니다.                                                                                    |             `boolean`              |     `false`    |
 | open                    | `Drawer`의 가시성을 관리합니다.                                                                                                 |             `boolean`              |     `false`    |
-| hideVeil                | `Drawer`의 베일을 제거합니다.                                                                                                   |             `boolean`              |     `false`    |
+| hideVeil                | 외부 클릭 처리를 변경하지 않고 `Drawer`의 베일을 제거합니다.                                                                    |             `boolean`              |     `false`    |
 | onOpenChange            | 열린 상태 변경 시점에 호출되는 콜백                                                                                            |             `Function`             |                |
-| onTransitionIn          | "in" 전환 시작 시 호출되는 콜백                                                                                                 |             `Function`             |                |
-| onTransitionInComplete  | "in" 전환 완료 시 호출되는 콜백                                                                                                 |             `Function`             |                |
-| onTransitionOut         | "out" 전환 시작 시 호출되는 콜백                                                                                                |             `Function`             |                |
-| onTransitionOutComplete | "out" 전환 완료 시 호출되는 콜백                                                                                                |             `Function`             |                |
-| onResizeEnd             | 크기 조절이 끝날 때 호출되는 콜백                                                                                               |             `Function`             |                |
-| onResize                | 서랍의 크기가 조절될 때 호출되는 콜백                                                                                           |             `Function`             |                |
-| onResizeStart           | 크기 조절이 시작될 때 호출되는 콜백                                                                                             |             `Function`             |                |
+| onTransitionIn          | 전환 "in" 시작 시 호출되는 콜백                                                                                                 |             `Function`             |                |
+| onTransitionInComplete  | 전환 "in" 완료 시 호출되는 콜백                                                                                                 |             `Function`             |                |
+| onTransitionOut         | 전환 "out" 시작 시 호출되는 콜백                                                                                                |             `Function`             |                |
+| onTransitionOutComplete | 전환 "out" 완료 시 호출되는 콜백                                                                                                |             `Function`             |                |
+| onResizeEnd             | 크기 조절 완료 시 호출되는 콜백                                                                                                 |             `Function`             |                |
+| onResize                | 서랍 크기 조절 중 호출되는 콜백                                                                                                |             `Function`             |                |
+| onResizeStart           | 크기 조절 시작 시 호출되는 콜백                                                                                                 |             `Function`             |                |
 | maxSize                 | 서랍의 최대 너비 또는 높이 (픽셀 단위)                                                                                          |              `number`              |                |
 | minSize                 | 서랍의 최소 너비 또는 높이 (픽셀 단위)                                                                                          |              `number`              |                |
-| size                    | 서랍의 너비 또는 높이 (픽셀 단위). `auto` 옵션이 전달되면 Drawer의 너비 또는 높이는 콘텐츠에 맞게 조정됩니다.                   |         `number \| 'auto'`         |                |
-
-GRAVITY_TRANSLATION
+| size                    | 서랍의 너비 또는 높이 (픽셀 단위). `auto` 옵션이 전달되면 `Drawer`의 너비 또는 높이가 콘텐츠에 맞게 조정됩니다.                   |         `number \| 'auto'`         |                |
