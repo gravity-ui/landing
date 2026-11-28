@@ -1,74 +1,23 @@
-<!--GITHUB_BLOCK-->
-
-# TableColumnSetup
-
-<!--/GITHUB_BLOCK-->
-
 Der `TableColumnSetup`-Komponente bietet eine Benutzeroberfläche zur Konfiguration der Sichtbarkeit und Reihenfolge von Tabellenspalten. Sie zeigt eine Schaltfläche an, die ein Popup mit einer Liste verfügbarer Spalten öffnet, sodass Benutzer Spalten ein-/ausblenden und optional per Drag & Drop neu anordnen können.
 
 ```tsx
-import {TableColumnSetup} from '@gravity-ui/uikit';
+import {TableColumnSetup} from '@gravity-ui/uikit/legacy';
 ```
 
-<!--SANDBOX
-import {TableColumnSetup} from '@gravity-ui/uikit';
+Diese Komponente ist veraltet: Neue Funktionen finden Sie unter [`@gravity-ui/table`](https://github.com/gravity-ui/table). Lesen Sie die [Migrationsanleitung zu v8](../../../../docs/migration-to-v8.md#table-and-tablecolumnsetup). Wie alles in `@gravity-ui/uikit/legacy` benötigt sie die optionalen Peer-Abhängigkeiten
+`@hello-pangea/dnd`, `react-window` und `react-virtualized-auto-sizer`, die neben dem Paket installiert werden müssen: Der Einstiegspunkt lädt alle davon, egal was Sie daraus importieren.
 
-const items = [
-    {id: 'name', title: 'Name', selected: true, required: true},
-    {id: 'email', title: 'Email', selected: true},
-    {id: 'phone', title: 'Phone', selected: false},
-];
+GRAVITY_TRANSLATION_BLOCK_1_END
 
-export default function () {
-    return <TableColumnSetup items={items} onUpdate={(updatedItems) => console.log(updatedItems)} />;
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-const items = [
-  {id: 'name', title: 'Name', selected: true, required: true},
-  {id: 'email', title: 'Email', selected: true},
-  {id: 'phone', title: 'Phone', selected: false},
-];
-
-<TableColumnSetup items={items} onUpdate={(updatedItems) => console.log(updatedItems)} />;
-```
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_2_END
 
 ## Sortierbare Spalten
 
 Aktivieren Sie die Drag & Drop-Funktionalität, damit Benutzer Spalten neu anordnen können, indem Sie die Eigenschaft `sortable` auf `true` setzen.
 
-<!--SANDBOX
-import {TableColumnSetup} from '@gravity-ui/uikit';
+GRAVITY_TRANSLATION_BLOCK_3_END
 
-const items = [
-    {id: 'name', title: 'Name', selected: true, required: true},
-    {id: 'email', title: 'Email', selected: true},
-    {id: 'phone', title: 'Phone', selected: false},
-];
-
-export default function () {
-    return (
-        <TableColumnSetup
-            items={items}
-            sortable
-            onUpdate={(updatedItems) => console.log(updatedItems)}
-        />
-    );
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-<TableColumnSetup items={items} sortable onUpdate={(updatedItems) => console.log(updatedItems)} />
-```
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_4_END
 
 ## Anwendungsmodi
 
@@ -77,142 +26,56 @@ Steuern Sie, wann Änderungen angewendet werden, mit der Eigenschaft `hideApplyB
 - `true` - Änderungen werden sofort angewendet, wenn der Benutzer Spalten umschaltet
 - `false` - Änderungen werden erst angewendet, wenn der Benutzer auf die Schaltfläche "Anwenden" klickt
 
-<!--SANDBOX
-import {TableColumnSetup} from '@gravity-ui/uikit';
+GRAVITY_TRANSLATION_BLOCK_5_END
 
-const items = [
-    {id: 'name', title: 'Name', selected: true, required: true},
-    {id: 'email', title: 'Email', selected: true},
-    {id: 'phone', title: 'Phone', selected: false},
-];
-
-export default function () {
-    return (
-        <TableColumnSetup
-            items={items}
-            hideApplyButton
-            onUpdate={(updatedItems) => console.log(updatedItems)}
-        />
-    );
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-<TableColumnSetup
-  items={items}
-  hideApplyButton
-  onUpdate={(updatedItems) => console.log(updatedItems)}
-/>
-```
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_6_END
 
 ## Statusanzeige
 
 Zeigen Sie die Anzahl der ausgewählten Spalten in der Umschalt-Schaltfläche an, indem Sie die Eigenschaft `showStatus` aktivieren.
 
-<!--SANDBOX
-import {TableColumnSetup} from '@gravity-ui/uikit';
+GRAVITY_TRANSLATION_BLOCK_7_END
 
-const items = [
-    {id: 'name', title: 'Name', selected: true, required: true},
-    {id: 'email', title: 'Email', selected: true},
-    {id: 'phone', title: 'Phone', selected: false},
-];
-
-export default function () {
-    return <TableColumnSetup items={items} showStatus onUpdate={(updatedItems) => console.log(updatedItems)} />;
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-<TableColumnSetup
-  items={items}
-  showStatus={true}
-  onUpdate={(updatedItems) => console.log(updatedItems)}
-/>
-```
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_8_END
 
 ## Benutzerdefinierter Umschalter
 
 Passen Sie die Auslöser-Schaltfläche mit der Eigenschaft `renderSwitcher` an.
 
-<!--SANDBOX
-import {Button, TableColumnSetup} from '@gravity-ui/uikit';
+GRAVITY_TRANSLATION_BLOCK_9_END
 
-const items = [
-    {id: 'name', title: 'Name', selected: true, required: true},
-    {id: 'email', title: 'Email', selected: true},
-    {id: 'phone', title: 'Phone', selected: false},
-];
-
-export default function () {
-    return (
-        <TableColumnSetup
-            items={items}
-            renderSwitcher={({onClick, onKeyDown}) => (
-                <Button onClick={onClick} onKeyDown={onKeyDown} view="outlined">
-                    Configure Columns
-                </Button>
-            )}
-            onUpdate={(updatedItems) => console.log(updatedItems)}
-        />
-    );
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-<TableColumnSetup
-  items={items}
-  renderSwitcher={({onClick, onKeyDown}) => (
-    <Button onClick={onClick} onKeyDown={onKeyDown} view="outlined">
-      Configure Columns
-    </Button>
-  )}
-  onUpdate={(updatedItems) => console.log(updatedItems)}
-/>
-```
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_10_END
 
 ## Eigenschaften
 
 | Name            | Beschreibung                                                     |                            Typ                             | Standard |
-| :-------------- | :--------------------------------------------------------------- | :----------------------------------------------------------: | :------: |
-| items           | Array von Spaltenkonfigurationselementen                         |                  `TableColumnSetupItem[]`                  |          |
+| :-------------- | :-------------------------------------------------------------- | :---------------------------------------------------------: | :------: |
+| items           | Array von Spaltenkonfigurationselementen                             |                  `TableColumnSetupItem[]`                   |          |
 | onUpdate        | Callback, der aufgerufen wird, wenn sich die Spaltenkonfiguration ändert |          `(items: TableColumnSetupItem[]) => void`          |          |
-| disabled        | Deaktiviert die Umschalt-Schaltfläche                            |                          `boolean`                          | `false`  |
-| sortable        | Aktiviert das Drag & Drop-Sortieren von Spalten                  |                          `boolean`                          | `true`   |
+| disabled        | Deaktiviert die Umschalt-Schaltfläche                                    |                          `boolean`                          | `false`  |
+| sortable        | Ermöglicht das Sortieren von Spalten per Drag & Drop                        |                          `boolean`                          | `true`   |
 | hideApplyButton | Wann Änderungen angewendet werden: sofort oder manuell über die Schaltfläche "Anwenden" |                          `boolean`                          | `false`  |
-| showStatus      | Zeigt die Anzahl der ausgewählten/gesamten Spalten in der Umschalt-Schaltfläche an |                          `boolean`                          | `false`  |
-| popupWidth      | Breite des Popups                                                |                      `number \| 'fit'`                      |          |
-| popupPlacement  | Position des Popups relativ zum Auslöser                         |      [`PopupPlacement`](../Popup/README.md#properties)      |          |
-| renderSwitcher  | Benutzerdefinierte Render-Funktion für die Umschalt-Schaltfläche | `(props: SwitcherProps) => React.ReactElement \| undefined` |          |
-| switcher        | **Veraltet.** Verwenden Sie stattdessen `renderSwitcher`         |              `React.ReactElement \| undefined`              |          |
-| getItemTitle    | Funktion zum Abrufen des Elementtitels                           |      `(item: TableColumnSetupItem) => React.ReactNode`      |          |
-| className       | Benutzerdefinierte CSS-Klasse für das Root-Element              |                          `string`                           |          |
+| showStatus      | Zeigt die Anzahl der ausgewählten/gesamten Spalten in der Umschalt-Schaltfläche an           |                          `boolean`                          | `false`  |
+| popupWidth      | Breite des Popups                                              |                      `number \| 'fit'`                      |          |
+| popupPlacement  | Position des Popups relativ zum Auslöser                             |    [`PopupPlacement`](../../Popup/README.md#properties)     |          |
+| renderSwitcher  | Benutzerdefinierte Render-Funktion für die Umschalt-Schaltfläche                  | `(props: SwitcherProps) => React.ReactElement \| undefined` |          |
+| switcher        | **Veraltet.** Verwenden Sie stattdessen `renderSwitcher`                    |              `React.ReactElement \| undefined`              |          |
+| getItemTitle    | Funktion zum Abrufen des Elementtitels                                      |      `(item: TableColumnSetupItem) => React.ReactNode`      |          |
+| className       | Benutzerdefinierte CSS-Klasse für das Root-Element                           |                          `string`                           |          |
 
 ### TableColumnSetupItem
 
-| Name     | Beschreibung                                    |        Typ         | Standard |
-| :------- | :---------------------------------------------- | :----------------: | :------: |
-| id       | Eindeutige Kennung für die Spalte               |      `string`      |          |
-| title    | Angezeigter Titel für die Spalte                |  `React.ReactNode` |          |
-| selected | Ob die Spalte derzeit sichtbar ist              |      `boolean`     |          |
-| required | Ob die Spalte erforderlich ist (kann nicht ausgeblendet werden) |      `boolean`     |          |
-| sticky   | Feste Positionierung für die Spalte             | `'left' \| 'right'`|          |
+| Name     | Beschreibung                                       |        Typ         | Standard |
+| :------- | :------------------------------------------------- | :----------------: | :------: |
+| id       | Eindeutige Kennung für die Spalte                  |      `string`      |          |
+| title    | Angezeigter Titel für die Spalte                   |  `React.ReactNode` |          |
+| selected | Ob die Spalte derzeit sichtbar ist                 |      `boolean`     |          |
+| required | Ob die Spalte erforderlich ist (kann nicht versteckt werden) |      `boolean`     |          |
+| sticky   | Feste Positionierung für die Spalte                | `'left' \| 'right'` |          |
 
 ### SwitcherProps
 
-| Name      | Beschreibung                            |                   Typ                    |
-| :-------- | :-------------------------------------- | :---------------------------------------: |
+| Name      | Beschreibung                           |                   Typ                    |
+| :-------- | :------------------------------------- | :---------------------------------------: |
 | onClick   | Klick-Ereignisbehandlungsroutine für den Schalter |  `React.MouseEventHandler<HTMLElement>`   |
 | onKeyDown | KeyDown-Ereignisbehandlungsroutine für den Schalter | `React.KeyboardEventHandler<HTMLElement>` |
