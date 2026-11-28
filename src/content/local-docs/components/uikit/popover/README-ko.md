@@ -1,18 +1,14 @@
-<!--GITHUB_BLOCK-->
-
-# Popover
-
-<!--/GITHUB_BLOCK-->
-
-`Popover`은 자식 요소에 고정되고 호버 또는 클릭 시 열리는 플로팅되고 선택적으로 상호작용 가능한 콘텐츠(텍스트, 링크 또는 버튼)를 표시합니다. `children` 속성을 통해 전달된 `ReactElement`를 트리거로 사용하여 내장된 트리거 상호작용 기능을 갖춘 [`Popup`](../Popup/README.md)을 래핑합니다.
+`Popover`는 자식 요소에 고정되고 호버 또는 클릭 시 열리는 플로팅 가능한 대화형 콘텐츠(텍스트, 링크 또는 버튼)를 표시합니다. `children` 속성을 통해 전달된 `ReactElement`를 트리거로 사용하여 내장된 트리거 상호 작용 기능을 갖춘 [`Popup`](../Popup/README.md)을 래핑합니다.
 
 ```tsx
 import {Popover} from '@gravity-ui/uikit';
 ```
 
+이전 `Popover`에서 마이그레이션하시나요? [마이그레이션 가이드](https://github.com/gravity-ui/uikit/blob/main/docs/migration-from-legacy-popover.md)를 참조하세요.
+
 ## 사용법
 
-HTML 요소 또는 네이티브 DOM 핸들러 및 ARIA 속성을 속성(예: `Button`)으로 수락하는 모든 구성 요소를 `Popover` 구성 요소로 래핑합니다. 콘텐츠를 `content` 속성에 넣습니다.
+`Button`과 같이 네이티브 DOM 핸들러 및 ARIA 속성을 속성으로 수락하는 HTML 요소 또는 모든 구성 요소를 `Popover` 구성 요소로 래핑합니다. 콘텐츠는 `content` 속성에 넣습니다.
 
 ```jsx
 import {Button, Popover} from '@gravity-ui/uikit';
@@ -47,10 +43,8 @@ import {Button, Popover} from '@gravity-ui/uikit';
 | open                 | `open` 상태를 수동으로 제어                                                                             |                              `boolean`                              |                 |
 | placement            | `Floating UI` 배치                                                                                       | `Placement` `Array<Placement>` `"auto"` `"auto-start"` `"auto-end"` |     `"top"`     |
 | qa                   | 테스트 속성 (`data-qa`)                                                                                    |                              `string`                               |                 |
-| rest                 | 열리기 전에 커서가 얼마나 오랫동안 휴지 상태여야 하는지(ms).                                                      |                              `number`                               |       `0`       |
+| rest                 | 열리기 전에 커서가 휴식해야 하는 시간(ms)                                                      |                              `number`                               |       `0`       |
 | strategy             | `Floating UI` 포지셔닝 전략                                                                            |                       `"absolute"` `"fixed"`                        |  `"absolute"`   |
 | style                | 루트 노드에 대한 HTML `style` 속성                                                                          |                              `string`                               |                 |
 | toggle               | 반복 클릭으로 `open` 상태를 토글할지 여부                                                       |                              `boolean`                              |     `true`      |
 | trigger              | `Popover`를 열어야 하는 이벤트. 기본 `all` 값은 `hover`와 `click` 모두를 참조합니다                 |                          `"all"` `"click"`                          |     `"all"`     |
-
-GRAVITY_TRANSL

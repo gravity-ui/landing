@@ -1,25 +1,21 @@
-<!--GITHUB_BLOCK-->
-
-# Popover
-
-<!--/GITHUB_BLOCK-->
-
-`Popover` exibe conteúdo flutuante, opcionalmente interativo (texto, links ou botões) ancorado a um elemento filho e aberto ao passar o mouse ou clicar. Ele envolve [`Popup`](../Popup/README.md) com interatividade de gatilho integrada, usando o `ReactElement` passado através da propriedade `children` como gatilho.
+`Popover` exibe conteúdo flutuante, opcionalmente interativo (texto, links ou botões) ancorado a um elemento filho e aberto ao passar o mouse ou clicar. Ele envolve o [`Popup`](../Popup/README.md) com interatividade de gatilho integrada, usando o `ReactElement` passado através da propriedade `children` como gatilho.
 
 ```tsx
 import {Popover} from '@gravity-ui/uikit';
 ```
 
+Migrando do `Popover` legado? Veja o [guia de migração](https://github.com/gravity-ui/uikit/blob/main/docs/migration-from-legacy-popover.md).
+
 ## Uso
 
-Envolva um elemento HTML ou qualquer componente que aceite manipuladores DOM nativos e atributos ARIA nas propriedades (por exemplo, `Button`) com o componente `Popover`. Coloque seu conteúdo
+Envolva um elemento HTML ou qualquer componente que aceite manipuladores DOM nativos e atributos ARIA em propriedades (ou seja, `Button`) com o componente `Popover`. Coloque seu conteúdo
 na propriedade `content`.
 
 ```jsx
 import {Button, Popover} from '@gravity-ui/uikit';
 
-<Popover content="Content">
-  <Button>Click or hover me</Button>
+<Popover content="Conteúdo">
+  <Button>Clique ou passe o mouse sobre mim</Button>
 </Popover>;
 ```
 

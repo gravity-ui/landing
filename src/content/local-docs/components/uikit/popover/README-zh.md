@@ -1,18 +1,14 @@
-<!--GITHUB_BLOCK-->
-
-# Popover
-
-<!--/GITHUB_BLOCK-->
-
-`Popover` 显示浮动的、可选的交互式内容（文本、链接或按钮），它锚定在子元素上，并在悬停或单击时打开。它使用 [`Popup`](../Popup/README.md) 并内置了触发器交互性，使用通过 `children` 属性传递的 `ReactElement` 作为触发器。
+`Popover` 显示浮动的、可选交互式的内容（文本、链接或按钮），该内容锚定到子元素并在悬停或单击时打开。它使用 [`Popup`](../Popup/README.md) 并内置了触发器交互性，使用通过 `children` 属性传递的 `ReactElement` 作为触发器。
 
 ```tsx
 import {Popover} from '@gravity-ui/uikit';
 ```
 
+从旧版 `Popover` 迁移？请参阅[迁移指南](https://github.com/gravity-ui/uikit/blob/main/docs/migration-from-legacy-popover.md)。
+
 ## 用法
 
-将 HTML 元素或任何接受原生 DOM 处理程序和 ARIA 属性作为属性的组件（例如 `Button`）包装在 `Popover` 组件中。将您的内容放入 `content` 属性中。
+使用 `Popover` 组件包装 HTML 元素或任何接受原生 DOM 处理程序和 ARIA 属性作为属性的组件（例如 `Button`）。将您的内容放入 `content` 属性中。
 
 ```jsx
 import {Button, Popover} from '@gravity-ui/uikit';
@@ -37,7 +33,7 @@ import {Button, Popover} from '@gravity-ui/uikit';
 | disableOutsideClick  | 点击外部时不关闭                                                                               |                              `boolean`                              |     `false`     |
 | disablePortal        | 禁用 `Portal`                                                                                       |                              `boolean`                              |     `false`     |
 | disabled             | 不响应任何事件打开                                                                                      |                              `boolean`                              |     `false`     |
-| enableSafePolygon    | 在指针从触发器移到 `Popover` 内容时，使用动态多边形区域以防止其关闭                                                       |                              `boolean`                              |     `false`     |
+| enableSafePolygon    | 从触发器移动到 `Popover` 内容时，使用动态多边形区域以防止其关闭                                                       |                              `boolean`                              |     `false`     |
 | hasArrow             | 渲染一个指向触发器的箭头                                                                       |                              `boolean`                              |     `false`     |
 | keepMounted          | 隐藏时，`Popover` 不会从 DOM 中移除                                                        |                              `boolean`                              |     `false`     |
 | middlewares          | `Floating UI` 中间件。如果设置，它们将完全覆盖默认中间件。                    |                         `Array<Middleware>`                         |                 |
@@ -51,4 +47,4 @@ import {Button, Popover} from '@gravity-ui/uikit';
 | strategy             | `Floating UI` 定位策略                                                                            |                       `"absolute"` `"fixed"`                        |  `"absolute"`   |
 | style                | 根节点的 HTML `style` 属性                                                                          |                              `string`                               |                 |
 | toggle               | 是否通过重复点击切换 `open` 状态                                                       |                              `boolean`                              |     `true`      |
-| trigger              | 哪个事件应该打开 `Popover`。默认的 `all` 值同时指 `hover` 和 `click`                 |                          `"all"` `"click"`                          |     `"all"`     |
+| trigger              | 哪个事件应该打开 `Popover`。默认的 `all` 值指的是 `hover` 和 `click`                                                |                          `"all"` `"click"`                          |     `"all"`     |

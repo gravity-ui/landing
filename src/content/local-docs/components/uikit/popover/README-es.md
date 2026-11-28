@@ -1,25 +1,21 @@
-<!--GITHUB_BLOCK-->
-
-# Popover
-
-<!--/GITHUB_BLOCK-->
-
 `Popover` muestra contenido flotante, opcionalmente interactivo (texto, enlaces o botones) anclado a un elemento hijo y abierto al pasar el cursor o hacer clic. Envuelve [`Popup`](../Popup/README.md) con interactividad de activación incorporada, utilizando el `ReactElement` pasado a través de la propiedad `children` como activador.
 
 ```tsx
 import {Popover} from '@gravity-ui/uikit';
 ```
 
+¿Migrando desde el `Popover` heredado? Consulte la [guía de migración](https://github.com/gravity-ui/uikit/blob/main/docs/migration-from-legacy-popover.md).
+
 ## Uso
 
-Envuelve un elemento HTML o cualquier componente que acepte manejadores DOM nativos y atributos ARIA en propiedades (es decir, `Button`) con el componente `Popover`. Coloca tu contenido
+Envuelva un elemento HTML o cualquier componente que acepte manejadores DOM nativos y atributos ARIA en propiedades (es decir, `Button`) con el componente `Popover`. Coloque su contenido
 en la propiedad `content`.
 
 ```jsx
 import {Button, Popover} from '@gravity-ui/uikit';
 
-<Popover content="Content">
-  <Button>Click or hover me</Button>
+<Popover content="Contenido">
+  <Button>Haz clic o pasa el cursor sobre mí</Button>
 </Popover>;
 ```
 
@@ -41,15 +37,15 @@ import {Button, Popover} from '@gravity-ui/uikit';
 | enableSafePolygon    | Usa un área de polígono dinámico al mover el puntero del disparador al contenido del `Popover` para evitar que se cierre |                              `boolean`                              |        `false`         |
 | hasArrow             | Renderiza una flecha apuntando al disparador                                                                       |                              `boolean`                              |        `false`         |
 | keepMounted          | El `Popover` no se eliminará del DOM al ocultarse                                                        |                              `boolean`                              |        `false`         |
-| middlewares          | `Floating UI` middlewares. Si se establecen, sobrescribirán completamente los middlewares predeterminados.                    |                         `Array<Middleware>`                         |                        |
+| middlewares          | Middlewares de `Floating UI`. Si se establecen, sobrescribirán completamente los middlewares predeterminados.                    |                         `Array<Middleware>`                         |                        |
 | modal                | Habilita el comportamiento de captura de foco                                                                              |                              `boolean`                              |        `false`         |
-| offset               | Valor de `Floating UI` offset                                                                                    |                           `PopoverOffset`                           |          `4`           |
+| offset               | Valor de offset de `Floating UI`                                                                                    |                           `PopoverOffset`                           |          `4`           |
 | onOpenChange         | Función que se llama cuando cambia el estado `open`                                                         |                             `Function`                              |                        |
 | open                 | Controla manualmente el estado `open`                                                                             |                              `boolean`                              |                        |
-| placement            | `Floating UI` placement                                                                                       | `Placement` `Array<Placement>` `"auto"` `"auto-start"` `"auto-end"` |        `"top"`         |
+| placement            | Colocación de `Floating UI`                                                                                       | `Placement` `Array<Placement>` `"auto"` `"auto-start"` `"auto-end"` |        `"top"`         |
 | qa                   | Atributo de prueba (`data-qa`)                                                                                    |                              `string`                               |                        |
-| rest                 | Tiempo en ms que el cursor debe estar en reposo antes de abrir.                                                      |                              `number`                               |          `0`           |
-| strategy             | `Floating UI` positioning strategy                                                                            |                       `"absolute"` `"fixed"`                        |      `"absolute"`      |
+| rest                 | Tiempo en ms que el cursor debe permanecer en reposo antes de abrir.                                                      |                              `number`                               |          `0`           |
+| strategy             | Estrategia de posicionamiento de `Floating UI`                                                                            |                       `"absolute"` `"fixed"`                        |      `"absolute"`      |
 | style                | Atributo `style` de HTML para el nodo raíz                                                                          |                              `string`                               |                        |
 | toggle               | Si se debe alternar el estado `open` con clics repetidos                                                       |                              `boolean`                              |        `true`          |
 | trigger              | Qué evento debe abrir el `Popover`. El valor predeterminado `all` se refiere tanto a `hover` como a `click`                 |                          `"all"` `"click"`                          |        `"all"`         |
