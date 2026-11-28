@@ -1,9 +1,3 @@
-<!--GITHUB_BLOCK-->
-
-# Skeleton
-
-<!--/GITHUB_BLOCK-->
-
 El componente Skeleton muestra una vista previa de marcador de posición de su contenido antes de que se carguen los datos. Esta vista previa se muestra para reducir la frustración por el tiempo de carga.
 
 ```tsx
@@ -43,34 +37,13 @@ Use la prop `size` para establecer una altura preestablecida del esqueleto (y an
 | `'l'`  | Grande       |
 | `'xl'` | Extra grande |
 
-<!--GITHUB_BLOCK-->
-
-```tsx
-<Skeleton size="xs" width={120} />
-<Skeleton size="m"  width={200} />
-<Skeleton size="xl" width={280} />
-
-<Skeleton variant="circle" size="l" />
-<Skeleton variant="square" size="l" />
-```
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_1_END
 
 ## Marcador de posición de texto
 
 Use `variant="text"` para renderizar un esqueleto que hereda `font-size` y `line-height` del contexto padre. Coloque varios esqueletos dentro de un elemento `<Text variant="...">` para marcadores de posición de varias líneas.
 
-<!--GITHUB_BLOCK-->
-
-```tsx
-<Text variant="body-1">
-  <Skeleton variant="text" width={400} />
-  <Skeleton variant="text" width={400} />
-  <Skeleton variant="text" width={240} />
-</Text>
-```
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_2_END
 
 ## Propiedades
 
@@ -81,6 +54,12 @@ Use `variant="text"` para renderizar un esqueleto que hereda `font-size` y `line
 | `qa`        | Atributo HTML `data-qa`, utilizado para pruebas                                                                                   |                     `string`                     |            |
 | `animation` | Tipo de animación a aplicar al esqueleto                                                                                      |      `'gradient'` \| `'pulse'` \| `'none'`       | `gradient` |
 | `variant`   | Apariencia preestablecida. `'circle'` y `'square'` fuerzan `aspect-ratio: 1`. `'text'` hereda la tipografía del contexto padre.    | `'rect'` \| `'square'` \| `'circle'` \| `'text'` |   `rect`   |
-| `size`      | Altura preestablecida (y anchura para variantes `'circle'`/`'square'`). También controla el token de `border-radius` para `'rect'`/`'square'`. |   `'xs'` \| `'s'` \| `'m'` \| `'l'` \| `'xl'`    |            |
+| `size`      | Altura preestablecida (y anchura para las variantes `'circle'`/`'square'`). También controla el token de `border-radius` para `'rect'`/`'square'`. |   `'xs'` \| `'s'` \| `'m'` \| `'l'` \| `'xl'`    |            |
 | `width`     | Anchura personalizada. Alias de `style.width`                                                                                        |               `number` \| `string`               |            |
 | `height`    | Altura personalizada. Alias de `style.height`                                                                                        |               `number` \| `string`               |            |
+
+## API CSS
+
+| Nombre                            | Descripción                                                                         |
+| :------------------------------ | :---------------------------------------------------------------------------------- |
+| `--g-skeleton-background-color` | Color de fondo del esqueleto, también utilizado como color final de la animación `'gradient'` |

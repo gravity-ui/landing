@@ -1,10 +1,4 @@
-<!--GITHUB_BLOCK-->
-
-# Skeleton
-
-<!--/GITHUB_BLOCK-->
-
-Le composant Skeleton affiche un aperçu de contenu temporaire avant le chargement des données. Cet aperçu est affiché afin de réduire la frustration liée au temps de chargement.
+Le composant Skeleton affiche un aperçu temporaire de votre contenu avant le chargement des données. Cet aperçu est affiché afin de réduire la frustration liée au temps de chargement.
 
 ```tsx
 import {Skeleton} from '@gravity-ui/uikit';
@@ -14,11 +8,11 @@ import {Skeleton} from '@gravity-ui/uikit';
 
 Utilisez la prop `animation` pour contrôler l'animation de chargement. La valeur par défaut est `'gradient'`.
 
-| Valeur       | Description                               |
-| :----------- | :---------------------------------------- |
+| Valeur       | Description                                |
+| :----------- | :----------------------------------------- |
 | `'gradient'` | Effet de scintillement avec dégradé glissant — **par défaut** |
-| `'pulse'`    | Pulsation d'opacité                       |
-| `'none'`     | Aucune animation                          |
+| `'pulse'`    | Pulsation d'opacité                        |
+| `'none'`     | Aucune animation                           |
 
 ## Variante
 
@@ -27,13 +21,13 @@ Utilisez la prop `variant` pour choisir une apparence prédéfinie. La valeur pa
 | Valeur     | Description                                                                               |
 | :--------- | :---------------------------------------------------------------------------------------- |
 | `'rect'`   | Coins arrondis utilisant un token de `border-radius` adapté à la taille — **par défaut** |
-| `'circle'` | Entièrement circulaire (`border-radius: 50%`, `aspect-ratio: 1`)                         |
-| `'square'` | Ratio d'aspect carré (`aspect-ratio: 1`) avec le même arrondi que `'rect'`                |
-| `'text'`   | Espace réservé pour une ligne de texte — la hauteur hérite de `font-size` et `line-height` du contexte parent |
+| `'circle'` | Entièrement circulaire (`border-radius: 50%`, `aspect-ratio: 1`)                          |
+| `'square'` | Rapport d'aspect carré (`aspect-ratio: 1`) avec le même arrondi que `'rect'`              |
+| `'text'`   | Aperçu de ligne de texte — la hauteur hérite de `font-size` et `line-height` du contexte parent |
 
 ## Taille
 
-Utilisez la prop `size` pour définir une hauteur prédéfinie pour le squelette (et une largeur pour les variantes `'circle'` / `'square'`). Chaque taille ajuste également le token de `border-radius` utilisé par les variantes `'rect'` et `'square'`. Lorsque `size` est omis, définissez les dimensions avec `width` et `height` à la place.
+Utilisez la prop `size` pour définir une hauteur de squelette prédéfinie (et une largeur pour les variantes `'circle'` / `'square'`). Chaque taille ajuste également le token de `border-radius` utilisé par les variantes `'rect'` et `'square'`. Lorsque `size` est omis, définissez les dimensions avec `width` et `height` à la place.
 
 | Valeur | Description   |
 | :----- | :------------ |
@@ -43,34 +37,13 @@ Utilisez la prop `size` pour définir une hauteur prédéfinie pour le squelette
 | `'l'`  | Grande        |
 | `'xl'` | Extra large   |
 
-<!--GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_1_END
 
-```tsx
-<Skeleton size="xs" width={120} />
-<Skeleton size="m"  width={200} />
-<Skeleton size="xl" width={280} />
+## Aperçu de texte
 
-<Skeleton variant="circle" size="l" />
-<Skeleton variant="square" size="l" />
-```
+Utilisez `variant="text"` pour afficher un squelette qui hérite de `font-size` et `line-height` du contexte parent. Placez plusieurs squelettes à l'intérieur d'un élément `<Text variant="...">` pour des aperçus multilignes.
 
-<!--/GITHUB_BLOCK-->
-
-## Espace réservé pour le texte
-
-Utilisez `variant="text"` pour afficher un squelette qui hérite de `font-size` et `line-height` du contexte parent. Placez plusieurs squelettes à l'intérieur d'un élément `<Text variant="...">` pour des espaces réservés multilignes.
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-<Text variant="body-1">
-  <Skeleton variant="text" width={400} />
-  <Skeleton variant="text" width={400} />
-  <Skeleton variant="text" width={240} />
-</Text>
-```
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_2_END
 
 ## Propriétés
 
@@ -84,3 +57,9 @@ Utilisez `variant="text"` pour afficher un squelette qui hérite de `font-size` 
 | `size`      | Hauteur prédéfinie (et largeur pour les variantes `'circle'`/`'square'`). Contrôle également le token `border-radius` pour `'rect'`/`'square'`. |   `'xs'` \| `'s'` \| `'m'` \| `'l'` \| `'xl'`    |            |
 | `width`     | Largeur personnalisée. Alias pour `style.width`                                                                                        |               `number` \| `string`               |            |
 | `height`    | Hauteur personnalisée. Alias pour `style.height`                                                                                      |               `number` \| `string`               |            |
+
+## API CSS
+
+| Nom                            | Description                                                                         |
+| :------------------------------ | :---------------------------------------------------------------------------------- |
+| `--g-skeleton-background-color` | Couleur de fond du squelette, également utilisée comme couleur de fin de l'animation `'gradient'` |
