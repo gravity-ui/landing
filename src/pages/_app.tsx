@@ -1,12 +1,12 @@
 import '@diplodoc/transform/dist/css/base.css';
 import '@gravity-ui/blog-constructor/styles/styles.css';
 import '@gravity-ui/markdown-editor/styles/styles.css';
-import '@gravity-ui/uikit/styles/fonts.css';
 import '@gravity-ui/uikit/styles/styles.css';
 import {NextComponentType} from 'next';
 import {appWithTranslation} from 'next-i18next';
 import 'overlayscrollbars/overlayscrollbars.css';
 
+import {inter} from '../fonts';
 import {useAnalyticsOutboundLinks} from '../hooks/useAnalyticsOutboundLinks';
 import {useReportWebVitals} from '../hooks/useReportWebVitals';
 import {WindowBreakpointProvider} from '../hooks/useWindowBreakpoint';
@@ -26,6 +26,11 @@ export const App = ({
 
     return (
         <WindowBreakpointProvider>
+            <style jsx global>{`
+                :root {
+                    --font-inter: ${inter.style.fontFamily};
+                }
+            `}</style>
             <Component {...pageProps} />
         </WindowBreakpointProvider>
     );
