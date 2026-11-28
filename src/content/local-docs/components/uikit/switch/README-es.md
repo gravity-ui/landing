@@ -1,10 +1,4 @@
-<!--GITHUB_BLOCK-->
-
-# Switch
-
-<!--/GITHUB_BLOCK-->
-
-El componente `Switch` se utiliza para alternar entre dos estados: normalmente, entre **activado** y **desactivado**, o **habilitado** y **deshabilitado**.
+El componente `Switch` se utiliza para alternar entre dos estados: típicamente, entre **activado** y **desactivado**, o **habilitado** y **deshabilitado**.
 
 ```tsx
 import {Switch} from '@gravity-ui/uikit';
@@ -17,103 +11,25 @@ Un `Switch` puede tener diferentes estados:
 - Marcado: Cuando el interruptor tiene el estado **Activado**.
 - Deshabilitado: Cuando el interruptor no está disponible.
 
-<!--SANDBOX
-import {Switch} from '@gravity-ui/uikit';
+GRAVITY_TRANSLATION_BLOCK_1_END
 
-export default function () {
-    return (
-        <>
-            <Switch size="l" checked={false}>
-                Unchecked
-            </Switch>
-            <Switch size="l" checked>
-                Checked
-            </Switch>
-            <Switch size="l" disabled>
-                Disabled
-            </Switch>
-        </>
-    );
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-<Switch size="l" checked={false}>Unchecked</Switch>
-<Switch size="l" checked>Checked</Switch>
-<Switch size="l" disabled>Disabled</Switch>
-```
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_2_END
 
 ## Tamaño
 
 Utiliza la propiedad `size` para gestionar el tamaño del `Switch`. El tamaño predeterminado es `m`.
 
-<!--SANDBOX
-import {Switch} from '@gravity-ui/uikit';
+GRAVITY_TRANSLATION_BLOCK_3_END
 
-export default function () {
-    return (
-        <>
-            <Switch size="s">S Size</Switch>
-            <Switch size="m">M Size</Switch>
-            <Switch size="l">L Size</Switch>
-        </>
-    );
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-<Switch size="s">S Size</Switch>
-<Switch size="m">M Size</Switch>
-<Switch size="l">L Size</Switch>
-```
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_4_END
 
 ## Etiqueta
 
-Puedes asignar una etiqueta a un `Switch` utilizando la propiedad `content` o proporcionarla como propiedad hija.
+Puedes asignar una etiqueta a un `Switch` usando la propiedad `content` o proporcionarla como una propiedad hija.
 
-<!--SANDBOX
-import {Box, Switch} from '@gravity-ui/uikit';
+GRAVITY_TRANSLATION_BLOCK_5_END
 
-export default function () {
-    return (
-        <div>
-            <Switch content="Content" size="l" />
-            <Box spacing={{mt: 2}}>
-                <Switch size="l">
-                    <span>Content as children</span>
-                </Switch>
-            </Box>
-        </div>
-    );
-}
-SANDBOX-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-<div>
-  <Switch content="Content" size="l" />
-  <div
-    style={{
-      marginTop: 10,
-    }}
-  >
-    <Switch size="l">
-      <span>Content as children</span>
-    </Switch>
-  </div>
-</div>
-```
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_6_END
 
 ## Propiedades
 
